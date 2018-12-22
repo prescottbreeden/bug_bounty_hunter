@@ -1,0 +1,41 @@
+<form 
+  *ngIf="showEmailField"
+  (submit)="onEmail()" 
+  class="form">
+  <h4 class="form__title">Enter Your Email</h4>
+  <div class="form__row">
+    <label for="email_field" class="form__label">Email</label>
+    <input 
+      [(ngModel)]="user.email"
+      #email="ngModel"
+      name="email"
+      type="email" 
+      class="form__input" 
+      id="email_field">
+  </div>
+  <button class="btn">Next</button>
+</form>
+
+<form 
+  *ngIf="showPasswordField"
+  (submit)="onPassword()" 
+  class="form">
+  <h4 *ngIf="!isRegistered" class="form__title">Choose Password</h4>
+  <h4 *ngIf="isRegistered" class="form__title">Enter Your Password</h4>
+  <input type="hidden" [value]="user.email" name="user.email">
+  <div class="form__row">
+    <label for="password" class="form__label">Password</label>
+    <input 
+      [(ngModel)]="user.password"
+      #password="ngModel"
+      name="password"
+      type="password" 
+      class="form__input" 
+      id="password">
+  </div>
+  <button *ngIf="!isRegistered" class="btn">Register</button>
+  <button *ngIf="isRegistered" class="btn">Login</button>
+</form>
+
+{{ user.password }}
+{{ user.email }}
