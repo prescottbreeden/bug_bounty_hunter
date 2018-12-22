@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Join Us | Not a mail cult...</title>
+</head>
+<body>
+    success...
+    <p>total users: <%= data.length %>  </p>
+    <% for(let i = 0; i < data.length; i++) { %>
+        <div class="user">
+            <p>ID: "<%= data[i].id %></p>
+            <p>User: "<%= data[i].email %>"</p>
+        </div>
+            <% } %> 
+
+    <form action="/api/user" method="POST">
+        <label for="email">Email: </label>
+        <input type="text" name="email">
+        <button>Submit</button>
+    </form>
+</body>
+</html>
