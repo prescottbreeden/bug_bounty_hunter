@@ -24,20 +24,16 @@ export class RegisterComponent implements OnInit {
     private _router: Router
   ) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   onEmail() {
-    this._http.isUnique(this.user.email).subscribe(data => {
-      if (data.length > 0) {
+    this._http.isUnique(this.user.email).subscribe(res => {
+      if (res.length > 0) {
         this.isRegistered = true;
-        // this.loginPassword = res['password'];
-      } else {
-        console.log('falf');
       }
+      this.showPasswordField = true;
+      this.showEmailField = false;
     });
-    this.showPasswordField = true;
-    this.showEmailField = false;
   }
 
   onPassword() {

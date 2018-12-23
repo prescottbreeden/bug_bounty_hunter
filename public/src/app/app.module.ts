@@ -4,10 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
+import { HttpService } from './http.service';
+import { AuthService } from './auth.service';
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './register/register.component';
 import { NavComponent } from './nav/nav.component';
-import { HttpService } from './http.service';
 import { BugsShowComponent } from './bugs/bugs-show/bugs-show.component';
 
 @NgModule({
@@ -24,7 +25,7 @@ import { BugsShowComponent } from './bugs/bugs-show/bugs-show.component';
     BrowserModule,
     HttpClientModule
   ],
-  providers: [HttpService],
+  providers: [HttpService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
