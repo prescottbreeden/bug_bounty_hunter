@@ -8,9 +8,12 @@ export class AuthService {
 
   constructor(private _http: HttpClient) { }
 
+  isUnique(credentials) {
+    return this._http.post('/authservice/validate/email/', credentials);
+  }
+
   login(credentials) {
-    return this._http.post('/api/authenticate',
-      JSON.stringify(credentials));
+    return this._http.post('/authservice/authenticate', credentials);
   }
 
   logout() {
@@ -21,3 +24,4 @@ export class AuthService {
     return false;
   }
 }
+

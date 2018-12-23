@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../http.service';
+import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,41 +15,55 @@ export class RegisterComponent implements OnInit {
     email: '',
     password: ''
   };
-  loginPassword = '';
+  invalidLogin = false;
   isRegistered = false;
   showEmailField = true;
   showPasswordField = false;
 
   constructor(
-    private _http: HttpService,
-    private _router: Router
+    private authService: AuthService,
+    private userApi: HttpService,
+    private router: Router
   ) { }
 
   ngOnInit() { }
 
   onEmail() {
-    this._http.isUnique(this.user.email).subscribe(res => {
-      console.log('res: ', res);
-      if (res instanceof Array) {
-        if (res.length > 0) {
-          this.isRegistered = true;
+    this.authService.isUnique(this.user)
+      .subscribe(result => {
+        if (result instanceof Array) {
+          if (result.length > 0) {
+            this.isRegistered = true;
+          } 
         }
-      }
-      this.showPasswordField = true;
-      this.showEmailField = false;
-    });
+        this.togglePasswordField();
+        this.toggleEmailField();
+      });
   }
 
   onPassword() {
     if (this.isRegistered) {
-      this._http.login(this.user).subscribe(data => {
-        this._router.navigate(['/bugs']);
-      });
+      this.authService.login(this.user)
+        .subscribe(result => {
+          if (result) {
+            this.router.navigate(['/bugs']);
+          } else {
+            this.invalidLogin = true;
+          }
+        });
     } else {
-      this._http.createUser(this.user).subscribe(data => {
-        this._router.navigate(['/bugs']);
-      });
+      this.userApi.createNewUser(this.user)
+        .subscribe(() => {
+          this.router.navigate(['/bugs']);
+        });
     }
   }
 
+  togglePasswordField() {
+    this.showPasswordField = !this.showPasswordField;
+  }
+  
+  toggleEmailField() {
+    this.showEmailField = !this.showEmailField;
+  }
 }

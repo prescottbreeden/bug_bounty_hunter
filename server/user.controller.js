@@ -100,7 +100,8 @@ module.exports = {
   },
 
   validateEmail: (req, res) => {
-    const email = req.params.email;
+    const email = req.body.email;
+
     let q = `
         SELECT *
           FROM users 
