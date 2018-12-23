@@ -29,7 +29,7 @@ export class RegisterComponent implements OnInit {
 
   onEmail() {
     this._http.isUnique(this.user.email).subscribe(data => {
-      if (data) {
+      if (data.length > 0) {
         this.isRegistered = true;
         // this.loginPassword = res['password'];
       } else {

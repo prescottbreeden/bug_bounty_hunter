@@ -6,8 +6,6 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const favicon = require('serve-favicon');
-const User = require('./server/models/user');
-// const Schema = require('./models/Schema');
 const Routes = require('./server/routes.js');
 const app = express();
 
