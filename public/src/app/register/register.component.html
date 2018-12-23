@@ -20,9 +20,31 @@
   *ngIf="showPasswordField"
   (submit)="onPassword()" 
   class="form">
-  <h4 *ngIf="!isRegistered" class="form__title">Choose Password</h4>
-  <h4 *ngIf="isRegistered" class="form__title">Enter Your Password</h4>
+
   <input type="hidden" [value]="user.email" name="user.email">
+
+  <div *ngIf="!isRegistered" class="form__row">
+    <label for="first_name" class="form__label">First Name</label>
+    <input 
+      [(ngModel)]="user.first_name"
+      #first_name="ngModel"
+      name="first_name"
+      type="text" 
+      class="form__input" 
+      id="first_name">
+  </div>
+
+  <div *ngIf="!isRegistered" class="form__row">
+    <label for="last_name" class="form__label">Last Name</label>
+    <input 
+      [(ngModel)]="user.last_name"
+      #last_name="ngModel"
+      name="last_name"
+      type="text" 
+      class="form__input" 
+      id="last_name">
+  </div>
+
   <div class="form__row">
     <label for="password" class="form__label">Password</label>
     <input 
@@ -33,6 +55,7 @@
       class="form__input" 
       id="password">
   </div>
+
   <button *ngIf="!isRegistered" class="btn">Register</button>
   <button *ngIf="isRegistered" class="btn">Login</button>
 </form>

@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
   user = {
+    first_name: '',
+    last_name: '',
     email: '',
     password: ''
   };
@@ -26,29 +28,25 @@ export class RegisterComponent implements OnInit {
   }
 
   onEmail() {
-    this._http
-      .getByEmail(this.user.email)
-      .subscribe(res => {
-        console.log('test', res);
-        if (res.toString().length > 0) {
-          this.isRegistered = true;
-          this.loginPassword = res['password'];
-        }
-      });
-
+    this._http.isUnique(this.user.email).subscribe(data => {
+      if (data) {
+        this.isRegistered = true;
+        // this.loginPassword = res['password'];
+      } else {
+        console.log('falf');
+      }
+    });
     this.showPasswordField = true;
     this.showEmailField = false;
   }
 
   onPassword() {
     if (this.isRegistered) {
-      this._http.validate(this.user).subscribe(data => {
-        console.log(data);
+      this._http.login(this.user).subscribe(data => {
         this._router.navigate(['/bugs']);
       });
     } else {
       this._http.createUser(this.user).subscribe(data => {
-        console.log(data);
         this._router.navigate(['/bugs']);
       });
     }
