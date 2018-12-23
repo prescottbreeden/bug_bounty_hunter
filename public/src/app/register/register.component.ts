@@ -28,8 +28,11 @@ export class RegisterComponent implements OnInit {
 
   onEmail() {
     this._http.isUnique(this.user.email).subscribe(res => {
-      if (res.length > 0) {
-        this.isRegistered = true;
+      console.log('res: ', res);
+      if (res instanceof Array) {
+        if (res.length > 0) {
+          this.isRegistered = true;
+        }
       }
       this.showPasswordField = true;
       this.showEmailField = false;

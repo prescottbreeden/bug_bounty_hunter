@@ -8,7 +8,7 @@ const db_connection = mysql.createConnection(config.database);
 
 module.exports = {
   
-  getAll: function (req, res, next) {
+  getAll: (req, res, next) => {
 
     let q = `
        SELECT user_id, 
@@ -30,7 +30,7 @@ module.exports = {
     }) 
   },
   
-  getById: function (req, res, next) {
+  getById: (req, res, next) => {
     const ID = req.params.id;
 
     let q = `
@@ -85,6 +85,20 @@ module.exports = {
     })
   },
 
+  update: (req, res, next) => {
+    const data = req.body;
+    const first_name = data.first_name;
+    const last_name = data.last_name;
+    const email = data.email;
+    let password = data.password;
+
+    res.json('route not finished');
+  },
+
+  delete: (req, res, next) => {
+    res.json('route not finished');
+  },
+
   validateEmail: (req, res) => {
     const email = req.params.email;
     let q = `
@@ -115,11 +129,6 @@ module.exports = {
     db_connection.query(q, function(error, results, fields) {
       if(error) {
         logger.log('warn', 'SYS ERROR: users.login()');
-        next(error);
-      }
-      if (results.length === 0) {
-        console.log('------ EMAIL NOT FOUND ------ ');
-        error.name = 'EmailNotFound';
         next(error);
       }
       else {

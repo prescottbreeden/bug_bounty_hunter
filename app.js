@@ -20,6 +20,9 @@ app.use(express.static( __dirname + '/public/dist/public' ));
 
 Routes(app);
 app.use(errorHandler);
+app.all("*", (req, res, next) => {
+  res.sendFile(path.resolve("./public/dist/public/index.html"));
+});
 
 app.listen(config.server.port, () => {
   console.log(`Express server listening on port: ${config.server.port}`);

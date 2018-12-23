@@ -25,12 +25,12 @@ export class HttpService {
 
   isUnique(email: string) {
     console.log('****** _http.isUnique()  ******');
-    return this._http.get('/validate/email/' + email);
+    return this._http.get('/api/users/validate/email/' + email);
   }
 
   login(newUser) {
     console.log('****** _http.getUsers()  ******');
-    return this._http.post('/login', newUser);
+    return this._http.post('/api/users/login', newUser);
   }
 
   getBugs() {
