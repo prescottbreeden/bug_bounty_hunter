@@ -16,7 +16,8 @@ CREATE TABLE users (
 CREATE TABLE bugs (
   bug_id      INTEGER       NOT NULL  AUTO_INCREMENT  PRIMARY KEY,
   user_id     INTEGER       NOT NULL,
-  content     TEXT          NOT NULL,
+  title       VARCHAR(255)  NOT NULL,
+  traceback   TEXT          NOT NULL,
   created_at  TIMESTAMP     NOT NULL  DEFAULT NOW(),
   updated_at  TIMESTAMP     NOT NULL  DEFAULT NOW()   ON UPDATE NOW(),
 

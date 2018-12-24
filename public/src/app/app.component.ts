@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpService } from './http.service';
+import { AuthService } from './users/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -7,15 +7,11 @@ import { HttpService } from './http.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+  token: object;
 
-  users: any = [];
-
-  constructor(private _http: HttpService) { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
-    this._http.getUsers().subscribe(data => {
-      this.users = data;
-      console.log(this.users);
-    });
+    this.token = this.authService.getToken();
   }
 }

@@ -1,10 +1,10 @@
 const env = process.env.NODE_ENV || 'development';
-const config = require('../config')[env];
-const mysql = require('mysql');
-const bcrypt = require('bcryptjs');
+const config = require('../../config')[env];
+const logger = require('../_helpers/logger');
+const Models = require('../models');
 const jwt = require('jsonwebtoken');
-const User = require('./models/user.model');
-const logger = require('./_helpers/logger');
+const bcrypt = require('bcryptjs');
+const mysql = require('mysql');
 const db_connection = mysql.createConnection(config.database);
 
 module.exports = {
@@ -88,11 +88,6 @@ module.exports = {
 
   update: (req, res, next) => {
     const data = req.body;
-    const first_name = data.first_name;
-    const last_name = data.last_name;
-    const email = data.email;
-    let password = data.password;
-
     res.json('route not finished');
   },
 
@@ -137,12 +132,11 @@ module.exports = {
         next(error);
       }
       else {
-        const user = new User(results[0]);
+        const user = new Models.User(results[0]);
         var status = bcrypt.compareSync(data.password, results[0]['password']);
         if (status) {
           let token = jwt.sign({ currentUser: user }, 'shhhhhhh');
-          // console.log('returning user: ', user);
-          console.log(token);
+          console.log('returning user: \n\n', user,'\n\n', token);
 
           return res.json(token);
         }

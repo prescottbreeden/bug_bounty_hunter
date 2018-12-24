@@ -5,9 +5,9 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { HttpService } from './http.service';
-import { AuthService } from './auth.service';
+import { AuthService } from './users/auth.service';
 import { AppComponent } from './app.component';
-import { RegisterComponent } from './register/register.component';
+import { RegisterComponent } from './users/login_register/register.component';
 import { NavComponent } from './nav/nav.component';
 import { BugsShowComponent } from './bugs/bugs-show/bugs-show.component';
 

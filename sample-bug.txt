@@ -1,0 +1,15 @@
+Title: 
+
+Project 'app.js' could not be found in workspace.
+
+Traceback: 
+
+Error: Project 'app.js' could not be found in workspace.
+    at Workspace.getProject (/home/prescott/Documents/code/projects/bug_hunter/public/node_modules/@angular-devkit/core/src/workspace/workspace.js:93:19)
+    at Architect.getBuilderConfiguration (/home/prescott/Documents/code/projects/bug_hunter/public/node_modules/@angular-devkit/architect/src/architect.js:96:41)
+    at ServeCommand.initialize (/home/prescott/Documents/code/projects/bug_hunter/public/node_modules/@angular/cli/models/architect-command.js:81:52)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+    at Function.Module.runMain (internal/modules/cjs/loader.js:744:11)
+    at startup (internal/bootstrap/node.js:285:19)
+    at bootstrapNodeJSCore (internal/bootstrap/node.js:739:3)
+[nodemon] app crashed - waiting for file changes before starting...

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpService } from '../http.service';
+import { HttpService } from 'src/app/http.service';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { NewUser } from '../models/NewUser';
 
 @Component({
   selector: 'app-register',
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  user = {
+  user: NewUser = {
     first_name: '',
     last_name: '',
     email: '',

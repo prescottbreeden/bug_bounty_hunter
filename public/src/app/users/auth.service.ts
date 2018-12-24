@@ -41,13 +41,16 @@ export class AuthService {
     return false;
   }
 
-  readToken() {
-    let token = localStorage.getItem('token');
+  getToken() {
     const helper = new JwtHelperService();
-    const decodedToken = helper.decodeToken(token)
-    const expirationDate = helper.getTokenExpirationDate(token);
-    console.log(expirationDate);
-    return decodedToken;
+    let token = localStorage.getItem('token');
+    return helper.decodeToken(token);
+  }
+
+  checkToken() {
+    const helper = new JwtHelperService();
+    let token = localStorage.getItem('token');
+    return helper.isTokenExpired(token);
   }
 }
 
