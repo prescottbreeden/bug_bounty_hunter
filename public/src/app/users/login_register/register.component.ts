@@ -3,6 +3,7 @@ import { HttpService } from 'src/app/http.service';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { NewUser } from '../models/NewUser';
+import { invalid } from '@angular/compiler/src/render3/view/util';
 
 @Component({
   selector: 'app-register',
@@ -14,7 +15,8 @@ export class RegisterComponent implements OnInit {
     first_name: '',
     last_name: '',
     email: '',
-    password: ''
+    password: '',
+    confirm: ''
   };
   invalidLogin = false;
   isRegistered = false;
@@ -51,6 +53,9 @@ export class RegisterComponent implements OnInit {
           }
         });
     } else {
+      if (this.user.confirm != this.user.password) {
+        return this.invalidLogin = true;
+      }
       this.userApi.createNewUser(this.user)
         .subscribe(() => {
           this.router.navigate(['/bugs']);

@@ -56,6 +56,17 @@
       id="password">
   </div>
 
+  <div *ngIf="!isRegistered" class="form__row">
+    <label for="confirm" class="form__label">Confirm</label>
+    <input 
+      [(ngModel)]="user.confirm"
+      #confirm="ngModel"
+      name="confirm"
+      type="password" 
+      class="form__input" 
+      id="confirm">
+  </div>
+
   <button *ngIf="!isRegistered" class="btn">Register</button>
   <button *ngIf="isRegistered" class="btn">Login</button>
 </form>

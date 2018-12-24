@@ -1,7 +1,7 @@
 const env = process.env.NODE_ENV || 'development';
 const config = require('../../config')[env];
 const logger = require('../_helpers/logger');
-const Models = require('../models');
+const Models = require('../models/Models');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const mysql = require('mysql');
@@ -53,6 +53,9 @@ module.exports = {
           console.log('returning user: \n\n', user,'\n\n', token);
 
           return res.json(token);
+        }
+        else {
+          throw 'Password does not match';
         }
       }
     });

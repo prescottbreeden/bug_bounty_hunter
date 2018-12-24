@@ -1,7 +1,7 @@
 const env = process.env.NODE_ENV || 'development';
 const config = require('../../config')[env];
 const logger = require('../_helpers/logger');
-const Models = require('../models');
+const Models = require('../models/Models');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const mysql = require('mysql');
@@ -10,15 +10,7 @@ const db_connection = mysql.createConnection(config.database);
 module.exports = {
   
   getAll: (req, res, next) => {
-
-    let q = `
-       SELECT user_id, 
-              email,
-              created_at,
-              updated_at
-         FROM users;
-    `;
-
+    let q = ` SELECT * FROM users; `;
     db_connection.query(q, function(error, results, fields) {
       if(error) {
         logger.log('warn', 'SYS ERROR: users.getAll()');
@@ -27,26 +19,15 @@ module.exports = {
       else {
         res.json(results);
       }
-
-    }) 
+    });
   },
-  
+
   getById: (req, res, next) => {
     const ID = req.params.id;
-
-    let q = `
-       SELECT *
-         FROM users 
-        WHERE user_id = ${ID};`;
-
+    let q = `SELECT * FROM users WHERE user_id = ${ID};`;
     db_connection.query(q, function(error, results, fields) {
       if(error) {
         logger.log('warn', 'SYS ERROR: users.getById()');
-        next(error);
-      }
-      if(results.length === 0) {
-        console.log('------ ID NOT FOUND ------ ');
-        error.name = 'IdNotFound';
         next(error);
       }
       else {
@@ -56,7 +37,6 @@ module.exports = {
   },
 
   create: (req, res, next) => {
-
     const data = req.body;
     const first_name = data.first_name;
     const last_name = data.last_name;
@@ -80,10 +60,21 @@ module.exports = {
       }
       else {
         console.log('------ NEW USER CREATED ------ ');
-        res.json(results);
       }
+    });
 
-    })
+    q = `SELECT * FROM users WHERE email = '${email}';`;
+    db_connection.query(q, function(error, results, fields) {
+      if (error) {
+        logger.log('warn', 'SYS ERROR: users.login()');
+        next(error);
+      } else {
+        const user = new Models.User(results[0]);
+        let token = jwt.sign({ currentUser: user }, 'shhhhhhh');
+        console.log('returning user: \n\n', user,'\n\n', token);
+        return res.json(token);
+      }
+    });
   },
 
   update: (req, res, next) => {
