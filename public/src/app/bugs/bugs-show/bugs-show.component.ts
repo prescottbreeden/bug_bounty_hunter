@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/users/auth.service';
 import { Router } from '@angular/router';
 import { HttpService } from 'src/app/http.service';
+import { Bug } from '../models/Bug';
 
 @Component({
   selector: 'app-bugs-show',
@@ -9,7 +10,8 @@ import { HttpService } from 'src/app/http.service';
   styleUrls: ['./bugs-show.component.scss']
 })
 export class BugsShowComponent implements OnInit {
-  bugs: any;
+  token: any | null;
+  bugs: Bug | any;
 
   constructor(
     private authService: AuthService,
@@ -24,13 +26,12 @@ export class BugsShowComponent implements OnInit {
       this.authService.logout();
       this.router.navigate(['/']);
     } else {
-      this.bugs = this.httpService.getBugs();
+      const buggies = this.httpService.getBugs();
+      if (buggies instanceof Array) {
+        this.bugs = buggies;
+      }
       console.log(this.bugs);
     }
-  }
-
-  onSubmitBug() {
-
   }
 
 }

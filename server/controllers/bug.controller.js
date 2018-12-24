@@ -1,9 +1,6 @@
 const env = process.env.NODE_ENV || 'development';
 const config = require('../../config')[env];
 const logger = require('../_helpers/logger');
-const Models = require('../models');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
 const mysql = require('mysql');
 const db_connection = mysql.createConnection(config.database);
 
@@ -11,17 +8,11 @@ module.exports = {
   
   getAll: (req, res, next) => {
 
-    let q = `
-       SELECT user_id, 
-              email,
-              created_at,
-              updated_at
-         FROM users;
-    `;
+    let q = 'SELECT *, FROM bugs;';
 
     db_connection.query(q, function(error, results, fields) {
       if(error) {
-        logger.log('warn', 'SYS ERROR: users.getAll()');
+        logger.log('warn', 'SYS ERROR: bug.getAll()');
         next(error);
       }
       else {
@@ -36,12 +27,12 @@ module.exports = {
 
     let q = `
        SELECT *
-         FROM users 
-        WHERE user_id = ${ID};`;
+         FROM bugs 
+        WHERE bug_id = ${ID};`;
 
     db_connection.query(q, function(error, results, fields) {
       if(error) {
-        logger.log('warn', 'SYS ERROR: users.getById()');
+        logger.log('warn', 'SYS ERROR: bug.getById()');
         next(error);
       }
       if(results.length === 0) {
@@ -56,30 +47,25 @@ module.exports = {
   },
 
   create: (req, res, next) => {
-
     const data = req.body;
-    const first_name = data.first_name;
-    const last_name = data.last_name;
-    const email = data.email;
-    let password = data.password;
-
-    if (password) {
-      password = bcrypt.hashSync(password, 10);
-    }
+    console.log(data);
+    const user_id = data.user_id;
+    const title = data.title;
+    const traceback = data.traceback;
 
     let q = `
       INSERT INTO 
-       users (first_name, last_name, email, password) 
-      VALUES ('${first_name}','${last_name}','${email}','${password}')
+        bugs (user_id, title, traceback) 
+      VALUES ('${user_id}','${title}','${traceback}')
     ;`;
 
     db_connection.query(q, function(error, results, fields) {
       if (error) {
-        logger.log('warn', 'SYS ERROR: users.create()');
+        logger.log('warn', 'SYS ERROR: bug.create()');
         next(error);
       }
       else {
-        console.log('------ NEW USER CREATED ------ ');
+        console.log('------ NEW BUG CREATED ------ ');
         res.json(results);
       }
 

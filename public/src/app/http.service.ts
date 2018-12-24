@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NewUser } from './users/models/NewUser';
+import { NewBug } from './bugs/models/NewBug';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +26,8 @@ export class HttpService {
   getOneBug(id: number) {
     return this._http.get('/api/bugs/' + id); 
   }
-  createBug(newBug: any) {
+  createBug(newBug: NewBug) {
+    console.log('inside service.... ');
     return this._http.post('/api/bugs', newBug); 
   }
 }

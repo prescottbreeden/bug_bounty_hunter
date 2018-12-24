@@ -1,0 +1,38 @@
+<form 
+  (submit)="onSubmitBug()" 
+  class="form">
+
+  <input 
+    type="hidden" 
+    [(ngModel)]="newBug.user_id" 
+    name="newBug.user_id">
+
+  <div class="form__row">
+    <label for="title" class="form__label">Error</label>
+  </div>
+  <div class="form__row">
+    <input 
+      [(ngModel)]="newBug.title"
+      #title="ngModel"
+      name="newBug.title"
+      type="text" 
+      class="form__input" 
+      id="title">
+  </div>
+
+  <div class="form__row">
+    <label for="traceback" class="form__label">Traceback</label>
+  </div>
+  <div class="form__row">
+    <textarea 
+      [(ngModel)]="newBug.traceback"
+      #traceback="ngModel"
+      name="newBug.traceback"
+      type="text" 
+      class="form__input" 
+      id="traceback"></textarea>
+  </div>
+  <button class="btn">Submit New Bug</button>
+</form>
+
+{{ newBug | json }}

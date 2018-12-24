@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { RegisterComponent } from './users/login_register/register.component';
 import { NavComponent } from './nav/nav.component';
 import { BugsShowComponent } from './bugs/bugs-show/bugs-show.component';
+import { BugsCreateComponent } from './bugs/bugs-create/bugs-create.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { BugsShowComponent } from './bugs/bugs-show/bugs-show.component';
     RegisterComponent,
     NavComponent,
     BugsShowComponent,
+    BugsCreateComponent,
   ],
   imports: [
     BrowserModule,
