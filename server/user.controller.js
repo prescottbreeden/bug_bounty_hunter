@@ -2,6 +2,7 @@ const env = process.env.NODE_ENV || 'development';
 const config = require('../config')[env];
 const mysql = require('mysql');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const User = require('./models/user.model');
 const logger = require('./_helpers/logger');
 const db_connection = mysql.createConnection(config.database);
@@ -101,6 +102,9 @@ module.exports = {
 
   validateEmail: (req, res) => {
     const email = req.body.email;
+    console.log("-------------")
+    console.log(email)
+    console.log("-------------")
 
     let q = `
         SELECT *
@@ -135,11 +139,14 @@ module.exports = {
       else {
         const user = new User(results[0]);
         var status = bcrypt.compareSync(data.password, results[0]['password']);
-        console.log('returning user: ', user);
-        return res.json(results)
+        if (status) {
+          let token = jwt.sign({ currentUser: user }, 'shhhhhhh');
+          // console.log('returning user: ', user);
+          console.log(token);
+
+          return res.json(token);
+        }
       }
     });
-    
   }
-
 };

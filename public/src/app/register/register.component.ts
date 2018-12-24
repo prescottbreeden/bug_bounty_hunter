@@ -31,10 +31,8 @@ export class RegisterComponent implements OnInit {
   onEmail() {
     this.authService.isUnique(this.user)
       .subscribe(result => {
-        if (result instanceof Array) {
-          if (result.length > 0) {
-            this.isRegistered = true;
-          } 
+        if (result) {
+          this.isRegistered = true;
         }
         this.togglePasswordField();
         this.toggleEmailField();
