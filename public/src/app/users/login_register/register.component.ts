@@ -61,7 +61,14 @@ export class RegisterComponent implements OnInit {
       }
       this.api.createNewUser(this.user)
         .subscribe(() => {
-          this.router.navigate(['/bugs']);
+          this.authService.login(this.user)
+            .subscribe(result => {
+              if (result) {
+                this.router.navigate(['/bugs']);
+              } else {
+                this.invalidLogin = true;
+              }
+            })
         });
     }
   }

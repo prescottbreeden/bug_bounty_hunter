@@ -54,20 +54,7 @@ module.exports = {
       }
       else {
         console.log('------ NEW USER CREATED ------ ');
-      }
-    });
-
-    db_connection.query('SELECT * FROM users WHERE email = ?', [data.email], 
-      function(error, results, fields) {
-
-      if (error) {
-        logger.log('warn', 'SYS ERROR: users.login()');
-        res.json(error);
-      } else {
-        const user = new Models.User(results[0]);
-        let token = jwt.sign({ currentUser: user }, 'shhhhhhh');
-        console.log('returning user: \n\n', user,'\n\n', token);
-        return res.json(token);
+        return res.json(results);
       }
     });
   },
