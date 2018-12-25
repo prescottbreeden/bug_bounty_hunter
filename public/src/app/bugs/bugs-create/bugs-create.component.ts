@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class BugsCreateComponent implements OnInit {
   token: any | null;
   newBug: NewBug = {
-    user_id: '',
+    posted_by: '',
     title: '',
     traceback: ''
   };
@@ -26,7 +26,7 @@ export class BugsCreateComponent implements OnInit {
   ngOnInit() {
     this.token = this.authService.getToken()
     if (this.token) {
-      this.newBug.user_id = this.token.currentUser.user_id;
+      this.newBug.posted_by = this.token.currentUser.user_id;
     }
   }
 

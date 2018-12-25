@@ -1,5 +1,5 @@
 export interface NewBug {
-  user_id: string;
+  posted_by: string;
   title: string;
   traceback: string;
 }
