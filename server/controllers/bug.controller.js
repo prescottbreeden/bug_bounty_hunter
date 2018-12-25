@@ -28,6 +28,9 @@ module.exports = {
       }
       else {
         res.json(results);
+        console.log('---------')
+        console.log(results);
+        console.log('---------')
       }
     });
   },
