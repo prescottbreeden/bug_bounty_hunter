@@ -12,6 +12,8 @@ import { RegisterComponent } from './users/login_register/register.component';
 import { BugsShowComponent } from './bugs/bugs-show/bugs-show.component';
 import { BugsCreateComponent } from './bugs/bugs-create/bugs-create.component';
 import { BugsViewComponent } from './bugs/bugs-view/bugs-view.component';
+import { AnswerCreateComponent } from './answers/answer-create/answer-create.component';
+import { AnswerShowComponent } from './answers/answer-show/answer-show.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { BugsViewComponent } from './bugs/bugs-view/bugs-view.component';
     BugsShowComponent,
     BugsCreateComponent,
     BugsViewComponent,
+    AnswerCreateComponent,
+    AnswerShowComponent,
   ],
   imports: [
     BrowserModule,

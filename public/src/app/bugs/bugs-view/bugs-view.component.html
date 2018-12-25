@@ -1,8 +1,10 @@
-<p>
-  bugs-view works!
-</p>
-{{ bug.bug_id }}
-{{ bug.posted_by }}
-{{ bug.title }}
-{{ bug.traceback }}
-{{ bug.created_at }}
+<section class="bug-view">
+  <h2 class="bug-view__title">{{ bug.title }}</h2>
+  <p style="white-space: pre-line; font-size: 75%;" class="bug-view__traceback">
+    {{bug.traceback}}
+  </p>
+</section>
+<hr>
+<app-answer-create></app-answer-create>
+<hr>
+<app-answer-show></app-answer-show>

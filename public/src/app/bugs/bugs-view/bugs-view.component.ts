@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
-import { Bug, BugModel } from '../models/Bug';
+import { Bug, MapBugData } from '../models/Bug';
 import { HttpService } from 'src/app/http.service';
 
 @Component({
@@ -28,7 +28,7 @@ export class BugsViewComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       this.api.getOneBug(params['id'])
         .subscribe(results => {
-          this.bug = BugModel(results[0]);
+          this.bug = MapBugData(results[0]);
         });
     });
   }

@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpService } from 'src/app/http.service';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
-import { NewUser } from '../models/NewUser';
-import { invalid } from '@angular/compiler/src/render3/view/util';
+import { NewUser } from '../models/User';
 
 @Component({
   selector: 'app-register',

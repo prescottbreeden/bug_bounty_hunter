@@ -7,7 +7,13 @@ export interface Bug {
   updated_at: string | Date;
 }
 
-export function BugModel(data): Bug {
+export interface NewBug {
+  posted_by: string;
+  title: string;
+  traceback: string;
+}
+
+export function MapBugData(data): Bug {
   return {
     bug_id: data['bug_id'],
     posted_by: data['posted_by'],

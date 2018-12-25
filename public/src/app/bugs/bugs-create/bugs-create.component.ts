@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NewBug } from '../models/NewBug';
+import { NewBug } from '../models/Bug';
 import { AuthService } from 'src/app/users/auth.service';
 import { HttpService } from 'src/app/http.service';
 import { Router } from '@angular/router';
