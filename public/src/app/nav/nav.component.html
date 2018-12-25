@@ -1,5 +1,18 @@
 <nav class="nav">
-  <button [routerLink]="['/']" class="nav__link">Home</button>
-  <button [routerLink]="['/bugs']" class="nav__link">Bugs</button>
-  <button (click)="logout()" class="nav__link">Logout</button>
+  <button 
+    [routerLink]="['/']" 
+    class="nav__link">Home
+  </button>
+  <button 
+    [routerLink]="['/bugs']" 
+    class="nav__link">Bugs
+  </button>
+  <button 
+    [routerLink]="['/bugs/create']" 
+    class="nav__link">Submit Bug
+  </button>
+  <button 
+    (click)="logout()" 
+    class="nav__link">Logout
+  </button>
 </nav>

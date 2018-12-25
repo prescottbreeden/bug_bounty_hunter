@@ -7,38 +7,26 @@ const db_connection = mysql.createConnection(config.database);
 module.exports = {
   
   getAll: (req, res, next) => {
-
-    let q = 'SELECT *, FROM bugs;';
-
-    db_connection.query(q, function(error, results, fields) {
+    db_connection.query('SELECT * FROM bugs', function(error, results, fields) {
       if(error) {
-        logger.log('warn', 'SYS ERROR: bug.getAll()');
-        next(error);
+        logger.log('warn', `bug.getAll(): ${error}`);
+        res.json(error);
       }
       else {
         res.json(results);
       }
-
-    }) 
+    });
   },
   
   getById: (req, res, next) => {
     const ID = req.params.id;
 
-    let q = `
-       SELECT *
-         FROM bugs 
-        WHERE bug_id = ${ID};`;
+    db_connection.query('SELECT * FROM bugs WHERE bug_id = ?', [ID], 
+      function(error, results, fields) {
 
-    db_connection.query(q, function(error, results, fields) {
       if(error) {
-        logger.log('warn', 'SYS ERROR: bug.getById()');
-        next(error);
-      }
-      if(results.length === 0) {
-        console.log('------ ID NOT FOUND ------ ');
-        error.name = 'IdNotFound';
-        next(error);
+        logger.log('warn', `bug.getById(): ${error}`);
+        res.json(error);
       }
       else {
         res.json(results);
@@ -47,29 +35,21 @@ module.exports = {
   },
 
   create: (req, res, next) => {
-    const data = req.body;
-    console.log(data);
-    const user_id = data.user_id;
-    const title = data.title;
-    const traceback = data.traceback;
+    let data = req.body;
 
-    let q = `
-      INSERT INTO 
-        bugs (user_id, title, traceback) 
-      VALUES ('${user_id}','${title}','${traceback}')
-    ;`;
+    db_connection.query('INSERT INTO bugs (user_id, title, traceback) VALUES (?, ?, ?)', 
+      [data.user_id, data.title, data.traceback], 
+      function(error, results, fields) {
 
-    db_connection.query(q, function(error, results, fields) {
       if (error) {
-        logger.log('warn', 'SYS ERROR: bug.create()');
-        next(error);
+        logger.log('warn', `bug.create(): ${error}`);
+        res.json(error);
       }
       else {
         console.log('------ NEW BUG CREATED ------ ');
         res.json(results);
       }
-
-    })
+    });
   },
 
   update: (req, res, next) => {

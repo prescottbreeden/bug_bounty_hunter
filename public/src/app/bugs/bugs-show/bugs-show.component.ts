@@ -11,7 +11,7 @@ import { Bug } from '../models/Bug';
 })
 export class BugsShowComponent implements OnInit {
   token: any | null;
-  bugs: Bug | any;
+  bugs: any;
 
   constructor(
     private authService: AuthService,
@@ -21,16 +21,14 @@ export class BugsShowComponent implements OnInit {
 
   ngOnInit() {
     const token = this.authService.getToken();
-    console.log('Current user: ', token);
     if (!token) {
       this.authService.logout();
       this.router.navigate(['/']);
     } else {
-      const buggies = this.httpService.getBugs();
-      if (buggies instanceof Array) {
-        this.bugs = buggies;
-      }
-      console.log(this.bugs);
+      this.httpService.getBugs()
+        .subscribe(results => {
+          this.bugs = results;
+        })
     }
   }
 

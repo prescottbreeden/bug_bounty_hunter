@@ -32,7 +32,10 @@ export class BugsCreateComponent implements OnInit {
 
   onSubmitBug() {
     console.log(this.newBug);
-    this.httpService.createBug(this.newBug);
+    this.httpService.createBug(this.newBug)
+      .subscribe(res => {
+        console.log('new bug created: ', res);
+      });
     this.router.navigate(['/bugs']);
   }
 

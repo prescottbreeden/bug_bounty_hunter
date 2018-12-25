@@ -25,11 +25,14 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private userApi: HttpService,
+    private api: HttpService,
     private router: Router
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    this.api.getBugs();
+    this.api.getUsers();
+  }
 
   onEmail() {
     this.authService.isUnique(this.user)
@@ -56,7 +59,7 @@ export class RegisterComponent implements OnInit {
       if (this.user.confirm != this.user.password) {
         return this.invalidLogin = true;
       }
-      this.userApi.createNewUser(this.user)
+      this.api.createNewUser(this.user)
         .subscribe(() => {
           this.router.navigate(['/bugs']);
         });

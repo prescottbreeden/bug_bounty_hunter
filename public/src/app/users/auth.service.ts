@@ -47,10 +47,5 @@ export class AuthService {
     return helper.decodeToken(token);
   }
 
-  checkToken() {
-    const helper = new JwtHelperService();
-    let token = localStorage.getItem('token');
-    return helper.isTokenExpired(token);
-  }
 }
 
