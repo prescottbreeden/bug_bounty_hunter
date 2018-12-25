@@ -13,34 +13,39 @@ CREATE TABLE users (
   updated_at  TIMESTAMP     NOT NULL  DEFAULT NOW()   ON UPDATE NOW()
 );
 
+CREATE TABLE tags (
+  tag_id      INTEGER       NOT NULL  AUTO_INCREMENT  PRIMARY KEY,
+  tag_name    VARCHAR(255)  NOT NULL
+);
+
 CREATE TABLE bugs (
   bug_id      INTEGER       NOT NULL  AUTO_INCREMENT  PRIMARY KEY,
-  user_id     INTEGER       NOT NULL,
+  posted_by   INTEGER       NOT NULL,
   title       VARCHAR(255)  NOT NULL,
   traceback   TEXT          NOT NULL,
   created_at  TIMESTAMP     NOT NULL  DEFAULT NOW(),
   updated_at  TIMESTAMP     NOT NULL  DEFAULT NOW()   ON UPDATE NOW(),
 
-  FOREIGN KEY (user_id)
+  FOREIGN KEY (posted_by)
     REFERENCES users (user_id)
 );
 
 CREATE TABLE answers (
   answer_id   INTEGER       NOT NULL AUTO_INCREMENT   PRIMARY KEY,
-  user_id     INTEGER       NOT NULL,
   bug_id      INTEGER       NOT NULL,
+  posted_by   INTEGER       NOT NULL,
   content     LONGTEXT      NOT NULL,
   created_at  TIMESTAMP     NOT NULL  DEFAULT NOW(),
   updated_at  TIMESTAMP     NOT NULL  DEFAULT NOW()   ON UPDATE NOW(),
 
-  FOREIGN KEY (user_id)
+  FOREIGN KEY (posted_by)
     REFERENCES users (user_id),
   
   FOREIGN KEY (bug_id)
     REFERENCES bugs (bug_id)
 );
 
-CREATE TABLE bug_upvotes (
+CREATE TABLE bugs_upvotes (
   bug_upvote_id     INTEGER     NOT NULL  AUTO_INCREMENT    PRIMARY KEY,
   user_id           INTEGER     NOT NULL,
   bug_id            INTEGER     NOT NULL,
@@ -52,7 +57,7 @@ CREATE TABLE bug_upvotes (
     REFERENCES bugs (bug_id)
 );
 
-CREATE TABLE answer_upvotes (
+CREATE TABLE answers_upvotes (
   answer_upvote_id  INTEGER     NOT NULL  AUTO_INCREMENT    PRIMARY KEY,
   user_id           INTEGER     NOT NULL,
   answer_id         INTEGER     NOT NULL,
@@ -62,4 +67,16 @@ CREATE TABLE answer_upvotes (
   
   FOREIGN KEY (answer_id)
     REFERENCES answers (answer_id)
+);
+
+CREATE TABLE bugs_tags (
+  bug_tag_id        INTEGER     NOT NULL  AUTO_INCREMENT    PRIMARY KEY,
+  tag_id            INTEGER     NOT NULL,
+  bug_id            INTEGER     NOT NULL,
+
+  FOREIGN KEY (tag_id)
+    REFERENCES tags (tag_id),
+  
+  FOREIGN KEY (bug_id)
+    REFERENCES bugs (bug_id)
 );
