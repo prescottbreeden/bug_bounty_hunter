@@ -6,7 +6,7 @@ const db_connection = mysql.createConnection(config.database);
 
 module.exports = {
   
-  getAll: (req, res, next) => {
+  getAll: (req, res) => {
     db_connection.query('SELECT * FROM bugs', function(error, results, fields) {
       if(error) {
         logger.log('warn', `bug.getAll(): ${error}`);
@@ -18,10 +18,8 @@ module.exports = {
     });
   },
   
-  getById: (req, res, next) => {
-    const ID = req.params.id;
-
-    db_connection.query('SELECT * FROM bugs WHERE bug_id = ?', [ID], 
+  getById: (req, res) => {
+    db_connection.query('SELECT * FROM bugs WHERE bug_id = ?', [req.params.id], 
       function(error, results, fields) {
 
       if(error) {
@@ -34,13 +32,8 @@ module.exports = {
     });
   },
 
-  create: (req, res, next) => {
-    let data = req.body;
-
-    db_connection.query('INSERT INTO bugs (user_id, title, traceback) VALUES (?, ?, ?)', 
-      [data.user_id, data.title, data.traceback], 
-      function(error, results, fields) {
-
+  create: (req, res) => {
+    db_connection.query('INSERT INTO bugs SET ?', req.body, function(error, results, fields) {
       if (error) {
         logger.log('warn', `bug.create(): ${error}`);
         res.json(error);
@@ -52,12 +45,12 @@ module.exports = {
     });
   },
 
-  update: (req, res, next) => {
+  update: (req, res) => {
     const data = req.body;
     res.json('route not finished');
   },
 
-  delete: (req, res, next) => {
+  delete: (req, res) => {
     res.json('route not finished');
   },
 

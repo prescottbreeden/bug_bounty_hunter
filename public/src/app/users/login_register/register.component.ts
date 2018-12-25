@@ -16,8 +16,8 @@ export class RegisterComponent implements OnInit {
     last_name: '',
     email: '',
     password: '',
-    confirm: ''
   };
+  confirmPassword: '';
   invalidLogin = false;
   isRegistered = false;
   showEmailField = true;
@@ -56,7 +56,7 @@ export class RegisterComponent implements OnInit {
           }
         });
     } else {
-      if (this.user.confirm != this.user.password) {
+      if (this.confirmPassword != this.user.password) {
         return this.invalidLogin = true;
       }
       this.api.createNewUser(this.user)

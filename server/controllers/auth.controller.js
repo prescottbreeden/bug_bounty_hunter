@@ -10,20 +10,10 @@ const db_connection = mysql.createConnection(config.database);
 module.exports = {
 
   validateEmail: (req, res) => {
-    const email = req.body.email;
-    console.log("-------------")
-    console.log(email)
-    console.log("-------------")
-
-    let q = `
-        SELECT *
-          FROM users 
-         WHERE email = '${email}';`;
-
-    db_connection.query(q, function(error, results, fields) {
+    db_connection.query('SELECT * FROM users WHERE email = ?', req.body.email, function(error, results, fields) {
       if(error) {
-        logger.log('warn', 'SYS ERROR: users.validateEmail()');
-        next(error);
+        logger.log('warn', `users.validateEmail(): ${error}`);
+        res.json(error);
       }
       else {
         return res.json(results);
@@ -32,22 +22,14 @@ module.exports = {
   },
 
   login: (req, res) => {
-    const data = req.body;
-    const email = req.body.email;
-
-    let q = `
-        SELECT *
-          FROM users 
-         WHERE email = '${email}';`;
-
-    db_connection.query(q, function(error, results, fields) {
+    db_connection.query('SELECT * FROM users WHERE email = ?', req.body.email, function(error, results, fields) {
       if(error) {
-        logger.log('warn', 'SYS ERROR: users.login()');
-        next(error);
+        logger.log('warn', `users.login(): ${error}`);
+        res.json(error);
       }
       else {
         const user = new Models.User(results[0]);
-        var status = bcrypt.compareSync(data.password, results[0]['password']);
+        var status = bcrypt.compareSync(req.body.password, results[0]['password']);
         if (status) {
           let token = jwt.sign({ currentUser: user }, 'shhhhhhh');
           console.log('returning user: \n\n', user,'\n\n', token);
