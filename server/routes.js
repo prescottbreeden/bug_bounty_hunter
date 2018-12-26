@@ -1,7 +1,6 @@
 const user = require('./controllers/user.controller');
 const auth = require('./controllers/auth.controller');
 const bug = require('./controllers/bug.controller');
-const answer = require('./controllers/answer.controller');
 
 module.exports = function(app) {
 
@@ -17,7 +16,6 @@ module.exports = function(app) {
 
     .get('/api/bugs', bug.getAll)
     .get('/api/bugs/:id', bug.getById)
-    .get('/api/bugs/answers/:id', bug.getByIdWithAnswers)
     .post('/api/bugs', bug.create)
     .put('/api/bugs/:id', bug.update)
     .delete('/api/bugs/:id', bug.delete)

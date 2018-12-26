@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/users/services/auth.service';
 import { Router } from '@angular/router';
 import { BugService } from '../services/bug.service';
+import { BugModel, MapBugData } from '../models/Bug';
 // import { Bug } from '../models/Bug';
 
 @Component({
@@ -10,7 +11,7 @@ import { BugService } from '../services/bug.service';
   styleUrls: ['./bugs-show.component.scss']
 })
 export class BugsShowComponent implements OnInit {
-  bugs: any;
+  bugs: BugModel[];
 
   constructor(
     private authService: AuthService,
@@ -27,7 +28,7 @@ export class BugsShowComponent implements OnInit {
       console.log('token valid');
       this.bugService.getBugs()
         .subscribe(results => {
-          this.bugs = results;
+          this.bugs = MapBugData(results);
         })
     }
   }

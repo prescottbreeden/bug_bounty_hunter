@@ -3,14 +3,14 @@ CREATE SCHEMA bug_hunter;
 USE bug_hunter;
 
 CREATE TABLE users (
-  user_id     INTEGER       NOT NULL  AUTO_INCREMENT  PRIMARY KEY,
-  first_name  VARCHAR(255)  NOT NULL,
-  last_name   VARCHAR(255)  NOT NULL,
-  email       VARCHAR(255)  NOT NULL,
-  password    VARCHAR(255)  NOT NULL,
-  admin       TINYINT(1)    NOT NULL  DEFAULT 0,
-  created_at  TIMESTAMP     NOT NULL  DEFAULT NOW(),
-  updated_at  TIMESTAMP     NOT NULL  DEFAULT NOW()   ON UPDATE NOW()
+  user_id       INTEGER       NOT NULL  AUTO_INCREMENT  PRIMARY KEY,
+  first_name    VARCHAR(255)  NOT NULL,
+  last_name     VARCHAR(255)  NOT NULL,
+  email         VARCHAR(255)  NOT NULL,
+  password      VARCHAR(255)  NOT NULL,
+  admin         TINYINT(1)    NOT NULL  DEFAULT 0,
+  user_created  TIMESTAMP     NOT NULL  DEFAULT NOW(),
+  user_updated  TIMESTAMP     NOT NULL  DEFAULT NOW()   ON UPDATE NOW()
 );
 
 CREATE TABLE tags (
@@ -21,22 +21,22 @@ CREATE TABLE tags (
 CREATE TABLE bugs (
   bug_id      INTEGER       NOT NULL  AUTO_INCREMENT  PRIMARY KEY,
   posted_by   INTEGER       NOT NULL,
-  title       VARCHAR(255)  NOT NULL,
+  error       VARCHAR(255)  NOT NULL,
   traceback   TEXT          NOT NULL,
-  created_at  TIMESTAMP     NOT NULL  DEFAULT NOW(),
-  updated_at  TIMESTAMP     NOT NULL  DEFAULT NOW()   ON UPDATE NOW(),
+  bug_created TIMESTAMP     NOT NULL  DEFAULT NOW(),
+  bug_updated TIMESTAMP     NOT NULL  DEFAULT NOW()   ON UPDATE NOW(),
 
   FOREIGN KEY (posted_by)
     REFERENCES users (user_id)
 );
 
 CREATE TABLE answers (
-  answer_id   INTEGER       NOT NULL AUTO_INCREMENT   PRIMARY KEY,
-  bug_id      INTEGER       NOT NULL,
-  answered_by   INTEGER       NOT NULL,
-  content     LONGTEXT      NOT NULL,
-  created_at  TIMESTAMP     NOT NULL  DEFAULT NOW(),
-  updated_at  TIMESTAMP     NOT NULL  DEFAULT NOW()   ON UPDATE NOW(),
+  answer_id       INTEGER     NOT NULL AUTO_INCREMENT   PRIMARY KEY,
+  bug_id          INTEGER     NOT NULL,
+  answered_by     INTEGER     NOT NULL,
+  answer_content  LONGTEXT    NOT NULL,
+  answer_created  TIMESTAMP   NOT NULL  DEFAULT NOW(),
+  answer_updated  TIMESTAMP   NOT NULL  DEFAULT NOW()   ON UPDATE NOW(),
 
   FOREIGN KEY (answered_by)
     REFERENCES users (user_id),

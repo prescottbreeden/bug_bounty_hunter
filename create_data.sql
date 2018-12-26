@@ -20,7 +20,7 @@ USE bug_hunter;
         ('express')
         ;
 
- INSERT INTO bugs (posted_by, title, traceback)
+ INSERT INTO bugs (posted_by, error, traceback)
  VALUES (1, 'Test Bug 1', 'Test traceback 1...'),
         (1, 'Test Bug 2', 'Test traceback 2...'),
         (1, 'Test Bug 3', 'Test traceback 3...'),
@@ -34,7 +34,7 @@ USE bug_hunter;
         (2, 'Test Bug 11', 'Test traceback 11...')
         ;
 
- INSERT INTO answers (answered_by, bug_id, content)
+ INSERT INTO answers (answered_by, bug_id, answer_content)
  VALUES (1, 2, 'Test Answer 1'),
         (1, 2, 'Test Answer 2'),
         (1, 2, 'Test Answer 3'),
