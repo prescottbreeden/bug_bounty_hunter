@@ -1,7 +1,9 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
-import { BugModel, MapBugData } from '../models/Bug';
+import { AuthService } from 'src/app/users/services/auth.service';
 import { BugService } from 'src/app/bugs/services/bug.service';
+import { BugModel, MapBugData } from '../models/Bug';
+import { NewAnswer, MapAnswerData, AnswerModel } from 'src/app/bugs/models/Answer';
 
 @Component({
   selector: 'app-bugs-view',
@@ -9,7 +11,14 @@ import { BugService } from 'src/app/bugs/services/bug.service';
   styleUrls: ['./bugs-view.component.scss']
 })
 export class BugsViewComponent implements OnInit {
-  @Output() UpdateBugId = new EventEmitter<BugModel>();
+
+  answers: AnswerModel[];
+
+  newAnswer: NewAnswer = {
+    bug_id: '',
+    answered_by: '',
+    answer_content: ''
+  };
 
   bug: BugModel = {
     bug_id: '',
@@ -24,20 +33,30 @@ export class BugsViewComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private bugService: BugService,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
-    this.route.params.subscribe((params: Params) => {
-      this.bugService.getBugById(params['id'])
-        .subscribe(results => {
-          this.bug = MapBugData(results[0]);
+    const token = this.authService.getToken();
+    if (!token) {
+      this.router.navigate(['/']);
+    } else {
+      this.route.params.subscribe((params: Params) => {
+        this.bugService.getBugById(params['id'])
+          .subscribe(results => {
+            this.answers = MapAnswerData(results);
+            this.bug = MapBugData(results[0]);
+            this.newAnswer.answered_by = token.currentUser.user_id;
+            this.newAnswer.bug_id = this.bug.bug_id;
           });
-          // console.log(typeof(this.bug.bug_id));
-    });
+      });
+    }
   }
-
-  goHome() {
-    this.router.navigate(['/bugs']);
+  
+  onSubmitAnswer() {
+    this.bugService.addAnswer(this.newAnswer).subscribe(res => {
+      console.log(res);
+    });
   }
 
 }

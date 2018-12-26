@@ -34,7 +34,7 @@ USE bug_hunter;
         (2, 'Test Bug 11', 'Test traceback 11...')
         ;
 
- INSERT INTO answers (posted_by, bug_id, content)
+ INSERT INTO answers (answered_by, bug_id, content)
  VALUES (1, 2, 'Test Answer 1'),
         (1, 2, 'Test Answer 2'),
         (1, 2, 'Test Answer 3'),

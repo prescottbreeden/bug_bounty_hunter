@@ -8,7 +8,7 @@ export interface BugModel {
 }
 
 export interface NewBug {
-  posted_by: string;
+  posted_by: string | number;
   title: string;
   traceback: string;
 }

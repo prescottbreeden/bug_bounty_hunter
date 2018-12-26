@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NewBug, BugModel } from '../models/Bug';
+import { NewAnswer } from '../models/Answer';
 
 @Injectable({
   providedIn: 'root'
@@ -23,5 +24,8 @@ export class BugService {
   }
   deleteBug(id: number) {
     return this.http.delete('/api/bugs/' + id);
+  }
+  addAnswer(newAnswer: NewAnswer) {
+    return this.http.post('/api/answers', newAnswer);
   }
 }

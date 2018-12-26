@@ -6,7 +6,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { UserService } from './users/services/user.service';
 import { BugService } from './bugs/services/bug.service';
-import { AnswerService } from './answers/services/answer.service';
 import { AuthService } from './users/services/auth.service';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -14,8 +13,6 @@ import { RegisterComponent } from './users/login_register/register.component';
 import { BugsShowComponent } from './bugs/bugs-show/bugs-show.component';
 import { BugsCreateComponent } from './bugs/bugs-create/bugs-create.component';
 import { BugsViewComponent } from './bugs/bugs-view/bugs-view.component';
-import { AnswerCreateComponent } from './answers/answer-create/answer-create.component';
-import { AnswerShowComponent } from './answers/answer-show/answer-show.component';
 import { DataService } from './data.service';
 
 @NgModule({
@@ -26,8 +23,6 @@ import { DataService } from './data.service';
     BugsShowComponent,
     BugsCreateComponent,
     BugsViewComponent,
-    AnswerCreateComponent,
-    AnswerShowComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,7 +31,7 @@ import { DataService } from './data.service';
     BrowserModule,
     HttpClientModule
   ],
-  providers: [DataService, UserService, AuthService, BugService, AnswerService],
+  providers: [DataService, UserService, AuthService, BugService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

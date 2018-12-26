@@ -5,6 +5,42 @@
   </p>
 </section>
 <hr>
-<app-answer-create></app-answer-create>
+
+<form 
+  (submit)="onSubmitAnswer()" 
+  class="form">
+
+  <input 
+    type="hidden" 
+    [(ngModel)]="newAnswer.posted_by" 
+    name="newAnswer.posted_by">
+
+  <input 
+    type="hidden" 
+    [(ngModel)]="newAnswer.bug_id" 
+    name="newAnswer.bug_id">
+
+  <div class="form__row">
+    <label for="content" class="form__label">Add Answer</label>
+  </div>
+  <div class="form__row">
+    <textarea 
+      [(ngModel)]="newAnswer.content"
+      #traceback="ngModel"
+      name="newAnswer.content"
+      type="text" 
+      class="form__input" 
+      id="content"></textarea>
+  </div>
+  <button class="btn">Submit Answer</button>
+</form>
+
+{{ newAnswer | json }}
 <hr>
-<app-answer-show></app-answer-show>
+<div class="answers">
+  <div *ngFor="let answer of answers" class="answers__row">
+    {{ answer.answer_content }} | 
+    {{ answer.answered_by }} | 
+    {{ answer.answer_created | date:'short'}}
+  </div>
+</div>

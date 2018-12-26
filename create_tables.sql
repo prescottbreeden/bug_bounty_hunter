@@ -33,12 +33,12 @@ CREATE TABLE bugs (
 CREATE TABLE answers (
   answer_id   INTEGER       NOT NULL AUTO_INCREMENT   PRIMARY KEY,
   bug_id      INTEGER       NOT NULL,
-  posted_by   INTEGER       NOT NULL,
+  answered_by   INTEGER       NOT NULL,
   content     LONGTEXT      NOT NULL,
   created_at  TIMESTAMP     NOT NULL  DEFAULT NOW(),
   updated_at  TIMESTAMP     NOT NULL  DEFAULT NOW()   ON UPDATE NOW(),
 
-  FOREIGN KEY (posted_by)
+  FOREIGN KEY (answered_by)
     REFERENCES users (user_id),
   
   FOREIGN KEY (bug_id)
