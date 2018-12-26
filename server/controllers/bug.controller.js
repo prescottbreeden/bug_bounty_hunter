@@ -19,7 +19,7 @@ module.exports = {
   },
 
   getById: (req, res) => {
-    db_connection.query('SELECT * FROM bugs AS b JOIN answers AS a ON b.bug_id = a.bug_id WHERE b.bug_id = ?', [req.params.id],
+    db_connection.query('SELECT b.bug_id, posted_by, error, traceback, bug_created, bug_updated, answer_id, answered_by, answer_content, answer_created, answer_updated FROM bugs AS b LEFT JOIN answers AS a ON b.bug_id = a.bug_id WHERE b.bug_id = ?', [req.params.id],
       function(error, results, fields) {
 
       if(error) {
@@ -54,17 +54,28 @@ module.exports = {
   },
 
   addAnswer: (req, res) => {
-    console.log(req.body);
-    // db_connection.query('INSERT INTO answers SET ?', req.body, function(error, results, fields) {
-    //   if (error) {
-    //     logger.log('warn', `bugs.addAnswer(): ${error}`);
-    //     res.json(error);
-    //   }
-    //   else {
-    //     console.log('------ NEW ANSWER CREATED ------ ');
-    //     res.json(results);
-    //   }
-    // });
+    db_connection.query('INSERT INTO answers SET ?', req.body, function(error, results, fields) {
+      if (error) {
+        logger.log('warn', `bugs.addAnswer(): ${error}`);
+        res.json(error);
+      }
+      else {
+        console.log('------ NEW ANSWER CREATED ------ ');
+        res.json(results);
+      }
+    });
   },
+
+  getAnswer: (req, res) => {
+    db_connection.query('SELECT * FROM answers WHERE answer_id = ?', [req.params.id],
+    function(error, results, fields) {
+      if (error) {
+        logger.log('warn', `bugs.getAnswer(): ${error}`);
+        res.json(error);
+      } else {
+        res.json(results);
+      }
+    })
+  }
 
 };

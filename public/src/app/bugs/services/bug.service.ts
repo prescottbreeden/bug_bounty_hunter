@@ -28,4 +28,7 @@ export class BugService {
   addAnswer(newAnswer: NewAnswer) {
     return this.http.post('/api/answers', newAnswer);
   }
+  getAnswer(id: number) {
+    return this.http.get('/api/answers/' + id);
+  }
 }

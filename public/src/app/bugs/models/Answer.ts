@@ -13,6 +13,17 @@ export interface NewAnswer {
   answer_content: string;
 }
 
+export function MapAnswerDatum(data): AnswerModel {
+  return {
+    answer_id: data['answer_id'],
+    bug_id: data['bug_id'],
+    answered_by: data['answered_by'],
+    answer_content: data['answer_content'],
+    answer_created: data['answer_created'],
+    answer_updated: data['answer_updated']
+  }
+}
+
 export function MapAnswerData(data): AnswerModel[] {
   let answers = [];
   data.forEach(datum => {

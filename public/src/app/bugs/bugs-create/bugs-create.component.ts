@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class BugsCreateComponent implements OnInit {
   newBug: NewBug = {
     posted_by: '',
-    title: '',
+    error: '',
     traceback: ''
   };
 

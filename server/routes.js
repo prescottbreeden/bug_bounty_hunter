@@ -19,6 +19,7 @@ module.exports = function(app) {
     .post('/api/bugs', bug.create)
     .put('/api/bugs/:id', bug.update)
     .delete('/api/bugs/:id', bug.delete)
+    .get('/api/answers/:id', bug.getAnswer)
     .post('/api/answers', bug.addAnswer)
 
 }

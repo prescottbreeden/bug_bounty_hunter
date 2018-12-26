@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { AuthService } from 'src/app/users/services/auth.service';
 import { BugService } from 'src/app/bugs/services/bug.service';
-import { BugModel, MapBugData } from '../models/Bug';
-import { NewAnswer, MapAnswerData, AnswerModel } from 'src/app/bugs/models/Answer';
+import { BugModel, MapBugData, MapBugDatum } from '../models/Bug';
+import { NewAnswer, MapAnswerData, AnswerModel, MapAnswerDatum } from 'src/app/bugs/models/Answer';
 
 @Component({
   selector: 'app-bugs-view',
@@ -23,10 +23,10 @@ export class BugsViewComponent implements OnInit {
   bug: BugModel = {
     bug_id: '',
     posted_by: '',
-    title: '',
+    error: '',
     traceback: '',
-    created_at: '',
-    updated_at: ''
+    bug_created: '',
+    bug_updated: ''
   };
 
   constructor(
@@ -43,9 +43,9 @@ export class BugsViewComponent implements OnInit {
     } else {
       this.route.params.subscribe((params: Params) => {
         this.bugService.getBugById(params['id'])
-          .subscribe(results => {
-            this.answers = MapAnswerData(results);
-            this.bug = MapBugData(results[0]);
+          .subscribe(res => {
+            this.bug = MapBugDatum(res[0]);
+            this.answers = MapAnswerData(res);
             this.newAnswer.answered_by = token.currentUser.user_id;
             this.newAnswer.bug_id = this.bug.bug_id;
           });
@@ -55,8 +55,14 @@ export class BugsViewComponent implements OnInit {
   
   onSubmitAnswer() {
     this.bugService.addAnswer(this.newAnswer).subscribe(res => {
-      console.log(res);
+      console.log(res['insertId']);
+      this.bugService.getAnswer(res['insertId'])
+        .subscribe(res => {
+          this.answers = [ ...this.answers, MapAnswerDatum(res[0])];
+          console.log(this.answers);
+        })
     });
+    this.newAnswer.answer_content = '';
   }
 
 }

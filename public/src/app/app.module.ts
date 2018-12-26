@@ -13,7 +13,6 @@ import { RegisterComponent } from './users/login_register/register.component';
 import { BugsShowComponent } from './bugs/bugs-show/bugs-show.component';
 import { BugsCreateComponent } from './bugs/bugs-create/bugs-create.component';
 import { BugsViewComponent } from './bugs/bugs-view/bugs-view.component';
-import { DataService } from './data.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +30,7 @@ import { DataService } from './data.service';
     BrowserModule,
     HttpClientModule
   ],
-  providers: [DataService, UserService, AuthService, BugService],
+  providers: [UserService, AuthService, BugService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
