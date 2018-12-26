@@ -24,6 +24,7 @@ export class BugsShowComponent implements OnInit {
       this.authService.logout();
       this.router.navigate(['/']);
     } else {
+      console.log('token valid');
       this.bugService.getBugs()
         .subscribe(results => {
           this.bugs = results;

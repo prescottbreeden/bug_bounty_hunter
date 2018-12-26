@@ -15,6 +15,9 @@ export class AnswerService {
   getAnswerById(id: number) {
     return this.http.get('/api/answers/' + id); 
   }
+  getAnswerWithId(id: number) {
+    return this.http.get('/api/answers/all/' + id);
+  }
   createAnswer(newAnswer: NewAnswer) {
     return this.http.post('/api/answers', newAnswer); 
   }

@@ -16,6 +16,7 @@ import { BugsCreateComponent } from './bugs/bugs-create/bugs-create.component';
 import { BugsViewComponent } from './bugs/bugs-view/bugs-view.component';
 import { AnswerCreateComponent } from './answers/answer-create/answer-create.component';
 import { AnswerShowComponent } from './answers/answer-show/answer-show.component';
+import { DataService } from './data.service';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import { AnswerShowComponent } from './answers/answer-show/answer-show.component
     BrowserModule,
     HttpClientModule
   ],
-  providers: [UserService, AuthService, BugService, AnswerService],
+  providers: [DataService, UserService, AuthService, BugService, AnswerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -23,7 +23,7 @@ export class BugsViewComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private bugService: BugService
+    private bugService: BugService,
   ) { }
 
   ngOnInit() {
@@ -31,9 +31,8 @@ export class BugsViewComponent implements OnInit {
       this.bugService.getBugById(params['id'])
         .subscribe(results => {
           this.bug = MapBugData(results[0]);
-          console.log('Target bug id: ', this.bug.bug_id);
+          });
           // console.log(typeof(this.bug.bug_id));
-        });
     });
   }
 

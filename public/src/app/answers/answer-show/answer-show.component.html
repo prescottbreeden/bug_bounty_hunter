@@ -1,3 +1,5 @@
-<p>
-  answer-show works!
-</p>
+<div class="answers">
+    <div *ngFor="let answer of answers" class="answers__row">
+      {{ answer.content }}
+    </div>
+</div>

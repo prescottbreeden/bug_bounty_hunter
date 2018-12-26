@@ -17,6 +17,21 @@ module.exports = {
       }
     });
   },
+
+  getAllWithId: (req, res) => {
+    db_connection.query('SELECT * FROM answers as a WHERE a.bug_id = ?', [req.body],
+    function(error, results, fields) {
+      if(error) {
+        
+        res.json(error);
+      }
+      else {
+        res.json(results);
+      }
+
+    })
+
+  },
   
   getById: (req, res) => {
     db_connection.query('SELECT * FROM answers WHERE answer_id = ?', [req.params.id], 

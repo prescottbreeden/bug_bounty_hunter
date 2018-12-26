@@ -23,6 +23,7 @@ module.exports = function(app) {
 
     .get('/api/answers', answer.getAll)
     .get('/api/answers/:id', answer.getById)
+    .get('/api/answers/all/:id', answer.getAllWithId)
     .post('/api/answers', answer.create)
     .put('/api/answers/:id', answer.update)
     .delete('/api/answers/:id', answer.delete)

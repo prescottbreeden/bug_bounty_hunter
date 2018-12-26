@@ -1,4 +1,4 @@
-export interface Answer {
+export interface AnswerModel {
   answer_id: string;
   bug_id: string;
   posted_by: string;
@@ -13,7 +13,7 @@ export interface NewAnswer {
   content: string;
 }
 
-export function MapAnswerData(data: Answer) {
+export function MapAnswerData(data): AnswerModel {
   return {
     answer_id: data['answer_id'],
     bug_id: data['bug_id'],
@@ -22,4 +22,8 @@ export function MapAnswerData(data: Answer) {
     created_at: data['created_at'],
     updated_at: data['updated_at']
   }
+}
+
+export function convertData(data: any) {
+  return [data];
 }
