@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
-import { Bug, MapBugData } from '../models/Bug';
+import { BugModel, MapBugData } from '../models/Bug';
 import { BugService } from 'src/app/bugs/services/bug.service';
 
 @Component({
@@ -9,7 +9,9 @@ import { BugService } from 'src/app/bugs/services/bug.service';
   styleUrls: ['./bugs-view.component.scss']
 })
 export class BugsViewComponent implements OnInit {
-  bug: Bug = {
+  @Output() UpdateBugId = new EventEmitter<BugModel>();
+
+  bug: BugModel = {
     bug_id: '',
     posted_by: '',
     title: '',
@@ -29,6 +31,8 @@ export class BugsViewComponent implements OnInit {
       this.bugService.getBugById(params['id'])
         .subscribe(results => {
           this.bug = MapBugData(results[0]);
+          console.log('Target bug id: ', this.bug.bug_id);
+          // console.log(typeof(this.bug.bug_id));
         });
     });
   }
@@ -38,3 +42,4 @@ export class BugsViewComponent implements OnInit {
   }
 
 }
+

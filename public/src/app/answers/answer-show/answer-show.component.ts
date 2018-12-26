@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from 'src/app/users/services/auth.service';
 import { Router } from '@angular/router';
 import { AnswerService } from 'src/app/answers/services/answer.service';
+import { BugModel } from 'src/app/bugs/models/Bug';
 
 @Component({
   selector: 'app-answer-show',
@@ -9,6 +10,7 @@ import { AnswerService } from 'src/app/answers/services/answer.service';
   styleUrls: ['./answer-show.component.scss']
 })
 export class AnswerShowComponent implements OnInit {
+  bug: BugModel;
   answers: any;
 
   constructor(

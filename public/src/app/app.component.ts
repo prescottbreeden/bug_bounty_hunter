@@ -14,4 +14,5 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.token = this.authService.getToken();
   }
+
 }

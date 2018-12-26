@@ -1,4 +1,4 @@
-export interface Bug {
+export interface BugModel {
   bug_id: string | number;
   posted_by: string | number;
   title: string;
@@ -13,7 +13,7 @@ export interface NewBug {
   traceback: string;
 }
 
-export function MapBugData(data): Bug {
+export function MapBugData(data): BugModel {
   return {
     bug_id: data['bug_id'],
     posted_by: data['posted_by'],

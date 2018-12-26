@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { NewBug, Bug } from '../models/Bug';
+import { NewBug, BugModel } from '../models/Bug';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,7 @@ export class BugService {
   createBug(newBug: NewBug) {
     return this.http.post('/api/bugs', newBug); 
   }
-  updateBug(bug: Bug) {
+  updateBug(bug: BugModel) {
     return this.http.put('/api/bugs/' + bug.bug_id, bug);
   }
   deleteBug(id: number) {
