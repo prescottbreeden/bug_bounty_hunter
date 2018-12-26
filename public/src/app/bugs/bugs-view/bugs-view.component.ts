@@ -26,7 +26,7 @@ export class BugsViewComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
-      this.bugService.getOneBug(params['id'])
+      this.bugService.getBugById(params['id'])
         .subscribe(results => {
           this.bug = MapBugData(results[0]);
         });

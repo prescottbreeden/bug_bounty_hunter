@@ -1,6 +1,7 @@
 const user = require('./controllers/user.controller');
 const auth = require('./controllers/auth.controller');
 const bug = require('./controllers/bug.controller');
+const answer = require('./controllers/answer.controller');
 
 module.exports = function(app) {
 
@@ -19,4 +20,10 @@ module.exports = function(app) {
     .post('/api/bugs', bug.create)
     .put('/api/bugs/:id', bug.update)
     .delete('/api/bugs/:id', bug.delete)
+
+    .get('/api/answers', answer.getAll)
+    .get('/api/answers/:id', answer.getById)
+    .post('/api/answers', answer.create)
+    .put('/api/answers/:id', answer.update)
+    .delete('/api/answers/:id', answer.delete)
 }

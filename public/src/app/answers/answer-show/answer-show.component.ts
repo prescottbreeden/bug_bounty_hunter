@@ -20,15 +20,12 @@ export class AnswerShowComponent implements OnInit {
   ngOnInit() {
     const token = this.authService.getToken();
     if (!token) {
-      this.authService.logout();
       this.router.navigate(['/']);
     } else {
       this.answerService.getAnswers()
         .subscribe(results => {
           this.answers = results;
-        })
+        });
     }
   }
-  }
-
 }

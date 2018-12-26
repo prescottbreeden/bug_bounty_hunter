@@ -25,7 +25,6 @@ export class BugsCreateComponent implements OnInit {
   ngOnInit() {
     const token = this.authService.getToken()
     if (!token) {
-      this.authService.logout();
       this.router.navigate(['/']);
     } else {
       this.newBug.posted_by = token.currentUser.user_id;

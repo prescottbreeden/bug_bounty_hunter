@@ -12,7 +12,7 @@ export class BugService {
   getBugs() { 
     return this.http.get('/api/bugs'); 
   }
-  getOneBug(id: number) {
+  getBugById(id: number) {
     return this.http.get('/api/bugs/' + id); 
   }
   createBug(newBug: NewBug) {
