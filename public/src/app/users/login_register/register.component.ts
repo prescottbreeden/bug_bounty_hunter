@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpService } from 'src/app/http.service';
-import { AuthService } from '../auth.service';
+import { UserService } from 'src/app/users/services/user.service';
+import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { NewUser } from '../models/User';
+import { BugService } from 'src/app/bugs/services/bug.service';
 
 @Component({
   selector: 'app-register',
@@ -24,13 +25,14 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private api: HttpService,
+    private userService: UserService,
+    private bugService: BugService,
     private router: Router
   ) { }
 
   ngOnInit() { 
-    this.api.getBugs();
-    this.api.getUsers();
+    this.bugService.getBugs();
+    this.userService.getUsers();
   }
 
   onEmail() {
@@ -58,7 +60,7 @@ export class RegisterComponent implements OnInit {
       if (this.confirmPassword != this.user.password) {
         return this.invalidLogin = true;
       }
-      this.api.createNewUser(this.user)
+      this.userService.createNewUser(this.user)
         .subscribe(() => {
           this.authService.login(this.user)
             .subscribe(result => {

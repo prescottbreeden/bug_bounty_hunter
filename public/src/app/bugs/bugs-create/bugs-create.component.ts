@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NewBug } from '../models/Bug';
-import { AuthService } from 'src/app/users/auth.service';
-import { HttpService } from 'src/app/http.service';
+import { AuthService } from 'src/app/users/services/auth.service';
+import { BugService } from 'src/app/bugs/services/bug.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./bugs-create.component.scss']
 })
 export class BugsCreateComponent implements OnInit {
-  token: any | null;
   newBug: NewBug = {
     posted_by: '',
     title: '',
@@ -19,20 +18,23 @@ export class BugsCreateComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private httpService: HttpService,
+    private bugService: BugService,
     private router: Router
   ) { }
 
   ngOnInit() {
-    this.token = this.authService.getToken()
-    if (this.token) {
-      this.newBug.posted_by = this.token.currentUser.user_id;
+    const token = this.authService.getToken()
+    if (!token) {
+      this.authService.logout();
+      this.router.navigate(['/']);
+    } else {
+      this.newBug.posted_by = token.currentUser.user_id;
     }
   }
 
   onSubmitBug() {
     console.log(this.newBug);
-    this.httpService.createBug(this.newBug)
+    this.bugService.createBug(this.newBug)
       .subscribe(res => {
         console.log('new bug created: ', res);
       });

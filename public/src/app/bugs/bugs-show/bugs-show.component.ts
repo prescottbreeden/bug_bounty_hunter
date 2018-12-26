@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/users/auth.service';
+import { AuthService } from 'src/app/users/services/auth.service';
 import { Router } from '@angular/router';
-import { HttpService } from 'src/app/http.service';
-import { Bug } from '../models/Bug';
+import { BugService } from '../services/bug.service';
+// import { Bug } from '../models/Bug';
 
 @Component({
   selector: 'app-bugs-show',
@@ -10,13 +10,12 @@ import { Bug } from '../models/Bug';
   styleUrls: ['./bugs-show.component.scss']
 })
 export class BugsShowComponent implements OnInit {
-  token: any | null;
   bugs: any;
 
   constructor(
     private authService: AuthService,
     private router: Router,
-    private httpService: HttpService
+    private bugService: BugService
   ) { }
 
   ngOnInit() {
@@ -25,7 +24,7 @@ export class BugsShowComponent implements OnInit {
       this.authService.logout();
       this.router.navigate(['/']);
     } else {
-      this.httpService.getBugs()
+      this.bugService.getBugs()
         .subscribe(results => {
           this.bugs = results;
         })

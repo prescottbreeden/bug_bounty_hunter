@@ -4,8 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
-import { HttpService } from './http.service';
-import { AuthService } from './users/auth.service';
+import { UserService } from './users/services/user.service';
+import { BugService } from './bugs/services/bug.service';
+import { AnswerService } from './answers/services/answer.service';
+import { AuthService } from './users/services/auth.service';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { RegisterComponent } from './users/login_register/register.component';
@@ -33,7 +35,7 @@ import { AnswerShowComponent } from './answers/answer-show/answer-show.component
     BrowserModule,
     HttpClientModule
   ],
-  providers: [HttpService, AuthService],
+  providers: [UserService, AuthService, BugService, AnswerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
