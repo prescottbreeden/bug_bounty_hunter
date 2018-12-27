@@ -1,18 +1,22 @@
-<nav class="nav">
-  <button 
-    [routerLink]="['/']" 
-    class="nav__link">Home
-  </button>
-  <button 
-    [routerLink]="['/bugs']" 
-    class="nav__link">Bugs
-  </button>
-  <button 
-    [routerLink]="['/bugs/create']" 
-    class="nav__link">Submit Bug
-  </button>
-  <button 
-    (click)="logout()" 
-    class="nav__link">Logout
-  </button>
-</nav>
+
+<header class="header">
+  <h1 class="header__title">Bug Bounty Hunter</h1>
+  <nav class="header__nav">
+    <button 
+      [routerLink]="['/bugs']" 
+      class="header__nav--link">Bugs
+    </button>
+    <button 
+      [routerLink]="['/bugs/create']" 
+      class="header__nav--link">Submit Bug
+    </button>
+    <button 
+      [routerLink]="['/profile']" 
+      class="header__nav--link">Profile
+    </button>
+    <button 
+      (click)="logout()" 
+      class="header__nav--link">Logout
+    </button>
+  </nav>
+</header>

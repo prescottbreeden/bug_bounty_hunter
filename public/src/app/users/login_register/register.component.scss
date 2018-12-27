@@ -1,0 +1,41 @@
+.reg {
+  // border: 1px solid #333;
+  border-radius: 5px;
+  padding: 6rem 10rem;
+  display: inline-block;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 1rem 3rem rgba(0,0,0,.2);
+}
+
+.form {
+  text-align: center;
+
+  &__label {
+    margin-right: 1rem;
+  }
+
+  &:hover {
+    cursor: default;
+  }
+}
+
+.btn {
+  background-color: transparent;
+  border: 1px solid #333;
+  padding: 1rem 3rem;
+  color: #333;
+  width: 50%;
+  border-radius: 5px;
+  margin-top: 2rem;
+  font-size: 2rem;
+  transition: all .2s;
+  
+  &:hover {
+    cursor: pointer;
+    background-color: var(--color-red);
+    color: var(--color-white);
+  }
+}

@@ -1,75 +1,80 @@
-<form 
-  *ngIf="showEmailField"
-  (submit)="onEmail()" 
-  class="form">
-  <h4 class="form__title">Enter Your Email</h4>
-  <div class="form__row">
-    <label for="email_field" class="form__label">Email</label>
-    <input 
-      [(ngModel)]="user.email"
-      #email="ngModel"
-      name="email"
-      type="email" 
-      class="form__input" 
-      id="email_field">
-  </div>
-  <button class="btn">Next</button>
-</form>
+<section class="reg">
 
-<form 
-  *ngIf="showPasswordField"
-  (submit)="onPassword()" 
-  class="form">
+  <form 
+    *ngIf="showEmailField"
+    (submit)="onEmail()" 
+    class="form">
+    <h4 class="form__title">Enter Your Email</h4>
+    <div class="form__row">
+      <label for="email_field" class="form__label hide">Email</label>
+      <input 
+        [(ngModel)]="user.email"
+        #email="ngModel"
+        name="email"
+        type="email" 
+        class="form__input" 
+        id="email_field">
+    </div>
+    <button class="btn">Next</button>
+  </form>
 
-  <input type="hidden" [value]="user.email" name="user.email">
+  <form 
+    *ngIf="showPasswordField"
+    (submit)="onPassword()" 
+    class="form">
 
-  <div *ngIf="!isRegistered" class="form__row">
-    <label for="first_name" class="form__label">First Name</label>
-    <input 
-      [(ngModel)]="user.first_name"
-      #first_name="ngModel"
-      name="first_name"
-      type="text" 
-      class="form__input" 
-      id="first_name">
-  </div>
+    <input type="hidden" [value]="user.email" name="user.email">
 
-  <div *ngIf="!isRegistered" class="form__row">
-    <label for="last_name" class="form__label">Last Name</label>
-    <input 
-      [(ngModel)]="user.last_name"
-      #last_name="ngModel"
-      name="last_name"
-      type="text" 
-      class="form__input" 
-      id="last_name">
-  </div>
+    <div *ngIf="!isRegistered" class="form__row">
+      <label for="first_name" class="form__label">First Name</label>
+      <input 
+        [(ngModel)]="user.first_name"
+        #first_name="ngModel"
+        name="first_name"
+        type="text" 
+        class="form__input" 
+        id="first_name">
+    </div>
 
-  <div class="form__row">
-    <label for="password" class="form__label">Password</label>
-    <input 
-      [(ngModel)]="user.password"
-      #password="ngModel"
-      name="password"
-      type="password" 
-      class="form__input" 
-      id="password">
-  </div>
+    <div *ngIf="!isRegistered" class="form__row">
+      <label for="last_name" class="form__label">Last Name</label>
+      <input 
+        [(ngModel)]="user.last_name"
+        #last_name="ngModel"
+        name="last_name"
+        type="text" 
+        class="form__input" 
+        id="last_name">
+    </div>
 
-  <div *ngIf="!isRegistered" class="form__row">
-    <label for="confirm" class="form__label">Confirm</label>
-    <input 
-      [(ngModel)]="confirmPassword"
-      #confirm="ngModel"
-      name="confirm"
-      type="password" 
-      class="form__input" 
-      id="confirm">
-  </div>
+    <h4 class="form__title">Enter your password</h4>
+    <div class="form__row">
+      <label for="password" class="form__label hide">Password</label>
+      <input 
+        [(ngModel)]="user.password"
+        #password="ngModel"
+        name="password"
+        type="password" 
+        class="form__input" 
+        id="password">
+    </div>
 
-  <button *ngIf="!isRegistered" class="btn">Register</button>
-  <button *ngIf="isRegistered" class="btn">Login</button>
-</form>
+    <div *ngIf="!isRegistered" class="form__row">
+      <label for="confirm" class="form__label">Confirm</label>
+      <input 
+        [(ngModel)]="confirmPassword"
+        #confirm="ngModel"
+        name="confirm"
+        type="password" 
+        class="form__input" 
+        id="confirm">
+    </div>
 
-{{ user.password }}
-{{ user.email }}
+    <button *ngIf="!isRegistered" class="btn">Register</button>
+    <button *ngIf="isRegistered" class="btn">Login</button>
+  </form>
+
+  {{ user.password }}
+  {{ user.email }}
+
+</section>

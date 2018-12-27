@@ -1,1 +1,30 @@
-/* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: Jedi;
+  src: url('./assets/STJEDISE.TTF');
+}
+:root {
+  --color-dark: #393e46;
+  --color-blue: #00ADB5;
+  --color-white: #FFF4E0;
+  --color-yelow: #F8B500;
+  --color-red: #FC3C3C;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+  font-family: Jedi;
+  // background-color: #111;
+}
+
+body {
+  font-size: 2rem;
+  // color: #eee;
+}
+
+.hide {
+  display: none;
+}
