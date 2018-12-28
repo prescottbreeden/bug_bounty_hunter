@@ -1,20 +1,51 @@
 .reg {
   // border: 1px solid #333;
   border-radius: 5px;
-  padding: 6rem 10rem;
-  display: inline-block;
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  box-shadow: 0 1rem 3rem rgba(0,0,0,.2);
+  // padding: 6rem 10rem;
+  // box-shadow: 0 1rem 3rem rgba(0,0,0,.2);
+  // position: relative;
+  // background-color: lightgrey;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  &__img {
+    margin-top: 2rem;
+    display: inline-block;
+    // border: 1px solid green;
+  }
+   &__form-container {
+    //  height: 100%;
+     width: 50%;
+     position: relative;
+   }
 }
 
 .form {
-  text-align: center;
+  display: inline-block;
+  // border: 1px solid red;
+  transform: translate(-50%, -50%);
+  padding: 3rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+
+  &__title {
+    font-size: 2.5rem;
+  }
+  &__row {
+    margin-top: 1.5rem;
+  }
 
   &__label {
     margin-right: 1rem;
+  }
+
+  &__input {
+    padding: 1rem;
+    font-size: 2.5rem;
+
   }
 
   &:hover {
@@ -22,15 +53,23 @@
   }
 }
 
+.email {
+  // text-align: center;
+}
+
+.password--returning {
+  text-align: center;
+}
+
 .btn {
   background-color: transparent;
   border: 1px solid #333;
-  padding: 1rem 3rem;
+  padding: 1.5rem 3.5rem;
   color: #333;
   width: 50%;
   border-radius: 5px;
   margin-top: 2rem;
-  font-size: 2rem;
+  font-size: 2.5rem;
   transition: all .2s;
   
   &:hover {

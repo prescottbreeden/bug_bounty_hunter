@@ -12,7 +12,10 @@ export class AppComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
-    this.token = this.authService.getToken();
+    this.authService.tokenEmitted$.subscribe(token => {
+      this.token = token;
+      console.log('app component: token recieved');
+    })
   }
 
 }

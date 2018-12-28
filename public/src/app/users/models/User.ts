@@ -15,6 +15,10 @@ export interface NewUser {
   password: string;
 }
 
+export interface UserToken {
+  currentUser: User;
+}
+
 export function MapUserData(data): User {
   return {
     user_id: data['user_id'],

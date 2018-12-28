@@ -3,6 +3,7 @@ import { NewBug } from '../models/Bug';
 import { AuthService } from 'src/app/users/services/auth.service';
 import { BugService } from 'src/app/bugs/services/bug.service';
 import { Router } from '@angular/router';
+import { UserToken } from 'src/app/users/models/User';
 
 @Component({
   selector: 'app-bugs-create',
@@ -10,6 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./bugs-create.component.scss']
 })
 export class BugsCreateComponent implements OnInit {
+  token: UserToken;
   newBug: NewBug = {
     posted_by: '',
     error: '',
@@ -23,11 +25,13 @@ export class BugsCreateComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const token = this.authService.getToken()
-    if (!token) {
+    this.token = this.authService.getToken();
+    if (!this.token) {
+      this.authService.logout();
       this.router.navigate(['/']);
     } else {
-      this.newBug.posted_by = token.currentUser.user_id;
+      console.log('token valid');
+      this.newBug.posted_by = this.token.currentUser.user_id;
     }
   }
 

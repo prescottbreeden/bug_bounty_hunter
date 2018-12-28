@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { UserService } from 'src/app/users/services/user.service';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
@@ -18,7 +18,7 @@ export class RegisterComponent implements OnInit {
     password: '',
   };
   confirmPassword: '';
-  invalidLogin = false;
+  badPassword = false;
   isRegistered = false;
   showEmailField = true;
   showPasswordField = false;
@@ -53,12 +53,12 @@ export class RegisterComponent implements OnInit {
           if (result) {
             this.router.navigate(['/bugs']);
           } else {
-            this.invalidLogin = true;
+            this.badPassword = true;
           }
         });
     } else {
       if (this.confirmPassword != this.user.password) {
-        return this.invalidLogin = true;
+        return this.badPassword = true;
       }
       this.userService.createNewUser(this.user)
         .subscribe(() => {
@@ -67,7 +67,7 @@ export class RegisterComponent implements OnInit {
               if (result) {
                 this.router.navigate(['/bugs']);
               } else {
-                this.invalidLogin = true;
+                this.badPassword = true;
               }
             })
         });

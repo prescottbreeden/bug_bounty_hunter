@@ -1,4 +1,7 @@
 <section class="reg">
+  <img src="assets/img/fettprofile2.jpg" alt="balls" class="reg__img">
+
+  <div class="reg__form-container">
 
   <form 
     *ngIf="showEmailField"
@@ -12,7 +15,7 @@
         #email="ngModel"
         name="email"
         type="email" 
-        class="form__input" 
+        class="form__input email" 
         id="email_field">
     </div>
     <button class="btn">Next</button>
@@ -74,7 +77,6 @@
     <button *ngIf="isRegistered" class="btn">Login</button>
   </form>
 
-  {{ user.password }}
-  {{ user.email }}
+  </div>
 
 </section>

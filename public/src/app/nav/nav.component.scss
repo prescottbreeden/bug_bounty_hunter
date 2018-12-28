@@ -3,11 +3,12 @@
   justify-content: space-between;
   align-items: center;
   background-color: var(--color-dark);
-  height: 8rem;
+  height: 12rem;
+  // padding: 2rem 3rem;
 
   &__title {
     margin-left: 6rem;
-    font-size: 3rem;
+    font-size: 4rem;
     color: transparent;
     -webkit-text-stroke-width: 1px;  
     -webkit-text-stroke-color: var(--color-yelow);  
@@ -20,12 +21,13 @@
   &__nav {
       margin-right: 3rem;
     &--link {
+      text-transform: uppercase;
       background-color: transparent;
       color: var(--color-white);
       border: none;
       font-size: 1.75rem;
-      height: 8rem;
-      padding: 1rem 2rem;
+      height: 12rem;
+      padding: 0rem 3rem;
 
       &:hover {
         cursor: pointer;

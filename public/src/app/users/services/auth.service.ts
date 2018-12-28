@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+// import { Observable } from 'rxjs/Observable';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  private emitTokenChanged = new Subject<any>();
+  tokenEmitted$ = this.emitTokenChanged.asObservable();
 
   constructor(private _http: HttpClient) { }
 
@@ -24,9 +28,10 @@ export class AuthService {
 
   login(credentials) {
     return this._http.post('/authservice/authenticate', credentials)
-      .pipe(map(response => {
-        if (response) {
-          localStorage.setItem('token', response.toString());
+      .pipe(map(token => {
+        if (token) {
+          localStorage.setItem('token', token.toString());
+          this.emitTokenChanged.next(token);
           return true;
         }
         return false;
