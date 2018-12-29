@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-// import { Observable } from 'rxjs/Observable';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Subject } from 'rxjs';
+import { MapUserData } from '../models/User';
 
 @Injectable({
   providedIn: 'root'
@@ -16,13 +16,14 @@ export class AuthService {
 
   isUnique(credentials) {
     return this._http.post('/authservice/validate/email/', credentials)
-      .pipe(map(response => {
-        if (response instanceof Array) {
-          if (response.length > 0) {
-            return true;
+      .pipe(map(result => {
+        if (result instanceof Array) {
+          if (result.length === 1) {
+            const response = MapUserData(result[0]);
+            return response;
           }
         }
-        return false;
+        return null;
       }));
   }
 

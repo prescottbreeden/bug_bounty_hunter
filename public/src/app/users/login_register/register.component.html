@@ -1,82 +1,97 @@
 <section class="reg">
   <img src="assets/img/fettprofile2.jpg" alt="balls" class="reg__img">
-
   <div class="reg__form-container">
 
-  <form 
-    *ngIf="showEmailField"
-    (submit)="onEmail()" 
-    class="form">
-    <h4 class="form__title">Enter Your Email</h4>
-    <div class="form__row">
-      <label for="email_field" class="form__label hide">Email</label>
-      <input 
-        [(ngModel)]="user.email"
-        #email="ngModel"
-        name="email"
-        type="email" 
-        class="form__input email" 
-        id="email_field">
-    </div>
-    <button class="btn">Next</button>
-  </form>
+    <form 
+      *ngIf="showEmailField"
+      (submit)="onEmail()" 
+      class="form">
+      <h4 class="form__title">Enter Your Email</h4>
+      <div class="form__row">
+        <input 
+          [(ngModel)]="user.email"
+          #email="ngModel"
+          name="email"
+          type="email" 
+          class="form__input email" 
+          required
+          id="email_field">
+      </div>
+      <div *ngIf="email.touched && !email.valid" class="form__error">Email is required.</div>
+      <button class="btn">Next</button>
+    </form>
 
-  <form 
-    *ngIf="showPasswordField"
-    (submit)="onPassword()" 
-    class="form">
+    <form 
+      *ngIf="isRegistered && showPasswordField"
+      (submit)="onPassword()" 
+      class="form">
+      <input type="hidden" [value]="user.email" name="user.email">
+      <h4 class="form__title">Welcome Back {{user.first_name}}</h4>
+      <div class="form__row">
+        <label for="password" class="form__label hide">Password</label>
+        <input 
+          [(ngModel)]="user.password"
+          #password="ngModel"
+          name="password"
+          type="password" 
+          class="form__input" 
+          required
+          id="password">
+      </div>
+      <div *ngIf="password.touched && !password.valid" class="form__error">Password is required.</div>
+      <button class="btn">Login</button>
+      <a class="form__link" href="/">Not {{user.first_name}} {{user.last_name}}?</a>
+    </form>
 
-    <input type="hidden" [value]="user.email" name="user.email">
-
-    <div *ngIf="!isRegistered" class="form__row">
-      <label for="first_name" class="form__label">First Name</label>
-      <input 
-        [(ngModel)]="user.first_name"
-        #first_name="ngModel"
-        name="first_name"
-        type="text" 
-        class="form__input" 
-        id="first_name">
-    </div>
-
-    <div *ngIf="!isRegistered" class="form__row">
-      <label for="last_name" class="form__label">Last Name</label>
-      <input 
-        [(ngModel)]="user.last_name"
-        #last_name="ngModel"
-        name="last_name"
-        type="text" 
-        class="form__input" 
-        id="last_name">
-    </div>
-
-    <h4 class="form__title">Enter your password</h4>
-    <div class="form__row">
-      <label for="password" class="form__label hide">Password</label>
-      <input 
-        [(ngModel)]="user.password"
-        #password="ngModel"
-        name="password"
-        type="password" 
-        class="form__input" 
-        id="password">
-    </div>
-
-    <div *ngIf="!isRegistered" class="form__row">
-      <label for="confirm" class="form__label">Confirm</label>
-      <input 
-        [(ngModel)]="confirmPassword"
-        #confirm="ngModel"
-        name="confirm"
-        type="password" 
-        class="form__input" 
-        id="confirm">
-    </div>
-
-    <button *ngIf="!isRegistered" class="btn">Register</button>
-    <button *ngIf="isRegistered" class="btn">Login</button>
-  </form>
+    <form 
+      *ngIf="!isRegistered && showPasswordField"
+      (submit)="onPassword()" 
+      class="form">
+      <input type="hidden" [value]="user.email" name="user.email">
+      <h4 class="form__title">Register</h4>
+      <div class="form__row">
+        <label for="first_name" class="form__label">First Name</label>
+        <input 
+          [(ngModel)]="user.first_name"
+          #first_name="ngModel"
+          name="first_name"
+          type="text" 
+          class="form__input" 
+          id="first_name">
+      </div>
+      <div class="form__row">
+        <label for="last_name" class="form__label">Last Name</label>
+        <input 
+          [(ngModel)]="user.last_name"
+          #last_name="ngModel"
+          name="last_name"
+          type="text" 
+          class="form__input" 
+          id="last_name">
+      </div>
+      <div class="form__row">
+        <label for="password" class="form__label">Password</label>
+        <input 
+          [(ngModel)]="user.password"
+          #password="ngModel"
+          name="password"
+          type="password" 
+          class="form__input" 
+          id="password">
+      </div>
+      <div class="form__row">
+        <label for="confirm" class="form__label">Confirm</label>
+        <input 
+          [(ngModel)]="confirmPassword"
+          #confirm="ngModel"
+          name="confirm"
+          type="password" 
+          class="form__input" 
+          id="confirm">
+      </div>
+      <button class="btn">Register</button>
+      <a class="form__link" href="/">Already registered? Click here.</a>
+    </form>
 
   </div>
-
 </section>

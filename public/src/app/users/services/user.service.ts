@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { User, NewUser } from '../models/User';
+import { UserModel, NewUser } from '../models/User';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,7 @@ export class UserService {
   createNewUser(newUser: NewUser) { 
     return this.http.post('/api/users', newUser); 
   }
-  updateUser(user: User) {
+  updateUser(user: UserModel) {
     return this.http.post('/api/users/' + user.user_id, user);
   }
   deleteUser(id: number) {

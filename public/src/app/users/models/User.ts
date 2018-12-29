@@ -1,4 +1,4 @@
-export interface User {
+export interface UserModel {
   user_id: string;
   first_name: string;
   last_name: string;
@@ -16,10 +16,10 @@ export interface NewUser {
 }
 
 export interface UserToken {
-  currentUser: User;
+  currentUser: UserModel;
 }
 
-export function MapUserData(data): User {
+export function MapUserData(data): UserModel {
   return {
     user_id: data['user_id'],
     first_name: data['first_name'],

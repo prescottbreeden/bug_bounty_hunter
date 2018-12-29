@@ -1,6 +1,6 @@
 .reg {
   // border: 1px solid #333;
-  border-radius: 5px;
+  border-radius: var(--border-radius);
   // padding: 6rem 10rem;
   // box-shadow: 0 1rem 3rem rgba(0,0,0,.2);
   // position: relative;
@@ -22,7 +22,9 @@
 }
 
 .form {
+  color: var(--color-dark);
   display: inline-block;
+  letter-spacing: 1px;
   // border: 1px solid red;
   transform: translate(-50%, -50%);
   padding: 3rem;
@@ -30,44 +32,51 @@
   top: 50%;
   left: 50%;
 
+  &:hover {
+    cursor: default;
+  }
 
   &__title {
     font-size: 2.5rem;
   }
+  
   &__row {
-    margin-top: 1.5rem;
+    margin-top: 2.5rem;
   }
 
   &__label {
+    display: block;
     margin-right: 1rem;
   }
 
   &__input {
+    border-style: groove;
+    border-radius: var(--border-radius);
+    box-sizing: border-box;
     padding: 1rem;
     font-size: 2.5rem;
 
+    &:focus {
+      outline: none;
+    }
+  }
+  &__error {
+    color: var(--color-red);
   }
 
-  &:hover {
-    cursor: default;
+  &__link {
+    display: block;
   }
-}
 
-.email {
-  // text-align: center;
-}
-
-.password--returning {
-  text-align: center;
 }
 
 .btn {
   background-color: transparent;
-  border: 1px solid #333;
+  border: 1px solid var(--color-dark);
   padding: 1.5rem 3.5rem;
-  color: #333;
+  // color: var(--color-dark);
   width: 50%;
-  border-radius: 5px;
+  border-radius: var(--border-radius);
   margin-top: 2rem;
   font-size: 2.5rem;
   transition: all .2s;
@@ -76,5 +85,6 @@
     cursor: pointer;
     background-color: var(--color-red);
     color: var(--color-white);
+    border: 1px solid var(--color-red);
   }
 }

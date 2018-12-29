@@ -29,6 +29,10 @@
       height: 12rem;
       padding: 0rem 3rem;
 
+      &:active {
+        outline: none;
+        border: none;
+      }
       &:hover {
         cursor: pointer;
         background-color: var(--color-red);
