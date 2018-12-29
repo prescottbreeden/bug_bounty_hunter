@@ -1,12 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
-import { UserService } from './users/services/user.service';
-import { BugService } from './bugs/services/bug.service';
-import { AuthService } from './users/services/auth.service';
+import { UserService } from './common/services/user.service';
+import { BugService } from './common/services/bug.service';
+import { AuthService } from './common/services/auth.service';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { RegisterComponent } from './users/login_register/register.component';
@@ -29,6 +29,7 @@ import { AboutComponent } from './about/about.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserModule,
     HttpClientModule
   ],

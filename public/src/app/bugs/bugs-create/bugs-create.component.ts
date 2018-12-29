@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { NewBug } from '../models/Bug';
-import { AuthService } from 'src/app/users/services/auth.service';
-import { BugService } from 'src/app/bugs/services/bug.service';
+import { NewBug } from '../../common/models/Bug';
+import { AuthService } from 'src/app/common/services/auth.service';
+import { BugService } from 'src/app/common/services/bug.service';
 import { Router } from '@angular/router';
-import { UserToken } from 'src/app/users/models/User';
+import { UserToken } from 'src/app/common/models/User';
 
 @Component({
   selector: 'app-bugs-create',

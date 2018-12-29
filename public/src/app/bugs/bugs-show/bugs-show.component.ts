@@ -1,8 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { AuthService } from 'src/app/users/services/auth.service';
+import { AuthService } from 'src/app/common/services/auth.service';
 import { Router } from '@angular/router';
-import { BugService } from '../services/bug.service';
-import { BugModel, MapBugData } from '../models/Bug';
+import { BugService } from 'src/app/common/services/bug.service';
+import { BugModel, MapBugData } from '../../common/models/Bug';
 // import { Bug } from '../models/Bug';
 
 @Component({

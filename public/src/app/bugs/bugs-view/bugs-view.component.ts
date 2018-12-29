@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
-import { AuthService } from 'src/app/users/services/auth.service';
-import { BugService } from 'src/app/bugs/services/bug.service';
-import { BugModel, MapBugData, MapBugDatum } from '../models/Bug';
-import { NewAnswer, MapAnswerData, AnswerModel, MapAnswerDatum } from 'src/app/bugs/models/Answer';
+import { AuthService } from 'src/app/common/services/auth.service';
+import { BugService } from 'src/app/common/services/bug.service';
+import { BugModel, MapBugData, MapBugDatum } from '../../common/models/Bug';
+import { NewAnswer, MapAnswerData, AnswerModel, MapAnswerDatum } from 'src/app/common/models/Answer';
 
 @Component({
   selector: 'app-bugs-view',

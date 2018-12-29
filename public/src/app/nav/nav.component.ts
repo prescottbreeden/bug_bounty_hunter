@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AuthService } from '../users/services/auth.service';
+import { AuthService } from '../common/services/auth.service';
 import { Router } from '@angular/router';
-import { UserToken } from '../users/models/User';
+import { UserToken } from '../common/models/User';
 
 @Component({
   selector: 'app-nav',

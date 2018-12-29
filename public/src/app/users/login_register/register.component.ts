@@ -1,9 +1,10 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { UserService } from 'src/app/users/services/user.service';
-import { AuthService } from '../services/auth.service';
+import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/app/common/services/user.service';
+import { AuthService } from '../../common/services/auth.service';
 import { Router } from '@angular/router';
-import { NewUser } from '../models/User';
-import { BugService } from 'src/app/bugs/services/bug.service';
+import { NewUser, UserValidators } from '../../common/models/User';
+import { BugService } from 'src/app/common/services/bug.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -11,7 +12,32 @@ import { BugService } from 'src/app/bugs/services/bug.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  email_reg = '/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/'
+
+  emailForm = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email])
+  });
+
+  newUserForm = new FormGroup({
+    first_name: new FormControl('', 
+      [
+        Validators.required, 
+        Validators.minLength(2), 
+        UserValidators.cannotContainSpace
+      ]
+    ),
+    last_name: new FormControl('', 
+      [Validators.required, Validators.minLength(2)]
+    ),
+    password: new FormControl('', Validators.required)
+  });
+
+  get Email() {
+    return this.emailForm.get('email');
+  }
+  get FirstName() {
+    return this.newUserForm.get('first_name');
+  }
+
   errors: object[];
   user: NewUser = {
     first_name: '',
@@ -38,8 +64,8 @@ export class RegisterComponent implements OnInit {
   }
 
   onEmail() {
-    if (this.user.email.length && this.user.email.match(this.email_reg)) {
-      this.authService.isUnique(this.user)
+    if (this.emailForm.valid) {
+      this.authService.isUnique(this.emailForm.value)
         .subscribe(result => {
           if (result) {
             this.user.first_name = result.first_name;
@@ -49,6 +75,7 @@ export class RegisterComponent implements OnInit {
           this.togglePasswordField();
           this.toggleEmailField();
         });
+
     }
   }
 
@@ -87,39 +114,4 @@ export class RegisterComponent implements OnInit {
   toggleEmailField() {
     this.showEmailField = !this.showEmailField;
   }
-
-  ValidateUser() {
-    if (this.user.first_name.length < 2) {
-      this.errors.push({
-        type: 'first_name',
-        message: 'First name must be at least 2 characters long.',
-      });
-    }
-    if (this.user.last_name.length < 2) {
-      this.errors.push({
-        type: 'last_name',
-        message: 'Last name must be at least 2 characters long.',
-      });
-    }
-    if (!this.user.email) {
-      this.errors.push({
-        type: 'email',
-        message: 'Email cannot be blank',
-      });
-    } else {
-      if(!this.user.email.match(this.email_reg)) {
-        this.errors.push({
-          type: 'email',
-          message: 'Passwords do not match',
-        });
-      }
-    }
-
-    if (this.user.first_name.length < 2) {
-      this.errors.push({
-        type: 'first_name',
-        message: 'First name must be at least 2 characters long.',
-      })
-    }
-  } 
 }
