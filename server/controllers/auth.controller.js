@@ -37,7 +37,7 @@ module.exports = {
           return res.json(token);
         }
         else {
-          throw 'Password does not match';
+          return null;
         }
       }
     });

@@ -14,6 +14,7 @@ import { BugsShowComponent } from './bugs/bugs-show/bugs-show.component';
 import { BugsCreateComponent } from './bugs/bugs-create/bugs-create.component';
 import { BugsViewComponent } from './bugs/bugs-view/bugs-view.component';
 import { AboutComponent } from './about/about.component';
+import { AutofocusDirective } from './common/autofocus.directive';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { AboutComponent } from './about/about.component';
     BugsCreateComponent,
     BugsViewComponent,
     AboutComponent,
+    AutofocusDirective,
   ],
   imports: [
     BrowserModule,

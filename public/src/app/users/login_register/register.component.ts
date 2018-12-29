@@ -17,6 +17,11 @@ export class RegisterComponent implements OnInit {
     email: new FormControl('', [Validators.required, Validators.email])
   });
 
+  passwordForm = new FormGroup({
+    email: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required)
+  });
+
   newUserForm = new FormGroup({
     first_name: new FormControl('', 
       [
@@ -26,19 +31,32 @@ export class RegisterComponent implements OnInit {
       ]
     ),
     last_name: new FormControl('', 
-      [Validators.required, Validators.minLength(2)]
+      [
+        Validators.required, 
+        Validators.minLength(2),
+        UserValidators.cannotContainSpace
+      ]
     ),
+    email: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required)
   });
 
   get Email() {
     return this.emailForm.get('email');
   }
+  get LogPassword() {
+    return this.passwordForm.get('password');
+  }
   get FirstName() {
     return this.newUserForm.get('first_name');
   }
+  get LastName() {
+    return this.newUserForm.get('last_name');
+  }
+  get RegPassword() {
+    return this.newUserForm.get('password');
+  }
 
-  errors: object[];
   user: NewUser = {
     first_name: '',
     last_name: '',
@@ -46,7 +64,6 @@ export class RegisterComponent implements OnInit {
     password: '',
   };
   confirmPassword: '';
-  badPassword = false;
   isRegistered = false;
   showEmailField = true;
   showPasswordField = false;
@@ -65,6 +82,7 @@ export class RegisterComponent implements OnInit {
 
   onEmail() {
     if (this.emailForm.valid) {
+      this.user.email = this.emailForm.value.email;
       this.authService.isUnique(this.emailForm.value)
         .subscribe(result => {
           if (result) {
@@ -74,40 +92,56 @@ export class RegisterComponent implements OnInit {
           }
           this.togglePasswordField();
           this.toggleEmailField();
+          console.log('user info: ', this.user);
         });
-
+    } else {
+      console.log('form sucks');
+      this.emailForm.setErrors({
+        invalidLogin: true
+      })
     }
+  }
+
+  onRegister() {
+    this.user = this.newUserForm.value;
+    if (this.confirmPassword != this.user.password) {
+      this.newUserForm.setErrors({
+        invalidLogin: true
+      });
+      return 0;
+    } 
+    this.userService.createNewUser(this.user)
+      .subscribe(() => {
+        this.authService.login(this.user)
+          .subscribe(result => {
+            if (result) {
+              this.router.navigate(['/bugs']);
+            } else {
+              this.newUserForm.setErrors({
+                invalidLogin: true
+              });
+            }
+          })
+      });
   }
 
   onPassword() {
-    if (this.isRegistered) {
-      this.authService.login(this.user)
-        .subscribe(result => {
-          if (result) {
-            this.router.navigate(['/bugs']);
-          } else {
-            this.badPassword = true;
-          }
-        });
-    } else {
-      if (this.confirmPassword != this.user.password) {
-        return this.badPassword = true;
-      }
-      this.userService.createNewUser(this.user)
-        .subscribe(() => {
-          this.authService.login(this.user)
-            .subscribe(result => {
-              if (result) {
-                this.router.navigate(['/bugs']);
-              } else {
-                this.badPassword = true;
-              }
-            })
-        });
-    }
-  }
+    console.log(this.user);
+    this.authService.login(this.user)
+      .subscribe(result => {
+        if (result) {
+          this.router.navigate(['/bugs']);
+        } 
+        else {
+          console.log('password doesnt match');
+          // this.passwordForm.setErrors({
+          //   passwordNotMatch: true
+          // })
+        }
+      });
+} 
 
-  togglePasswordField() {
+togglePasswordField() {
     this.showPasswordField = !this.showPasswordField;
   }
   

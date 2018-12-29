@@ -1,7 +1,6 @@
 <section class="reg">
   <img src="assets/img/fettprofile2.jpg" alt="balls" class="reg__img">
   <div class="reg__form-container">
-
     <form 
       [formGroup]="emailForm"
       (ngSubmit)="onEmail()"
@@ -10,13 +9,14 @@
       <h4 class="form__title">Enter Your Email</h4>
       <div class="form__row">
         <input 
+          appAutofocus
           formControlName="email"
           type="email" 
           class="form__input email" 
           required
           id="email_field">
       </div>
-      <div *ngIf="Email.touched && Email.invalid" class="form__error">
+      <div *ngIf="Email.touched && Email.invalid || emailForm.errors" class="form__error">
         <div *ngIf="Email.errors.required">Email is required.</div>
         <div *ngIf="Email.errors.email">Email must be valid.</div>
       </div>
@@ -25,31 +25,35 @@
 
     <form 
       *ngIf="isRegistered && showPasswordField"
-      (submit)="onPassword()" 
+      (ngSubmit)="onPassword()" 
       class="form">
       <input type="hidden" [value]="user.email" name="user.email">
       <h4 class="form__title">Welcome Back {{user.first_name}}</h4>
       <div class="form__row">
         <label for="password" class="form__label hide">Password</label>
         <input 
+          appAutofocus
           [(ngModel)]="user.password"
           #password="ngModel"
-          name="password"
           type="password" 
+          name="password"
           class="form__input" 
-          required
           id="password">
       </div>
-      <div *ngIf="password.touched && !password.valid" class="form__error">Password is required.</div>
       <button class="btn">Login</button>
       <a class="form__link" href="/">Not {{user.first_name}} {{user.last_name}}?</a>
     </form>
 
     <form 
       [formGroup]="newUserForm"
+      (ngSubmit)="onRegister()"
       *ngIf="!isRegistered && showPasswordField"
       class="form">
-      <input type="hidden" [value]="user.email" name="user.email">
+      <input 
+        type="hidden" 
+        [value]="user.email" 
+        formControlName="reg_email"
+        >
       <h4 class="form__title">Register</h4>
       <div class="form__row">
         <label for="first_name" class="form__label">First Name</label>
@@ -72,6 +76,11 @@
           class="form__input" 
           id="last_name">
       </div>
+      <div *ngIf="LastName.touched && LastName.invalid" class="form__error">
+        <div *ngIf="LastName.errors.required">Last name is required.</div>
+        <div *ngIf="LastName.errors.minlength">Name must be at least {{ FirstName.errors.minlength.requiredLength }} characters.</div>
+        <div *ngIf="LastName.errors.cannotContainSpace">Names cannot contain spaces</div>
+      </div>
       <div class="form__row">
         <label for="password" class="form__label">Password</label>
         <input 
@@ -79,6 +88,9 @@
           type="password" 
           class="form__input" 
           id="password">
+      </div>
+      <div *ngIf="RegPassword.touched && RegPassword.invalid" class="form__error">
+        <div *ngIf="RegPassword.errors.required">Password is required.</div>
       </div>
       <div class="form__row">
         <label for="confirm" class="form__label">Confirm</label>
