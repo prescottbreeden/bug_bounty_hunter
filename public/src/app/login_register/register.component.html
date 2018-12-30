@@ -41,7 +41,7 @@
       </div>
       <div *ngIf="LogPassword.touched && LogPassword.invalid" class="form__error">
         <div *ngIf="LogPassword.hasError('required')">Password is required</div>
-        <div *ngIf="LogPassword.hasError('incorrectPassword')">incorrect password.</div>
+        <div *ngIf="LogPassword.hasError('incorrectPassword')">Incorrect password.</div>
       </div>
       <button [disabled]="!passwordForm.valid" class="btn">Login</button>
       <a class="form__link" href="/">Not {{user.first_name}} {{user.last_name}}?</a>

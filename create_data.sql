@@ -21,34 +21,35 @@ USE bug_hunter;
         ;
 
  INSERT INTO bugs (posted_by, error, traceback)
- VALUES (1, 'Test Bug 1', 'Test traceback 1...'),
-        (1, 'Test Bug 2', 'Test traceback 2...'),
-        (1, 'Test Bug 3', 'Test traceback 3...'),
-        (1, 'Test Bug 4', 'Test traceback 4...'),
-        (1, 'Test Bug 5', 'Test traceback 5...'),
-        (2, 'Test Bug 6', 'Test traceback 6...'),
-        (2, 'Test Bug 7', 'Test traceback 7...'),
-        (2, 'Test Bug 8', 'Test traceback 8...'),
-        (2, 'Test Bug 9', 'Test traceback 9...'),
-        (2, 'Test Bug 10', 'Test traceback 10...'),
-        (2, 'Test Bug 11', 'Test traceback 11...')
+ VALUES (1, 'error TS2339: Property "length" does not exist on type "Object".', 'Test traceback 1...'),
+        (1, 'error TS2339: Property "length" does not exist on type "Object".', 'Test traceback 2...'),
+        (1, 'error TS2339: Property "length" does not exist on type "Object".', 'Test traceback 3...'),
+        (1, 'error TS2339: Property "length" does not exist on type "Object".', 'Test traceback 4...'),
+        (1, 'error TS2339: Property "length" does not exist on type "Object".', 'Test traceback 5...'),
+        (2, 'error TS2339: Property "length" does not exist on type "Object".', 'Test traceback 6...'),
+        (2, 'error TS2339: Property "length" does not exist on type "Object".', 'Test traceback 7...'),
+        (2, 'error TS2339: Property "length" does not exist on type "Object".', 'Test traceback 8...'),
+        (2, 'error TS2339: Property "length" does not exist on type "Object".', 'Test traceback 9...'),
+        (2, 'error TS2339: Property "length" does not exist on type "Object".', 'Test traceback 10...'),
+        (2, 'error TS2339: Property "length" does not exist on type "Object".', 'Test traceback 11...')
         ;
 
  INSERT INTO answers (answered_by, bug_id, answer_content)
- VALUES (1, 2, 'Test Answer 1'),
-        (1, 2, 'Test Answer 2'),
-        (1, 2, 'Test Answer 3'),
-        (1, 2, 'Test Answer 4'),
-        (1, 2, 'Test Answer 5'),
-        (2, 1, 'Test Answer 6'),
-        (2, 1, 'Test Answer 7'),
-        (2, 1, 'Test Answer 8'),
-        (2, 1, 'Test Answer 9'),
-        (2, 1, 'Test Answer 10'),
-        (2, 1, 'Test Answer 11')
+ VALUES (1, 2, 'This is the answer that never ends... yes it goes on and on my friends, some people started reading it not knowing what it was, and now theyll keep on reading it forever just because this is the song that doesnt end, yes it goes on and on my friends, some people started reading it not knowing what it was, and now theyll keep on reading it forever just because this is the answer that never ends... '),
+        (1, 2, 'This is the answer that never ends... yes it goes on and on my friends, some people started reading it not knowing what it was, and now theyll keep on reading it forever just because this is the song that doesnt end, yes it goes on and on my friends, some people started reading it not knowing what it was, and now theyll keep on reading it forever just because this is the answer that never ends... '),
+        (1, 2, 'This is the answer that never ends... yes it goes on and on my friends, some people started reading it not knowing what it was, and now theyll keep on reading it forever just because this is the song that doesnt end, yes it goes on and on my friends, some people started reading it not knowing what it was, and now theyll keep on reading it forever just because this is the answer that never ends... '),
+        (1, 2, 'This is the answer that never ends... yes it goes on and on my friends, some people started reading it not knowing what it was, and now theyll keep on reading it forever just because this is the song that doesnt end, yes it goes on and on my friends, some people started reading it not knowing what it was, and now theyll keep on reading it forever just because this is the answer that never ends... '),
+        (1, 2, 'This is the answer that never ends... yes it goes on and on my friends, some people started reading it not knowing what it was, and now theyll keep on reading it forever just because this is the song that doesnt end, yes it goes on and on my friends, some people started reading it not knowing what it was, and now theyll keep on reading it forever just because this is the answer that never ends... '),
+        (2, 1, 'This is the answer that never ends... yes it goes on and on my friends, some people started reading it not knowing what it was, and now theyll keep on reading it forever just because this is the song that doesnt end, yes it goes on and on my friends, some people started reading it not knowing what it was, and now theyll keep on reading it forever just because this is the answer that never ends... '),
+        (2, 1, 'This is the answer that never ends... yes it goes on and on my friends, some people started reading it not knowing what it was, and now theyll keep on reading it forever just because this is the song that doesnt end, yes it goes on and on my friends, some people started reading it not knowing what it was, and now theyll keep on reading it forever just because this is the answer that never ends... '),
+        (2, 1, 'This is the answer that never ends... yes it goes on and on my friends, some people started reading it not knowing what it was, and now theyll keep on reading it forever just because this is the song that doesnt end, yes it goes on and on my friends, some people started reading it not knowing what it was, and now theyll keep on reading it forever just because this is the answer that never ends... '),
+        (2, 1, 'This is the answer that never ends... yes it goes on and on my friends, some people started reading it not knowing what it was, and now theyll keep on reading it forever just because this is the song that doesnt end, yes it goes on and on my friends, some people started reading it not knowing what it was, and now theyll keep on reading it forever just because this is the answer that never ends... '),
+        (2, 1, 'This is the answer that never ends... yes it goes on and on my friends, some people started reading it not knowing what it was, and now theyll keep on reading it forever just because this is the song that doesnt end, yes it goes on and on my friends, some people started reading it not knowing what it was, and now theyll keep on reading it forever just because this is the answer that never ends... '),
+        (2, 1, 'This is the answer that never ends... yes it goes on and on my friends, some people started reading it not knowing what it was, and now theyll keep on reading it forever just because this is the song that doesnt end, yes it goes on and on my friends, some people started reading it not knowing what it was, and now theyll keep on reading it forever just because this is the answer that never ends... '),
+        (2, 1, 'This is the answer that never ends... yes it goes on and on my friends, some people started reading it not knowing what it was, and now theyll keep on reading it forever just because this is the song that doesnt end, yes it goes on and on my friends, some people started reading it not knowing what it was, and now theyll keep on reading it forever just because this is the answer that never ends... ')
         ;
 
- INSERT INTO answers_upvotes (user_id, answer_id)
+ INSERT INTO answers_likes (user_id, answer_id)
  VALUES (2, 1),
         (2, 2),
         (3, 2),
@@ -57,7 +58,7 @@ USE bug_hunter;
         (1, 8)
         ;
 
- INSERT INTO bugs_upvotes (user_id, bug_id)
+ INSERT INTO bugs_likes (user_id, bug_id)
  VALUES (2, 3),
         (2, 5),
         (3, 5),

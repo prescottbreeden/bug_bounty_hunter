@@ -1,3 +1,47 @@
 .bug-view {
   margin-bottom: var(--margin-bottom);
+
+  &__traceback {
+    white-space: pre-line;
+    font-size: 75%; 
+  }
+}
+
+.form {
+  margin-bottom: var(--margin-bottom);
+
+  &__textarea {
+    display: inline-block;
+    width: 50rem;
+    height: 50rem;
+    border-style: groove;
+    border-radius: var(--border-radius);
+    box-sizing: border-box;
+    padding: 1rem;
+    font-size: 1.5rem;
+  }
+}
+
+.answers {
+  margin: 2rem;
+
+  &__row {
+    margin-top: 1rem;
+    padding: 2rem;
+    border: 1px solid var(--color-blue);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  &__content {
+    white-space: pre-line;
+  }
+
+  &__info {
+    text-align: right;
+    min-width: 10%;
+    margin-left: 2rem;
+    font-size: 1.2rem;
+  }
 }

@@ -5,6 +5,7 @@ export interface BugModel {
   traceback: string;
   bug_created: string;
   bug_updated: string;
+  num_answers: string | number;
 }
 
 export interface NewBug {
@@ -20,7 +21,8 @@ export function MapBugDatum(data): BugModel {
     error: data['error'],
     traceback: data['traceback'],
     bug_created: data['bug_created'],
-    bug_updated: data['bug_updated']
+    bug_updated: data['bug_updated'],
+    num_answers: data['num_answers']
   }
 }
 
@@ -33,7 +35,8 @@ export function MapBugData(data): BugModel[] {
       error: datum['error'],
       traceback: datum['traceback'],
       bug_created: datum['bug_created'],
-      bug_updated: datum['bug_updated']
+      bug_updated: datum['bug_updated'],
+      num_answers: datum['num_answers']
     }
     bugs.push(bug);
   });

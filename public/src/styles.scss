@@ -32,6 +32,77 @@ body {
   // color: #eee;
 }
 
-.hide {
-  display: none;
+.form {
+  color: var(--color-dark);
+  display: inline-block;
+  letter-spacing: 1px;
+  // border: 1px solid red;
+  padding: 3rem;
+
+  &:hover {
+    cursor: default;
+  }
+
+  &__title {
+    font-size: 3rem;
+    // margin-bottom: var(--margin-bottom);
+  }
+  
+  &__row {
+  }
+
+  &__label {
+    display: block;
+    margin-right: 1rem;
+  }
+
+  &__input {
+    border-style: groove;
+    border-radius: var(--border-radius);
+    box-sizing: border-box;
+    padding: 1rem;
+    font-size: 2.5rem;
+
+    &.ng-dirty {
+      // border-color: var(--color-blue);
+      // background-color: var(--color-blue);
+      // color: var(--color-white);
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+  &__error {
+    color: var(--color-red);
+  }
+
+  &__link {
+    display: block;
+  }
+
+}
+.btn {
+  background-color: transparent;
+  border: 1px solid var(--color-dark);
+  border-radius: var(--border-radius);
+  padding: 1.5rem 3.5rem;
+  color: var(--color-dark);
+  width: 50%;
+  margin-top: 2rem;
+  font-size: 2.5rem;
+  transition: all .2s;
+  
+  &:disabled:hover {
+    cursor: not-allowed;
+    color: var(--color-dark);
+    background-color: transparent;
+    border: 1px solid var(--color-dark);
+  }
+  &:hover {
+    cursor: pointer;
+    background-color: var(--color-red);
+    color: var(--color-white);
+    border: 1px solid var(--color-red);
+  }
 }

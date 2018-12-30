@@ -26,7 +26,8 @@ export class BugsViewComponent implements OnInit {
     error: '',
     traceback: '',
     bug_created: '',
-    bug_updated: ''
+    bug_updated: '',
+    num_answers: ''
   };
 
   constructor(

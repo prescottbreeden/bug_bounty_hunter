@@ -4,7 +4,7 @@
       <h4 class="bugs__error">{{ bug.error }}</h4>
       <div class="bugs__info">
         <h6 class="bugs__created">{{ bug.bug_created | date: 'EEEE, LLL d'}}</h6>
-        <h6 class="bugs__answers">0 answers</h6>
+        <h6 class="bugs__answers">{{ bug.num_answers }} answers</h6>
       </div>
     </a>
   </div>

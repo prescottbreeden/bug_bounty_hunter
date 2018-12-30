@@ -45,8 +45,8 @@ CREATE TABLE answers (
     REFERENCES bugs (bug_id)
 );
 
-CREATE TABLE bugs_upvotes (
-  bug_upvote_id     INTEGER     NOT NULL  AUTO_INCREMENT    PRIMARY KEY,
+CREATE TABLE bugs_likes (
+  bug_like_id     INTEGER     NOT NULL  AUTO_INCREMENT    PRIMARY KEY,
   user_id           INTEGER     NOT NULL,
   bug_id            INTEGER     NOT NULL,
 
@@ -57,8 +57,8 @@ CREATE TABLE bugs_upvotes (
     REFERENCES bugs (bug_id)
 );
 
-CREATE TABLE answers_upvotes (
-  answer_upvote_id  INTEGER     NOT NULL  AUTO_INCREMENT    PRIMARY KEY,
+CREATE TABLE answers_likes (
+  answer_like_id  INTEGER     NOT NULL  AUTO_INCREMENT    PRIMARY KEY,
   user_id           INTEGER     NOT NULL,
   answer_id         INTEGER     NOT NULL,
 

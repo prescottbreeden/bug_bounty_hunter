@@ -1,6 +1,6 @@
 <section class="bug-view">
   <h2 class="bug-view__error">{{ bug.error }}</h2>
-  <p style="white-space: pre-line; font-size: 75%;" class="bug-view__traceback">
+  <p class="bug-view__traceback">
     {{bug.traceback}}
   </p>
 </section>
@@ -29,18 +29,23 @@
       #traceback="ngModel"
       name="newAnswer.answer_content"
       type="text" 
-      class="form__input" 
+      class="form__input form__textarea" 
       id="content"></textarea>
   </div>
   <button class="btn">Submit Answer</button>
 </form>
 
-{{ newAnswer | json }}
 <hr>
 <div class="answers">
   <div *ngFor="let answer of answers" class="answers__row">
-    {{ answer.answer_content }} | 
-    {{ answer.answered_by }} | 
-    {{ answer.answer_created | date:'short'}}
+    <div class="answers__content">
+      {{ answer.answer_content }}
+    </div>
+    <div class="answers__info">
+      <div *ngIf="isAdmin" class="answered_by">{{ answer.answered_by }}</div>
+        
+      {{ answer.answer_created | date:'EEEE, LLL dd'}}
+    </div>
   </div>
 </div>
+{{ newAnswer | json }}
