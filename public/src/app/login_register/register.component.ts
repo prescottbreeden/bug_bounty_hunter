@@ -3,8 +3,9 @@ import { UserService } from 'src/app/common/services/user.service';
 import { AuthService } from '../common/services/auth.service';
 import { Router } from '@angular/router';
 import { NewUser } from '../common/models/User';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { UserValidators } from '../common/models/Validations';
+import { uniqueEmailValidator } from '../common/unique-email-validator.directive';
 
 @Component({
   selector: 'app-register',
@@ -15,6 +16,9 @@ export class RegisterComponent implements OnInit {
   showEmailField = true;
   showPasswordField = false;
   isRegistered = false;
+  emailForm: FormGroup;
+  passwordForm: FormGroup;
+  newUserForm: FormGroup;
 
   user: NewUser = {
     first_name: '',
@@ -23,48 +27,58 @@ export class RegisterComponent implements OnInit {
     password: '',
   };
 
-  emailForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email])
-  });
+  constructor(
+    private authService: AuthService,
+    private userService: UserService,
+    private router: Router,
+    private fb: FormBuilder
+  ) { }
 
-  passwordForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', Validators.required)
-  });
+  ngOnInit() {
+    this.createEmailForm();
+  }
 
-  newUserForm = new FormGroup({
-    first_name: new FormControl('',
-      [
-        Validators.required,
+  createEmailForm() {
+    this.emailForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]]
+    })
+  }
+
+  createPasswordForm() {
+    this.passwordForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]]
+    })
+  }
+
+  createNewUserForm() {
+    this.newUserForm = this.fb.group({
+      first_name: ['',
+        [Validators.required,
         Validators.minLength(2),
-        UserValidators.cannotContainSpace
-      ]
-    ),
-    last_name: new FormControl('',
-      [
-        Validators.required,
+        UserValidators.cannotContainSpace]
+      ],
+      last_name: ['',
+        [Validators.required,
         Validators.minLength(2),
-        UserValidators.cannotContainSpace
-      ]
-    ),
-    email: new FormControl('',
-      [
-        Validators.required,
-        Validators.email
-      ]
-    ),
-    password: new FormControl('', Validators.required),
-    confirm: new FormControl('', Validators.required)
-  });
+        UserValidators.cannotContainSpace]
+      ],
+      email: ['',
+        [Validators.required, Validators.email],
+        [uniqueEmailValidator(this.userService)]
+      ],
+      password: ['', [Validators.required]],
+      confirm: ['', [Validators.required]]
+    })
+  }
 
-  // login
+
   get LogEmail() {
     return this.emailForm.get('email');
   }
   get LogPassword() {
     return this.passwordForm.get('password');
   }
-  // registration
   get FirstName() {
     return this.newUserForm.get('first_name');
   }
@@ -78,16 +92,6 @@ export class RegisterComponent implements OnInit {
     return this.newUserForm.get('password');
   }
 
-  constructor(
-    private authService: AuthService,
-    private userService: UserService,
-    private router: Router
-  ) { }
-
-  ngOnInit() {
-    this.userService.getUsers();
-  }
-
   onEmail() {
     if (this.emailForm.valid) {
       this.user.email = this.emailForm.value.email;
@@ -97,8 +101,10 @@ export class RegisterComponent implements OnInit {
             this.user.first_name = result.first_name;
             this.user.last_name = result.last_name;
             this.isRegistered = true;
+            this.createPasswordForm();
             this.passwordForm.get('email').setValue(this.user.email);
           } else {
+            this.createNewUserForm();
             this.newUserForm.get('email').setValue(this.user.email);
           }
           this.togglePasswordField();
@@ -110,6 +116,7 @@ export class RegisterComponent implements OnInit {
       })
     }
   }
+
   onPassword() {
     if (this.passwordForm.valid) {
       this.authService.login(this.passwordForm.value)
@@ -132,11 +139,12 @@ export class RegisterComponent implements OnInit {
 
   onRegister() {
     const {first_name, last_name, email, password} = this.newUserForm.value;
-    this.user.first_name = first_name;
-    this.user.last_name = last_name;
-    this.user.email = email;
-    this.user.password = password;
-    console.log(this.user);
+    this.user = {
+      first_name: first_name,
+      last_name: last_name,
+      email: email,
+      password: password
+    }
     if (this.newUserForm.value.confirm != this.user.password) {
       this.RegPassword.setErrors({
         passwordsDoNotMatch: true

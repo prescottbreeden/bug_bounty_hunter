@@ -15,6 +15,7 @@ import { BugsCreateComponent } from './bugs/bugs-create/bugs-create.component';
 import { BugsViewComponent } from './bugs/bugs-view/bugs-view.component';
 import { AboutComponent } from './about/about.component';
 import { AutofocusDirective } from './common/autofocus.directive';
+import { UniqueEmailValidatorDirective } from './common/unique-email-validator.directive';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { AutofocusDirective } from './common/autofocus.directive';
     BugsViewComponent,
     AboutComponent,
     AutofocusDirective,
+    UniqueEmailValidatorDirective,
   ],
   imports: [
     BrowserModule,

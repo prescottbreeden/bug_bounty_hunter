@@ -16,7 +16,7 @@
           class="form__input email" 
           id="email_field">
       </div>
-      <div *ngIf="LogEmail.touched && LogEmail.invalid" class="form__error">
+      <div *ngIf="LogEmail.invalid && (LogEmail.dirty || LogEmail.touched)" class="form__error">
         <div *ngIf="LogEmail.hasError('required')">Email is required.</div>
         <div *ngIf="LogEmail.hasError('invalidEmail')">Email must be valid.</div>
       </div>
