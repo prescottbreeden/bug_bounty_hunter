@@ -22,7 +22,9 @@ module.exports = {
   },
 
   getById: (req, res) => {
-    db_connection.query('SELECT * FROM users WHERE user_id = ?', [req.params.id] , function(error, results, fields) {
+    db_connection.query('SELECT * FROM users WHERE user_id = ?', req.params.id, 
+      function(error, results, fields) {
+
       if(error) {
         logger.log('warn', `users.getById(): ${error}`);
         res.json(error);
@@ -35,7 +37,9 @@ module.exports = {
 
   create: (req, res) => {
     req.body.password = bcrypt.hashSync(req.body.password, 10);
-    db_connection.query('INSERT INTO users SET ?', req.body, function(error, results, fields) {
+    db_connection.query('INSERT INTO users SET ?', req.body, 
+      function(error, results, fields) {
+
       if (error) {
         logger.log('warn', `users.create(): ${error}`);
         res.json(error);

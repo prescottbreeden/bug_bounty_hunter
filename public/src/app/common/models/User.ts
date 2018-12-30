@@ -1,4 +1,6 @@
 import { AbstractControl, ValidationErrors } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
+import { Injectable } from '@angular/core';
 
 export interface UserModel {
   user_id: string;
@@ -30,25 +32,5 @@ export function MapUserData(data): UserModel {
     admin: data['admin'],
     created_at: data['created_at'],
     updated_at: data['updated_at']
-  }
-}
-
-export class UserValidators {
-  static cannotContainSpace(control : AbstractControl) : ValidationErrors | null {
-    if ((control.value as string).indexOf(' ') >=0) {
-      return { cannotcontainspace: true }
-    }
-    return null;
-  }
-  customLength(control: AbstractControl) : ValidationErrors | null {
-    if ((control.value as string).length == 0) {
-      return {
-        customLength: {
-          requiredLength: 10,
-          actualLength: control.value.length
-        }
-      }
-    }
-    return null;
   }
 }

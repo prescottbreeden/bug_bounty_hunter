@@ -37,7 +37,7 @@ module.exports = {
           return res.json(token);
         }
         else {
-          return null;
+          return res.json(null);
         }
       }
     });

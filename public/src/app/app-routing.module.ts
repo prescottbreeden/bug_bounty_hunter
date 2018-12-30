@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { RegisterComponent } from './users/login_register/register.component';
+import { RegisterComponent } from './login_register/register.component';
 import { BugsShowComponent } from './bugs/bugs-show/bugs-show.component';
 import { BugsCreateComponent } from './bugs/bugs-create/bugs-create.component';
 import { BugsViewComponent } from './bugs/bugs-view/bugs-view.component';

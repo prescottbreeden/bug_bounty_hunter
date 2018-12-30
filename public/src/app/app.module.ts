@@ -9,7 +9,7 @@ import { BugService } from './common/services/bug.service';
 import { AuthService } from './common/services/auth.service';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
-import { RegisterComponent } from './users/login_register/register.component';
+import { RegisterComponent } from './login_register/register.component';
 import { BugsShowComponent } from './bugs/bugs-show/bugs-show.component';
 import { BugsCreateComponent } from './bugs/bugs-create/bugs-create.component';
 import { BugsViewComponent } from './bugs/bugs-view/bugs-view.component';

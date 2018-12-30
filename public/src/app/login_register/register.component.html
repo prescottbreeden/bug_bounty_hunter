@@ -1,0 +1,124 @@
+<section class="reg">
+  <img src="assets/img/fettprofile2.jpg" alt="balls" class="reg__img">
+  <div class="reg__form-container">
+    <form 
+      [formGroup]="emailForm"
+      (ngSubmit)="onEmail()"
+      *ngIf="showEmailField"
+      class="form">
+      <h4 class="form__title">Enter Your Email</h4>
+      <div class="form__row">
+        <input 
+          appAutofocus
+          formControlName="email"
+          required
+          type="email" 
+          class="form__input email" 
+          id="email_field">
+      </div>
+      <div *ngIf="LogEmail.touched && LogEmail.invalid" class="form__error">
+        <div *ngIf="LogEmail.hasError('required')">Email is required.</div>
+        <div *ngIf="LogEmail.hasError('invalidEmail')">Email must be valid.</div>
+      </div>
+      <button [disabled]="!emailForm.valid" class="btn">Next</button>
+    </form>
+
+    <form 
+      [formGroup]="passwordForm"
+      (ngSubmit)="onPassword()" 
+      *ngIf="isRegistered && showPasswordField"
+      class="form">
+      <input type="hidden" formControlName="email">
+      <h4 class="form__title">Welcome Back {{user.first_name}}</h4>
+      <div class="form__row">
+        <label for="password" class="form__label hide">Password</label>
+        <input 
+          appAutofocus
+          formControlName="password"
+          type="password" 
+          class="form__input" 
+          id="password">
+      </div>
+      <div *ngIf="LogPassword.touched && LogPassword.invalid" class="form__error">
+        <div *ngIf="LogPassword.hasError('required')">Password is required</div>
+        <div *ngIf="LogPassword.hasError('incorrectPassword')">incorrect password.</div>
+      </div>
+      <button [disabled]="!passwordForm.valid" class="btn">Login</button>
+      <a class="form__link" href="/">Not {{user.first_name}} {{user.last_name}}?</a>
+    </form>
+
+    <form 
+      [formGroup]="newUserForm"
+      (ngSubmit)="onRegister()"
+      *ngIf="!isRegistered && showPasswordField"
+      class="form">
+      <h4 class="form__title">Register</h4>
+      <div class="form__row">
+        <label for="first_name" class="form__label">First Name</label>
+        <input 
+          appAutofocus
+          formControlName="first_name"
+          type="text" 
+          class="form__input" 
+          id="first_name">
+      </div>
+      <div *ngIf="FirstName.touched && FirstName.invalid" class="form__error">
+        <div *ngIf="FirstName.hasError('required')">First name is required.</div>
+        <div *ngIf="FirstName.hasError('minlength')">Name must be at least {{ FirstName.errors.minlength.requiredLength }} characters.</div>
+        <div *ngIf="FirstName.hasError('cannotContainSpace')">Names cannot contain spaces</div>
+      </div>
+      <div class="form__row">
+        <label for="last_name" class="form__label">Last Name</label>
+        <input 
+          formControlName="last_name"
+          type="text" 
+          class="form__input" 
+          id="last_name">
+      </div>
+      <div *ngIf="LastName.touched && LastName.invalid" class="form__error">
+        <div *ngIf="LastName.hasError('required')">Last name is required.</div>
+        <div *ngIf="LastName.hasError('minlength')">Name must be at least {{ FirstName.errors.minlength.requiredLength }} characters.</div>
+        <div *ngIf="LastName.hasError('cannotContainSpace')">Names cannot contain spaces</div>
+      </div>
+      <div class="form__row">
+        <label for="reg_email" class="form__label">Email</label>
+        <input 
+          formControlName="email"
+          type="email" 
+          class="form__input"
+          id="reg_email">
+      </div>
+      <div *ngIf="RegEmail.touched && RegEmail.invalid" class="form__error">
+        <div *ngIf="RegEmail.hasError('required')">Email is required.</div>
+        <div *ngIf="RegEmail.hasError('alreadyExists')">Email is already registered.</div>
+      </div>
+      <div class="form__row">
+        <label for="password" class="form__label">Password</label>
+        <input 
+          formControlName="password"
+          type="password" 
+          class="form__input" 
+          id="password">
+      </div>
+      <div 
+        *ngIf="RegPassword.touched && RegPassword.invalid" class="form__error">
+        <div *ngIf="RegPassword.hasError('required')">Password is required.</div>
+      </div>
+      <div class="form__row">
+        <label for="confirm" class="form__label">Confirm</label>
+        <input 
+          formControlName="confirm"
+          type="password" 
+          class="form__input" 
+          id="confirm">
+      </div>
+      <div 
+        *ngIf="RegPassword.touched && RegPassword.invalid" class="form__error">
+        <div *ngIf="RegPassword.hasError('passwordsDoNotMatch')">Passwords do not match.</div>
+      </div>
+      <button [disabled]="!newUserForm.valid" class="btn">Register</button>
+      <a class="form__link" href="/">Already registered? <br> Click here.</a>
+    </form>
+
+  </div>
+</section>

@@ -14,7 +14,7 @@ export class AuthService {
 
   constructor(private _http: HttpClient) { }
 
-  isUnique(credentials) {
+  emailExists(credentials) {
     return this._http.post('/authservice/validate/email/', credentials)
       .pipe(map(result => {
         if (result instanceof Array) {
