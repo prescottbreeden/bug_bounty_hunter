@@ -7,11 +7,12 @@
   // padding: 2rem 3rem;
 
   &__title {
+    font-family: Jedi;
     margin-left: 6rem;
     font-size: 4rem;
     color: transparent;
     -webkit-text-stroke-width: 1px;  
-    -webkit-text-stroke-color: var(--color-yelow);  
+    -webkit-text-stroke-color: var(--color-yellow);  
 
     &:hover {
       cursor: default;

@@ -1,6 +1,11 @@
-<p>----- all bugs -----</p>
 <div class="bugs">
   <div *ngFor="let bug of bugs" class="bugs__item">
-    <a href="/bugs/{{bug.bug_id}}">{{ bug.error }}</a>
+    <a href="/bugs/{{bug.bug_id}}" class="bugs__link">
+      <h4 class="bugs__error">{{ bug.error }}</h4>
+      <div class="bugs__info">
+        <h6 class="bugs__created">{{ bug.bug_created | date: 'EEEE, LLL d'}}</h6>
+        <h6 class="bugs__answers">0 answers</h6>
+      </div>
+    </a>
   </div>
 </div>

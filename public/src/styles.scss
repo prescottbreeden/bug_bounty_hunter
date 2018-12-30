@@ -2,15 +2,18 @@
   font-family: Jedi;
   src: url('assets/font/STJEDISE.TTF');
 }
+ @import url('https://fonts.googleapis.com/css?family=Lato:400,700');
 :root {
   --color-dark: #393e46;
   --color-blue: #00ADB5;
-  --color-yelow: #F8B500;
+  --color-yellow: #F8B500;
   --color-red: #FC3C3C;
   --color-black: #222;
-  --color-white: #FFF4E0;
+  --color-off-white: #FFF4E0;
+  --color-white: #eee;
 
   --border-radius: 5px;
+  --margin-bottom: 3rem;
 }
 * {
   margin: 0;
@@ -19,7 +22,8 @@
 
 html {
   font-size: 62.5%;
-  font-family: Jedi;
+  font-family: 'Lato', sans-serif;
+  background-color: var(--color-white);
   // background-color: #111;
 }
 
