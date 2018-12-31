@@ -57,6 +57,13 @@ html {
 body {
   font-size: 1.6rem; }
 
+.u-divider {
+  border-top: 1px solid #393e46;
+  border-bottom: 1px solid #393e46;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  margin-bottom: 3rem; }
+
 .row {
   max-width: 114rem;
   margin: 0 auto;
@@ -189,14 +196,17 @@ body {
       list-style-position: inside;
       font-size: 2rem; }
     .bug-create__info--row {
-      margin-top: 2rem;
+      margin-top: 1rem;
       box-sizing: border-box;
       display: flex;
       align-items: center;
-      width: 100%;
-      font-size: 2.5rem; }
+      width: 100%; }
     .bug-create__info--bullet-title {
+      font-size: 2.5rem;
       margin-left: 1rem; }
+    .bug-create__info--text {
+      font-size: 2rem;
+      margin-bottom: 1rem; }
 
 .bugs__link {
   text-decoration: none;
@@ -226,10 +236,15 @@ body {
   color: inherit; }
 
 .bug-view {
-  margin-bottom: var(--margin-bottom); }
+  margin-bottom: 3rem; }
+  .bug-view__error {
+    margin-bottom: 1rem; }
   .bug-view__traceback {
     white-space: pre-line;
-    font-size: 75%; }
+    font-size: 2rem;
+    background-color: #FFF4E0;
+    padding: 2rem;
+    border-radius: 5px; }
 
 .form {
   margin-bottom: var(--margin-bottom); }
@@ -238,7 +253,7 @@ body {
     width: 75rem;
     height: 50rem;
     border-style: groove;
-    border-radius: var(--border-radius);
+    border-radius: 5px;
     box-sizing: border-box;
     padding: 1rem;
     font-size: 1.5rem;
@@ -249,12 +264,13 @@ body {
   .answers__row {
     margin-top: 1rem;
     padding: 2rem;
-    border: 1px solid var(--color-blue);
+    border: 1px solid #00ADB5;
     display: flex;
     justify-content: space-between;
     align-items: flex-start; }
   .answers__content {
-    white-space: pre-line; }
+    white-space: pre-line;
+    font-size: 2rem; }
   .answers__info {
     text-align: right;
     min-width: 10%;

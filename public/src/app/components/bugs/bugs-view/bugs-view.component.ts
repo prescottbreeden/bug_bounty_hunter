@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { AuthService } from 'src/app/common/services/auth.service';
 import { BugService } from 'src/app/common/services/bug.service';
-import { BugModel, MapBugData, MapBugDatum } from '../../common/models/Bug';
+import { BugModel, MapBugData, MapBugDatum } from 'src/app/common/models/Bug';
 import { NewAnswer, MapAnswerData, AnswerModel, MapAnswerDatum } from 'src/app/common/models/Answer';
 
 @Component({
@@ -12,6 +12,7 @@ import { NewAnswer, MapAnswerData, AnswerModel, MapAnswerDatum } from 'src/app/c
 export class BugsViewComponent implements OnInit {
 
   answers: AnswerModel[];
+  showAnswerForm = false;
 
   newAnswer: NewAnswer = {
     bug_id: '',
@@ -63,6 +64,11 @@ export class BugsViewComponent implements OnInit {
         })
     });
     this.newAnswer.answer_content = '';
+  }
+
+  toggleForm() {
+    console.log('clicked');
+    this.showAnswerForm = !this.showAnswerForm;
   }
 
 }

@@ -2,8 +2,7 @@ import { Component, OnInit, } from '@angular/core';
 import { AuthService } from 'src/app/common/services/auth.service';
 import { Router } from '@angular/router';
 import { BugService } from 'src/app/common/services/bug.service';
-import { BugModel, MapBugData } from '../../common/models/Bug';
-// import { Bug } from '../models/Bug';
+import { BugModel, MapBugData } from 'src/app/common/models/Bug';
 
 @Component({
   selector: 'app-bugs-show',

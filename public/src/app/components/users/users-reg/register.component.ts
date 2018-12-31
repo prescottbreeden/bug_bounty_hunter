@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/common/services/user.service';
-import { AuthService } from '../common/services/auth.service';
+import { AuthService } from 'src/app/common/services/auth.service';
 import { Router } from '@angular/router';
-import { NewUser } from '../common/models/User';
+import { NewUser } from 'src/app/common/models/User';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { UserValidators } from '../common/models/Validations';
-import { uniqueEmailValidator } from '../common/unique-email-validator.directive';
+import { UserValidators } from 'src/app/common/models/Validations';
+import { uniqueEmailValidator } from 'src/app/common/directives/unique-email-validator.directive';
 
 @Component({
   selector: 'app-register',

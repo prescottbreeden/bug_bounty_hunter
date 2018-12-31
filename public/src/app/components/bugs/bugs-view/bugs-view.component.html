@@ -1,0 +1,79 @@
+<section class="bug-view">
+  <h2 class="bug-view__error">{{ bug.error }}</h2>
+  <p class="bug-view__traceback">
+    {{bug.traceback}}
+  </p>
+</section>
+<div class="u-divider">
+  <button (click)="toggleForm()" *ngIf="!showAnswerForm">Add Answer</button>
+  <button (click)="toggleForm()" *ngIf="showAnswerForm">Hide Form</button>
+  <div *ngIf="showAnswerForm" class="row">
+    <div class="bug-create col-2-of-4">
+      <form 
+        (submit)="onSubmitAnswer()" 
+        class="bug-create__form">
+
+        <input 
+          type="hidden" 
+          [(ngModel)]="newAnswer.posted_by" 
+          name="newAnswer.posted_by">
+
+        <input 
+          type="hidden" 
+          [(ngModel)]="newAnswer.bug_id" 
+          name="newAnswer.bug_id">
+
+        <div class="bug-create__form--row">
+          <label for="content" class="bug-create__form--label">Add Answer</label>
+        </div>
+        <div class="form__row">
+          <textarea 
+            [(ngModel)]="newAnswer.answer_content"
+            #traceback="ngModel"
+            name="newAnswer.answer_content"
+            type="text" 
+            class="bug-create__form--textbox" 
+            id="content"></textarea>
+        </div>
+        <button class="bug-create__btn">Add Answer</button>
+      </form>
+    </div>
+    <div class="bug-create__info col-2-of-4">
+      <h4 class="bug-create__info--header">Guidelines</h4>
+      <div class="bug-create__info--list">
+        <div class="bug-create__info--row">
+          <img src="assets/img/target_50px.png" alt="target" class="bug-create__bullseye">
+          <p class="bug-create__info--bullet-title">Be Concise</p> 
+        </div>
+        <div class="bug-create__info--row">
+          <p class="bug-create__info--text">
+            Try not to write a book.  Ain't nobody got time for that.
+          </p>
+        </div> 
+        <div class="bug-create__info--row">
+          <img src="assets/img/target_50px.png" alt="target" class="bug-create__bullseye">
+          <p class="bug-create__info--bullet-title">Be Polite</p> 
+        </div>
+        <div class="bug-create__info--row">
+          <p class="bug-create__info--text">
+            Answers (like bug posts) are anonymous to your peers; however, 
+            they are not anonymous to your instructors.
+          </p>
+        </div> 
+      </div>
+    </div>
+  </div>
+</div>
+<div class="answers">
+  <div *ngFor="let answer of answers" class="answers__row">
+    <div class="answers__content">
+      {{ answer.answer_content }}
+    </div>
+    <div class="answers__info">
+      <div *ngIf="isAdmin" class="answered_by">{{ answer.answered_by }}</div>
+        
+      {{ answer.answer_created | date:'EEEE, LLL dd'}}
+    </div>
+  </div>
+</div>
+{{ newAnswer | json }}
