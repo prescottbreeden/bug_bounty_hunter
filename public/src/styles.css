@@ -153,25 +153,50 @@ body {
   .btn:hover:disabled {
     cursor: not-allowed; }
 
-.bug-create__form {
-  font-size: 2rem; }
-  .bug-create__form--input {
-    border-style: ridge;
-    border-radius: 5px;
-    padding: 1rem;
-    margin: 1rem 0;
-    width: 50%; }
-  .bug-create__form--textbox {
-    margin: 1rem 0;
-    border-radius: 5px;
-    resize: none;
-    width: 50%;
-    height: 20rem; }
-
-.bug-create__btn {
-  width: 50%;
-  padding: 2rem;
-  font-size: 2rem; }
+.bug-create {
+  display: inline-block; }
+  .bug-create__form {
+    display: inline-block;
+    font-size: 2rem;
+    width: 100%; }
+    .bug-create__form--input {
+      border-style: ridge;
+      border-radius: 5px;
+      padding: 1rem;
+      margin: 1rem 0;
+      width: 90%; }
+    .bug-create__form--textbox {
+      margin: 1rem 0;
+      border-radius: 5px;
+      resize: none;
+      width: 90%;
+      height: 20rem; }
+  .bug-create__btn {
+    width: 90%;
+    padding: 2rem;
+    font-size: 2rem; }
+  .bug-create__bullseye {
+    min-height: 50px;
+    min-width: 50px; }
+  .bug-create__info {
+    display: inline-block;
+    width: 100%;
+    margin-left: 3rem;
+    vertical-align: top; }
+    .bug-create__info--header {
+      font-size: 3rem; }
+    .bug-create__info--list {
+      list-style-position: inside;
+      font-size: 2rem; }
+    .bug-create__info--row {
+      margin-top: 2rem;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      font-size: 2.5rem; }
+    .bug-create__info--bullet-title {
+      margin-left: 1rem; }
 
 .bugs__link {
   text-decoration: none;

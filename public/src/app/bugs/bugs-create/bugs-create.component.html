@@ -1,39 +1,65 @@
-<div class="bug-create">
-  <form 
-    (submit)="onSubmitBug()" 
-    class="bug-create__form">
+<div class="row">
+  <div class="bug-create col-2-of-4">
+    <form 
+      (submit)="onSubmitBug()" 
+      class="bug-create__form">
 
-    <input 
-      type="hidden" 
-      [(ngModel)]="newBug.posted_by" 
-      name="newBug.posted_by">
-
-    <div class="bug-create__form--row">
-      <label for="title" class="bug-create__form--label">Error</label>
-    </div>
-    <div class="bug-create__form--row">
       <input 
-        [(ngModel)]="newBug.error"
-        #title="ngModel"
-        name="newBug.error"
-        type="text" 
-        class="bug-create__form--input" 
-        id="title">
-    </div>
+        type="hidden" 
+        [(ngModel)]="newBug.posted_by" 
+        name="newBug.posted_by">
 
-    <div class="bug-create__form--row">
-      <label for="traceback" class="bug-create__form--label">Traceback</label>
-    </div>
-    <div class="bug-create__form--row">
-      <textarea 
-        [(ngModel)]="newBug.traceback"
-        #traceback="ngModel"
-        name="newBug.traceback"
-        type="text" 
-        class="bug-create__form--textbox" 
-        id="traceback"></textarea>
-    </div>
-    <button class="bug-create__btn">Submit New Bug</button>
-  </form>
+      <div class="bug-create__form--row">
+        <label for="title" class="bug-create__form--label">Error</label>
+      </div>
+      <div class="bug-create__form--row">
+        <input 
+          [(ngModel)]="newBug.error"
+          #title="ngModel"
+          name="newBug.error"
+          type="text" 
+          class="bug-create__form--input" 
+          id="title">
+      </div>
 
+      <div class="bug-create__form--row">
+        <label for="traceback" class="bug-create__form--label">Traceback</label>
+      </div>
+      <div class="bug-create__form--row">
+        <textarea 
+          [(ngModel)]="newBug.traceback"
+          #traceback="ngModel"
+          name="newBug.traceback"
+          type="text" 
+          class="bug-create__form--textbox" 
+          id="traceback"></textarea>
+      </div>
+      <button class="bug-create__btn">Submit New Bug</button>
+    </form>
+  </div>
+  <div class="bug-create__info col-2-of-4">
+    <h4 class="bug-create__info--header">Guidelines</h4>
+    <div class="bug-create__info--list">
+      <div class="bug-create__info--row">
+        <img src="assets/img/target_50px.png" alt="target" class="bug-create__bullseye">
+        <p class="bug-create__info--bullet-title">Defining Your Error</p> 
+      </div>
+      <div class="bug-create__info--row">
+        <p class="bug-create__info--text">
+            When you are posting a bug, try to ascertain which part of your 
+            error message is the most pertinent and descriptive.
+        </p>
+      </div> 
+      <div class="bug-create__info--row">
+        <img src="assets/img/target_50px.png" alt="target" class="bug-create__bullseye">
+        <p class="bug-create__info--bullet-title">Defining Your Traceback</p> 
+      </div>
+      <div class="bug-create__info--row">
+        <p class="bug-create__info--text">
+            When you are posting a bug, try to ascertain which part of your 
+            error message is the most pertinent and descriptive.
+        </p>
+      </div> 
+    </div>
+  </div>
 </div>
