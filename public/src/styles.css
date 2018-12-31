@@ -153,24 +153,46 @@ body {
   .btn:hover:disabled {
     cursor: not-allowed; }
 
+.bug-create__form {
+  font-size: 2rem; }
+  .bug-create__form--input {
+    border-style: ridge;
+    border-radius: 5px;
+    padding: 1rem;
+    margin: 1rem 0;
+    width: 50%; }
+  .bug-create__form--textbox {
+    margin: 1rem 0;
+    border-radius: 5px;
+    resize: none;
+    width: 50%;
+    height: 20rem; }
+
+.bug-create__btn {
+  width: 50%;
+  padding: 2rem;
+  font-size: 2rem; }
+
 .bugs__link {
   text-decoration: none;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  color: var(--color-black); }
+  color: #222; }
   .bugs__link:hover {
-    background-color: var(--color-blue);
-    color: var(--color-white); }
+    background-color: #00ADB5;
+    color: #eee; }
 
 .bugs__item {
   margin: 1rem 1rem;
-  border: 1px solid var(--color-blue);
-  transition: all .1s; }
+  border: 1px solid #00ADB5;
+  transition: all .1s;
+  font-size: 2rem; }
 
 .bugs__info {
-  min-width: 10%; }
+  min-width: 10%;
+  font-size: 2rem; }
 
 .bugs__created {
   color: inherit; }
@@ -224,66 +246,86 @@ body {
     display: table;
     width: 100%;
     height: 80rem; }
-
-.form {
-  width: 100%;
-  display: table-cell;
-  vertical-align: middle;
-  box-sizing: border-box;
-  padding: 3rem; }
-  .form:hover {
-    cursor: default; }
-  .form__title {
-    font-size: 3rem; }
-  .form__input.ng-invalid.ng-dirty {
-    border-bottom: 3px solid #FC3C3C; }
-  .form__input.ng-pristine {
-    border-bottom: 3px solid green; }
-  .form__row {
-    margin-top: 1rem; }
-  .form__input {
+  .reg__form {
     width: 100%;
-    font-size: 2.5rem;
-    font-family: inherit;
-    color: inherit;
-    padding: 1rem 2rem 1rem 0;
-    margin-top: .5rem;
-    border-radius: 2px;
-    border: none;
-    border-bottom: 3px solid transparent;
-    transition: border color .3s; }
-    .form__input:valid {
+    display: table-cell;
+    vertical-align: middle;
+    box-sizing: border-box;
+    padding: 3rem; }
+    .reg__form:hover {
+      cursor: default; }
+    .reg__form--title {
+      font-size: 3rem; }
+    .reg__form--input.ng-invalid.ng-dirty {
+      border-bottom: 3px solid #FC3C3C; }
+    .reg__form--input.ng-pristine {
       border-bottom: 3px solid green; }
-    .form__input:focus {
-      outline: none; }
-    .form__input::-webkit-input-placeholder {
-      color: #393e46; }
-  .form__label {
-    margin-top: .5rem;
+    .reg__form--row {
+      margin-top: 1rem; }
+    .reg__form--input {
+      width: 100%;
+      font-size: 2.5rem;
+      font-family: inherit;
+      color: inherit;
+      padding: 1rem 2rem 1rem 0;
+      margin-top: .5rem;
+      border-radius: 2px;
+      border: none;
+      border-bottom: 3px solid transparent;
+      transition: border color .3s; }
+      .reg__form--input:valid {
+        border-bottom: 3px solid green; }
+      .reg__form--input:focus {
+        outline: none; }
+      .reg__form--input::-webkit-input-placeholder {
+        color: #393e46; }
+    .reg__form--label {
+      margin-top: .5rem;
+      font-size: 2rem;
+      display: block;
+      width: 100%;
+      margin-bottom: 3rem; }
+    .reg__form--error {
+      font-family: 'Lato';
+      font-size: 2rem;
+      margin-top: .5rem;
+      color: #FC3C3C;
+      margin-bottom: 3rem; }
+    .reg__form--input:placeholder-shown + .reg__form--label {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-4rem); }
+    .reg__form--link {
+      display: block;
+      text-decoration: none;
+      margin-top: 1rem;
+      color: var(--color-yellow);
+      transition: border color .3s;
+      border-bottom: 1px solid transparent; }
+      .reg__form--link:hover {
+        color: var(--color-blue);
+        border-bottom: 1px solid #00ADB5;
+        cursor: pointer; }
+
+.search {
+  font-size: 2.5rem;
+  margin: 1rem 1rem;
+  margin-bottom: 3rem;
+  display: flex; }
+  .search__search-bar {
+    width: 80%;
+    padding: 1rem;
     font-size: 2rem;
-    display: block;
-    width: 100%;
-    margin-bottom: 3rem; }
-  .form__error {
-    font-family: 'Lato';
+    border-style: ridge;
+    border-radius: 5px 0 0 5px; }
+  .search__btn {
+    background-color: #00ADB5;
+    color: #eee;
+    width: 20%;
     font-size: 2rem;
-    margin-top: .5rem;
-    color: #FC3C3C;
-    margin-bottom: 3rem; }
-  .form__input:placeholder-shown + .form__label {
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-4rem); }
-  .form__link {
-    display: block;
-    text-decoration: none;
-    margin-top: 1rem;
-    color: var(--color-yellow);
-    transition: border color .3s;
-    border-bottom: 1px solid transparent; }
-    .form__link:hover {
-      color: var(--color-blue);
-      border-bottom: 1px solid #00ADB5;
+    border: none;
+    border-radius: 0 5px 5px 0; }
+    .search__btn:hover {
       cursor: pointer; }
 
 .app-container {

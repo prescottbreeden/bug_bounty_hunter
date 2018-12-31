@@ -15,98 +15,99 @@
     height: 80rem;
     // border: 1px dashed red;
   }
-}
 
-.form {
-  width: 100%;
-  display: table-cell;
-  vertical-align: middle;
-  box-sizing: border-box;
-  padding: 3rem;
-
-  &:hover {
-    cursor: default;
-  }
-
-  &__title {
-    font-size: 3rem;
-  }
-
-  &__input.ng-invalid.ng-dirty {
-    border-bottom: 3px solid $color-red;
-  }
-
-  &__input.ng-pristine {
-    border-bottom: 3px solid green;
-  }
-
-  &__row {
-    margin-top: 1rem;
-  }
-
-  &__input {
+  &__form {
     width: 100%;
-    font-size: 2.5rem;
-    font-family: inherit;
-    color: inherit;
-    padding: 1rem 2rem 1rem 0;
-    margin-top: .5rem;
-    border-radius: 2px;
-    border: none;
-    border-bottom: 3px solid transparent;
-    transition: border color .3s;
-    // border: 1px dashed orange;
+    display: table-cell;
+    vertical-align: middle;
+    box-sizing: border-box;
+    padding: 3rem;
 
+    &:hover {
+      cursor: default;
+    }
 
-    &:valid {
+    &--title {
+      font-size: 3rem;
+    }
+
+    &--input.ng-invalid.ng-dirty {
+      border-bottom: 3px solid $color-red;
+    }
+
+    &--input.ng-pristine {
       border-bottom: 3px solid green;
     }
 
-    &:focus {
-        outline: none;
+    &--row {
+      margin-top: 1rem;
+    }
+
+    &--input {
+      width: 100%;
+      font-size: 2.5rem;
+      font-family: inherit;
+      color: inherit;
+      padding: 1rem 2rem 1rem 0;
+      margin-top: .5rem;
+      border-radius: 2px;
+      border: none;
+      border-bottom: 3px solid transparent;
+      transition: border color .3s;
+      // border: 1px dashed orange;
+
+
+      &:valid {
+        border-bottom: 3px solid green;
+      }
+
+      &:focus {
+          outline: none;
+      }
+      
+      &::-webkit-input-placeholder {
+          color: $color-dark;
+      }
+    }
+
+    &--label {
+      margin-top: .5rem;
+      font-size: 2rem;
+      display: block;
+      width: 100%;
+      margin-bottom: $margin-bottom;
+    }
+
+    &--error {
+      font-family: 'Lato';
+      font-size: 2rem;
+      margin-top: .5rem;
+      color: $color-red;
+      margin-bottom: $margin-bottom;
+    }
+
+    &--input:placeholder-shown + &--label {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-4rem);
     }
     
-    &::-webkit-input-placeholder {
-        color: $color-dark;
+
+    &--link {
+      display: block;
+      text-decoration: none;
+      margin-top: 1rem;
+      color: var(--color-yellow);
+      transition: border color .3s;
+        border-bottom: 1px solid transparent;
+
+      &:hover {
+        color: var(--color-blue);
+        border-bottom: 1px solid $color-blue;
+        cursor: pointer;
+      }
     }
-  }
 
-  &__label {
-    margin-top: .5rem;
-    font-size: 2rem;
-    display: block;
-    width: 100%;
-    margin-bottom: $margin-bottom;
-  }
-
-  &__error {
-    font-family: 'Lato';
-    font-size: 2rem;
-    margin-top: .5rem;
-    color: $color-red;
-    margin-bottom: $margin-bottom;
-  }
-
-  &__input:placeholder-shown + &__label {
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(-4rem);
-  }
-  
-
-  &__link {
-    display: block;
-    text-decoration: none;
-    margin-top: 1rem;
-    color: var(--color-yellow);
-    transition: border color .3s;
-      border-bottom: 1px solid transparent;
-
-    &:hover {
-      color: var(--color-blue);
-      border-bottom: 1px solid $color-blue;
-      cursor: pointer;
-    }
   }
 
 }

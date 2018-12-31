@@ -1,38 +1,39 @@
-<form 
-  (submit)="onSubmitBug()" 
-  class="form">
+<div class="bug-create">
+  <form 
+    (submit)="onSubmitBug()" 
+    class="bug-create__form">
 
-  <input 
-    type="hidden" 
-    [(ngModel)]="newBug.posted_by" 
-    name="newBug.posted_by">
-
-  <div class="form__row">
-    <label for="title" class="form__label">Error</label>
-  </div>
-  <div class="form__row">
     <input 
-      [(ngModel)]="newBug.error"
-      #title="ngModel"
-      name="newBug.error"
-      type="text" 
-      class="form__input" 
-      id="title">
-  </div>
+      type="hidden" 
+      [(ngModel)]="newBug.posted_by" 
+      name="newBug.posted_by">
 
-  <div class="form__row">
-    <label for="traceback" class="form__label">Traceback</label>
-  </div>
-  <div class="form__row">
-    <textarea 
-      [(ngModel)]="newBug.traceback"
-      #traceback="ngModel"
-      name="newBug.traceback"
-      type="text" 
-      class="form__input" 
-      id="traceback"></textarea>
-  </div>
-  <button class="btn">Submit New Bug</button>
-</form>
+    <div class="bug-create__form--row">
+      <label for="title" class="bug-create__form--label">Error</label>
+    </div>
+    <div class="bug-create__form--row">
+      <input 
+        [(ngModel)]="newBug.error"
+        #title="ngModel"
+        name="newBug.error"
+        type="text" 
+        class="bug-create__form--input" 
+        id="title">
+    </div>
 
-{{ newBug | json }}
+    <div class="bug-create__form--row">
+      <label for="traceback" class="bug-create__form--label">Traceback</label>
+    </div>
+    <div class="bug-create__form--row">
+      <textarea 
+        [(ngModel)]="newBug.traceback"
+        #traceback="ngModel"
+        name="newBug.traceback"
+        type="text" 
+        class="bug-create__form--textbox" 
+        id="traceback"></textarea>
+    </div>
+    <button class="bug-create__btn">Submit New Bug</button>
+  </form>
+
+</div>

@@ -11,6 +11,7 @@ import { BugModel, MapBugData } from '../../common/models/Bug';
 })
 export class BugsShowComponent implements OnInit {
   bugs: BugModel[];
+  searchTerm: string;
 
   constructor(
     private authService: AuthService,
