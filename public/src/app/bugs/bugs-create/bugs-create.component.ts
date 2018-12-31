@@ -8,7 +8,6 @@ import { UserToken } from 'src/app/common/models/User';
 @Component({
   selector: 'app-bugs-create',
   templateUrl: './bugs-create.component.html',
-  styleUrls: ['./bugs-create.component.scss']
 })
 export class BugsCreateComponent implements OnInit {
   token: UserToken;

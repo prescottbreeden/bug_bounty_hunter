@@ -7,7 +7,12 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "watch:sass": "node-sass src/sass/main.scss src/styles.css -w",
+    "compile:sass": "node-sass src/sass/main.scss src/sass/comp/styles.comp.css",
+    "prefix:css": "postcss --use autoprefixer -b 'last 10 versions' src/sass/comp/styles.comp.css -o src/sass/comp/styles.prefixed.css",
+    "compress:css": "node-sass src/sass/comp/styles.prefixed.css src/styles.css --output-style compressed",
+    "build:css": "npm-run-all compile:sass prefix:css compress:css"
   },
   "private": true,
   "dependencies": {
@@ -45,6 +50,12 @@
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
-    "typescript": "~3.1.1"
+    "typescript": "~3.1.1",
+    "concat": "^1.0.3",
+    "hoek": "^6.1.2",
+    "node-minify": "^3.6.0",
+    "node-sass": "^4.11.0",
+    "npm-run-all": "^4.1.5",
+    "postcss-cli": "^6.1.0"
   }
 }

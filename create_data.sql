@@ -22,14 +22,6 @@ USE bug_hunter;
 
  INSERT INTO bugs (posted_by, error, traceback)
  VALUES (1, 'error TS2339: Property "length" does not exist on type "Object".', 'Test traceback 1...'),
-        (1, 'error TS2339: Property "length" does not exist on type "Object".', 'Test traceback 2...'),
-        (1, 'error TS2339: Property "length" does not exist on type "Object".', 'Test traceback 3...'),
-        (1, 'error TS2339: Property "length" does not exist on type "Object".', 'Test traceback 4...'),
-        (1, 'error TS2339: Property "length" does not exist on type "Object".', 'Test traceback 5...'),
-        (2, 'error TS2339: Property "length" does not exist on type "Object".', 'Test traceback 6...'),
-        (2, 'error TS2339: Property "length" does not exist on type "Object".', 'Test traceback 7...'),
-        (2, 'error TS2339: Property "length" does not exist on type "Object".', 'Test traceback 8...'),
-        (2, 'error TS2339: Property "length" does not exist on type "Object".', 'Test traceback 9...'),
         (2, 'error TS2339: Property "length" does not exist on type "Object".', 'Test traceback 10...'),
         (2, 'error TS2339: Property "length" does not exist on type "Object".', 'Test traceback 11...')
         ;

@@ -1,0 +1,25 @@
+@font-face {
+  font-family: Jedi;
+  src: url('assets/font/STJEDISE.TTF');
+}
+
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700');
+
+html {
+  font-size: 62.5%;
+  font-family: 'Lato', sans-serif;
+
+  @include respond(tab-land) {
+    font-size: 56.25%;
+  }
+  @include respond(tab-port) {
+    font-size: 56.25%;
+  }
+  @include respond(big-desktop) {
+    font-size: 75%;
+  }
+}
+
+body {
+  font-size: 1.6rem;
+}

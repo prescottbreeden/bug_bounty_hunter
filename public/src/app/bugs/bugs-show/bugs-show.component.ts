@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import { AuthService } from 'src/app/common/services/auth.service';
 import { Router } from '@angular/router';
 import { BugService } from 'src/app/common/services/bug.service';
@@ -8,7 +8,6 @@ import { BugModel, MapBugData } from '../../common/models/Bug';
 @Component({
   selector: 'app-bugs-show',
   templateUrl: './bugs-show.component.html',
-  styleUrls: ['./bugs-show.component.scss']
 })
 export class BugsShowComponent implements OnInit {
   bugs: BugModel[];

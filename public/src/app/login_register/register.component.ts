@@ -10,7 +10,6 @@ import { uniqueEmailValidator } from '../common/unique-email-validator.directive
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
   showEmailField = true;
@@ -91,6 +90,9 @@ export class RegisterComponent implements OnInit {
   get RegPassword() {
     return this.newUserForm.get('password');
   }
+  get Confirm() {
+    return this.newUserForm.get('confirm');
+  }
 
   onEmail() {
     if (this.emailForm.valid) {
@@ -146,7 +148,7 @@ export class RegisterComponent implements OnInit {
       password: password
     }
     if (this.newUserForm.value.confirm != this.user.password) {
-      this.RegPassword.setErrors({
+      this.Confirm.setErrors({
         passwordsDoNotMatch: true
       })
     } else {

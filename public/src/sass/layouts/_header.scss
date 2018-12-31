@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--color-dark);
+  background-color: $color-dark;
   height: 12rem;
   // padding: 2rem 3rem;
 
@@ -12,7 +12,7 @@
     font-size: 4rem;
     color: transparent;
     -webkit-text-stroke-width: 1px;  
-    -webkit-text-stroke-color: var(--color-yellow);  
+    -webkit-text-stroke-color: $color-yellow;  
 
     &:hover {
       cursor: default;
@@ -24,7 +24,7 @@
     &--link {
       text-transform: uppercase;
       background-color: transparent;
-      color: var(--color-white);
+      color: $color-white;
       border: none;
       font-size: 1.75rem;
       height: 12rem;
@@ -36,7 +36,7 @@
       }
       &:hover {
         cursor: pointer;
-        background-color: var(--color-red);
+        background-color: $color-red;
       }
     }
     
