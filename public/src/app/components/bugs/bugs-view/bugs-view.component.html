@@ -30,13 +30,30 @@
           <label for="content" class="bug-create__form--label">Add Answer</label>
         </div>
         <div class="form__row">
-          <textarea 
+
+          <quill-editor 
             [(ngModel)]="newAnswer.answer_content"
-            #traceback="ngModel"
+            #content="ngModel"
             name="newAnswer.answer_content"
-            type="text" 
-            class="bug-create__form--textbox" 
-            id="content"></textarea>
+            id="content"
+            [style]="{height: '250px'}"
+            >
+            <div quill-editor-toolbar>
+            <span class="ql-formats">
+              <button class="ql-bold" [title]="'Bold'"></button>
+              <button class="ql-italic" [title]="'Italic'"></button>
+            </span>
+            <span class="ql-formats">
+              <select class="ql-align" [title]="'Aligment'">
+                <option selected></option>
+                <option value="center"></option>
+                <option value="right"></option>
+                <option value="justify"></option>
+              </select>
+            </span>
+          </div>
+          </quill-editor>
+
         </div>
         <button class="bug-create__btn">Add Answer</button>
       </form>

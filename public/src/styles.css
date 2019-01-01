@@ -26,6 +26,9 @@
       }
 
 */
+@import url(~quill/dist/quill.core.css);
+@import url(~quill/dist/quill.bubble.css);
+@import url(~quill/dist/quill.snow.css);
 @import url("https://fonts.googleapis.com/css?family=Lato:400,700");
 *,
 *::after,

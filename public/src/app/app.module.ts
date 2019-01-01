@@ -1,7 +1,8 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { QuillModule } from 'ngx-quill';
 
 import { AppRoutingModule } from './common/app-routing.module';
 import { UserService } from './common/services/user.service';
@@ -39,9 +40,11 @@ import { FilterPipe } from './common/filter.pipe';
     FormsModule,
     ReactiveFormsModule,
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    QuillModule
   ],
   providers: [UserService, AuthService, BugService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
