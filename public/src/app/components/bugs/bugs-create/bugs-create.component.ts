@@ -14,7 +14,8 @@ export class BugsCreateComponent implements OnInit {
   newBug: NewBug = {
     posted_by: '',
     error: '',
-    traceback: ''
+    traceback: '',
+    message: ''
   };
 
   constructor(

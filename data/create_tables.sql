@@ -23,6 +23,7 @@ CREATE TABLE bugs (
   posted_by   INTEGER       NOT NULL,
   error       VARCHAR(255)  NOT NULL,
   traceback   TEXT          NOT NULL,
+  message     TEXT          NOT NULL,
   bug_created TIMESTAMP     NOT NULL  DEFAULT NOW(),
   bug_updated TIMESTAMP     NOT NULL  DEFAULT NOW()   ON UPDATE NOW(),
 

@@ -37,6 +37,9 @@
 body {
   box-sizing: border-box; }
 
+button::-moz-focus-inner {
+  border: 0; }
+
 @font-face {
   font-family: Jedi;
   src: url("assets/font/STJEDISE.TTF"); }
@@ -180,15 +183,25 @@ body {
       margin: 1rem 0;
       width: 90%; }
     .bug-create__form--textbox {
+      padding: 1rem;
       margin: 1rem 0;
       border-radius: 5px;
+      border-style: groove;
       resize: none;
       width: 90%;
       height: 20rem; }
   .bug-create__btn {
     width: 90%;
     padding: 2rem;
-    font-size: 2rem; }
+    font-size: 2rem;
+    border: none;
+    border-radius: 5px;
+    border: 1px solid rgba(57, 62, 70, 0.5);
+    background-color: #00ADB5;
+    color: #eee; }
+    .bug-create__btn:hover {
+      cursor: pointer;
+      background-color: #FC3C3C; }
   .bug-create__bullseye {
     min-height: 50px;
     min-width: 50px; }
@@ -203,6 +216,8 @@ body {
       list-style-position: inside;
       font-size: 2rem; }
     .bug-create__info--row {
+      margin-top: 1rem;
+      box-sizing: border-box;
       margin-top: 1rem;
       box-sizing: border-box;
       display: flex;

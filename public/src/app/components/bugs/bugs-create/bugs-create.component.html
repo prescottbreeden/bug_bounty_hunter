@@ -3,12 +3,10 @@
     <form 
       (submit)="onSubmitBug()" 
       class="bug-create__form">
-
       <input 
         type="hidden" 
         [(ngModel)]="newBug.posted_by" 
         name="newBug.posted_by">
-
       <div class="bug-create__form--row">
         <label for="title" class="bug-create__form--label">Error</label>
       </div>
@@ -21,7 +19,6 @@
           class="bug-create__form--input" 
           id="title">
       </div>
-
       <div class="bug-create__form--row">
         <label for="traceback" class="bug-create__form--label">Traceback</label>
       </div>
@@ -34,6 +31,18 @@
           class="bug-create__form--textbox" 
           id="traceback"></textarea>
       </div>
+      <div class="bug-create__form--row">
+        <label for="message" class="bug-create__form--label">Message</label>
+      </div>
+      <div class="bug-create__form--row">
+        <textarea 
+          [(ngModel)]="newBug.message"
+          #message="ngModel"
+          name="newBug.message"
+          type="text" 
+          class="bug-create__form--textbox" 
+          id="message"></textarea>
+      </div>
       <button class="bug-create__btn">Submit New Bug</button>
     </form>
   </div>
@@ -42,7 +51,7 @@
     <div class="bug-create__info--list">
       <div class="bug-create__info--row">
         <img src="assets/img/target_50px.png" alt="target" class="bug-create__bullseye">
-        <p class="bug-create__info--bullet-title">Defining Your Error</p> 
+        <p class="bug-create__info--bullet-title">Defining an Error</p> 
       </div>
       <div class="bug-create__info--row">
         <p class="bug-create__info--text">
@@ -52,12 +61,39 @@
       </div> 
       <div class="bug-create__info--row">
         <img src="assets/img/target_50px.png" alt="target" class="bug-create__bullseye">
-        <p class="bug-create__info--bullet-title">Defining Your Traceback</p> 
+        <p class="bug-create__info--bullet-title">Posting a Traceback</p> 
       </div>
       <div class="bug-create__info--row">
         <p class="bug-create__info--text">
-            When you are posting a bug, try to ascertain which part of your 
-            error message is the most pertinent and descriptive.
+          Your traceback refers to the block of code that references each line
+          of code that failed because of the error.  This output can be extremely 
+          helpful when debugging to get additional info but takes practice 
+          to filter what's noise and what's integral.  If you are 
+          unsure what your traceback is, just copy the whole error message 
+          and paste it here.
+        </p>
+      </div> 
+      <div class="bug-create__info--row">
+        <img src="assets/img/target_50px.png" alt="target" class="bug-create__bullseye">
+        <p class="bug-create__info--bullet-title">Adding a Message</p> 
+      </div>
+      <div class="bug-create__info--row">
+        <p class="bug-create__info--text">
+          This is a really good place to mention the ways you have already tried 
+          to solve your bug.  Not only will this reduce thread redundancy but will 
+          also offer an opportunity for you to rubber-duck-debug in case you forgot 
+          to try something. If there is any additional info that you think might 
+          be helpful you can add it here (e.g. code snippets you think might be 
+          the cause, questions about the error message itself, etc.).
+        </p>
+      </div> 
+      <div class="bug-create__info--row">
+        <img src="assets/img/target_50px.png" alt="target" class="bug-create__bullseye">
+        <p class="bug-create__info--bullet-title">Brevity is the Soul of Wit</p> 
+      </div>
+      <div class="bug-create__info--row">
+        <p class="bug-create__info--text">
+          Don't write a book; ain't nobody's got times for that.
         </p>
       </div> 
     </div>
