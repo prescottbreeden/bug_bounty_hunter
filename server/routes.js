@@ -11,6 +11,9 @@ module.exports = function(app) {
     .put('/api/users/:id', user.update)
     .delete('/api/users/:id', user.delete)
 
+    .get('/api/users/stats', user.getAllUserData)
+    .get('/api/users/stats/:id', user.getUserStatsById)
+
     .post('/authservice/validate/email/', auth.validateEmail)
     .post('/authservice/authenticate', auth.login)
 
@@ -19,6 +22,7 @@ module.exports = function(app) {
     .post('/api/bugs', bug.create)
     .put('/api/bugs/:id', bug.update)
     .delete('/api/bugs/:id', bug.delete)
+
     .get('/api/answers/:id', bug.getAnswer)
     .post('/api/answers', bug.addAnswer)
 

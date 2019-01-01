@@ -1,8 +1,8 @@
 .header {
   display: flex;
-  justify-content: space-between;
+  // justify-content: space-between;
   align-items: center;
-  background-color: $color-dark;
+  background-color: rgba($color-dark, .8);
   height: 12rem;
   // padding: 2rem 3rem;
 
@@ -19,26 +19,8 @@
     }
   }
 
-  &__nav {
-      margin-right: 3rem;
-    &--link {
-      text-transform: uppercase;
-      background-color: transparent;
-      color: $color-white;
-      border: none;
-      font-size: 1.75rem;
-      height: 12rem;
-      padding: 0rem 3rem;
-
-      &:active {
-        outline: none;
-        border: none;
-      }
-      &:hover {
-        cursor: pointer;
-        background-color: $color-red;
-      }
-    }
-    
+  &__img {
+    margin-left: 1rem;
   }
+
 }

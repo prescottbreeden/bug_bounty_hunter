@@ -27,4 +27,10 @@ export class UserService {
   deleteUser(id: number) {
     return this.http.delete('/api/users/' + id);
   }
+  getUserStatsById(id: string | number) {
+    return this.http.get('/api/users/stats/' + id);
+  }
+  getAllUserStats() {
+    return this.http.get('/api/users/stats/');
+  }
 }

@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent},
   { path: 'profile', component: UsersProfileComponent},
   { path: 'bugs', component: BugsShowComponent},
-  { path: 'bugs/create', component: BugsCreateComponent},
+  { path: 'new-bug', component: BugsCreateComponent},
   { path: 'bugs/:id', component: BugsViewComponent},
 ];
 

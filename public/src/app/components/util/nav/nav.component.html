@@ -2,37 +2,48 @@
 <header 
   class="header">
   <h1 class="header__title">Bug Bounty Hunter</h1>
-  <nav 
-    class="header__nav">
-    <button 
-      *ngIf="!loggedIn"
-      [routerLink]="['/about']" 
-      class="header__nav--link">About
-    </button>
-    <button 
-      *ngIf="!loggedIn"
-      [routerLink]="['/']" 
-      class="header__nav--link">Login
-    </button>
-    <button 
-      *ngIf="loggedIn"
-      [routerLink]="['/bugs']" 
-      class="header__nav--link">Bugs
-    </button>
-    <button 
-      *ngIf="loggedIn"
-      [routerLink]="['/bugs/create']" 
-      class="header__nav--link">Submit Bug
-    </button>
-    <button 
-      *ngIf="loggedIn"
-      [routerLink]="['/profile']" 
-      class="header__nav--link">Profile
-    </button>
-    <button 
-      *ngIf="loggedIn"
-      (click)="logout()" 
-      class="header__nav--link">Logout
-    </button>
-  </nav>
+  <img src="assets/img/target_50px.png" alt="target" class="header__img">
 </header>
+<nav 
+  class="nav">
+  <button 
+    *ngIf="!loggedIn"
+    [routerLink]="['/about']" 
+    routerLinkActive="active-link"
+    routerLinkActiveOptions="{exact: true}"
+    class="nav__link">About
+  </button>
+  <button 
+    *ngIf="!loggedIn"
+    [routerLink]="['/']" 
+    routerLinkActive="active-link"
+    routerLinkActiveOptions="{exact: true}"
+    class="nav__link">Login
+  </button>
+  <button 
+    *ngIf="loggedIn"
+    [routerLink]="['/bugs']" 
+    routerLinkActive="active-link"
+    routerLinkActiveOptions="{exact: true}"
+    class="nav__link">Bugs
+  </button>
+  <button 
+    *ngIf="loggedIn"
+    [routerLink]="['/new-bug']" 
+    routerLinkActive="active-link"
+    routerLinkActiveOptions="{exact: true}"
+    class="nav__link">Submit Bug
+  </button>
+  <button 
+    *ngIf="loggedIn"
+    [routerLink]="['/profile']" 
+    routerLinkActive="active-link"
+    routerLinkActiveOptions="{exact: true}"
+    class="nav__link">Profile
+  </button>
+  <button 
+    *ngIf="loggedIn"
+    (click)="logout()" 
+    class="nav__link">Logout
+  </button>
+</nav>

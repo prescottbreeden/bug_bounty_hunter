@@ -1,3 +1,15 @@
-<p>
-  users-profile works!
-</p>
+<div class="profile">
+  <h2 class="profile__title">{{ user.first_name }} {{ user.last_name }}'s Profile</h2>
+  <div class="profile__info">First name: {{ user.first_name }} </div>
+  <div class="profile__info">Last name: {{ user.last_name }} </div>
+  <div class="profile__info">Email: {{ user.email }} </div>
+  <div class="profile__info">Created: {{ user.created_at | date: 'longDate' }} </div>
+  <div class="profile__info">Updated: {{ user.updated_at | date: 'longDate' }} </div>
+
+  <div class="profile__stats">
+    <div class="profile__item">Bugs posted: {{ stats.bugs_posted }}</div>
+    <div class="profile__item">Bugs answered: {{ stats.answers_posted }}</div>
+    <div class="profile__item">Bugs liked: {{ stats.bugs_liked }}</div>
+    <div class="profile__item">Answers liked: {{ stats.answers_liked }}</div>
+  </div>
+</div>

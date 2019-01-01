@@ -1,7 +1,3 @@
-import { AbstractControl, ValidationErrors } from '@angular/forms';
-import { AuthService } from '../services/auth.service';
-import { Injectable } from '@angular/core';
-
 export interface UserModel {
   user_id: string;
   first_name: string;
@@ -10,6 +6,13 @@ export interface UserModel {
   admin: boolean;
   created_at: string | Date;
   updated_at: string | Date;
+}
+
+export interface UserStats {
+  bugs_posted: string | number;
+  answers_posted: string | number;
+  bugs_liked: string | number;
+  answers_liked: string | number;
 }
 
 export interface NewUser {
@@ -30,7 +33,16 @@ export function MapUserData(data): UserModel {
     last_name: data['last_name'],
     email: data['email'],
     admin: data['admin'],
-    created_at: data['created_at'],
-    updated_at: data['updated_at']
+    created_at: data['user_created'],
+    updated_at: data['user_updated']
+  }
+}
+
+export function MapUserStatsData(data): UserStats {
+  return {
+    bugs_posted: data['bugs'],
+    answers_posted: data['answers'],
+    bugs_liked: data['alikes'],
+    answers_liked: data['blikes']
   }
 }
