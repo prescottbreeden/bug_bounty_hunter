@@ -366,14 +366,14 @@ body {
     padding: 1rem;
     font-size: 2rem;
     border-style: ridge;
-    border-radius: 5px 0 0 5px; }
+    border-radius: 0 5px 5px 0; }
   .search__btn {
     background-color: #00ADB5;
     color: #eee;
     width: 20%;
     font-size: 2rem;
     border: none;
-    border-radius: 0 5px 5px 0; }
+    border-radius: 5px 0 0 5px; }
     .search__btn:hover {
       cursor: pointer; }
 

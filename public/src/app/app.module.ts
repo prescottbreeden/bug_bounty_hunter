@@ -17,6 +17,7 @@ import { AboutComponent } from './components/util/about/about.component';
 import { AutofocusDirective } from './common/directives/autofocus.directive';
 import { UniqueEmailValidatorDirective } from './common/directives/unique-email-validator.directive';
 import { UsersProfileComponent } from './components/users/users-profile/users-profile.component';
+import { FilterPipe } from './common/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { UsersProfileComponent } from './components/users/users-profile/users-pr
     AutofocusDirective,
     UniqueEmailValidatorDirective,
     UsersProfileComponent,
+    FilterPipe,
   ],
   imports: [
     BrowserModule,

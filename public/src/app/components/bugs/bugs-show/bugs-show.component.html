@@ -1,12 +1,12 @@
 <div class="search">
+  <button class="search__btn">Search</button>
   <input 
-    [(ngModel)]="searchTerm"
+    [(ngModel)]="searchText"
     type="text" 
     class="search__search-bar">
-  <button class="search__btn">Search</button>
 </div>
 <div class="bugs">
-  <div *ngFor="let bug of bugs" class="bugs__item">
+  <div *ngFor="let bug of bugs | filter : searchText" class="bugs__item">
     <a href="/bugs/{{bug.bug_id}}" class="bugs__link">
       <h4 class="bugs__error">{{ bug.error }}</h4>
       <div class="bugs__info">

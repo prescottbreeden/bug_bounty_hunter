@@ -10,7 +10,15 @@ import { BugModel, MapBugData } from 'src/app/common/models/Bug';
 })
 export class BugsShowComponent implements OnInit {
   bugs: BugModel[];
-  searchTerm: string;
+  searchText: string;
+  characters: string[] = [
+    'Finn the human',
+    'Jake the dog',
+    'Princess bubblegum',
+    'Lumpy Space Princess',
+    'Beemo1',
+    'Beemo2'
+  ];
 
   constructor(
     private authService: AuthService,
