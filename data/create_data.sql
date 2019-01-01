@@ -20,11 +20,54 @@ USE bug_hunter;
         ('express')
         ;
 
- INSERT INTO bugs (posted_by, error, traceback)
- VALUES (1, 'error TS2339: Property "length" does not exist on type "Object".', 'Test traceback 1...'),
-        (2, 'error TS2339: Property "length" does not exist on type "Object".', 'Test traceback 10...'),
-        (2, 'error TS2339: Property "length" does not exist on type "Object".', 'Test traceback 11...')
-        ;
+ INSERT INTO bugs (posted_by, error, traceback, message)
+ VALUES 
+  (1, 
+  'error TS2339: Property "length" does not exist on type "Object".', 
+  'Test traceback 1...', 
+  'I think it may have something to do with this block of code: 
+
+  ngOnInit() {
+    this.token = this.authService.getToken();
+    if (!this.token) {
+      this.authService.logout();
+      this.router.navigate(["/"]);
+    } else {
+      console.log("token valid");
+      this.newBug.posted_by = this.token.currentUser.user_id;
+    }
+  }'),
+  (2, 
+  'error TS2339: Property "length" does not exist on type "Object".', 
+  'Test traceback 1...', 
+  'I think it may have something to do with this block of code: 
+
+  ngOnInit() {
+    this.token = this.authService.getToken();
+    if (!this.token) {
+      this.authService.logout();
+      this.router.navigate(["/"]);
+    } else {
+      console.log("token valid");
+      this.newBug.posted_by = this.token.currentUser.user_id;
+    }
+  }'),
+  (2, 
+  'error TS2339: Property "length" does not exist on type "Object".', 
+  'Test traceback 1...', 
+  'I think it may have something to do with this block of code: 
+
+  ngOnInit() {
+    this.token = this.authService.getToken();
+    if (!this.token) {
+      this.authService.logout();
+      this.router.navigate(["/"]);
+    } else {
+      console.log("token valid");
+      this.newBug.posted_by = this.token.currentUser.user_id;
+    }
+  }')
+;
 
  INSERT INTO answers (answered_by, bug_id, answer_content)
  VALUES (1, 2, 'This is the answer that never ends... yes it goes on and on my friends, some people started reading it not knowing what it was, and now theyll keep on reading it forever just because this is the song that doesnt end, yes it goes on and on my friends, some people started reading it not knowing what it was, and now theyll keep on reading it forever just because this is the answer that never ends... '),
@@ -51,10 +94,10 @@ USE bug_hunter;
         ;
 
  INSERT INTO bugs_likes (user_id, bug_id)
- VALUES (2, 3),
-        (2, 5),
-        (3, 5),
-        (1, 6),
-        (1, 7),
-        (1, 9)
+ VALUES (2, 1),
+        (2, 1),
+        (3, 1),
+        (1, 2),
+        (1, 2),
+        (1, 3)
         ;

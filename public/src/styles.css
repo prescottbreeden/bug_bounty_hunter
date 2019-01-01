@@ -267,6 +267,12 @@ body {
     background-color: #FFF4E0;
     padding: 2rem;
     border-radius: 5px; }
+  .bug-view__message {
+    white-space: pre-line;
+    font-size: 2rem;
+    padding: 2rem;
+    border: 1px solid rgba(57, 62, 70, 0.6);
+    margin-top: 2rem; }
 
 .form {
   margin-bottom: var(--margin-bottom); }

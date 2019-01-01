@@ -12,6 +12,14 @@
     padding: 2rem;
     border-radius: $default-border-radius;
   }
+
+  &__message {
+    white-space: pre-line;
+    font-size: 2rem;
+    padding: 2rem;
+    border: 1px solid rgba($color-dark, .6);
+    margin-top: 2rem;
+  }
 }
 
 .form {

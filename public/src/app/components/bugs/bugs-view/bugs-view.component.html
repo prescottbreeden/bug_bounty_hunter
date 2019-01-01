@@ -3,6 +3,9 @@
   <p class="bug-view__traceback">
     {{bug.traceback}}
   </p>
+  <p class="bug-view__message">
+    {{bug.message}}
+  </p>
 </section>
 <div class="u-divider">
   <button (click)="toggleForm()" *ngIf="!showAnswerForm">Add Answer</button>

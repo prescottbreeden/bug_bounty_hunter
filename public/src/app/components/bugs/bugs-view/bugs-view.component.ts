@@ -25,6 +25,7 @@ export class BugsViewComponent implements OnInit {
     posted_by: '',
     error: '',
     traceback: '',
+    message: '',
     bug_created: '',
     bug_updated: '',
     num_answers: ''
@@ -45,6 +46,7 @@ export class BugsViewComponent implements OnInit {
       this.route.params.subscribe((params: Params) => {
         this.bugService.getBugById(params['id'])
           .subscribe(res => {
+            console.log(res);
             this.bug = MapBugDatum(res[0]);
             this.answers = MapAnswerData(res);
             this.newAnswer.answered_by = token.currentUser.user_id;
