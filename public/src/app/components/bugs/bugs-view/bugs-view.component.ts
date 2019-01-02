@@ -22,7 +22,8 @@ export class BugsViewComponent implements OnInit {
     message: '',
     bug_created: '',
     bug_updated: '',
-    num_answers: ''
+    num_answers: '',
+    num_likes: ''
   };
 
   answers: AnswerModel[] = [

@@ -7,6 +7,7 @@ export interface BugModel {
   bug_created: string;
   bug_updated: string;
   num_answers: string | number;
+  num_likes: string | number;
 }
 
 export interface NewBug {
@@ -25,7 +26,8 @@ export function MapBugDatum(data): BugModel {
     message: data['message'],
     bug_created: data['bug_created'],
     bug_updated: data['bug_updated'],
-    num_answers: data['num_answers']
+    num_answers: data['num_answers'],
+    num_likes: data['num_likes']
   }
 }
 
@@ -40,7 +42,8 @@ export function MapBugData(data): BugModel[] {
       message: datum['message'],
       bug_created: datum['bug_created'],
       bug_updated: datum['bug_updated'],
-      num_answers: datum['num_answers']
+      num_answers: datum['num_answers'],
+      num_likes: datum['num_likes']
     }
     bugs.push(bug);
   });

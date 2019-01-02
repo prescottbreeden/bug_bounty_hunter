@@ -304,6 +304,19 @@ body {
     border-top: 3px solid #00ADB5;
     border-bottom: 3px solid #00ADB5;
     margin-bottom: 1rem; }
+    .bug-view__row--cluster {
+      display: flex;
+      align-items: center; }
+  .bug-view__icon {
+    display: inline-block;
+    height: 3rem;
+    width: 3rem; }
+    .bug-view__icon:hover {
+      cursor: pointer;
+      fill: #FC3C3C; }
+  .bug-view__error {
+    display: inline-block;
+    margin-left: 2rem; }
   .bug-view__traceback {
     white-space: pre-line;
     font-size: 2rem;

@@ -7,7 +7,24 @@ const db_connection = mysql.createConnection(config.database);
 module.exports = {
   
   getAll: (req, res) => {
-    db_connection.query('SELECT b.bug_id, posted_by, error, traceback, message, bug_created, COUNT(a.bug_id) AS num_answers FROM bugs AS b LEFT JOIN answers AS a ON b.bug_id = a.bug_id GROUP BY bug_id', function(error, results, fields) {
+    db_connection.query(`
+
+   SELECT b.bug_id, 
+          posted_by, 
+          error, 
+          traceback, 
+          message, 
+          bug_created, 
+          COUNT(a.bug_id) AS num_answers,
+          COUNT(bl.bug_like_id) AS num_likes
+     FROM bugs AS b 
+LEFT JOIN answers AS a 
+       ON b.bug_id = a.bug_id 
+LEFT JOIN bugs_likes AS bl
+       ON b.bug_id = bl.bug_id
+ GROUP BY bug_id`, 
+
+      function(error, results, fields) {
       if(error) {
         logger.log('warn', `bug.getAll(): ${error}`);
         res.json(error);

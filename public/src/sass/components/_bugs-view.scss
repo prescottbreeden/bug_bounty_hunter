@@ -10,13 +10,27 @@
     border-top: 3px solid $color-blue;
     border-bottom: 3px solid $color-blue;
     margin-bottom: 1rem;
+
+    &--cluster {
+      display: flex;
+      align-items: center;
+    }
   }
 
-  &__like {
+  &__icon {
+    display: inline-block;
+    height: 3rem;
+    width: 3rem;
 
+    &:hover {
+      cursor: pointer;
+      fill: $color-red;
+    }
   }
 
   &__error {
+    display: inline-block;
+    margin-left: 2rem;
   }
 
   &__traceback {
