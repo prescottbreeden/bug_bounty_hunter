@@ -86,7 +86,7 @@
     </div>
   </div>
 </div>
-<div *ngIf="!answers[0].answer_content === ''" >
+<div *ngIf="!answers[0].answer_content === null" >
   <div *ngFor="let answer of answers" class="answers__row">
     <div 
       [innerHtml]="answer.answer_content"
@@ -97,6 +97,6 @@
     </div>
   </div>
 </div>   
-<div *ngIf="answers[0].answer_content === ''" class="answers">
+<div *ngIf="answers[0].answer_content === null" class="answers">
   There are currently no suggested solutions for this bug. You should be the first!
 </div>

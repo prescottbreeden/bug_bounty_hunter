@@ -51,11 +51,9 @@ LEFT JOIN answers_likes AS al
 LEFT JOIN bugs_likes AS bl
        ON bl.user_id = u.user_id
  GROUP BY u.user_id
- ORDER BY bugs DESC;
+ ORDER BY bugs DESC`, [req.params.id], 
 
-    `, req.params.id, 
       function(error, results, fields) {
-
       if(error) {
         logger.log('warn', `users.getById(): ${error}`);
         res.json(error);
@@ -84,11 +82,9 @@ LEFT JOIN bugs_likes AS bl
     LEFT JOIN bugs_likes AS bl
            ON bl.user_id = u.user_id
         WHERE u.user_id = ?
-     GROUP BY u.user_id;
+     GROUP BY u.user_id`, [req.params.id], 
 
-    `, req.params.id, 
       function(error, results, fields) {
-
       if(error) {
         logger.log('warn', `users.getById(): ${error}`);
         res.json(error);
@@ -101,7 +97,7 @@ LEFT JOIN bugs_likes AS bl
 
   create: (req, res) => {
     req.body.password = bcrypt.hashSync(req.body.password, 10);
-    db_connection.query('INSERT INTO users SET ?', req.body, 
+    db_connection.query('INSERT INTO users SET ?', [req.body], 
       function(error, results, fields) {
 
       if (error) {

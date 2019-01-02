@@ -45,18 +45,17 @@ LEFT JOIN bugs_likes AS bl
           message, 
           bug_created, 
           bug_updated, 
-          IF (answer_id IS NULL, '', answer_id) AS answer_id,
-          IF (answered_by IS NULL, '', answered_by) AS answered_by,
-          IF (answer_content IS NULL, '', answer_content) AS answer_content,
-          IF (answer_created IS NULL, '', answer_created) AS answer_created,
-          IF (answer_updated IS NULL, '', answer_updated) AS answer_updated
+          answer_id,
+          answered_by,
+          answer_content,
+          answer_created,
+          answer_updated
      FROM bugs AS b 
 LEFT JOIN answers AS a 
        ON b.bug_id = a.bug_id 
-    WHERE b.bug_id = ?
-   ` 
-   , [req.params.id], function(error, results, fields) {
-
+    WHERE b.bug_id = ?`, [req.params.id], 
+   
+      function(error, results, fields) {
       if(error) {
         logger.log('warn', `bug.getById(): ${error}`);
         res.json(error);
@@ -86,6 +85,14 @@ LEFT JOIN answers AS a
 
   delete: (req, res) => {
     res.json('route not finished');
+  },
+
+  likeBug: (req, res) => {
+
+  },
+
+  likeAnswer: (req, res) => {
+
   },
 
   addAnswer: (req, res) => {
