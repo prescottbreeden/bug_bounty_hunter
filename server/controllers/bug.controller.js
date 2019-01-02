@@ -87,8 +87,44 @@ LEFT JOIN answers AS a
     res.json('route not finished');
   },
 
+  getBugLikes: (req, res) => {
+
+    db_connection.query(`
+    
+   SELECT bl.user_id
+     FROM bugs AS b 
+     JOIN bugs_likes AS bl 
+       ON b.bug_id = bl.bug_id 
+    WHERE b.bug_id = ?
+      AND bl.user_id = ?`, [req.params.bug_id, req.params.user_id], 
+   
+      function(error, results, fields) {
+      if(error) {
+        logger.log('warn', `bug.getBugLikes(): ${error}`);
+        res.json(error);
+      }
+      else {
+        res.json(results);
+      }
+    });
+  },
+
   likeBug: (req, res) => {
 
+    db_connection.query(`
+    
+    INSERT INTO bugs_likes (bug_id, user_id)
+    VALUES (?, ?)`, [req.body.bug_id, req.body.user_id], 
+   
+      function(error, results, fields) {
+      if(error) {
+        logger.log('warn', `bug.likeBug(): ${error}`);
+        res.json(error);
+      }
+      else {
+        res.json(results);
+      }
+    });
   },
 
   likeAnswer: (req, res) => {

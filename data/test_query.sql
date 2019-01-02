@@ -45,29 +45,39 @@ USE bug_hunter;
 --           message, 
 --           bug_created, 
 --           bug_updated, 
---           IF (answer_id IS NULL, '', answer_id) AS answer_id,
---           IF (answered_by IS NULL, '', answered_by) AS answered_by,
---           IF (answer_content IS NULL, 'Be the first to answer!', answer_content) AS answer_content,
---           IF (answer_created IS NULL, '', answer_created) AS answer_created,
---           IF (answer_updated IS NULL, '', answer_updated) AS answer_updated
+--           answer_id,
+--           answered_by,
+--           answer_content) AS answer_content,
+--           answer_created,
+--           answer_updated
 --      FROM bugs AS b 
 -- LEFT JOIN answers AS a 
 --        ON b.bug_id = a.bug_id 
 --     WHERE b.bug_id = 2
 -- ;
 
-   SELECT b.bug_id, 
-          posted_by, 
-          error, 
-          traceback, 
-          message, 
-          bug_created, 
-          COUNT(a.bug_id) AS num_answers,
-          COUNT(bl.bug_like_id) AS num_likes
-     FROM bugs AS b 
-LEFT JOIN answers AS a 
-       ON b.bug_id = a.bug_id 
-LEFT JOIN bugs_likes AS bl
-       ON b.bug_id = bl.bug_id
- GROUP BY bug_id
-; 
+--    SELECT b.bug_id, 
+--           posted_by, 
+--           error, 
+--           traceback, 
+--           message, 
+--           bug_created, 
+--           COUNT(a.bug_id) AS num_answers,
+--           COUNT(bl.bug_like_id) AS num_likes
+--      FROM bugs AS b 
+-- LEFT JOIN answers AS a 
+--        ON b.bug_id = a.bug_id 
+-- LEFT JOIN bugs_likes AS bl
+--        ON b.bug_id = bl.bug_id
+--  GROUP BY bug_id
+-- ; 
+
+-- get answers on bug view
+--    SELECT b.bug_id,
+--           bl.bug_like_id
+--      FROM bugs AS b 
+--      JOIN bugs_likes AS bl 
+--        ON b.bug_id = bl.bug_id 
+--     WHERE b.bug_id = 1
+--       AND bl.user_id = 1
+-- ;

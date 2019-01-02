@@ -79,6 +79,30 @@ body {
 .u-spacer {
   margin-top: 2rem; }
 
+.u-loader {
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 15rem;
+  height: 15rem;
+  border: 1.6rem solid;
+  border-color: silver #15B3E1 silver #16CF97;
+  background-color: #ecf0f1;
+  border-radius: 50%;
+  animation: loader;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-delay: 0s;
+  animation-timing-function: linear; }
+
+@keyframes loader {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
+
 .footer {
   padding: 3rem;
   height: 18rem;
@@ -307,13 +331,20 @@ body {
     .bug-view__row--cluster {
       display: flex;
       align-items: center; }
-  .bug-view__icon {
+  .bug-view__icon--unliked {
     display: inline-block;
     height: 3rem;
     width: 3rem; }
-    .bug-view__icon:hover {
+    .bug-view__icon--unliked:hover {
       cursor: pointer;
       fill: #FC3C3C; }
+  .bug-view__icon--liked {
+    display: inline-block;
+    height: 3rem;
+    width: 3rem;
+    fill: #FC3C3C; }
+    .bug-view__icon--liked:hover {
+      cursor: pointer; }
   .bug-view__error {
     display: inline-block;
     margin-left: 2rem; }

@@ -18,14 +18,29 @@
   }
 
   &__icon {
-    display: inline-block;
-    height: 3rem;
-    width: 3rem;
 
-    &:hover {
-      cursor: pointer;
-      fill: $color-red;
+    &--unliked {
+      display: inline-block;
+      height: 3rem;
+      width: 3rem;
+
+      &:hover {
+        cursor: pointer;
+        fill: $color-red;
+      }
     }
+
+    &--liked {
+      display: inline-block;
+      height: 3rem;
+      width: 3rem;
+      fill: $color-red;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
   }
 
   &__error {

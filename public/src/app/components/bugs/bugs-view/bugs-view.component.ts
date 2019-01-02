@@ -5,14 +5,17 @@ import { BugService } from 'src/app/common/services/bug.service';
 import { BugModel, MapBugData, MapBugDatum } from 'src/app/common/models/Bug';
 import { NewAnswer, MapAnswerData, AnswerModel, MapAnswerDatum } from 'src/app/common/models/Answer';
 import { jsonDecode, jsonEncode, buildBugObject } from 'src/app/common/models/Helpers';
+import { UserModel } from 'src/app/common/models/User';
 
 @Component({
   selector: 'app-bugs-view',
   templateUrl: './bugs-view.component.html',
 })
 export class BugsViewComponent implements OnInit {
-
+  userLikes: Boolean = false;
   showAnswerForm: Boolean = false;
+  fetchingData: Boolean = true;
+  userId: string = '';
 
   bug: BugModel = {
     bug_id: '',
@@ -55,14 +58,21 @@ export class BugsViewComponent implements OnInit {
     if (!token) {
       this.router.navigate(['/']);
     } else {
+      this.userId = token.currentUser.user_id;
       this.route.params.subscribe((params: Params) => {
-        this.bugService.getBugById(params['id'])
+        this.bug.bug_id = params['id'];
+        this.bugService.getLikes(this.bug.bug_id, this.userId)
+          .subscribe(res => {
+            if(res[0].hasOwnProperty('user_id')) this.userLikes = true;
+          })
+        this.bugService.getBugById(this.bug.bug_id)
           .subscribe(res => {
             const DATA = buildBugObject(res);
             this.bug = DATA.bug;
             this.answers = DATA.answers;
-            this.newAnswer.answered_by = token.currentUser.user_id;
+            this.newAnswer.answered_by = this.userId;
             this.newAnswer.bug_id = this.bug.bug_id;
+            this.fetchingData = false;
           });
       });
     }
@@ -83,6 +93,16 @@ export class BugsViewComponent implements OnInit {
 
   toggleForm() {
     this.showAnswerForm = !this.showAnswerForm;
+  }
+
+  likeBug() {
+    this.bugService.likeBug({
+      bug_id: this.bug.bug_id,
+      user_id: this.userId
+    }).subscribe(res => {
+      console.log(res);
+      this.userLikes = true;
+    })
   }
 
 }

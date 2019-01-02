@@ -17,3 +17,28 @@
 .u-spacer {
   margin-top: 2rem;
 }
+
+.u-loader {
+    @include absoluteCenter;
+    width: 15rem;
+    height: 15rem;
+    border: 1.6rem solid;
+    border-color: silver #15B3E1 silver #16CF97; 
+    background-color: #ecf0f1;
+    border-radius: 50%;
+
+    animation: loader;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-delay: 0s;
+    animation-timing-function: linear;
+}
+
+@keyframes loader {
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg)
+    }
+}

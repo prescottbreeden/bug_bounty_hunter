@@ -13,7 +13,7 @@ export class BugService {
   getBugs() { 
     return this.http.get('/api/bugs'); 
   }
-  getBugById(id: number) {
+  getBugById(id: string | number) {
     return this.http.get('/api/bugs/' + id); 
   }
   createBug(newBug: NewBug) {
@@ -22,13 +22,19 @@ export class BugService {
   updateBug(bug: BugModel) {
     return this.http.put('/api/bugs/' + bug.bug_id, bug);
   }
-  deleteBug(id: number) {
+  deleteBug(id: string | number) {
     return this.http.delete('/api/bugs/' + id);
   }
   addAnswer(newAnswer: NewAnswer) {
     return this.http.post('/api/answers', newAnswer);
   }
-  getAnswer(id: number) {
+  getAnswer(id: string | number) {
     return this.http.get('/api/answers/' + id);
+  }
+  getLikes(bug_id: string | number, user_id: string | number) {
+    return this.http.get(`/api/bugs/likes/${bug_id}/${user_id}`)
+  }
+  likeBug(newLike: any) {
+    return this.http.post('/api/bugs/likes', newLike);
   }
 }
