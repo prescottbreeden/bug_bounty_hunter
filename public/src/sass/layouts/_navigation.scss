@@ -8,7 +8,20 @@
   justify-content: space-around;
   background-color: $color-dark-grey;
 
+  &__icon {
+    height: 100%;
+    width: 10%;
+    fill: $color-white;
+    // border: 1px solid orangered;
+  }
+  &__text {
+    // width: 50%;
+  }
+
   &__link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-transform: uppercase;
     background-color: transparent;
     border: none;

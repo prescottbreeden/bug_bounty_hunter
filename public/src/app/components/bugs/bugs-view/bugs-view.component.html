@@ -1,5 +1,8 @@
 <section class="bug-view">
-  <h2 class="bug-view__error">{{ bug.error }}</h2>
+  <div class="bug-view__row">
+    <h2 class="bug-view__error">{{ bug.error }}</h2>
+    <h5 class="bug-view__created">Posted: {{ bug.bug_created | date: 'shortDate' }}</h5>
+  </div>
   <div 
     [innerHtml]="bug.traceback"
     class="bug-view__traceback">

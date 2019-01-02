@@ -1,8 +1,22 @@
 .bug-view {
   margin-bottom: $margin-bottom;
 
-  &__error {
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-top: 3px solid $color-blue;
+    border-bottom: 3px solid $color-blue;
     margin-bottom: 1rem;
+  }
+
+  &__like {
+
+  }
+
+  &__error {
   }
 
   &__traceback {

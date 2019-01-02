@@ -64,6 +64,11 @@ html {
 body {
   font-size: 1.6rem; }
 
+.u-header--primary {
+  text-align: center;
+  font-size: 3.5rem;
+  margin-bottom: 3rem; }
+
 .u-divider {
   border-top: 1px solid #393e46;
   border-bottom: 1px solid #393e46;
@@ -151,7 +156,14 @@ body {
   display: flex;
   justify-content: space-around;
   background-color: #393e46; }
+  .nav__icon {
+    height: 100%;
+    width: 10%;
+    fill: #eee; }
   .nav__link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-transform: uppercase;
     background-color: transparent;
     border: none;
@@ -245,36 +257,41 @@ body {
       font-size: 2rem;
       margin-bottom: 1rem; }
 
-.bugs__link {
-  text-decoration: none;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-  color: #222; }
-  .bugs__link:hover {
-    background-color: #00ADB5;
-    color: #eee; }
-
-.bugs__item {
-  margin: 1rem 1rem;
-  border: 1px solid #00ADB5;
-  transition: all .1s;
-  font-size: 2rem; }
-
-.bugs__info {
-  min-width: 10%;
-  font-size: 2rem; }
-
-.bugs__created {
-  color: inherit; }
-
-.bugs__answers {
-  color: inherit; }
+.bugs {
+  margin-bottom: 3rem; }
+  .bugs__link {
+    text-decoration: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    color: #222; }
+    .bugs__link:hover {
+      background-color: #00ADB5;
+      color: #eee; }
+  .bugs__item {
+    margin: 1rem 1rem;
+    border: 1px solid #00ADB5;
+    transition: all .1s;
+    font-size: 2rem; }
+  .bugs__info {
+    min-width: 10%;
+    font-size: 2rem; }
+  .bugs__created {
+    color: inherit; }
+  .bugs__answers {
+    color: inherit; }
 
 .bug-view {
   margin-bottom: 3rem; }
-  .bug-view__error {
+  .bug-view__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-top: 3px solid #00ADB5;
+    border-bottom: 3px solid #00ADB5;
     margin-bottom: 1rem; }
   .bug-view__traceback {
     white-space: pre-line;
@@ -319,6 +336,43 @@ body {
     margin-left: 2rem;
     font-size: 1.2rem; }
 
+.profile__title {
+  text-align: center;
+  font-size: 3.5rem;
+  margin-bottom: 3rem; }
+
+.profile__image img {
+  width: 100%; }
+
+.profile__row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%; }
+
+.profile__info {
+  font-size: 2.5rem;
+  margin-bottom: 1rem; }
+
+.profile__item {
+  margin-bottom: 1rem; }
+
+.profile__btn {
+  font-family: Lato;
+  font-size: 2rem;
+  display: block;
+  padding: 1rem 2.5rem;
+  background-color: #00ADB5;
+  color: #eee;
+  margin: 0 auto;
+  margin-bottom: 3rem;
+  border-radius: 5px;
+  border: none; }
+  .profile__btn:hover {
+    cursor: pointer;
+    background-color: #FC3C3C; }
+  .profile__btn:disabled {
+    cursor: not-allowed; }
+
 .reg {
   box-sizing: border-box;
   width: 100%;
@@ -340,10 +394,6 @@ body {
       cursor: default; }
     .reg__form--title {
       font-size: 3rem; }
-    .reg__form--input.ng-invalid.ng-dirty {
-      border-bottom: 3px solid #FC3C3C; }
-    .reg__form--input.ng-pristine {
-      border-bottom: 3px solid #00ADB5; }
     .reg__form--row {
       margin-top: 1rem; }
     .reg__form--input {
@@ -355,10 +405,10 @@ body {
       margin-top: .5rem;
       border-radius: 2px;
       border: none;
-      border-bottom: 3px solid transparent;
+      border-bottom: 3px solid #00ADB5;
       transition: border color .3s; }
-      .reg__form--input:valid {
-        border-bottom: 3px solid #00ADB5; }
+      .reg__form--input.ng-invalid, .reg__form--input:invalid {
+        border-bottom: 3px solid #FC3C3C; }
       .reg__form--input:focus {
         outline: none; }
       .reg__form--input::-webkit-input-placeholder {

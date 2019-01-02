@@ -6,6 +6,7 @@
 </header>
 <nav 
   class="nav">
+
   <button 
     *ngIf="!loggedIn"
     [routerLink]="['/about']" 
@@ -20,30 +21,46 @@
     routerLinkActiveOptions="{exact: true}"
     class="nav__link">Login
   </button>
-  <button 
+  <div 
     *ngIf="loggedIn"
     [routerLink]="['/bugs']" 
     routerLinkActive="active-link"
     routerLinkActiveOptions="{exact: true}"
-    class="nav__link">Bugs
-  </button>
-  <button 
+    class="nav__link">
+    <svg class="nav__icon">
+      <use xlink:href="assets/img/icons/sprite.svg#icon-stack-overflow"></use>
+    </svg>
+    <span class="nav__text">Bugs</span>
+  </div>
+  <div 
     *ngIf="loggedIn"
     [routerLink]="['/new-bug']" 
     routerLinkActive="active-link"
     routerLinkActiveOptions="{exact: true}"
-    class="nav__link">Submit Bug
-  </button>
-  <button 
+    class="nav__link">
+    <svg class="nav__icon">
+      <use xlink:href="assets/img/icons/sprite.svg#icon-bug"></use>
+    </svg>
+    <span class="nav__text">Submit Bug</span>
+  </div>
+  <div 
     *ngIf="loggedIn"
     [routerLink]="['/profile']" 
     routerLinkActive="active-link"
     routerLinkActiveOptions="{exact: true}"
-    class="nav__link">Profile
-  </button>
-  <button 
+    class="nav__link">
+    <svg class="nav__icon">
+      <use xlink:href="assets/img/icons/sprite.svg#icon-user-circle-o"></use>
+    </svg>
+    <span class="nav__text">Profile</span>
+  </div>
+  <div 
     *ngIf="loggedIn"
     (click)="logout()" 
-    class="nav__link">Logout
-  </button>
+    class="nav__link">
+    <svg class="nav__icon">
+      <use xlink:href="assets/img/icons/sprite.svg#icon-bin"></use>
+    </svg>
+    <span class="nav__text">Logout</span>
+  </div>
 </nav>

@@ -29,13 +29,10 @@
       font-size: 3rem;
     }
 
-    &--input.ng-invalid.ng-dirty {
-      border-bottom: 3px solid $color-red;
-    }
 
-    &--input.ng-pristine {
-      border-bottom: 3px solid $color-blue;
-    }
+    // &--input.ng-pristine {
+    //   border-bottom: 3px solid $color-blue;
+    // }
 
     &--row {
       margin-top: 1rem;
@@ -50,12 +47,15 @@
       margin-top: .5rem;
       border-radius: 2px;
       border: none;
-      border-bottom: 3px solid transparent;
+      border-bottom: 3px solid $color-blue;
       transition: border color .3s;
 
+      &.ng-invalid,
+      &:invalid {
+        border-bottom: 3px solid $color-red;
+      }
 
       &:valid {
-        border-bottom: 3px solid $color-blue;
       }
 
       &:focus {
