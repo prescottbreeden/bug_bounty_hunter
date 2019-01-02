@@ -30,6 +30,12 @@
 @import url(~quill/dist/quill.bubble.css);
 @import url(~quill/dist/quill.snow.css);
 @import url("https://fonts.googleapis.com/css?family=Lato:400,700");
+@keyframes loader {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
+
 *,
 *::after,
 *::before {
@@ -97,11 +103,8 @@ body {
   animation-delay: 0s;
   animation-timing-function: linear; }
 
-@keyframes loader {
-  0% {
-    transform: rotate(0deg); }
-  100% {
-    transform: rotate(360deg); } }
+.u-color-grey {
+  color: #60646b !important; }
 
 .footer {
   padding: 3rem;

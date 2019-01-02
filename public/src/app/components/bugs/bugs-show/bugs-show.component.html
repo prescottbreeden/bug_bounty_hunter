@@ -14,9 +14,9 @@
     <a href="/bugs/{{bug.bug_id}}" class="bugs__link">
       <h4 class="bugs__error">{{ bug.error }}</h4>
       <div class="bugs__info">
-        <h6 class="bugs__created">{{ bug.bug_created | date: 'EEEE, LLL d'}}</h6>
-        <h6 class="bugs__answers">{{ bug.num_answers }} answer(s)</h6>
-        <h6 class="bugs__answers">{{ bug.num_likes }} like(s)</h6>
+        <h6 class="bugs__created">{{ bug.bug_created | timeAgo }}</h6>
+        <h6 class="bugs__answers u-color-grey">{{ bug.num_answers }} answer(s)</h6>
+        <h6 class="bugs__answers u-color-grey">{{ bug.num_likes }} like(s)</h6>
       </div>
     </a>
   </div>

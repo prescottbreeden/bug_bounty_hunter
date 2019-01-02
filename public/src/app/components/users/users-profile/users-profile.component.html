@@ -20,11 +20,11 @@
         </div>
         <div class="profile__row">
           <div class="profile__item">Created:</div>
-          <div class="profile__item">{{ user.created_at | date: 'longDate' }} </div>
+          <div class="profile__item">{{ user.created_at | timeAgo }} </div>
         </div>
         <div class="profile__row">
           <div class="profile__item">Updated:</div>
-          <div class="profile__item">{{ user.updated_at | date: 'longDate' }} </div>
+          <div class="profile__item">{{ user.updated_at | timeAgo }} </div>
         </div>
       </div>
       <div class="profile__info">

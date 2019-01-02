@@ -9,7 +9,10 @@
       </svg>
       <h2 class="bug-view__error">{{ bug.error }}</h2>
     </div>
-    <h5 class="bug-view__created">Posted: {{ bug.bug_created | date: 'shortDate' }}</h5>
+    <h5 class="bug-view__created"> 
+      <span class="u-color-grey">posted</span>
+      {{ bug.bug_created | timeAgo }}
+    </h5>
   </div>
   <div 
     [innerHtml]="bug.traceback"

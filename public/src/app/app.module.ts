@@ -10,6 +10,7 @@ import { BugService } from './common/services/bug.service';
 import { AuthService } from './common/services/auth.service';
 import { AppComponent } from './app.component';
 import { NavComponent } from './components/util/nav/nav.component';
+import { FooterComponent } from './components/util/footer/footer.component';
 import { RegisterComponent } from './components/users/users-reg/register.component';
 import { BugsShowComponent } from './components/bugs/bugs-show/bugs-show.component';
 import { BugsCreateComponent } from './components/bugs/bugs-create/bugs-create.component';
@@ -20,13 +21,14 @@ import { UniqueEmailValidatorDirective } from './common/directives/unique-email-
 import { UsersProfileComponent } from './components/users/users-profile/users-profile.component';
 import { FilterPipe } from './common/filter.pipe';
 import { PrettyPrintPipe } from './common/prettyprint.pipe';
-import { FooterComponent } from './components/util/footer/footer.component';
+import { TimeAgoPipe } from 'time-ago-pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
     NavComponent,
+    FooterComponent,
     BugsShowComponent,
     BugsCreateComponent,
     BugsViewComponent,
@@ -36,7 +38,7 @@ import { FooterComponent } from './components/util/footer/footer.component';
     UsersProfileComponent,
     FilterPipe,
     PrettyPrintPipe,
-    FooterComponent,
+    TimeAgoPipe,
   ],
   imports: [
     BrowserModule,

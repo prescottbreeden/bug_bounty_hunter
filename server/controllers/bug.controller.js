@@ -22,7 +22,8 @@ LEFT JOIN answers AS a
        ON b.bug_id = a.bug_id 
 LEFT JOIN bugs_likes AS bl
        ON b.bug_id = bl.bug_id
- GROUP BY bug_id`, 
+ GROUP BY b.bug_id
+ ORDER BY b.bug_created DESC`, 
 
       function(error, results, fields) {
       if(error) {
@@ -53,7 +54,8 @@ LEFT JOIN bugs_likes AS bl
      FROM bugs AS b 
 LEFT JOIN answers AS a 
        ON b.bug_id = a.bug_id 
-    WHERE b.bug_id = ?`, [req.params.id], 
+    WHERE b.bug_id = ?
+ ORDER BY a.answer_created DESC`, [req.params.id], 
    
       function(error, results, fields) {
       if(error) {

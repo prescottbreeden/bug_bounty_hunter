@@ -34,11 +34,6 @@
     animation-timing-function: linear;
 }
 
-@keyframes loader {
-    0%{
-        transform: rotate(0deg);
-    }
-    100%{
-        transform: rotate(360deg)
-    }
+.u-color-grey {
+  color: $color-light-grey !important;
 }
