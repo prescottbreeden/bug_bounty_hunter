@@ -5,7 +5,7 @@
     type="text" 
     class="search__search-bar">
 </div>
-<div class="bugs">
+<div *ngIf="bugs.length > 0" class="bugs">
   <div *ngFor="let bug of bugs | filter : searchText" class="bugs__item">
     <a href="/bugs/{{bug.bug_id}}" class="bugs__link">
       <h4 class="bugs__error">{{ bug.error }}</h4>
@@ -15,4 +15,7 @@
       </div>
     </a>
   </div>
+</div>
+<div *ngIf="!bugs.length">
+  This app has no bugs. Click 'Submit Bug' to create a new bug!
 </div>

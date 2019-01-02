@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/common/services/auth.service';
 import { BugService } from 'src/app/common/services/bug.service';
 import { BugModel, MapBugData, MapBugDatum } from 'src/app/common/models/Bug';
 import { NewAnswer, MapAnswerData, AnswerModel, MapAnswerDatum } from 'src/app/common/models/Answer';
+import { jsonDecode, jsonEncode, buildBugObject } from 'src/app/common/models/Helpers';
 
 @Component({
   selector: 'app-bugs-view',
@@ -11,14 +12,7 @@ import { NewAnswer, MapAnswerData, AnswerModel, MapAnswerDatum } from 'src/app/c
 })
 export class BugsViewComponent implements OnInit {
 
-  answers: AnswerModel[];
-  showAnswerForm = false;
-
-  newAnswer: NewAnswer = {
-    bug_id: '',
-    answered_by: '',
-    answer_content: ''
-  };
+  showAnswerForm: Boolean = false;
 
   bug: BugModel = {
     bug_id: '',
@@ -29,6 +23,23 @@ export class BugsViewComponent implements OnInit {
     bug_created: '',
     bug_updated: '',
     num_answers: ''
+  };
+
+  answers: AnswerModel[] = [
+    { 
+      answer_id: '',
+      bug_id: '',
+      answered_by: '',
+      answer_content: '',
+      answer_created: '',
+      answer_updated: ''
+    }
+  ];
+
+  newAnswer: NewAnswer = {
+    bug_id: '',
+    answered_by: '',
+    answer_content: ''
   };
 
   constructor(
@@ -46,9 +57,9 @@ export class BugsViewComponent implements OnInit {
       this.route.params.subscribe((params: Params) => {
         this.bugService.getBugById(params['id'])
           .subscribe(res => {
-            console.log(res);
-            this.bug = MapBugDatum(res[0]);
-            this.answers = MapAnswerData(res);
+            const DATA = buildBugObject(res);
+            this.bug = DATA.bug;
+            this.answers = DATA.answers;
             this.newAnswer.answered_by = token.currentUser.user_id;
             this.newAnswer.bug_id = this.bug.bug_id;
           });
@@ -57,19 +68,19 @@ export class BugsViewComponent implements OnInit {
   }
   
   onSubmitAnswer() {
+    this.newAnswer.answer_content = jsonEncode(this.newAnswer.answer_content);
     this.bugService.addAnswer(this.newAnswer).subscribe(res => {
-      console.log(res['insertId']);
       this.bugService.getAnswer(res['insertId'])
         .subscribe(res => {
-          this.answers = [ ...this.answers, MapAnswerDatum(res[0])];
-          console.log(this.answers);
+          let addedAnswer = MapAnswerDatum(res[0]);
+          addedAnswer.answer_content = jsonDecode(addedAnswer.answer_content);
+          this.answers = [ ...this.answers, addedAnswer];
         })
     });
     this.newAnswer.answer_content = '';
   }
 
   toggleForm() {
-    console.log('clicked');
     this.showAnswerForm = !this.showAnswerForm;
   }
 

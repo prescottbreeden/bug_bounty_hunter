@@ -19,29 +19,43 @@
           class="bug-create__form--input" 
           id="title">
       </div>
+      <div class="u-spacer"></div>
       <div class="bug-create__form--row">
         <label for="traceback" class="bug-create__form--label">Traceback</label>
       </div>
       <div class="bug-create__form--row">
-        <textarea 
-          [(ngModel)]="newBug.traceback"
-          #traceback="ngModel"
-          name="newBug.traceback"
-          type="text" 
-          class="bug-create__form--textbox" 
-          id="traceback"></textarea>
+          <quill-editor 
+            [(ngModel)]="newBug.traceback"
+            #traceback="ngModel"
+            name="newBug.traceback"
+            type="text" 
+            [style]="{ 'border-radius': '5px', 'height': '20rem' }"
+            id="traceback">
+            <div quill-editor-toolbar>
+              <span class="ql-formats">
+                <button class="ql-code-block" [title]="'Code Block'"></button>
+              </span>
+            </div>
+          </quill-editor>
       </div>
+      <div class="u-spacer"></div>
       <div class="bug-create__form--row">
         <label for="message" class="bug-create__form--label">Message</label>
       </div>
       <div class="bug-create__form--row">
-        <textarea 
-          [(ngModel)]="newBug.message"
-          #message="ngModel"
-          name="newBug.message"
-          type="text" 
-          class="bug-create__form--textbox" 
-          id="message"></textarea>
+          <quill-editor 
+            [(ngModel)]="newBug.message"
+            #message="ngModel"
+            name="newBug.message"
+            type="text" 
+            [style]="{ 'border-radius': '5px', 'height': '20rem' }"
+            id="traceback">
+            <div quill-editor-toolbar>
+              <span class="ql-formats">
+                <button class="ql-code-block" [title]="'Code Block'"></button>
+              </span>
+            </div>
+          </quill-editor>
       </div>
       <button class="bug-create__btn">Submit New Bug</button>
     </form>
@@ -99,3 +113,5 @@
     </div>
   </div>
 </div>
+<div [innerHtml]="newBug.traceback"></div>
+<div [innerHtml]="newBug.message"></div>

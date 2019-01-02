@@ -38,7 +38,8 @@
   box-sizing: inherit; }
 
 body {
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  margin-top: 18rem; }
 
 button::-moz-focus-inner {
   border: 0; }
@@ -69,6 +70,9 @@ body {
   padding-top: 2rem;
   padding-bottom: 2rem;
   margin-bottom: 3rem; }
+
+.u-spacer {
+  margin-top: 2rem; }
 
 .row {
   max-width: 114rem;
@@ -118,9 +122,13 @@ body {
     width: calc(3 * ((100% - 3 * 6rem) / 4) + 2 * 6rem); }
 
 .header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   display: flex;
   align-items: center;
-  background-color: rgba(57, 62, 70, 0.8);
+  background-color: #60646b;
   height: 12rem; }
   .header__title {
     font-family: Jedi;
@@ -135,6 +143,11 @@ body {
     margin-left: 1rem; }
 
 .nav {
+  position: fixed;
+  top: 12rem;
+  left: 0;
+  width: 100%;
+  height: 6rem;
   display: flex;
   justify-content: space-around;
   background-color: #393e46; }
@@ -184,22 +197,21 @@ body {
       border-radius: 5px;
       padding: 1rem;
       margin: 1rem 0;
-      width: 90%; }
+      width: 100%; }
     .bug-create__form--textbox {
       padding: 1rem;
       margin: 1rem 0;
       border-radius: 5px;
       border-style: groove;
       resize: none;
-      width: 90%;
       height: 20rem; }
   .bug-create__btn {
-    width: 90%;
+    width: 100%;
     padding: 2rem;
     font-size: 2rem;
     border: none;
     border-radius: 5px;
-    border: 1px solid rgba(57, 62, 70, 0.5);
+    border: 1px solid #60646b;
     background-color: #00ADB5;
     color: #eee; }
     .bug-create__btn:hover {
@@ -274,7 +286,7 @@ body {
     white-space: pre-line;
     font-size: 2rem;
     padding: 2rem;
-    border: 1px solid rgba(57, 62, 70, 0.6);
+    border: 1px solid #60646b;
     margin-top: 2rem; }
 
 .form {
@@ -300,7 +312,6 @@ body {
     justify-content: space-between;
     align-items: flex-start; }
   .answers__content {
-    white-space: pre-line;
     font-size: 2rem; }
   .answers__info {
     text-align: right;
@@ -332,7 +343,7 @@ body {
     .reg__form--input.ng-invalid.ng-dirty {
       border-bottom: 3px solid #FC3C3C; }
     .reg__form--input.ng-pristine {
-      border-bottom: 3px solid green; }
+      border-bottom: 3px solid #00ADB5; }
     .reg__form--row {
       margin-top: 1rem; }
     .reg__form--input {
@@ -347,7 +358,7 @@ body {
       border-bottom: 3px solid transparent;
       transition: border color .3s; }
       .reg__form--input:valid {
-        border-bottom: 3px solid green; }
+        border-bottom: 3px solid #00ADB5; }
       .reg__form--input:focus {
         outline: none; }
       .reg__form--input::-webkit-input-placeholder {

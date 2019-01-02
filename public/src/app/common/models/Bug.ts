@@ -46,3 +46,4 @@ export function MapBugData(data): BugModel[] {
   });
   return bugs;
 }
+

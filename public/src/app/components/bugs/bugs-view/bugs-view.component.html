@@ -1,11 +1,13 @@
 <section class="bug-view">
   <h2 class="bug-view__error">{{ bug.error }}</h2>
-  <p class="bug-view__traceback">
-    {{bug.traceback}}
-  </p>
-  <p class="bug-view__message">
-    {{bug.message}}
-  </p>
+  <div 
+    [innerHtml]="bug.traceback"
+    class="bug-view__traceback">
+  </div>
+  <div 
+    [innerHtml]="bug.message"
+    class="bug-view__message">
+  </div>
 </section>
 <div class="u-divider">
   <button (click)="toggleForm()" *ngIf="!showAnswerForm">Add Answer</button>
@@ -35,23 +37,15 @@
             [(ngModel)]="newAnswer.answer_content"
             #content="ngModel"
             name="newAnswer.answer_content"
-            id="content"
             [style]="{height: '250px'}"
-            >
+            id="content">
             <div quill-editor-toolbar>
-            <span class="ql-formats">
-              <button class="ql-bold" [title]="'Bold'"></button>
-              <button class="ql-italic" [title]="'Italic'"></button>
-            </span>
-            <span class="ql-formats">
-              <select class="ql-align" [title]="'Aligment'">
-                <option selected></option>
-                <option value="center"></option>
-                <option value="right"></option>
-                <option value="justify"></option>
-              </select>
-            </span>
-          </div>
+              <span class="ql-formats">
+                <button class="ql-bold" [title]="'Bold'"></button>
+                <button class="ql-italic" [title]="'Italic'"></button>
+                <button class="ql-code-block" [title]="'Code Block'"></button>
+              </span>
+            </div>
           </quill-editor>
 
         </div>
@@ -84,16 +78,17 @@
     </div>
   </div>
 </div>
-<div class="answers">
+<div *ngIf="!answers[0].answer_content === ''" >
   <div *ngFor="let answer of answers" class="answers__row">
-    <div class="answers__content">
-      {{ answer.answer_content }}
-    </div>
+    <div 
+      [innerHtml]="answer.answer_content"
+      class="answers__content"></div>
     <div class="answers__info">
       <div *ngIf="isAdmin" class="answered_by">{{ answer.answered_by }}</div>
-        
       {{ answer.answer_created | date:'EEEE, LLL dd'}}
     </div>
   </div>
+</div>   
+<div *ngIf="answers[0].answer_content === ''" class="answers">
+  There are currently no suggested solutions for this bug. You should be the first!
 </div>
-{{ newAnswer | json }}

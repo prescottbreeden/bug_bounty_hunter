@@ -12,7 +12,7 @@
       border-radius: 5px;
       padding: 1rem;
       margin: 1rem 0;
-      width: 90%;
+      width: 100%;
     }
 
     &--textbox {
@@ -21,23 +21,17 @@
       border-radius: 5px;
       border-style: groove;
       resize: none;
-      width: 90%;
       height: 20rem;
     }
-
-    &--label {
-
-    }
-
   }
 
   &__btn {
-    width: 90%;
+    width: 100%;
     padding: 2rem;
     font-size: 2rem;
     border: none;
     border-radius: $default-border-radius;
-    border: 1px solid rgba($color-dark, .5);
+    border: 1px solid $color-light-grey;
     background-color: $color-blue;
     color: $color-white;
 

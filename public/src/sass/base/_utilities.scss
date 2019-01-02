@@ -1,7 +1,11 @@
 .u-divider {
-  border-top: 1px solid $color-dark;
-  border-bottom: 1px solid $color-dark;
+  border-top: 1px solid $color-dark-grey;
+  border-bottom: 1px solid $color-dark-grey;
   padding-top: 2rem;
   padding-bottom: 2rem;
   margin-bottom: $margin-bottom;
+}
+
+.u-spacer {
+  margin-top: 2rem;
 }
