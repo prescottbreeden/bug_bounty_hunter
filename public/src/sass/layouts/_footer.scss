@@ -1,0 +1,18 @@
+.footer {
+  padding: 3rem;
+  height: 18rem;
+  background-image: linear-gradient(
+    to bottom, 
+    $color-dark-grey, 
+    $color-light-grey
+  );
+  color: $color-white;
+
+  &__title {
+    text-align: center;
+    font-size: 2.5rem;
+  }
+  &__text {
+    text-align: center;
+  }
+}

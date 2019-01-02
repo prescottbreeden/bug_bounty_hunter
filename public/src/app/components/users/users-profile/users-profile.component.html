@@ -47,6 +47,11 @@
       </div>
     </div>
   </div>
-  <button [disabled]="true" class="profile__btn">Edit Profile</button>
+  <button [disabled]="true" class="profile__btn">
+    <svg class="profile__btn--icon">
+      <use xlink:href="assets/img/icons/sprite.svg#icon-pencil"></use>
+    </svg>
+    <span class="profile__btn--text">Edit Profile</span>
+  </button>
 
 </div>

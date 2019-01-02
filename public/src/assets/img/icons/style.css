@@ -19,6 +19,14 @@ Single-colored icons can be modified like so:
   width: 0.9285714285714285em;
 }
 
+.icon-info-circle {
+  width: 0.8571428571428571em;
+}
+
+.icon-info {
+  width: 0.3571428571428571em;
+}
+
 .icon-stack-overflow {
   width: 0.8571428571428571em;
 }

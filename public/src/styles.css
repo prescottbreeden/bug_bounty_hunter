@@ -79,6 +79,17 @@ body {
 .u-spacer {
   margin-top: 2rem; }
 
+.footer {
+  padding: 3rem;
+  height: 18rem;
+  background-image: linear-gradient(to bottom, #393e46, #60646b);
+  color: #eee; }
+  .footer__title {
+    text-align: center;
+    font-size: 2.5rem; }
+  .footer__text {
+    text-align: center; }
+
 .row {
   max-width: 114rem;
   margin: 0 auto;
@@ -133,7 +144,7 @@ body {
   width: 100%;
   display: flex;
   align-items: center;
-  background-color: #60646b;
+  background-image: linear-gradient(to bottom, #60646b, #393e46);
   height: 12rem; }
   .header__title {
     font-family: Jedi;
@@ -359,7 +370,9 @@ body {
 .profile__btn {
   font-family: Lato;
   font-size: 2rem;
-  display: block;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   padding: 1rem 2.5rem;
   background-color: #00ADB5;
   color: #eee;
@@ -372,8 +385,17 @@ body {
     background-color: #FC3C3C; }
   .profile__btn:disabled {
     cursor: not-allowed; }
+  .profile__btn--icon {
+    height: 3rem;
+    width: 3rem;
+    fill: #eee; }
+  .profile__btn--text {
+    margin-left: 1rem;
+    line-height: 100%; }
 
 .reg {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
   box-sizing: border-box;
   width: 100%;
   display: inline-block; }
@@ -443,15 +465,24 @@ body {
 
 .search {
   font-size: 2.5rem;
-  margin: 1rem 1rem;
+  margin: 1rem;
   margin-bottom: 3rem;
-  display: flex; }
+  display: flex;
+  position: relative; }
   .search__search-bar {
     width: 80%;
     padding: 1rem;
     font-size: 2rem;
     border-style: ridge;
     border-radius: 0 5px 5px 0; }
+  .search__icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 5rem;
+    fill: rgba(96, 100, 107, 0.5);
+    padding: 1rem; }
   .search__btn {
     background-color: #00ADB5;
     color: #eee;

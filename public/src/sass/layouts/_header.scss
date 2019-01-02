@@ -6,7 +6,12 @@
   display: flex;
   // justify-content: space-between;
   align-items: center;
-  background-color: $color-light-grey;
+  // background-color: $color-light-grey;
+  background-image: linear-gradient(
+    to bottom, 
+    $color-light-grey,
+    $color-dark-grey
+  );
   height: 12rem;
   // padding: 2rem 3rem;
 

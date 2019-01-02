@@ -1,8 +1,9 @@
 .search {
   font-size: 2.5rem;
-  margin: 1rem 1rem;
+  margin: 1rem;
   margin-bottom: 3rem;
   display: flex;
+  position: relative;
 
   &__search-bar {
     width: 80%;
@@ -10,6 +11,16 @@
     font-size: 2rem;
     border-style: ridge;
     border-radius: 0 5px 5px 0;
+  }
+
+  &__icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 5rem;
+    fill: rgba($color-light-grey, .5);
+    padding: 1rem;
   }
 
   &__btn {

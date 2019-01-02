@@ -7,22 +7,7 @@
 <nav 
   class="nav">
 
-  <button 
-    *ngIf="!loggedIn"
-    [routerLink]="['/about']" 
-    routerLinkActive="active-link"
-    routerLinkActiveOptions="{exact: true}"
-    class="nav__link">About
-  </button>
-  <button 
-    *ngIf="!loggedIn"
-    [routerLink]="['/']" 
-    routerLinkActive="active-link"
-    routerLinkActiveOptions="{exact: true}"
-    class="nav__link">Login
-  </button>
   <div 
-    *ngIf="loggedIn"
     [routerLink]="['/bugs']" 
     routerLinkActive="active-link"
     routerLinkActiveOptions="{exact: true}"
@@ -30,10 +15,9 @@
     <svg class="nav__icon">
       <use xlink:href="assets/img/icons/sprite.svg#icon-stack-overflow"></use>
     </svg>
-    <span class="nav__text">Bugs</span>
+    <span class="nav__text">Find Bugs</span>
   </div>
   <div 
-    *ngIf="loggedIn"
     [routerLink]="['/new-bug']" 
     routerLinkActive="active-link"
     routerLinkActiveOptions="{exact: true}"
@@ -44,7 +28,6 @@
     <span class="nav__text">Submit Bug</span>
   </div>
   <div 
-    *ngIf="loggedIn"
     [routerLink]="['/profile']" 
     routerLinkActive="active-link"
     routerLinkActiveOptions="{exact: true}"
@@ -52,15 +35,26 @@
     <svg class="nav__icon">
       <use xlink:href="assets/img/icons/sprite.svg#icon-user-circle-o"></use>
     </svg>
-    <span class="nav__text">Profile</span>
+    <span class="nav__text">View Profile</span>
   </div>
   <div 
     *ngIf="loggedIn"
     (click)="logout()" 
     class="nav__link">
     <svg class="nav__icon">
-      <use xlink:href="assets/img/icons/sprite.svg#icon-bin"></use>
+      <use xlink:href="assets/img/icons/sprite.svg#icon-exit"></use>
     </svg>
     <span class="nav__text">Logout</span>
+  </div>
+  <div 
+    *ngIf="!loggedIn"
+    [routerLink]="['/']" 
+    routerLinkActive="active-link"
+    routerLinkActiveOptions="{exact: true}"
+    class="nav__link">
+    <svg class="nav__icon">
+      <use xlink:href="assets/img/icons/sprite.svg#icon-enter"></use>
+    </svg>
+    <span class="nav__text">Login</span>
   </div>
 </nav>

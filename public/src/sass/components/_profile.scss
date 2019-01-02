@@ -29,7 +29,9 @@
   &__btn {
     font-family: Lato;
     font-size: 2rem;
-    display: block;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     padding: 1rem 2.5rem;
     background-color: $color-blue;
     color: $color-white;
@@ -45,6 +47,16 @@
 
     &:disabled {
       cursor: not-allowed;
+    }
+
+    &--icon {
+      height: 3rem;
+      width: 3rem;
+      fill: $color-white;
+    }
+    &--text {
+      margin-left: 1rem;
+      line-height: 100%;
     }
   }
 }

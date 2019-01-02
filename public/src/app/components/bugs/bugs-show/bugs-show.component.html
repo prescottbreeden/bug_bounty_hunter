@@ -1,10 +1,13 @@
 <h2 class="u-header--primary">Bugs Dashboard</h2>
 <div class="search">
-  <button class="search__btn">Search</button>
+  <button class="search__btn">Live Search</button>
   <input 
     [(ngModel)]="searchText"
     type="text" 
     class="search__search-bar">
+  <svg class="search__icon">
+    <use xlink:href="assets/img/icons/sprite.svg#icon-search"></use>
+  </svg>
 </div>
 <div *ngIf="bugs.length > 0" class="bugs">
   <div *ngFor="let bug of bugs | filter : searchText" class="bugs__item">
@@ -20,4 +23,9 @@
 <div *ngIf="!bugs.length">
   This app has no bugs. Click 'Submit Bug' to create a new bug!
 </div>
-<button [routerLink]="['/new-bug']" class="profile__btn">Submit New Bug</button>
+<button [routerLink]="['/new-bug']" class="profile__btn">
+  <svg class="profile__btn--icon">
+    <use xlink:href="assets/img/icons/sprite.svg#icon-bug"></use>
+  </svg>
+  <span class="profile__btn--text">Submit New Bug</span>
+</button>
