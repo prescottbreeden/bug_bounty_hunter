@@ -24,6 +24,7 @@ CREATE TABLE bugs (
   error       VARCHAR(255)  NOT NULL,
   traceback   TEXT          NOT NULL,
   message     TEXT          NOT NULL,
+  view_count  INTEGER       NOT NULL  DEFAULT 0,
   bug_created TIMESTAMP     NOT NULL  DEFAULT NOW(),
   bug_updated TIMESTAMP     NOT NULL  DEFAULT NOW()   ON UPDATE NOW(),
 
@@ -56,18 +57,6 @@ CREATE TABLE bugs_likes (
   
   FOREIGN KEY (bug_id)
     REFERENCES bugs (bug_id)
-);
-
-CREATE TABLE answers_likes (
-  answer_like_id  INTEGER     NOT NULL  AUTO_INCREMENT    PRIMARY KEY,
-  user_id           INTEGER     NOT NULL,
-  answer_id         INTEGER     NOT NULL,
-
-  FOREIGN KEY (user_id)
-    REFERENCES users (user_id),
-  
-  FOREIGN KEY (answer_id)
-    REFERENCES answers (answer_id)
 );
 
 CREATE TABLE bugs_tags (

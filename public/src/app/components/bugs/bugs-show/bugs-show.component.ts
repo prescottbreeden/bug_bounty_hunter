@@ -28,6 +28,7 @@ export class BugsShowComponent implements OnInit {
       this.bugService.getBugs()
         .subscribe(results => {
           this.bugs = MapBugData(results);
+          console.log(this.bugs);
         })
     }
   }

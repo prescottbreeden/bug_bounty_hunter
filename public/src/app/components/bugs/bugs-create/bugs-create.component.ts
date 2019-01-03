@@ -4,7 +4,6 @@ import { AuthService } from 'src/app/common/services/auth.service';
 import { BugService } from 'src/app/common/services/bug.service';
 import { Router } from '@angular/router';
 import { UserToken } from 'src/app/common/models/User';
-import { jsonEncode } from 'src/app/common/models/Helpers';
 
 @Component({
   selector: 'app-bugs-create',
@@ -36,8 +35,8 @@ export class BugsCreateComponent implements OnInit {
   }
 
   onSubmitBug() {
-    this.newBug.traceback = jsonEncode(this.newBug.traceback);
-    this.newBug.message = jsonEncode(this.newBug.message);
+    this.newBug.traceback = JSON.stringify(this.newBug.traceback);
+    this.newBug.message = JSON.stringify(this.newBug.message);
     this.bugService.createBug(this.newBug)
       .subscribe(res => {
         console.log('new bug created: ', res);

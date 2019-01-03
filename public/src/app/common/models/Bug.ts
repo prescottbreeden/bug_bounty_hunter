@@ -4,6 +4,7 @@ export interface BugModel {
   error: string;
   traceback: string;
   message: string;
+  view_count: string | number;
   bug_created: string;
   bug_updated: string;
   num_answers: string | number;
@@ -24,6 +25,7 @@ export function MapBugDatum(data): BugModel {
     error: data['error'],
     traceback: data['traceback'],
     message: data['message'],
+    view_count: data['view_count'],
     bug_created: data['bug_created'],
     bug_updated: data['bug_updated'],
     num_answers: data['num_answers'],
@@ -40,6 +42,7 @@ export function MapBugData(data): BugModel[] {
       error: datum['error'],
       traceback: datum['traceback'],
       message: datum['message'],
+      view_count: datum['view_count'],
       bug_created: datum['bug_created'],
       bug_updated: datum['bug_updated'],
       num_answers: datum['num_answers'],

@@ -82,8 +82,13 @@ USE bug_hunter;
 --       AND bl.user_id = 1
 -- ;
 
-   SELECT IF(answer_like_id, 'true', 'false') AS likes
-     FROM answers_likes
-    WHERE answer_id = 1
-      AND user_id = 2
-;
+--    SELECT IF(answer_like_id, 'true', 'false') AS likes
+--      FROM answers_likes
+--     WHERE answer_id = 1
+--       AND user_id = 2
+-- ;
+
+--    UPDATE bugs 
+--       SET view_count = view_count + 1 
+--     WHERE bug_id = ?
+-- ;

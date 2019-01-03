@@ -15,6 +15,12 @@
       display: flex;
       align-items: center;
     }
+
+    &--col {
+      min-width: 15%;
+      display: flex;
+      flex-direction: column;
+    }
   }
 
   &__icon {
@@ -23,6 +29,8 @@
       display: inline-block;
       height: 3rem;
       width: 3rem;
+      min-height: 3rem;
+      min-width: 3rem;
 
       &:hover {
         cursor: pointer;
@@ -34,6 +42,8 @@
       display: inline-block;
       height: 3rem;
       width: 3rem;
+      min-height: 3rem;
+      min-width: 3rem;
       fill: $color-red;
 
       &:hover {
@@ -48,16 +58,25 @@
     margin-left: 2rem;
   }
 
+  &__created {
+    text-align: right;
+    min-width: 10%;
+    margin-left: 2rem;
+    font-size: 1.2rem;
+  }
+
   &__traceback {
-    white-space: pre-line;
     font-size: 2rem;
     background-color: $color-off-white;
     padding: 2rem;
     border-radius: $default-border-radius;
+    
+    .ql-syntax {
+      color: red;
+    }
   }
 
   &__message {
-    white-space: pre-line;
     font-size: 2rem;
     padding: 2rem;
     border: 1px solid $color-light-grey;

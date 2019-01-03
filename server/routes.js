@@ -29,6 +29,4 @@ module.exports = function(app) {
     .get('/api/bugs/likes/:bug_id/:user_id', bug.getBugLikes)
     .post('/api/bugs/likes', bug.likeBug)
 
-    .get('/api/answers/likes/:answer_id/:user_id', bug.isLiked)
-    // .post('/api/answers/likes', bug.likeBug)
 }

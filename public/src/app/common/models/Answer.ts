@@ -1,5 +1,3 @@
-import { jsonDecode } from './Helpers';
-
 export interface AnswerModel {
   answer_id: string | number;
   bug_id: string | number;
@@ -7,7 +5,6 @@ export interface AnswerModel {
   answer_content: string;
   answer_created: string;
   answer_updated: string;
-  user_likes: boolean;
 }
 
 export interface NewAnswer {
@@ -23,8 +20,7 @@ export function MapAnswerDatum(data): AnswerModel {
     answered_by: data['answered_by'],
     answer_content: data['answer_content'],
     answer_created: data['answer_created'],
-    answer_updated: data['answer_updated'],
-    user_likes: false
+    answer_updated: data['answer_updated']
   }
 }
 
@@ -38,10 +34,9 @@ export function MapAnswerData(data): AnswerModel[] {
       answered_by: datum['answered_by'],
       answer_content: datum['answer_content'],
       answer_created: datum['answer_created'],
-      answer_updated: datum['answer_updated'],
-      user_likes: false
+      answer_updated: datum['answer_updated']
     }
-    answer.answer_content = jsonDecode(answer.answer_content);
+    answer.answer_content = JSON.parse(answer.answer_content);
     answers.push(answer);
   });
   return answers;

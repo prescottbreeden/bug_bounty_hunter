@@ -50,6 +50,18 @@ body {
 button::-moz-focus-inner {
   border: 0; }
 
+pre {
+  white-space: pre-wrap;
+  /* Since CSS 2.1 */
+  white-space: -moz-pre-wrap;
+  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;
+  /* Opera 4-6 */
+  white-space: -o-pre-wrap;
+  /* Opera 7 */
+  word-wrap: break-word;
+  /* Internet Explorer 5.5+ */ }
+
 @font-face {
   font-family: Jedi;
   src: url("assets/font/STJEDISE.TTF"); }
@@ -308,17 +320,22 @@ body {
       background-color: #00ADB5;
       color: #eee; }
   .bugs__item {
-    margin: 1rem 1rem;
+    margin: 1rem;
     border: 1px solid #00ADB5;
     transition: all .1s;
     font-size: 2rem; }
   .bugs__info {
     min-width: 10%;
-    font-size: 2rem; }
+    font-size: 2rem;
+    color: inherit; }
+    .bugs__info--row {
+      display: flex;
+      justify-content: space-between; }
+    .bugs__info--cluster {
+      display: flex; }
   .bugs__created {
-    color: inherit; }
-  .bugs__answers {
-    color: inherit; }
+    margin-bottom: .5rem;
+    text-align: right; }
 
 .bug-view {
   margin-bottom: 3rem; }
@@ -334,10 +351,16 @@ body {
     .bug-view__row--cluster {
       display: flex;
       align-items: center; }
+    .bug-view__row--col {
+      min-width: 15%;
+      display: flex;
+      flex-direction: column; }
   .bug-view__icon--unliked {
     display: inline-block;
     height: 3rem;
-    width: 3rem; }
+    width: 3rem;
+    min-height: 3rem;
+    min-width: 3rem; }
     .bug-view__icon--unliked:hover {
       cursor: pointer;
       fill: #FC3C3C; }
@@ -345,20 +368,27 @@ body {
     display: inline-block;
     height: 3rem;
     width: 3rem;
+    min-height: 3rem;
+    min-width: 3rem;
     fill: #FC3C3C; }
     .bug-view__icon--liked:hover {
       cursor: pointer; }
   .bug-view__error {
     display: inline-block;
     margin-left: 2rem; }
+  .bug-view__created {
+    text-align: right;
+    min-width: 10%;
+    margin-left: 2rem;
+    font-size: 1.2rem; }
   .bug-view__traceback {
-    white-space: pre-line;
     font-size: 2rem;
     background-color: #FFF4E0;
     padding: 2rem;
     border-radius: 5px; }
+    .bug-view__traceback .ql-syntax {
+      color: red; }
   .bug-view__message {
-    white-space: pre-line;
     font-size: 2rem;
     padding: 2rem;
     border: 1px solid #60646b;

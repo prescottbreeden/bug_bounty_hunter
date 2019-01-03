@@ -16,7 +16,7 @@
   }
 
   &__item {
-    margin: 1rem 1rem;
+    margin: 1rem;
     border: 1px solid $color-blue;
     transition: all .1s;
     font-size: 2rem;
@@ -25,16 +25,30 @@
   &__info {
     min-width: 10%;
     font-size: 2rem;
+    color: inherit;
+
+    &--row {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &--item {
+
+    }
+
+    &--cluster {
+      display: flex;
+    }
   }
 
   &__created {
-    color: inherit;
+    margin-bottom: .5rem;
+    text-align: right;
     // color: var(--color-blue);
     // color: var(--color-black);
   }
 
   &__answers {
     // color: var(--color-yellow);
-    color: inherit;
   }
 }

@@ -9,10 +9,17 @@
       </svg>
       <h2 class="bug-view__error">{{ bug.error }}</h2>
     </div>
-    <h5 class="bug-view__created"> 
-      <span class="u-color-grey">posted</span>
-      {{ bug.bug_created | timeAgo }}
-    </h5>
+    <div class="bug-view__row--col">
+      <h5 class="bug-view__created"> 
+        <span class="u-color-grey">posted</span>
+        {{ bug.bug_created | timeAgo }}
+      </h5>
+      
+      <h5 class="bug-view__created"> 
+        <span class="u-color-grey">by</span>
+        {{ bug.posted_by }}
+      </h5>
+    </div>
   </div>
   <div 
     [innerHtml]="bug.traceback"
@@ -92,24 +99,18 @@
     </div>
   </div>
 </div>
-  <div *ngFor="let answer of answers" class="answers__row">
-    <div class="answers__row--cluster">
-      <svg *ngIf="answer.user_likes" class="answers__icon--liked">
-        <use xlink:href="assets/img/icons/sprite.svg#icon-heart"></use>
-      </svg>
-      <svg *ngIf="!answer.user_likes" (click)="likeAnswer()" class="answers__icon--unliked">
-        <use xlink:href="assets/img/icons/sprite.svg#icon-heart-o"></use>
-      </svg>
+  <div *ngIf="answers[0] && answers[0].answer_content !== null" class="answers">
+    <div *ngFor="let answer of answers" class="answers__row">
       <div 
         [innerHtml]="answer['answer_content']"
         class="answers__content">
       </div>
-    </div>
-    <div class="answers__info">
-      <div *ngIf="isAdmin" class="answered_by">{{ answer.answered_by }}</div>
-      {{ answer.answer_created | timeAgo }}
+      <div class="answers__info">
+        <p> <span class="u-color-grey">posted</span> {{ answer.answer_created | timeAgo }} </p>
+        <div class="answered_by"> {{ answer.answered_by }} </div>
+      </div>
     </div>
   </div>
-<div *ngIf="answers[0].answer_content === null" class="answers">
+<div *ngIf="answers[0] && answers[0].answer_content === null" class="answers">
   There are currently no suggested solutions for this bug. You should be the first!
 </div>

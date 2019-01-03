@@ -10,10 +10,11 @@ module.exports = {
     db_connection.query(`
 
    SELECT b.bug_id, 
-          posted_by, 
+          CONCAT(u.first_name, ' ', u.last_name) AS posted_by, 
           error, 
           traceback, 
           message, 
+          view_count,
           bug_created, 
           COUNT(a.bug_id) AS num_answers,
           COUNT(bl.bug_like_id) AS num_likes
@@ -22,6 +23,8 @@ LEFT JOIN answers AS a
        ON b.bug_id = a.bug_id 
 LEFT JOIN bugs_likes AS bl
        ON b.bug_id = bl.bug_id
+LEFT JOIN users AS u
+       ON b.posted_by = u.user_id
  GROUP BY b.bug_id
  ORDER BY b.bug_created DESC`, 
 
@@ -37,23 +40,29 @@ LEFT JOIN bugs_likes AS bl
   },
 
   getById: (req, res) => {
+    incrementCounter(req.params.id);
     db_connection.query(`
     
    SELECT b.bug_id, 
-          posted_by, 
+          CONCAT(u.first_name, ' ', u.last_name) AS posted_by,
           error, 
           traceback, 
           message, 
+          view_count,
           bug_created, 
           bug_updated, 
           answer_id,
-          answered_by,
+          CONCAT(u.first_name, ' ', u.last_name) AS answered_by,
           answer_content,
           answer_created,
           answer_updated
      FROM bugs AS b 
 LEFT JOIN answers AS a 
        ON b.bug_id = a.bug_id 
+LEFT JOIN users AS u 
+       ON b.posted_by = u.user_id 
+LEFT JOIN users AS u2
+       ON a.answered_by = u2.user_id
     WHERE b.bug_id = ?`, [req.params.id], 
    
       function(error, results, fields) {
@@ -128,31 +137,6 @@ LEFT JOIN answers AS a
     });
   },
 
-  likeAnswer: (req, res) => {
-
-  },
-
-  isLiked: (req, res) => {
-    
-    db_connection.query(`
-
-     SELECT IF(answer_like_id, 'true', 'false') AS likes
-       FROM answers_likes
-      WHERE answer_id = ?
-        AND user_id = ? `, [req.params.answer_id, req.params.user_id], 
-
-      function(error, results, fields) {
-      if (error) {
-        logger.log('warn', `bugs.addAnswer(): ${error}`);
-        res.json(error);
-      }
-      else {
-        console.log('------ NEW ANSWER CREATED ------ ');
-        res.json(results);
-      }
-    });
-  },
-
   addAnswer: (req, res) => {
     db_connection.query('INSERT INTO answers SET ?', req.body, function(error, results, fields) {
       if (error) {
@@ -179,3 +163,18 @@ LEFT JOIN answers AS a
   }
 
 };
+
+function incrementCounter(bugId) {
+
+    db_connection.query(`
+
+       UPDATE bugs 
+          SET view_count = view_count + 1 
+        WHERE bug_id = ?`, bugId, 
+
+      function(error, results, fields) {
+      if (error) {
+        logger.log('warn', `bugs.addAnswer(): ${error}`);
+      }
+    });
+}

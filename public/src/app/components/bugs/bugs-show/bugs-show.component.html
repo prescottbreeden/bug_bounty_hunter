@@ -15,10 +15,16 @@
       <h4 class="bugs__error">{{ bug.error }}</h4>
       <div class="bugs__info">
         <h6 class="bugs__created">{{ bug.bug_created | timeAgo }}</h6>
-        <h6 class="bugs__answers u-color-grey">{{ bug.num_answers }} answer(s)</h6>
-        <h6 class="bugs__answers u-color-grey">{{ bug.num_likes }} like(s)</h6>
+        <div class="bugs__info--row u-color-grey">
+          <h6 class="bugs__info--item">Views: </h6>
+          <h6 class="bugs__info--item">{{ bug.view_count }}</h6>
+        </div>
+        <div class="bugs__info--row u-color-grey">
+          <h6 class="bugs__info--item u-color-grey">Answers:</h6>
+          <h6 class="bugs__info--item u-color-grey">{{ bug.num_answers }} </h6>
+        </div>
       </div>
-    </a>
+    </a> 
   </div>
 </div>
 <div *ngIf="!bugs.length">
