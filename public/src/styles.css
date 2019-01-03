@@ -385,9 +385,8 @@ body {
     font-size: 2rem;
     background-color: #FFF4E0;
     padding: 2rem;
-    border-radius: 5px; }
-    .bug-view__traceback .ql-syntax {
-      color: red; }
+    border-radius: 5px;
+    color: #FC3C3C; }
   .bug-view__message {
     font-size: 2rem;
     padding: 2rem;

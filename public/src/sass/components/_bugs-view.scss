@@ -70,10 +70,8 @@
     background-color: $color-off-white;
     padding: 2rem;
     border-radius: $default-border-radius;
+    color: $color-red;
     
-    .ql-syntax {
-      color: red;
-    }
   }
 
   &__message {
