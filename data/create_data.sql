@@ -6,19 +6,19 @@ USE bug_hunter;
 --         ('Kris', 'Kringle', 'hohoho@gmail.com', '12345')
 --         ;
 
- INSERT INTO tags (tag_name)
- VALUES ('node'),
-        ('npm'),
-        ('angular'),
-        ('mongo'),
-        ('mongoose'),
-        ('routing'),
-        ('database'),
-        ('ejs'),
-        ('sockets'),
-        ('oop'),
-        ('express')
-        ;
+--  INSERT INTO tags (tag_name)
+--  VALUES ('node'),
+--         ('npm'),
+--         ('angular'),
+--         ('mongo'),
+--         ('mongoose'),
+--         ('routing'),
+--         ('database'),
+--         ('ejs'),
+--         ('sockets'),
+--         ('oop'),
+--         ('express')
+--         ;
 
 --  INSERT INTO bugs (posted_by, error, traceback, message)
 --  VALUES 
@@ -87,10 +87,8 @@ USE bug_hunter;
 --  INSERT INTO answers_likes (user_id, answer_id)
 --  VALUES (2, 1),
 --         (2, 2),
---         (3, 2),
---         (2, 3),
---         (1, 6),
---         (1, 8)
+--         (1, 2),
+--         (1, 3)
 --         ;
 
 --  INSERT INTO bugs_likes (user_id, bug_id)

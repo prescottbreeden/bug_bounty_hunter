@@ -5,7 +5,6 @@ import { BugService } from 'src/app/common/services/bug.service';
 import { BugModel, MapBugData, MapBugDatum } from 'src/app/common/models/Bug';
 import { NewAnswer, MapAnswerData, AnswerModel, MapAnswerDatum } from 'src/app/common/models/Answer';
 import { jsonDecode, jsonEncode, buildBugObject } from 'src/app/common/models/Helpers';
-import { UserModel } from 'src/app/common/models/User';
 
 @Component({
   selector: 'app-bugs-view',
@@ -14,7 +13,6 @@ import { UserModel } from 'src/app/common/models/User';
 export class BugsViewComponent implements OnInit {
   userLikes: Boolean = false;
   showAnswerForm: Boolean = false;
-  fetchingData: Boolean = true;
   userId: string = '';
 
   bug: BugModel = {
@@ -36,7 +34,8 @@ export class BugsViewComponent implements OnInit {
       answered_by: '',
       answer_content: '',
       answer_created: '',
-      answer_updated: ''
+      answer_updated: '',
+      user_likes: false
     }
   ];
 
@@ -70,9 +69,15 @@ export class BugsViewComponent implements OnInit {
             const DATA = buildBugObject(res);
             this.bug = DATA.bug;
             this.answers = DATA.answers;
+            this.answers.forEach(ele => {
+              this.bugService.answerIsLiked(ele.answer_id, this.userId)
+                .subscribe(res => {
+                  ele.user_likes = res;
+                });
+            });
+
             this.newAnswer.answered_by = this.userId;
             this.newAnswer.bug_id = this.bug.bug_id;
-            this.fetchingData = false;
           });
       });
     }
@@ -89,6 +94,7 @@ export class BugsViewComponent implements OnInit {
         })
     });
     this.newAnswer.answer_content = '';
+    this.toggleForm();
   }
 
   toggleForm() {
@@ -100,7 +106,6 @@ export class BugsViewComponent implements OnInit {
       bug_id: this.bug.bug_id,
       user_id: this.userId
     }).subscribe(res => {
-      console.log(res);
       this.userLikes = true;
     })
   }

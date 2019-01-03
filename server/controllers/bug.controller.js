@@ -54,8 +54,7 @@ LEFT JOIN bugs_likes AS bl
      FROM bugs AS b 
 LEFT JOIN answers AS a 
        ON b.bug_id = a.bug_id 
-    WHERE b.bug_id = ?
- ORDER BY a.answer_created DESC`, [req.params.id], 
+    WHERE b.bug_id = ?`, [req.params.id], 
    
       function(error, results, fields) {
       if(error) {
@@ -131,6 +130,27 @@ LEFT JOIN answers AS a
 
   likeAnswer: (req, res) => {
 
+  },
+
+  isLiked: (req, res) => {
+    
+    db_connection.query(`
+
+     SELECT IF(answer_like_id, 'true', 'false') AS likes
+       FROM answers_likes
+      WHERE answer_id = ?
+        AND user_id = ? `, [req.params.answer_id, req.params.user_id], 
+
+      function(error, results, fields) {
+      if (error) {
+        logger.log('warn', `bugs.addAnswer(): ${error}`);
+        res.json(error);
+      }
+      else {
+        console.log('------ NEW ANSWER CREATED ------ ');
+        res.json(results);
+      }
+    });
   },
 
   addAnswer: (req, res) => {

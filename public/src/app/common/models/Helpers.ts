@@ -1,5 +1,5 @@
-import { MapBugDatum, BugModel } from './Bug';
-import { MapAnswerData, AnswerModel } from './Answer';
+import { MapBugDatum } from './Bug';
+import { MapAnswerData } from './Answer';
 
 export function jsonDecode(string): string {
   return JSON.parse(string);

@@ -386,7 +386,24 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: flex-start; }
+    .answers__row--cluster {
+      display: flex; }
+  .answers__icon--unliked {
+    display: inline-block;
+    height: 3rem;
+    width: 3rem; }
+    .answers__icon--unliked:hover {
+      cursor: pointer;
+      fill: #FC3C3C; }
+  .answers__icon--liked {
+    display: inline-block;
+    height: 3rem;
+    width: 3rem;
+    fill: #FC3C3C; }
+    .answers__icon--liked:hover {
+      cursor: pointer; }
   .answers__content {
+    margin-left: 2rem;
     font-size: 2rem; }
   .answers__info {
     text-align: right;

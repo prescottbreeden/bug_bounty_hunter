@@ -47,7 +47,7 @@ USE bug_hunter;
 --           bug_updated, 
 --           answer_id,
 --           answered_by,
---           answer_content) AS answer_content,
+--           answer_content,
 --           answer_created,
 --           answer_updated
 --      FROM bugs AS b 
@@ -72,7 +72,7 @@ USE bug_hunter;
 --  GROUP BY bug_id
 -- ; 
 
--- get answers on bug view
+-- is liked by user
 --    SELECT b.bug_id,
 --           bl.bug_like_id
 --      FROM bugs AS b 
@@ -81,3 +81,9 @@ USE bug_hunter;
 --     WHERE b.bug_id = 1
 --       AND bl.user_id = 1
 -- ;
+
+   SELECT IF(answer_like_id, 'true', 'false') AS likes
+     FROM answers_likes
+    WHERE answer_id = 1
+      AND user_id = 2
+;

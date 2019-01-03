@@ -92,17 +92,24 @@
     </div>
   </div>
 </div>
-<div *ngIf="!answers[0].answer_content === null" >
   <div *ngFor="let answer of answers" class="answers__row">
-    <div 
-      [innerHtml]="answer.answer_content"
-      class="answers__content"></div>
+    <div class="answers__row--cluster">
+      <svg *ngIf="answer.user_likes" class="answers__icon--liked">
+        <use xlink:href="assets/img/icons/sprite.svg#icon-heart"></use>
+      </svg>
+      <svg *ngIf="!answer.user_likes" (click)="likeAnswer()" class="answers__icon--unliked">
+        <use xlink:href="assets/img/icons/sprite.svg#icon-heart-o"></use>
+      </svg>
+      <div 
+        [innerHtml]="answer['answer_content']"
+        class="answers__content">
+      </div>
+    </div>
     <div class="answers__info">
       <div *ngIf="isAdmin" class="answered_by">{{ answer.answered_by }}</div>
-      {{ answer.answer_created | date:'EEEE, LLL dd'}}
+      {{ answer.answer_created | timeAgo }}
     </div>
   </div>
-</div>   
 <div *ngIf="answers[0].answer_content === null" class="answers">
   There are currently no suggested solutions for this bug. You should be the first!
 </div>
