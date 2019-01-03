@@ -16,9 +16,15 @@
           [(ngModel)]="newBug.error"
           #title="ngModel"
           name="newBug.error"
+          placeholder="Define error here"
           type="text" 
           class="bug-create__form--input" 
           id="title">
+      </div>
+      <div 
+        *ngIf="formErrors.ErrorField" 
+        class="reg__form--error">
+        {{ formErrors.ErrorField }}
       </div>
       <div class="u-spacer"></div>
       <div class="bug-create__form--row">
@@ -39,6 +45,9 @@
             </div>
           </quill-editor>
       </div>
+      <div *ngIf="formErrors.TracebackField" class="reg__form--error">
+        {{ formErrors.TracebackField }}
+      </div>
       <div class="u-spacer"></div>
       <div class="bug-create__form--row">
         <label for="message" class="bug-create__form--label">Message</label>
@@ -58,6 +67,10 @@
             </div>
           </quill-editor>
       </div>
+      <div *ngIf="formErrors.MessageField" class="reg__form--error">
+        {{ formErrors.MessageField }}
+      </div>
+      <div class="u-spacer"></div>
       <button class="bug-create__btn">Submit New Bug</button>
     </form>
   </div>
@@ -114,5 +127,38 @@
     </div>
   </div>
 </div>
-<div [innerHtml]="newBug.traceback"></div>
-<div [innerHtml]="newBug.message"></div>
+<div *ngIf="newBug.error.length" class="bug-create__preview">
+  <h2 class="bug-create__preview--title">Bug Prieview</h2>
+  <section class="bug-view">
+    <div class="bug-view__row">
+      <div class="bug-view__row--cluster">
+        <svg *ngIf="userLikes" class="bug-view__icon--liked">
+          <use xlink:href="assets/img/icons/sprite.svg#icon-heart"></use>
+        </svg>
+        <svg *ngIf="!userLikes" (click)="likeBug()" class="bug-view__icon--unliked">
+          <use xlink:href="assets/img/icons/sprite.svg#icon-heart-o"></use>
+        </svg>
+        <h2 class="bug-view__error">{{ newBug.error }}</h2>
+      </div>
+      <div class="bug-view__row--col">
+        <h5 class="bug-view__created"> 
+          <span class="u-color-grey">posted</span>
+          a moment ago
+        </h5>
+        
+        <h5 class="bug-view__created"> 
+          <span class="u-color-grey">by</span>
+          {{ user.first_name }} {{ user.last_name }}
+        </h5>
+      </div>
+    </div>
+    <div 
+      [innerHtml]="newBug.traceback"
+      class="bug-view__traceback">
+    </div>
+    <div 
+      [innerHtml]="newBug.message"
+      class="bug-view__message">
+    </div>
+  </section>
+</div>

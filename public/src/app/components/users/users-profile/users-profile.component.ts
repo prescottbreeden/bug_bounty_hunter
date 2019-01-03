@@ -22,8 +22,7 @@ export class UsersProfileComponent implements OnInit {
   stats: UserStats = {
     bugs_posted: '',
     answers_posted: '',
-    bugs_liked: '',
-    answers_liked: ''
+    bugs_liked: ''
   };
 
   constructor(

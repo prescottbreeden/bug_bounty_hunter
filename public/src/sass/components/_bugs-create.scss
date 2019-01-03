@@ -39,6 +39,10 @@
       cursor: pointer;
       background-color: $color-red;
     }
+
+    &:disabled {
+      cursor: not-allowed;
+    }
   }
   &__bullseye {
     min-height: 50px;
@@ -82,6 +86,16 @@
     &--text {
       font-size: 2rem;
       margin-bottom: 1rem;
+    }
+  }
+
+  &__preview {
+    padding: 2rem;
+    border: 1px dashed $color-light-grey;
+
+    &--title {
+      text-align: center;
+      padding-bottom: 2rem;
     }
   }
 }

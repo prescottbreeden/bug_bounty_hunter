@@ -18,6 +18,33 @@ export interface NewBug {
   message: string;
 }
 
+export interface NewBugErrors {
+  ErrorField: string | null;
+  TracebackField: string | null;
+  MessageField: string | null;
+}
+
+export function ValidateNewBug(data: NewBug): NewBugErrors {
+  const errors = {
+    ErrorField: null,
+    TracebackField: null,
+    MessageField: null
+  } 
+  if (!data.error.length) {
+    errors.ErrorField = 'Error is required.';
+  }
+  if (data.error.length && data.error.length < 10) {
+    errors.ErrorField = 'Error must be 10 characters or more.'
+  }
+  if (!data.traceback.length) {
+    errors.TracebackField = 'Traceback is required.';
+  }
+  if (!data.message.length) {
+    errors.MessageField = 'Message is required.';
+  }
+  return errors;
+}
+
 export function MapBugDatum(data): BugModel {
   return {
     bug_id: data['bug_id'],

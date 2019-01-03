@@ -279,6 +279,8 @@ body {
     .bug-create__btn:hover {
       cursor: pointer;
       background-color: #FC3C3C; }
+    .bug-create__btn:disabled {
+      cursor: not-allowed; }
   .bug-create__bullseye {
     min-height: 50px;
     min-width: 50px; }
@@ -306,6 +308,12 @@ body {
     .bug-create__info--text {
       font-size: 2rem;
       margin-bottom: 1rem; }
+  .bug-create__preview {
+    padding: 2rem;
+    border: 1px dashed #60646b; }
+    .bug-create__preview--title {
+      text-align: center;
+      padding-bottom: 2rem; }
 
 .bugs {
   margin-bottom: 3rem; }

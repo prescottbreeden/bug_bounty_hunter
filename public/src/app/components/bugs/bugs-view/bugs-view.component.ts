@@ -5,18 +5,17 @@ import { BugService } from 'src/app/common/services/bug.service';
 import { BugModel } from 'src/app/common/models/Bug';
 import { NewAnswer, AnswerModel, MapAnswerDatum } from 'src/app/common/models/Answer';
 import { buildBugObject } from 'src/app/common/models/Helpers';
+import { UserToken, UserModel } from 'src/app/common/models/User';
 
 @Component({
   selector: 'app-bugs-view',
   templateUrl: './bugs-view.component.html',
 })
 export class BugsViewComponent implements OnInit {
+  token: UserToken;
+  user: UserModel;
   userLikes: Boolean = false;
   showAnswerForm: Boolean = false;
-  user: any = {
-    id: '',
-    name: ''
-  }
 
   bug: BugModel = {
     bug_id: '',
@@ -56,18 +55,15 @@ export class BugsViewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const token = this.authService.getToken();
-    if (!token) {
+    this.token = this.authService.getToken();
+    if (!this.token) {
+      this.authService.logout();
       this.router.navigate(['/']);
     } else {
-      const { user_id, first_name, last_name } = token.currentUser;
-      this.user.id = user_id;
-      this.user.name = first_name + ' ' + last_name;
-      console.log(this.user);
-
+      this.user = this.token.currentUser;
       this.route.params.subscribe((params: Params) => {
         this.bug.bug_id = params['id'];
-        this.bugService.getLikes(this.bug.bug_id, this.user.id)
+        this.bugService.getLikes(this.bug.bug_id, this.user.user_id)
           .subscribe(res => {
             if(res[0] && res[0].hasOwnProperty('user_id')) {
               this.userLikes = true;
@@ -78,7 +74,7 @@ export class BugsViewComponent implements OnInit {
             const DATA = buildBugObject(res);
             this.bug = DATA.bug;
             this.answers = DATA.answers;
-            this.newAnswer.answered_by = this.user.id;
+            this.newAnswer.answered_by = this.user.user_id;
             this.newAnswer.bug_id = this.bug.bug_id;
           });
       });
@@ -92,7 +88,7 @@ export class BugsViewComponent implements OnInit {
         .subscribe(res => {
           let addedAnswer = MapAnswerDatum(res[0]);
           addedAnswer.answer_content = JSON.parse(addedAnswer.answer_content);
-          addedAnswer.answered_by = this.user.name;
+          addedAnswer.answered_by = this.user.first_name + ' ' + this.user.last_name;
           this.answers = [ ...this.answers, addedAnswer];
         })
     });
@@ -107,7 +103,7 @@ export class BugsViewComponent implements OnInit {
   likeBug() {
     this.bugService.likeBug({
       bug_id: this.bug.bug_id,
-      user_id: this.user.id
+      user_id: this.user.user_id
     }).subscribe(res => {
       this.userLikes = true;
     })
