@@ -52,7 +52,7 @@ LEFT JOIN users AS u
           bug_created, 
           bug_updated, 
           answer_id,
-          CONCAT(u.first_name, ' ', u.last_name) AS answered_by,
+          CONCAT(u2.first_name, ' ', u2.last_name) AS answered_by,
           answer_content,
           answer_created,
           answer_updated
