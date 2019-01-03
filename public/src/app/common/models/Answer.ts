@@ -13,6 +13,23 @@ export interface NewAnswer {
   answer_content: string;
 }
 
+export interface NewAnswerErrors {
+  ContentField: string | null;
+}
+
+export function ValidateNewAnswer(data: NewAnswer): NewAnswerErrors {
+  const errors = {
+    ContentField: null
+  } 
+  if (!data.answer_content.length) {
+    errors.ContentField = 'Answer is required.';
+  }
+  if (data.answer_content.length && data.answer_content.length < 10) {
+    errors.ContentField = 'Answer must be 10 characters or more.'
+  }
+  return errors;
+}
+
 export function MapAnswerDatum(data): AnswerModel {
   return {
     answer_id: data['answer_id'],

@@ -3,7 +3,7 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 import { AuthService } from 'src/app/common/services/auth.service';
 import { BugService } from 'src/app/common/services/bug.service';
 import { BugModel } from 'src/app/common/models/Bug';
-import { NewAnswer, AnswerModel, MapAnswerDatum } from 'src/app/common/models/Answer';
+import { NewAnswer, AnswerModel, MapAnswerDatum, NewAnswerErrors, ValidateNewAnswer } from 'src/app/common/models/Answer';
 import { buildBugObject } from 'src/app/common/models/Helpers';
 import { UserModel, MapUserData } from 'src/app/common/models/User';
 import { isNull } from 'util';
@@ -47,6 +47,10 @@ export class BugsViewComponent implements OnInit {
     answer_content: ''
   };
 
+  formErrors: NewAnswerErrors = {
+    ContentField: null
+  }
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -68,6 +72,13 @@ export class BugsViewComponent implements OnInit {
   }
   
   onSubmitAnswer() {
+    this.formErrors = ValidateNewAnswer(this.newAnswer);
+    if (this.formErrors.ContentField === null) {
+      this.createAnswer();
+    }
+  }
+
+  createAnswer() {
     this.newAnswer.answer_content = JSON.stringify(this.newAnswer.answer_content);
     this.bugService.addAnswer(this.newAnswer).subscribe(res => {
       this.bugService.getAnswer(res['insertId'])
@@ -87,8 +98,10 @@ export class BugsViewComponent implements OnInit {
   }
 
   getLikedStatus() {
-    this.bugService.getLikes(this.bug.bug_id, this.user.user_id)
-      .subscribe(res => {
+    this.bugService.isFavorite({
+      bug_id: this.bug.bug_id, 
+      user_id: this.user.user_id
+    }).subscribe(res => {
         if(res[0] && res[0].hasOwnProperty('user_id')) {
           this.userLikes = true;
         }
@@ -107,11 +120,20 @@ export class BugsViewComponent implements OnInit {
   }
 
   likeBug() {
-    this.bugService.likeBug({
+    this.bugService.addFavorite({
       bug_id: this.bug.bug_id,
       user_id: this.user.user_id
     }).subscribe(res => {
       this.userLikes = true;
+    })
+  }
+
+  dislikeBug() {
+    this.bugService.removeFavorite({
+      bug_id: this.bug.bug_id,
+      user_id: this.user.user_id
+    }).subscribe(res => {
+      this.userLikes = false;
     })
   }
 }

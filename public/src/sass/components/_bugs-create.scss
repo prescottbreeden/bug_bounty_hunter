@@ -1,10 +1,13 @@
 .bug-create {
   display: inline-block;
 
+  &__form--block {
+    margin-top: 2rem;
+  }
+
   &__form {
     display: inline-block;
     font-size: 2rem;
-    // border: 1px dashed red;
     width: 100%;
 
     &--input {
@@ -25,25 +28,26 @@
     }
   }
 
+  &__icon {
+    height: 4rem;
+    width: 4rem;
+    fill: $color-white;
+  }
+
   &__btn {
+    @include standardButton;
     width: 100%;
-    padding: 2rem;
-    font-size: 2rem;
-    border: none;
-    border-radius: $default-border-radius;
-    border: 1px solid $color-light-grey;
-    background-color: $color-blue;
-    color: $color-white;
 
-    &:hover {
-      cursor: pointer;
-      background-color: $color-red;
-    }
-
-    &:disabled {
-      cursor: not-allowed;
+    &--toggle {
+      @include standardButton;
+      width: 20%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem;
     }
   }
+
   &__bullseye {
     min-height: 50px;
     min-width: 50px;
@@ -51,7 +55,6 @@
 
   &__info {
     display: inline-block;
-    // border: 1px dashed red;
     width: 100%;
     margin-left: 3rem;
     vertical-align: top;
@@ -73,9 +76,6 @@
       display: flex;
       align-items: center;
       width: 100%;
-      // line-height: 100%;
-      // border: 1px dashed green;
-      // vertical-align: middle;
     }
 
     &--bullet-title {

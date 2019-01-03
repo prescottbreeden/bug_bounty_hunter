@@ -32,19 +32,16 @@ export class BugService {
   getAnswer(id: string | number) {
     return this.http.get('/api/answers/' + id);
   }
-  answerIsLiked(answer_id: string | number, user_id: string | number) {
-    return this.http.get(`/api/answers/likes/${answer_id}/${user_id}`)
-      .pipe(map(ele => {
-        if (ele[0] && ele[0].hasOwnProperty('likes')) {
-          return true;
-        }
-        return false;
-      }));
+
+  isFavorite(data) {
+    return this.http.get(`/api/bugs/likes/${data.bug_id}/${data.user_id}`);
   }
-  getLikes(bug_id: string | number, user_id: string | number) {
-    return this.http.get(`/api/bugs/likes/${bug_id}/${user_id}`);
+
+  addFavorite(data: any) {
+    return this.http.post('/api/bugs/likes', data);
   }
-  likeBug(newLike: any) {
-    return this.http.post('/api/bugs/likes', newLike);
+
+  removeFavorite(data: any) {
+    return this.http.delete(`/api/bugs/likes/${data.bug_id}/${data.user_id}`);
   }
 }

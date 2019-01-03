@@ -1,7 +1,7 @@
 <section class="bug-view">
   <div class="bug-view__row">
     <div class="bug-view__row--cluster">
-      <svg *ngIf="userLikes" class="bug-view__icon--liked">
+      <svg *ngIf="userLikes" (click)="dislikeBug()" class="bug-view__icon--liked">
         <use xlink:href="assets/img/icons/sprite.svg#icon-heart"></use>
       </svg>
       <svg *ngIf="!userLikes" (click)="likeBug()" class="bug-view__icon--unliked">
@@ -31,29 +31,33 @@
   </div>
 </section>
 <div class="u-divider">
-  <button (click)="toggleForm()" *ngIf="!showAnswerForm">Add Answer</button>
-  <button (click)="toggleForm()" *ngIf="showAnswerForm">Hide Form</button>
-  <div *ngIf="showAnswerForm" class="row">
+  <div 
+    class="bug-create__btn--toggle"
+    (click)="toggleForm()">
+    <p *ngIf="!showAnswerForm">Add Answer</p>
+    <p *ngIf="showAnswerForm">Hide Form</p>
+    <svg class="bug-create__icon"
+    [class.u-rotate90]="showAnswerForm">
+      <use xlink:href="assets/img/icons/sprite.svg#icon-chevron-right"></use>
+    </svg>
+  </div>
+  <div *ngIf="showAnswerForm" class="row bug-create__form--block">
     <div class="bug-create col-2-of-4">
       <form 
         (submit)="onSubmitAnswer()" 
         class="bug-create__form">
-
         <input 
           type="hidden" 
           [(ngModel)]="newAnswer.posted_by" 
           name="newAnswer.posted_by">
-
         <input 
           type="hidden" 
           [(ngModel)]="newAnswer.bug_id" 
           name="newAnswer.bug_id">
-
         <div class="bug-create__form--row">
-          <label for="content" class="bug-create__form--label">Add Answer</label>
+          <h4 class="bug-create__info--header">Add Answer</h4>
         </div>
         <div class="form__row">
-
           <quill-editor 
             [(ngModel)]="newAnswer.answer_content"
             #content="ngModel"
@@ -68,8 +72,11 @@
               </span>
             </div>
           </quill-editor>
-
         </div>
+        <div *ngIf="formErrors.ContentField" class="reg__form--error">
+          {{ formErrors.ContentField }}
+        </div>
+        <div class="u-spacer"></div>
         <button class="bug-create__btn">Add Answer</button>
       </form>
     </div>

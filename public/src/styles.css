@@ -30,6 +30,12 @@
 @import url(~quill/dist/quill.bubble.css);
 @import url(~quill/dist/quill.snow.css);
 @import url("https://fonts.googleapis.com/css?family=Lato:400,700");
+@keyframes rotate90 {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(90deg); } }
+
 @keyframes loader {
   0% {
     transform: rotate(0deg); }
@@ -86,6 +92,14 @@ body {
   text-align: center;
   font-size: 3.5rem;
   margin-bottom: 3rem; }
+
+.u-rotate90 {
+  animation: rotate90;
+  animation-duration: .5s;
+  animation-iteration-count: 1;
+  animation-delay: 0s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards; }
 
 .u-divider {
   border-top: 1px solid #393e46;
@@ -250,6 +264,8 @@ body {
 
 .bug-create {
   display: inline-block; }
+  .bug-create__form--block {
+    margin-top: 2rem; }
   .bug-create__form {
     display: inline-block;
     font-size: 2rem;
@@ -267,20 +283,42 @@ body {
       border-style: groove;
       resize: none;
       height: 20rem; }
+  .bug-create__icon {
+    height: 4rem;
+    width: 4rem;
+    fill: #eee; }
   .bug-create__btn {
-    width: 100%;
     padding: 2rem;
     font-size: 2rem;
     border: none;
     border-radius: 5px;
     border: 1px solid #60646b;
     background-color: #00ADB5;
-    color: #eee; }
+    color: #eee;
+    width: 100%; }
     .bug-create__btn:hover {
       cursor: pointer;
       background-color: #FC3C3C; }
     .bug-create__btn:disabled {
       cursor: not-allowed; }
+    .bug-create__btn--toggle {
+      padding: 2rem;
+      font-size: 2rem;
+      border: none;
+      border-radius: 5px;
+      border: 1px solid #60646b;
+      background-color: #00ADB5;
+      color: #eee;
+      width: 20%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem; }
+      .bug-create__btn--toggle:hover {
+        cursor: pointer;
+        background-color: #FC3C3C; }
+      .bug-create__btn--toggle:disabled {
+        cursor: not-allowed; }
   .bug-create__bullseye {
     min-height: 50px;
     min-width: 50px; }

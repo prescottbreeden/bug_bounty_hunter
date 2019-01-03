@@ -97,8 +97,7 @@ LEFT JOIN users AS u2
     res.json('route not finished');
   },
 
-  getBugLikes: (req, res) => {
-
+  isFavorite: (req, res) => {
     db_connection.query(`
     
    SELECT bl.user_id
@@ -119,8 +118,8 @@ LEFT JOIN users AS u2
     });
   },
 
-  likeBug: (req, res) => {
-
+  addFavorite: (req, res) => {
+    console.log('inside like');
     db_connection.query(`
     
     INSERT INTO bugs_likes (bug_id, user_id)
@@ -128,7 +127,7 @@ LEFT JOIN users AS u2
    
       function(error, results, fields) {
       if(error) {
-        logger.log('warn', `bug.likeBug(): ${error}`);
+        logger.log('warn', `bug.addFavorite(): ${error}`);
         res.json(error);
       }
       else {
@@ -137,8 +136,30 @@ LEFT JOIN users AS u2
     });
   },
 
+  removeFavorite: (req, res) => {
+    console.log('inside dislike');
+    db_connection.query(`
+    
+     DELETE 
+       FROM bugs_likes
+      WHERE bug_id = ? 
+        AND user_id = ?`, [req.params.bug_id, req.params.user_id], 
+   
+      function(error, results, fields) {
+      if(error) {
+        logger.log('warn', `bug.removeFavorite(): ${error}`);
+        res.json(error);
+      }
+      else {
+        res.json(results);
+      }
+    });
+
+  },
+
   addAnswer: (req, res) => {
-    db_connection.query('INSERT INTO answers SET ?', req.body, function(error, results, fields) {
+    db_connection.query('INSERT INTO answers SET ?', req.body, 
+    function(error, results, fields) {
       if (error) {
         logger.log('warn', `bugs.addAnswer(): ${error}`);
         res.json(error);

@@ -12,12 +12,14 @@ import { isNull } from 'util';
 })
 export class BugsCreateComponent implements OnInit {
   user: UserModel;
+
   newBug: NewBug = {
     posted_by: '',
     error: '',
     traceback: '',
     message: ''
   };
+
   formErrors: NewBugErrors = {
     ErrorField: null,
     TracebackField: null,
@@ -51,10 +53,6 @@ export class BugsCreateComponent implements OnInit {
           console.log('new bug created: ', res);
         });
       this.router.navigate(['/bugs']);
-    }
-    else {
-      console.log('Fail');
-      console.log(this.formErrors);
     }
   }
 

@@ -6,6 +6,16 @@
     margin-bottom: $margin-bottom;
   }
 }
+
+.u-rotate90 {
+  animation: rotate90;
+  animation-duration: .5s;
+  animation-iteration-count: 1;
+  animation-delay: 0s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+}
+
 .u-divider {
   border-top: 1px solid $color-dark-grey;
   border-bottom: 1px solid $color-dark-grey;
