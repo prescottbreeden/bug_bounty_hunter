@@ -3,14 +3,14 @@ import { NewBug, NewBugErrors, ValidateNewBug } from 'src/app/common/models/Bug'
 import { AuthService } from 'src/app/common/services/auth.service';
 import { BugService } from 'src/app/common/services/bug.service';
 import { Router } from '@angular/router';
-import { UserToken, UserModel } from 'src/app/common/models/User';
+import { UserToken, UserModel, MapUserData } from 'src/app/common/models/User';
+import { isNull } from 'util';
 
 @Component({
   selector: 'app-bugs-create',
   templateUrl: './bugs-create.component.html',
 })
 export class BugsCreateComponent implements OnInit {
-  token: UserToken;
   user: UserModel;
   newBug: NewBug = {
     posted_by: '',
@@ -31,14 +31,12 @@ export class BugsCreateComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.token = this.authService.getToken();
-    this.user = this.token.currentUser;
-    if (!this.token) {
-      this.authService.logout();
-      this.router.navigate(['/']);
-    } else {
-      this.newBug.posted_by = this.token.currentUser.user_id;
+    const token = this.authService.getToken();
+    if (isNull(token)) {
+      return this.router.navigate(['/']);
     }
+    this.user = MapUserData(token.currentUser);
+    this.newBug.posted_by = this.user.user_id;
   }
 
   onSubmitBug() {

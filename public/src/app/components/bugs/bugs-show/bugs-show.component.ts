@@ -3,14 +3,15 @@ import { AuthService } from 'src/app/common/services/auth.service';
 import { Router } from '@angular/router';
 import { BugService } from 'src/app/common/services/bug.service';
 import { BugModel, MapBugData } from 'src/app/common/models/Bug';
-import { UserToken } from 'src/app/common/models/User';
+import { UserModel, MapUserData } from 'src/app/common/models/User';
+import { isNull } from 'util';
 
 @Component({
   selector: 'app-bugs-show',
   templateUrl: './bugs-show.component.html',
 })
 export class BugsShowComponent implements OnInit {
-  token: UserToken;
+  user: UserModel;
   bugs: BugModel[] = [];
   searchText: string = '';
 
@@ -21,18 +22,14 @@ export class BugsShowComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.token = this.authService.getToken();
-    if (!this.token) {
-      this.authService.logout();
-      this.router.navigate(['/']);
-    } else {
-      console.log('token valid');
-      this.bugService.getBugs()
-        .subscribe(results => {
-          this.bugs = MapBugData(results);
-          console.log(this.bugs);
-        })
+    const token = this.authService.getToken();
+    if (isNull(token)) {
+      return this.router.navigate(['/']);
     }
+    this.user = MapUserData(token.currentUser);
+    this.bugService.getBugs().subscribe(results => {
+      this.bugs = MapBugData(results);
+    });
   }
 
 }
