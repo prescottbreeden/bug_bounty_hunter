@@ -84,7 +84,7 @@
       <div class="bug-create__info--row">
         <p class="bug-create__info--text">
             When you are posting a bug, try to ascertain which part of your 
-            error message is the most pertinent and descriptive.
+            error message is the most important and descriptive.
         </p>
       </div> 
       <div class="bug-create__info--row">
@@ -93,12 +93,14 @@
       </div>
       <div class="bug-create__info--row">
         <p class="bug-create__info--text">
-          Your stack trace refers to the block of code that references each line
-          of code that failed because of the error.  This output can be extremely 
+          Your stack trace contains all the stack frames until its own contructor
+          function (i.e. everything that is still on the stack up until the error
+          exception is thrown).  This output can be extremely 
           helpful when debugging to get additional info but takes practice 
-          to filter what's noise and what's integral.  If you are 
-          unsure what your stack trace is, just copy the whole error message 
-          and paste it here.
+          to filter what is and isn't important.  If you're not exactly sure what 
+          this means, the stack trace is typically the majority of your error so 
+          feel free to copy the whole thing and paste it here (unless it is abnormally 
+          long, then use your judgement).
         </p>
       </div> 
       <div class="bug-create__info--row">
