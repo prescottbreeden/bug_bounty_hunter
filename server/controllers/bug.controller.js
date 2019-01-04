@@ -9,24 +9,21 @@ module.exports = {
   getAll: (req, res) => {
     db_connection.query(`
 
-   SELECT b.bug_id, 
-          CONCAT(u.first_name, ' ', u.last_name) AS posted_by, 
-          error, 
-          traceback, 
-          message, 
-          view_count,
-          bug_created, 
-          COUNT(a.bug_id) AS num_answers,
-          COUNT(bl.bug_like_id) AS num_likes
-     FROM bugs AS b 
-LEFT JOIN answers AS a 
-       ON b.bug_id = a.bug_id 
-LEFT JOIN bugs_likes AS bl
-       ON b.bug_id = bl.bug_id
-LEFT JOIN users AS u
-       ON b.posted_by = u.user_id
- GROUP BY b.bug_id
- ORDER BY b.bug_created DESC`, 
+       SELECT b.bug_id, 
+              CONCAT(u.first_name, ' ', u.last_name) AS posted_by, 
+              error, 
+              traceback, 
+              message, 
+              view_count,
+              bug_created, 
+              COUNT(a.bug_id) AS num_answers
+         FROM bugs AS b 
+    LEFT JOIN answers AS a 
+           ON b.bug_id = a.bug_id 
+    LEFT JOIN users AS u
+           ON b.posted_by = u.user_id
+     GROUP BY b.bug_id
+     ORDER BY b.bug_created DESC`, 
 
       function(error, results, fields) {
       if(error) {
@@ -40,30 +37,31 @@ LEFT JOIN users AS u
   },
 
   getById: (req, res) => {
-    incrementCounter(req.params.id);
+    const ID = req.params.id;
+    incrementCounter(ID);
     db_connection.query(`
     
-   SELECT b.bug_id, 
-          CONCAT(u.first_name, ' ', u.last_name) AS posted_by,
-          error, 
-          traceback, 
-          message, 
-          view_count,
-          bug_created, 
-          bug_updated, 
-          answer_id,
-          CONCAT(u2.first_name, ' ', u2.last_name) AS answered_by,
-          answer_content,
-          answer_created,
-          answer_updated
-     FROM bugs AS b 
-LEFT JOIN answers AS a 
-       ON b.bug_id = a.bug_id 
-LEFT JOIN users AS u 
-       ON b.posted_by = u.user_id 
-LEFT JOIN users AS u2
-       ON a.answered_by = u2.user_id
-    WHERE b.bug_id = ?`, [req.params.id], 
+       SELECT b.bug_id, 
+              CONCAT(u.first_name, ' ', u.last_name) AS posted_by,
+              error, 
+              traceback, 
+              message, 
+              view_count,
+              bug_created, 
+              bug_updated, 
+              answer_id,
+              CONCAT(u2.first_name, ' ', u2.last_name) AS answered_by,
+              answer_content,
+              answer_created,
+              answer_updated
+         FROM bugs AS b 
+    LEFT JOIN answers AS a 
+           ON b.bug_id = a.bug_id 
+    LEFT JOIN users AS u 
+           ON b.posted_by = u.user_id 
+    LEFT JOIN users AS u2
+           ON a.answered_by = u2.user_id
+        WHERE b.bug_id = ?`, [ID], 
    
       function(error, results, fields) {
       if(error) {
@@ -77,7 +75,14 @@ LEFT JOIN users AS u2
   },
 
   create: (req, res) => {
-    db_connection.query('INSERT INTO bugs SET ?', req.body, function(error, results, fields) {
+    const DATA = req.body;
+    db_connection.query(`
+    
+       INSERT 
+         INTO bugs 
+          SET ?`, [DATA], 
+
+      function(error, results, fields) {
       if (error) {
         logger.log('warn', `bug.create(): ${error}`);
         res.json(error);
@@ -98,18 +103,20 @@ LEFT JOIN users AS u2
   },
 
   isFavorite: (req, res) => {
+    const BUG_ID = req.params.bug_id;
+    const USER_ID = req.params.user_id;
     db_connection.query(`
     
-   SELECT bl.user_id
-     FROM bugs AS b 
-     JOIN bugs_likes AS bl 
-       ON b.bug_id = bl.bug_id 
-    WHERE b.bug_id = ?
-      AND bl.user_id = ?`, [req.params.bug_id, req.params.user_id], 
+       SELECT f.user_id
+         FROM bugs AS b 
+         JOIN favorites AS f 
+           ON b.bug_id = f.bug_id 
+        WHERE b.bug_id = ?
+          AND f.user_id = ?`, [BUG_ID, USER_ID], 
    
       function(error, results, fields) {
       if(error) {
-        logger.log('warn', `bug.getBugLikes(): ${error}`);
+        logger.log('warn', `bug.isFavorite(): ${error}`);
         res.json(error);
       }
       else {
@@ -119,11 +126,14 @@ LEFT JOIN users AS u2
   },
 
   addFavorite: (req, res) => {
-    console.log('inside like');
+    const DATA = req.body;
+    // const BUG_ID = req.body.bug_id;
+    // const USER_ID = req.body.user_id;
     db_connection.query(`
     
-    INSERT INTO bugs_likes (bug_id, user_id)
-    VALUES (?, ?)`, [req.body.bug_id, req.body.user_id], 
+       INSERT 
+         INTO favorites
+          SET ?`, [DATA], 
    
       function(error, results, fields) {
       if(error) {
@@ -137,11 +147,10 @@ LEFT JOIN users AS u2
   },
 
   removeFavorite: (req, res) => {
-    console.log('inside dislike');
     db_connection.query(`
     
      DELETE 
-       FROM bugs_likes
+       FROM favorites
       WHERE bug_id = ? 
         AND user_id = ?`, [req.params.bug_id, req.params.user_id], 
    
@@ -158,22 +167,33 @@ LEFT JOIN users AS u2
   },
 
   addAnswer: (req, res) => {
-    db_connection.query('INSERT INTO answers SET ?', req.body, 
-    function(error, results, fields) {
+    const DATA = req.body;
+    db_connection.query(`
+    
+       INSERT 
+         INTO answers 
+          SET ?`, [DATA], 
+
+      function(error, results, fields) {
       if (error) {
         logger.log('warn', `bugs.addAnswer(): ${error}`);
         res.json(error);
       }
       else {
-        console.log('------ NEW ANSWER CREATED ------ ');
         res.json(results);
       }
     });
   },
 
   getAnswer: (req, res) => {
-    db_connection.query('SELECT * FROM answers WHERE answer_id = ?', [req.params.id],
-    function(error, results, fields) {
+    const ID = req.params.id;
+    db_connection.query(`
+    
+       SELECT * 
+         FROM answers 
+        WHERE answer_id = ?`, [ID],
+
+      function(error, results, fields) {
       if (error) {
         logger.log('warn', `bugs.getAnswer(): ${error}`);
         res.json(error);

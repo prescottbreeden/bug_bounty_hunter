@@ -14,7 +14,7 @@ import { isNull } from 'util';
 })
 export class BugsViewComponent implements OnInit {
   user: UserModel;
-  userLikes: Boolean = false;
+  isFavorite: Boolean = false;
   showAnswerForm: Boolean = false;
 
   bug: BugModel = {
@@ -27,7 +27,6 @@ export class BugsViewComponent implements OnInit {
     bug_created: '',
     bug_updated: '',
     num_answers: '',
-    num_likes: ''
   };
 
   answers: AnswerModel[] = [
@@ -103,7 +102,7 @@ export class BugsViewComponent implements OnInit {
       user_id: this.user.user_id
     }).subscribe(res => {
         if(res[0] && res[0].hasOwnProperty('user_id')) {
-          this.userLikes = true;
+          this.isFavorite = true;
         }
       });
   }
@@ -124,7 +123,7 @@ export class BugsViewComponent implements OnInit {
       bug_id: this.bug.bug_id,
       user_id: this.user.user_id
     }).subscribe(res => {
-      this.userLikes = true;
+      this.isFavorite = true;
     })
   }
 
@@ -133,7 +132,7 @@ export class BugsViewComponent implements OnInit {
       bug_id: this.bug.bug_id,
       user_id: this.user.user_id
     }).subscribe(res => {
-      this.userLikes = false;
+      this.isFavorite = false;
     })
   }
 }

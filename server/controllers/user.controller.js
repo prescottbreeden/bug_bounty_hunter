@@ -36,19 +36,19 @@ module.exports = {
   getAllUserData: (req, res) => {
     db_connection.query(`
 
-   SELECT CONCAT(u.first_name, ' ', u.last_name) AS name,
-          COUNT(DISTINCT b.bug_id) AS bugs,
-          COUNT(DISTINCT a.answer_id) AS answers,
-          COUNT(DISTINCT bl.bug_like_id) AS blikes
-     FROM users AS u
-LEFT JOIN bugs AS b
-       ON b.posted_by = user_id
-LEFT JOIN answers AS a
-       ON a.answered_by = user_id
-LEFT JOIN bugs_likes AS bl
-       ON bl.user_id = u.user_id
- GROUP BY u.user_id
- ORDER BY bugs DESC`, [req.params.id], 
+       SELECT CONCAT(u.first_name, ' ', u.last_name) AS name,
+              COUNT(DISTINCT b.bug_id) AS bugs,
+              COUNT(DISTINCT answer_id) AS answers,
+              COUNT(DISTINCT favorite_id) AS favorites
+         FROM users AS u
+    LEFT JOIN bugs AS b
+           ON b.posted_by = user_id
+    LEFT JOIN answers AS a
+           ON a.answered_by = user_id
+    LEFT JOIN favorites AS f
+           ON f.user_id = u.user_id
+     GROUP BY u.user_id
+     ORDER BY bugs DESC`, [req.params.id], 
 
       function(error, results, fields) {
       if(error) {
@@ -66,21 +66,21 @@ LEFT JOIN bugs_likes AS bl
     db_connection.query(`
 
        SELECT COUNT(DISTINCT b.bug_id) AS bugs,
-              COUNT(DISTINCT a.answer_id) AS answers,
-              COUNT(DISTINCT bl.bug_like_id) AS blikes
+              COUNT(DISTINCT answer_id) AS answers,
+              COUNT(DISTINCT favorite_id) AS favorites
          FROM users AS u
     LEFT JOIN bugs AS b
            ON b.posted_by = user_id
     LEFT JOIN answers AS a
            ON a.answered_by = user_id
-    LEFT JOIN bugs_likes AS bl
-           ON bl.user_id = u.user_id
+    LEFT JOIN favorites AS f
+           ON f.user_id = u.user_id
         WHERE u.user_id = ?
      GROUP BY u.user_id`, [req.params.id], 
 
       function(error, results, fields) {
       if(error) {
-        logger.log('warn', `users.getById(): ${error}`);
+        logger.log('warn', `users.getUserStatsById(): ${error}`);
         res.json(error);
       }
       else {
@@ -90,16 +90,20 @@ LEFT JOIN bugs_likes AS bl
   },
 
   create: (req, res) => {
-    req.body.password = bcrypt.hashSync(req.body.password, 10);
-    db_connection.query('INSERT INTO users SET ?', [req.body], 
-      function(error, results, fields) {
+    const DATA = req.body;
+    DATA.password = bcrypt.hashSync(req.body.password, 10);
+    db_connection.query(`
 
+       INSERT 
+         INTO users 
+          SET ?`, [DATA], 
+
+      function(error, results, fields) {
       if (error) {
         logger.log('warn', `users.create(): ${error}`);
         res.json(error);
       }
       else {
-        console.log('------ NEW USER CREATED ------ ');
         return res.json(results);
       }
     });

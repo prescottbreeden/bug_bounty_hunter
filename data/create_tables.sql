@@ -47,10 +47,10 @@ CREATE TABLE answers (
     REFERENCES bugs (bug_id)
 );
 
-CREATE TABLE bugs_likes (
-  bug_like_id     INTEGER     NOT NULL  AUTO_INCREMENT    PRIMARY KEY,
-  user_id           INTEGER     NOT NULL,
-  bug_id            INTEGER     NOT NULL,
+CREATE TABLE favorites (
+  favorite_id     INTEGER     NOT NULL  AUTO_INCREMENT    PRIMARY KEY,
+  user_id         INTEGER     NOT NULL,
+  bug_id          INTEGER     NOT NULL,
 
   FOREIGN KEY (user_id)
     REFERENCES users (user_id),

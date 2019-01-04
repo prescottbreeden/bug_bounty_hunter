@@ -3,7 +3,6 @@ const env = process.env.NODE_ENV || 'development';
 const config = require('./config')[env];
 const path = require('path');
 const bodyParser = require('body-parser');
-const favicon = require('serve-favicon');
 const Routes = require('./server/routes.js');
 const app = express();
 
