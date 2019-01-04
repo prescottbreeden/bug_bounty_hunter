@@ -13,7 +13,9 @@ import { isNull } from 'util';
 export class BugsShowComponent implements OnInit {
   user: UserModel;
   bugs: BugModel[] = [];
+  fBugs: BugModel[] = [];
   searchText: string = '';
+  showFavorites: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -27,9 +29,25 @@ export class BugsShowComponent implements OnInit {
       return this.router.navigate(['/']);
     }
     this.user = MapUserData(token.currentUser);
+    this.getAllBugs();
+    this.getFavorites();
+  }
+
+  getAllBugs() {
     this.bugService.getBugs().subscribe(results => {
       this.bugs = MapBugData(results);
     });
+  }
+
+  getFavorites() {
+    this.bugService.getFavorites(this.user.user_id)
+      .subscribe(results => {
+        this.fBugs = MapBugData(results);
+      })
+  }
+
+  toggleFavorites() {
+    this.showFavorites = !this.showFavorites;
   }
 
 }

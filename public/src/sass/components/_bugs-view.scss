@@ -80,6 +80,10 @@
     border: 1px solid $color-light-grey;
     margin-top: 2rem;
   }
+
+  &__controls {
+    display: flex;
+  }
 }
 
 .form {

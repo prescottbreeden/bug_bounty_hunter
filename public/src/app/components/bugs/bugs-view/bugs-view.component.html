@@ -31,16 +31,164 @@
   </div>
 </section>
 <div class="u-divider">
+<div class="bug-view__controls">
   <div 
-    class="bug-create__btn--toggle"
+    class="bug-create__btn--toggle u-margin-right" 
+    [class.u-red-bg]="showAnswerForm"
     (click)="toggleForm()">
     <p *ngIf="!showAnswerForm">Add Answer</p>
     <p *ngIf="showAnswerForm">Hide Form</p>
-    <svg class="bug-create__icon"
-    [class.u-rotate90]="showAnswerForm">
+    <svg 
+      class="bug-create__icon" 
+      [class.u-rotate90]="showAnswerForm">
       <use xlink:href="assets/img/icons/sprite.svg#icon-chevron-right"></use>
     </svg>
   </div>
+  <div 
+    class="bug-create__btn--toggle" 
+    [class.u-red-bg]="showEditBugForm"
+    (click)="toggleEdit()">
+    <p *ngIf="!showEditBugForm">Edit Bug</p>
+    <p *ngIf="showEditBugForm">Hide Edit Bug</p>
+    <svg class="bug-create__icon" [class.u-rotate90]="showEditBugForm">
+      <use xlink:href="assets/img/icons/sprite.svg#icon-chevron-right"></use>
+    </svg>
+  </div>
+</div>
+
+<div class="u-spacer"></div>
+<div *ngIf="showEditBugForm" class="row">
+  <div class="bug-create col-2-of-4">
+    <form 
+      (submit)="onSubmitBug()" 
+      class="bug-create__form">
+      <input 
+        type="hidden" 
+        [(ngModel)]="bug.posted_by" 
+        name="bug.posted_by">
+      <div class="bug-create__form--row">
+        <label for="title" class="bug-create__form--label">Error</label>
+      </div>
+      <div class="bug-create__form--row">
+        <input 
+          [(ngModel)]="bug.error"
+          #title="ngModel"
+          name="bug.error"
+          placeholder="Define error here ..."
+          type="text" 
+          class="bug-create__form--input" 
+          id="title">
+      </div>
+      <div 
+        *ngIf="formErrors.ErrorField" 
+        class="reg__form--error">
+        {{ formErrors.ErrorField }}
+      </div>
+      <div class="u-spacer"></div>
+      <div class="bug-create__form--row">
+        <label for="traceback" class="bug-create__form--label">Stack Trace</label>
+      </div>
+      <div class="bug-create__form--row">
+          <quill-editor 
+            [(ngModel)]="bug.traceback"
+            #traceback="ngModel"
+            name="bug.traceback"
+            type="text" 
+            [style]="{ 'border-radius': '5px', 'height': '20rem' }"
+            id="traceback">
+            <div quill-editor-toolbar>
+              <span class="ql-formats">
+                <button class="ql-code-block" [title]="'Code Block'"></button>
+              </span>
+            </div>
+          </quill-editor>
+      </div>
+      <div *ngIf="formErrors.TracebackField" class="reg__form--error">
+        {{ formErrors.TracebackField }}
+      </div>
+      <div class="u-spacer"></div>
+      <div class="bug-create__form--row">
+        <label for="message" class="bug-create__form--label">Comments</label>
+      </div>
+      <div class="bug-create__form--row">
+          <quill-editor 
+            [(ngModel)]="bug.message"
+            #message="ngModel"
+            name="bug.message"
+            type="text" 
+            [style]="{ 'border-radius': '5px', 'height': '20rem' }"
+            id="traceback">
+            <div quill-editor-toolbar>
+              <span class="ql-formats">
+                <button class="ql-code-block" [title]="'Code Block'"></button>
+              </span>
+            </div>
+          </quill-editor>
+      </div>
+      <div *ngIf="formErrors.MessageField" class="reg__form--error">
+        {{ formErrors.MessageField }}
+      </div>
+      <div class="u-spacer"></div>
+      <button [disabled]="showEditBugForm" class="bug-create__btn">Save Bug Data</button>
+    </form>
+  </div>
+  <div class="bug-create__info col-2-of-4">
+    <h4 class="bug-create__info--header">Guidelines</h4>
+    <div class="bug-create__info--list">
+      <div class="bug-create__info--row">
+        <img src="assets/img/target_50px.png" alt="target" class="bug-create__bullseye">
+        <p class="bug-create__info--bullet-title">Defining an Error</p> 
+      </div>
+      <div class="bug-create__info--row">
+        <p class="bug-create__info--text">
+            When you are posting a bug, try to ascertain which part of your 
+            error message is the most important and descriptive.
+        </p>
+      </div> 
+      <div class="bug-create__info--row">
+        <img src="assets/img/target_50px.png" alt="target" class="bug-create__bullseye">
+        <p class="bug-create__info--bullet-title">Posting a Stack Trace</p> 
+      </div>
+      <div class="bug-create__info--row">
+        <p class="bug-create__info--text">
+          Your stack trace contains all the stack frames until its own contructor
+          function (i.e. everything that is still on the stack up until the error
+          exception is thrown).  This output can be extremely 
+          helpful when debugging to get additional info but takes practice 
+          to filter what is and isn't important.  If you're not exactly sure what 
+          this means, the stack trace is typically the majority of your error so 
+          feel free to copy the whole thing and paste it here (unless it is abnormally 
+          long, then use your judgement).
+        </p>
+      </div> 
+      <div class="bug-create__info--row">
+        <img src="assets/img/target_50px.png" alt="target" class="bug-create__bullseye">
+        <p class="bug-create__info--bullet-title">Adding a Comment</p> 
+      </div>
+      <div class="bug-create__info--row">
+        <p class="bug-create__info--text">
+          This is a really good place to mention the ways you have already tried 
+          to solve your bug.  Not only will this reduce thread redundancy but will 
+          also offer an opportunity for you to rubber-duck-debug in case you forgot 
+          to try something. If there is any additional info that you think might 
+          be helpful you can add it here (e.g. code snippets you think might be 
+          the cause, questions about the error message itself, etc.).
+        </p>
+      </div> 
+      <div class="bug-create__info--row">
+        <img src="assets/img/target_50px.png" alt="target" class="bug-create__bullseye">
+        <p class="bug-create__info--bullet-title">Brevity is the Soul of Wit</p> 
+      </div>
+      <div class="bug-create__info--row">
+        <p class="bug-create__info--text">
+          Don't write a book; ain't nobody's got times for that.
+        </p>
+      </div> 
+    </div>
+  </div>
+</div>
+
+
   <div *ngIf="showAnswerForm" class="row bug-create__form--block">
     <div class="bug-create col-2-of-4">
       <form 

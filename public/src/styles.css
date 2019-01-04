@@ -111,6 +111,9 @@ body {
 .u-spacer {
   margin-top: 2rem; }
 
+.u-margin-right {
+  margin-right: 2rem; }
+
 .u-loader {
   display: inline-block;
   position: absolute;
@@ -131,6 +134,9 @@ body {
 
 .u-color-grey {
   color: #60646b !important; }
+
+.u-red-bg {
+  background-color: #FC3C3C !important; }
 
 .footer {
   padding: 3rem;
@@ -191,6 +197,7 @@ body {
     width: calc(3 * ((100% - 3 * 6rem) / 4) + 2 * 6rem); }
 
 .header {
+  z-index: 1000;
   position: fixed;
   top: 0;
   left: 0;
@@ -212,6 +219,7 @@ body {
     margin-left: 1rem; }
 
 .nav {
+  z-index: 1000;
   position: fixed;
   top: 12rem;
   left: 0;
@@ -276,6 +284,18 @@ body {
       padding: 1rem;
       margin: 1rem 0;
       width: 100%; }
+      .bug-create__form--input::-webkit-input-placeholder {
+        /* Chrome/Opera/Safari */
+        font-style: italic; }
+      .bug-create__form--input::-moz-placeholder {
+        /* Firefox 19+ */
+        font-style: italic; }
+      .bug-create__form--input:-ms-input-placeholder {
+        /* IE 10+ */
+        font-style: italic; }
+      .bug-create__form--input:-moz-placeholder {
+        /* Firefox 18- */
+        font-style: italic; }
     .bug-create__form--textbox {
       padding: 1rem;
       margin: 1rem 0;
@@ -355,6 +375,20 @@ body {
 
 .bugs {
   margin-bottom: 3rem; }
+  .bugs__header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 1rem; }
+    .bugs__header--favorite {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #60646b; }
+    .bugs__header--text {
+      margin-right: 1rem;
+      text-transform: uppercase;
+      font-size: 1.2rem; }
   .bugs__link {
     text-decoration: none;
     display: flex;
@@ -438,6 +472,8 @@ body {
     padding: 2rem;
     border: 1px solid #60646b;
     margin-top: 2rem; }
+  .bug-view__controls {
+    display: flex; }
 
 .form {
   margin-bottom: var(--margin-bottom); }

@@ -127,8 +127,6 @@ module.exports = {
 
   addFavorite: (req, res) => {
     const DATA = req.body;
-    // const BUG_ID = req.body.bug_id;
-    // const USER_ID = req.body.user_id;
     db_connection.query(`
     
        INSERT 
@@ -144,6 +142,41 @@ module.exports = {
         res.json(results);
       }
     });
+  },
+
+  getFavorites: (req, res) => {
+    const ID = req.params.user_id;
+    db_connection.query(`
+    
+       SELECT b.bug_id,
+              CONCAT(u.first_name, ' ', u.last_name) AS posted_by, 
+              error, 
+              traceback, 
+              message, 
+              view_count,
+              bug_created, 
+              COUNT(a.bug_id) AS num_answers
+         FROM bugs AS b 
+    LEFT JOIN answers AS a 
+           ON b.bug_id = a.bug_id 
+    LEFT JOIN users AS u
+           ON b.posted_by = u.user_id
+         JOIN favorites AS f
+           ON b.bug_id = f.bug_id
+        WHERE f.user_id = ?
+     GROUP BY b.bug_id
+     ORDER BY b.bug_created DESC`, [ID], 
+   
+      function(error, results, fields) {
+      if(error) {
+        logger.log('warn', `bug.addFavorite(): ${error}`);
+        res.json(error);
+      }
+      else {
+        res.json(results);
+      }
+    });
+
   },
 
   removeFavorite: (req, res) => {

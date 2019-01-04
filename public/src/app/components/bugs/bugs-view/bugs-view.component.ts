@@ -16,6 +16,7 @@ export class BugsViewComponent implements OnInit {
   user: UserModel;
   isFavorite: Boolean = false;
   showAnswerForm: Boolean = false;
+  showEditBugForm: Boolean = false;
 
   bug: BugModel = {
     bug_id: '',
@@ -93,7 +94,16 @@ export class BugsViewComponent implements OnInit {
   }
 
   toggleForm() {
+    if (this.showEditBugForm) {
+      this.toggleEdit();
+    }
     this.showAnswerForm = !this.showAnswerForm;
+  }
+  toggleEdit() {
+    if (this.showAnswerForm) {
+      this.toggleForm();
+    }
+    this.showEditBugForm = !this.showEditBugForm;
   }
 
   getLikedStatus() {

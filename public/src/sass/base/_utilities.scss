@@ -28,6 +28,10 @@
   margin-top: 2rem;
 }
 
+.u-margin-right {
+  margin-right: 2rem;
+}
+
 .u-loader {
     @include absoluteCenter;
     width: 15rem;
@@ -46,4 +50,8 @@
 
 .u-color-grey {
   color: $color-light-grey !important;
+}
+
+.u-red-bg {
+  background-color: $color-red !important;
 }

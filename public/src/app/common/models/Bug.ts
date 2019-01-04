@@ -36,10 +36,10 @@ export function ValidateNewBug(data: NewBug): NewBugErrors {
     errors.ErrorField = 'Error must be 10 characters or more.'
   }
   if (!data.traceback.length) {
-    errors.TracebackField = 'Traceback is required.';
+    errors.TracebackField = 'Stack trace is required.';
   }
   if (!data.message.length) {
-    errors.MessageField = 'Message is required.';
+    errors.MessageField = 'Comments are required.';
   }
   return errors;
 }

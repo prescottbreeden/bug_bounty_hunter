@@ -43,7 +43,6 @@ export function MapAnswerDatum(data): AnswerModel {
 
 export function MapAnswerData(data): AnswerModel[] {
   let answers = [];
-  console.log('arra?: ', data instanceof Array);
   data.forEach(datum => {
     const answer = {
       answer_id: datum['answer_id'],

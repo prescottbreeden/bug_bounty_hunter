@@ -26,8 +26,9 @@ module.exports = function(app) {
     .get('/api/answers/:id', bug.getAnswer)
     .post('/api/answers', bug.addAnswer)
 
-    .get('/api/bugs/likes/:bug_id/:user_id', bug.isFavorite)
-    .post('/api/bugs/likes', bug.addFavorite)
-    .delete('/api/bugs/likes/:bug_id/:user_id', bug.removeFavorite)
+    .get('/api/bugs/favorites/:bug_id/:user_id', bug.isFavorite)
+    .get('/api/bugs/favorites/:user_id', bug.getFavorites)
+    .post('/api/bugs/favorites', bug.addFavorite)
+    .delete('/api/bugs/favorites/:bug_id/:user_id', bug.removeFavorite)
 
 }

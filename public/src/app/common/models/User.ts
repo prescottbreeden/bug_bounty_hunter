@@ -11,7 +11,7 @@ export interface UserModel {
 export interface UserStats {
   bugs_posted: string | number;
   answers_posted: string | number;
-  bugs_liked: string | number;
+  favorites: string | number;
 }
 
 export interface NewUser {
@@ -41,6 +41,6 @@ export function MapUserStatsData(data): UserStats {
   return {
     bugs_posted: data['bugs'],
     answers_posted: data['answers'],
-    bugs_liked: data['blikes']
+    favorites: data['favorites']
   }
 }

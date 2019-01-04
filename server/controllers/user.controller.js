@@ -10,7 +10,12 @@ const db_connection = mysql.createConnection(config.database);
 module.exports = {
   
   getAll: (req, res) => {
-    db_connection.query('SELECT * FROM users', function(error, results, fields) {
+    db_connection.query(`
+    
+       SELECT * 
+         FROM users`, 
+
+      function(error, results, fields) {
       if(error) {
         logger.log('warn', `users.getAll(): ${error}`);
         res.json(error);
@@ -22,9 +27,15 @@ module.exports = {
   },
 
   getById: (req, res) => {
-    db_connection.query('SELECT * FROM users WHERE user_id = ?', function(error, results, fields) {
+    db_connection.query(`
+
+       SELECT * 
+         FROM users 
+        WHERE user_id = ?`, 
+
+      function(error, results, fields) {
       if(error) {
-        logger.log('warn', `users.getAll(): ${error}`);
+        logger.log('warn', `users.getById(): ${error}`);
         res.json(error);
       }
       else {
@@ -52,7 +63,7 @@ module.exports = {
 
       function(error, results, fields) {
       if(error) {
-        logger.log('warn', `users.getById(): ${error}`);
+        logger.log('warn', `users.getAllUserData(): ${error}`);
         res.json(error);
       }
       else {

@@ -34,14 +34,17 @@ export class BugService {
   }
 
   isFavorite(data) {
-    return this.http.get(`/api/bugs/likes/${data.bug_id}/${data.user_id}`);
+    return this.http.get(`/api/bugs/favorites/${data.bug_id}/${data.user_id}`);
+  }
+  getFavorites(id: string | number) {
+    return this.http.get('/api/bugs/favorites/' + id);
   }
 
   addFavorite(data: any) {
-    return this.http.post('/api/bugs/likes', data);
+    return this.http.post('/api/bugs/favorites', data);
   }
 
   removeFavorite(data: any) {
-    return this.http.delete(`/api/bugs/likes/${data.bug_id}/${data.user_id}`);
+    return this.http.delete(`/api/bugs/favorites/${data.bug_id}/${data.user_id}`);
   }
 }
