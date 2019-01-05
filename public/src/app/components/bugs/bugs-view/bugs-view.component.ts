@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { AuthService } from 'src/app/common/services/auth.service';
 import { BugService } from 'src/app/common/services/bug.service';
-import { BugModel } from 'src/app/common/models/Bug';
+import { BugModel, NewBugErrors, ValidateNewBug, MapBugData } from 'src/app/common/models/Bug';
 import { NewAnswer, AnswerModel, MapAnswerDatum, NewAnswerErrors, ValidateNewAnswer } from 'src/app/common/models/Answer';
 import { buildBugObject } from 'src/app/common/models/Helpers';
 import { UserModel, MapUserData } from 'src/app/common/models/User';
 import { isNull } from 'util';
+import { BuiltinFunctionCall } from '@angular/compiler/src/compiler_util/expression_converter';
 
 @Component({
   selector: 'app-bugs-view',
@@ -21,6 +22,7 @@ export class BugsViewComponent implements OnInit {
   bug: BugModel = {
     bug_id: '',
     posted_by: '',
+    posted_name: '',
     error: '',
     traceback: '',
     message: '',
@@ -29,6 +31,8 @@ export class BugsViewComponent implements OnInit {
     bug_updated: '',
     num_answers: '',
   };
+
+  editBug: BugModel;
 
   answers: AnswerModel[] = [
     { 
@@ -47,8 +51,14 @@ export class BugsViewComponent implements OnInit {
     answer_content: ''
   };
 
-  formErrors: NewAnswerErrors = {
+  answerFormErrors: NewAnswerErrors = {
     ContentField: null
+  }
+
+  editFormErrors: NewBugErrors = {
+    ErrorField: null,
+    TracebackField: null,
+    MessageField: null
   }
 
   constructor(
@@ -72,9 +82,25 @@ export class BugsViewComponent implements OnInit {
   }
   
   onSubmitAnswer() {
-    this.formErrors = ValidateNewAnswer(this.newAnswer);
-    if (this.formErrors.ContentField === null) {
+    this.answerFormErrors = ValidateNewAnswer(this.newAnswer);
+    if (this.answerFormErrors.ContentField === null) {
       this.createAnswer();
+    }
+  }
+  onEditBug() {
+    this.editFormErrors = ValidateNewBug(this.editBug);
+    if (this.editFormErrors.ErrorField === null 
+      && this.editFormErrors.MessageField === null 
+      && this.editFormErrors.TracebackField === null) {
+      this.editBug.traceback = JSON.stringify(this.editBug.traceback);
+      this.editBug.message = JSON.stringify(this.editBug.message);
+      this.bugService.updateBug(this.editBug)
+        .subscribe(res => {
+          console.log('bug updated: ', res);
+        });
+      this.toggleEdit();
+      this.router.navigate(['/bugs/' + this.bug.bug_id]);
+      this.getBugData();
     }
   }
 
@@ -122,6 +148,7 @@ export class BugsViewComponent implements OnInit {
       .subscribe(res => {
         const DATA = buildBugObject(res);
         this.bug = DATA.bug;
+        this.editBug = { ...this.bug };
         this.answers = DATA.answers;
         this.newAnswer.answered_by = this.user.user_id;
         this.newAnswer.bug_id = this.bug.bug_id;

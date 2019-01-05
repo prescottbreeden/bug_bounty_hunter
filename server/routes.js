@@ -18,10 +18,10 @@ module.exports = function(app) {
     .post('/authservice/authenticate', auth.login)
 
     .get('/api/bugs', bug.getAll)
-    .get('/api/bugs/:id', bug.getById)
+    .get('/api/bugs/:bug_id', bug.getById)
     .post('/api/bugs', bug.create)
-    .put('/api/bugs/:id', bug.update)
-    .delete('/api/bugs/:id', bug.delete)
+    .put('/api/bugs/:bug_id', bug.update)
+    .delete('/api/bugs/:bug_id', bug.delete)
 
     .get('/api/answers/:id', bug.getAnswer)
     .post('/api/answers', bug.addAnswer)

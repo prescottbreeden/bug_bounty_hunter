@@ -10,7 +10,8 @@ module.exports = {
     db_connection.query(`
 
        SELECT b.bug_id, 
-              CONCAT(u.first_name, ' ', u.last_name) AS posted_by, 
+              posted_by,
+              CONCAT(u.first_name, ' ', u.last_name) AS posted_name, 
               error, 
               traceback, 
               message, 
@@ -37,12 +38,13 @@ module.exports = {
   },
 
   getById: (req, res) => {
-    const ID = req.params.id;
+    const ID = req.params.bug_id;
     incrementCounter(ID);
     db_connection.query(`
     
        SELECT b.bug_id, 
-              CONCAT(u.first_name, ' ', u.last_name) AS posted_by,
+              posted_by,
+              CONCAT(u.first_name, ' ', u.last_name) AS posted_name, 
               error, 
               traceback, 
               message, 
@@ -88,14 +90,31 @@ module.exports = {
         res.json(error);
       }
       else {
-        console.log('------ NEW BUG CREATED ------ ');
         res.json(results);
       }
     });
   },
 
   update: (req, res) => {
-    res.json('route not finished');
+    const ID = req.params.bug_id;
+    const { error, traceback, message } = req.body;
+    db_connection.query(`
+    
+       UPDATE bugs
+          SET error = ?,
+              traceback = ?,
+              message = ?
+        WHERE bug_id = ?`, [error, traceback, message, ID], 
+
+      function(error, results, fields) {
+      if (error) {
+        logger.log('warn', `bug.update(): ${error}`);
+        res.json(error);
+      }
+      else {
+        res.json(results);
+      }
+    });
   },
 
   delete: (req, res) => {
@@ -149,7 +168,8 @@ module.exports = {
     db_connection.query(`
     
        SELECT b.bug_id,
-              CONCAT(u.first_name, ' ', u.last_name) AS posted_by, 
+              posted_by,
+              CONCAT(u.first_name, ' ', u.last_name) AS posted_name, 
               error, 
               traceback, 
               message, 

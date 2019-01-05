@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NewBug, BugModel } from '../../common/models/Bug';
 import { NewAnswer } from '../../common/models/Answer';
-import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -23,14 +22,14 @@ export class BugService {
   updateBug(bug: BugModel) {
     return this.http.put('/api/bugs/' + bug.bug_id, bug);
   }
-  deleteBug(id: string | number) {
-    return this.http.delete('/api/bugs/' + id);
+  deleteBug(bug_id: string | number) {
+    return this.http.delete('/api/bugs/' + bug_id);
   }
   addAnswer(newAnswer: NewAnswer) {
     return this.http.post('/api/answers', newAnswer);
   }
-  getAnswer(id: string | number) {
-    return this.http.get('/api/answers/' + id);
+  getAnswer(answer_id: string | number) {
+    return this.http.get('/api/answers/' + answer_id);
   }
 
   isFavorite(data) {

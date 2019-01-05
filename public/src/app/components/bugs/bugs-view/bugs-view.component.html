@@ -17,7 +17,7 @@
       
       <h5 class="bug-view__created"> 
         <span class="u-color-grey">by</span>
-        {{ bug.posted_by }}
+        {{ bug.posted_name }}
       </h5>
     </div>
   </div>
@@ -45,11 +45,12 @@
     </svg>
   </div>
   <div 
+    *ngIf="user.user_id == bug.posted_by"
     class="bug-create__btn--toggle" 
     [class.u-red-bg]="showEditBugForm"
     (click)="toggleEdit()">
     <p *ngIf="!showEditBugForm">Edit Bug</p>
-    <p *ngIf="showEditBugForm">Hide Edit Bug</p>
+    <p *ngIf="showEditBugForm">Cancel</p>
     <svg class="bug-create__icon" [class.u-rotate90]="showEditBugForm">
       <use xlink:href="assets/img/icons/sprite.svg#icon-chevron-right"></use>
     </svg>
@@ -60,7 +61,7 @@
 <div *ngIf="showEditBugForm" class="row">
   <div class="bug-create col-2-of-4">
     <form 
-      (submit)="onSubmitBug()" 
+      (submit)="onEditBug()" 
       class="bug-create__form">
       <input 
         type="hidden" 
@@ -71,18 +72,18 @@
       </div>
       <div class="bug-create__form--row">
         <input 
-          [(ngModel)]="bug.error"
+          [(ngModel)]="editBug.error"
           #title="ngModel"
-          name="bug.error"
+          name="editBug.error"
           placeholder="Define error here ..."
           type="text" 
           class="bug-create__form--input" 
           id="title">
       </div>
       <div 
-        *ngIf="formErrors.ErrorField" 
+        *ngIf="editFormErrors.ErrorField" 
         class="reg__form--error">
-        {{ formErrors.ErrorField }}
+        {{ editFormErrors.ErrorField }}
       </div>
       <div class="u-spacer"></div>
       <div class="bug-create__form--row">
@@ -90,9 +91,9 @@
       </div>
       <div class="bug-create__form--row">
           <quill-editor 
-            [(ngModel)]="bug.traceback"
+            [(ngModel)]="editBug.traceback"
             #traceback="ngModel"
-            name="bug.traceback"
+            name="editBug.traceback"
             type="text" 
             [style]="{ 'border-radius': '5px', 'height': '20rem' }"
             id="traceback">
@@ -103,8 +104,8 @@
             </div>
           </quill-editor>
       </div>
-      <div *ngIf="formErrors.TracebackField" class="reg__form--error">
-        {{ formErrors.TracebackField }}
+      <div *ngIf="editFormErrors.TracebackField" class="reg__form--error">
+        {{ editFormErrors.TracebackField }}
       </div>
       <div class="u-spacer"></div>
       <div class="bug-create__form--row">
@@ -112,9 +113,9 @@
       </div>
       <div class="bug-create__form--row">
           <quill-editor 
-            [(ngModel)]="bug.message"
+            [(ngModel)]="editBug.message"
             #message="ngModel"
-            name="bug.message"
+            name="editBug.message"
             type="text" 
             [style]="{ 'border-radius': '5px', 'height': '20rem' }"
             id="traceback">
@@ -125,11 +126,11 @@
             </div>
           </quill-editor>
       </div>
-      <div *ngIf="formErrors.MessageField" class="reg__form--error">
-        {{ formErrors.MessageField }}
+      <div *ngIf="editFormErrors.MessageField" class="reg__form--error">
+        {{ editFormErrors.MessageField }}
       </div>
       <div class="u-spacer"></div>
-      <button [disabled]="showEditBugForm" class="bug-create__btn">Save Bug Data</button>
+      <button class="bug-create__btn">Save Bug Data</button>
     </form>
   </div>
   <div class="bug-create__info col-2-of-4">
@@ -222,7 +223,7 @@
           </quill-editor>
         </div>
         <div *ngIf="formErrors.ContentField" class="reg__form--error">
-          {{ formErrors.ContentField }}
+          {{ answerFormErrors.ContentField }}
         </div>
         <div class="u-spacer"></div>
         <button class="bug-create__btn">Add Answer</button>
