@@ -52,7 +52,8 @@ module.exports = {
               bug_created, 
               bug_updated, 
               answer_id,
-              CONCAT(u2.first_name, ' ', u2.last_name) AS answered_by,
+              CONCAT(u2.first_name, ' ', u2.last_name) AS answered_name,
+              answered_by,
               answer_content,
               answer_created,
               answer_updated
@@ -63,7 +64,8 @@ module.exports = {
            ON b.posted_by = u.user_id 
     LEFT JOIN users AS u2
            ON a.answered_by = u2.user_id
-        WHERE b.bug_id = ?`, [ID], 
+        WHERE b.bug_id = ?
+     ORDER BY a.answer_created`, [ID], 
    
       function(error, results, fields) {
       if(error) {
@@ -254,6 +256,30 @@ module.exports = {
         res.json(results);
       }
     })
+  },
+
+  updateAnswer: (req, res) => {
+    const ID = req.params.answer_id;
+    const { answer_content } = req.body;
+    db_connection.query(`
+    
+       UPDATE answers
+          SET answer_content = ?
+        WHERE answer_id = ?`, [answer_content, ID], 
+
+      function(error, results, fields) {
+      if (error) {
+        logger.log('warn', `bug.update(): ${error}`);
+        res.json(error);
+      }
+      else {
+        res.json(results);
+      }
+    });
+  },
+
+  deleteAnswer: (req, res) => {
+    console.log('route not finished');
   }
 
 };

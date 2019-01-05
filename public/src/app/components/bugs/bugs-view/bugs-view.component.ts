@@ -7,17 +7,18 @@ import { NewAnswer, AnswerModel, MapAnswerDatum, NewAnswerErrors, ValidateNewAns
 import { buildBugObject } from 'src/app/common/models/Helpers';
 import { UserModel, MapUserData } from 'src/app/common/models/User';
 import { isNull } from 'util';
-import { BuiltinFunctionCall } from '@angular/compiler/src/compiler_util/expression_converter';
 
 @Component({
   selector: 'app-bugs-view',
   templateUrl: './bugs-view.component.html',
 })
 export class BugsViewComponent implements OnInit {
-  user: UserModel;
   isFavorite: Boolean = false;
-  showAnswerForm: Boolean = false;
-  showEditBugForm: Boolean = false;
+  showEditBugForm: boolean = false;
+  showAnswerForm: boolean = false;
+  editAnswer: boolean = false;
+
+  user: UserModel;
 
   bug: BugModel = {
     bug_id: '',
@@ -39,6 +40,7 @@ export class BugsViewComponent implements OnInit {
       answer_id: '',
       bug_id: '',
       answered_by: '',
+      answered_name: '',
       answer_content: '',
       answer_created: '',
       answer_updated: '',
@@ -50,6 +52,8 @@ export class BugsViewComponent implements OnInit {
     answered_by: '',
     answer_content: ''
   };
+
+  updatedAnswer: AnswerModel;
 
   answerFormErrors: NewAnswerErrors = {
     ContentField: null
@@ -81,13 +85,22 @@ export class BugsViewComponent implements OnInit {
     });
   }
   
+  // -------------------------------------------- //
+  //              HTML EVENT LISTENERS            //
+  // -------------------------------------------- //
   onSubmitAnswer() {
     this.answerFormErrors = ValidateNewAnswer(this.newAnswer);
     if (this.answerFormErrors.ContentField === null) {
-      this.createAnswer();
+      return this.createAnswer();
     }
   }
-  onEditBug() {
+  onSubmitAnswerEdit() {
+    this.answerFormErrors = ValidateNewAnswer(this.updatedAnswer);
+    if (this.answerFormErrors.ContentField === null) {
+      return this.updateAnswer();
+    }
+  }
+  onSubmitBugEdit() {
     this.editFormErrors = ValidateNewBug(this.editBug);
     if (this.editFormErrors.ErrorField === null 
       && this.editFormErrors.MessageField === null 
@@ -103,7 +116,75 @@ export class BugsViewComponent implements OnInit {
       this.getBugData();
     }
   }
+  onEditAnswer(answer_id) {
+    this.updatedAnswer = this.answers.filter(ele => {
+      return ele.answer_id === answer_id;
+    })[0];
+    this.toggleForm();
+    this.editAnswer = true;
+  }
 
+
+  // -------------------------------------------- //
+  //              toggle form methods             //
+  // -------------------------------------------- //
+  toggleForm() {
+    if (this.editAnswer) {
+      this.editAnswer = false;
+    }
+    if (this.showEditBugForm) {
+      this.toggleEdit();
+    }
+    this.showAnswerForm = !this.showAnswerForm;
+  }
+  toggleEdit() {
+    if (this.showAnswerForm) {
+      this.toggleForm();
+    }
+    this.showEditBugForm = !this.showEditBugForm;
+  }
+
+
+  // -------------------------------------------- //
+  //              BUG API METHODS                 //
+  // -------------------------------------------- //
+  getLikedStatus() {
+    this.bugService.isFavorite({
+      bug_id: this.bug.bug_id, 
+      user_id: this.user.user_id
+    }).subscribe(res => {
+        if(res[0] && res[0].hasOwnProperty('user_id')) {
+          this.isFavorite = true;
+        }
+      });
+  }
+  getBugData() {
+    this.bugService.getBugById(this.bug.bug_id)
+      .subscribe(res => {
+        const DATA = buildBugObject(res);
+        this.bug = DATA.bug;
+        this.editBug = { ...this.bug };
+        this.answers = DATA.answers;
+        this.newAnswer.answered_by = this.user.user_id;
+        this.newAnswer.bug_id = this.bug.bug_id;
+      });
+  }
+  likeBug() {
+    this.bugService.addFavorite({
+      bug_id: this.bug.bug_id,
+      user_id: this.user.user_id
+    }).subscribe(res => {
+      this.isFavorite = true;
+    })
+  }
+  dislikeBug() {
+    this.bugService.removeFavorite({
+      bug_id: this.bug.bug_id,
+      user_id: this.user.user_id
+    }).subscribe(res => {
+      this.isFavorite = false;
+    })
+  }
   createAnswer() {
     this.newAnswer.answer_content = JSON.stringify(this.newAnswer.answer_content);
     this.bugService.addAnswer(this.newAnswer).subscribe(res => {
@@ -118,59 +199,15 @@ export class BugsViewComponent implements OnInit {
     this.newAnswer.answer_content = '';
     this.toggleForm();
   }
-
-  toggleForm() {
-    if (this.showEditBugForm) {
-      this.toggleEdit();
-    }
-    this.showAnswerForm = !this.showAnswerForm;
-  }
-  toggleEdit() {
-    if (this.showAnswerForm) {
-      this.toggleForm();
-    }
-    this.showEditBugForm = !this.showEditBugForm;
-  }
-
-  getLikedStatus() {
-    this.bugService.isFavorite({
-      bug_id: this.bug.bug_id, 
-      user_id: this.user.user_id
-    }).subscribe(res => {
-        if(res[0] && res[0].hasOwnProperty('user_id')) {
-          this.isFavorite = true;
-        }
-      });
-  }
-
-  getBugData() {
-    this.bugService.getBugById(this.bug.bug_id)
+  updateAnswer() {
+    this.updatedAnswer.answer_content = JSON.stringify(this.updatedAnswer.answer_content);
+    this.bugService.updateAnswer(this.updatedAnswer)
       .subscribe(res => {
-        const DATA = buildBugObject(res);
-        this.bug = DATA.bug;
-        this.editBug = { ...this.bug };
-        this.answers = DATA.answers;
-        this.newAnswer.answered_by = this.user.user_id;
-        this.newAnswer.bug_id = this.bug.bug_id;
+        console.log(res);
       });
-  }
-
-  likeBug() {
-    this.bugService.addFavorite({
-      bug_id: this.bug.bug_id,
-      user_id: this.user.user_id
-    }).subscribe(res => {
-      this.isFavorite = true;
-    })
-  }
-
-  dislikeBug() {
-    this.bugService.removeFavorite({
-      bug_id: this.bug.bug_id,
-      user_id: this.user.user_id
-    }).subscribe(res => {
-      this.isFavorite = false;
-    })
+    this.toggleForm();
+    this.editAnswer = false;
+    this.updatedAnswer.answer_content = JSON.parse(this.updatedAnswer.answer_content);
   }
 }
 

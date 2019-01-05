@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NewBug, BugModel } from '../../common/models/Bug';
-import { NewAnswer } from '../../common/models/Answer';
+import { NewAnswer, AnswerModel } from '../../common/models/Answer';
 
 @Injectable({
   providedIn: 'root'
@@ -25,12 +25,18 @@ export class BugService {
   deleteBug(bug_id: string | number) {
     return this.http.delete('/api/bugs/' + bug_id);
   }
-  addAnswer(newAnswer: NewAnswer) {
-    return this.http.post('/api/answers', newAnswer);
-  }
+
+
   getAnswer(answer_id: string | number) {
     return this.http.get('/api/answers/' + answer_id);
   }
+  addAnswer(newAnswer: NewAnswer) {
+    return this.http.post('/api/answers', newAnswer);
+  }
+  updateAnswer(answer: AnswerModel) {
+    return this.http.put('/api/answers/' + answer.answer_id, answer);
+  }
+
 
   isFavorite(data) {
     return this.http.get(`/api/bugs/favorites/${data.bug_id}/${data.user_id}`);
@@ -38,11 +44,9 @@ export class BugService {
   getFavorites(id: string | number) {
     return this.http.get('/api/bugs/favorites/' + id);
   }
-
   addFavorite(data: any) {
     return this.http.post('/api/bugs/favorites', data);
   }
-
   removeFavorite(data: any) {
     return this.http.delete(`/api/bugs/favorites/${data.bug_id}/${data.user_id}`);
   }

@@ -25,6 +25,7 @@ module.exports = function(app) {
 
     .get('/api/answers/:id', bug.getAnswer)
     .post('/api/answers', bug.addAnswer)
+    .put('/api/answers/:answer_id', bug.updateAnswer)
 
     .get('/api/bugs/favorites/:bug_id/:user_id', bug.isFavorite)
     .get('/api/bugs/favorites/:user_id', bug.getFavorites)

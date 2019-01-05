@@ -490,6 +490,9 @@ body {
 
 .answers {
   margin: 2rem; }
+  .answers__group {
+    display: flex;
+    align-items: flex-start; }
   .answers__row {
     margin-top: 1rem;
     padding: 2rem;
@@ -499,6 +502,14 @@ body {
     align-items: flex-start; }
     .answers__row--cluster {
       display: flex; }
+  .answers__icon--edit {
+    margin-top: .3rem;
+    height: 2rem;
+    width: 2rem;
+    fill: #60646b; }
+    .answers__icon--edit:hover {
+      cursor: pointer;
+      fill: #FC3C3C; }
   .answers__icon--unliked {
     display: inline-block;
     height: 3rem;

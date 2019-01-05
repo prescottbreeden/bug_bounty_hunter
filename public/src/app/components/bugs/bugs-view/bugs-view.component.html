@@ -37,7 +37,7 @@
     [class.u-red-bg]="showAnswerForm"
     (click)="toggleForm()">
     <p *ngIf="!showAnswerForm">Add Answer</p>
-    <p *ngIf="showAnswerForm">Hide Form</p>
+    <p *ngIf="showAnswerForm">Cancel</p>
     <svg 
       class="bug-create__icon" 
       [class.u-rotate90]="showAnswerForm">
@@ -61,7 +61,7 @@
 <div *ngIf="showEditBugForm" class="row">
   <div class="bug-create col-2-of-4">
     <form 
-      (submit)="onEditBug()" 
+      (submit)="onSubmitBugEdit()" 
       class="bug-create__form">
       <input 
         type="hidden" 
@@ -190,7 +190,83 @@
 </div>
 
 
-  <div *ngIf="showAnswerForm" class="row bug-create__form--block">
+  <div *ngIf="showAnswerForm && editAnswer" class="row bug-create__form--block">
+    <div class="bug-create col-2-of-4">
+      <form 
+        (submit)="onSubmitAnswerEdit()" 
+        class="bug-create__form">
+        <input 
+          type="hidden" 
+          [(ngModel)]="updatedAnswer.posted_by" 
+          name="updatedAnswer.posted_by">
+        <input 
+          type="hidden" 
+          [(ngModel)]="updatedAnswer.bug_id" 
+          name="updatedAnswer.bug_id">
+        <div class="bug-create__form--row">
+          <h4 class="bug-create__info--header">Edit Answer</h4>
+        </div>
+        <div class="form__row">
+          <quill-editor 
+            [(ngModel)]="updatedAnswer.answer_content"
+            #content="ngModel"
+            name="updatedAnswer.answer_content"
+            [style]="{height: '250px'}"
+            id="content">
+            <div quill-editor-toolbar>
+              <span class="ql-formats">
+                <button class="ql-bold" [title]="'Bold'"></button>
+                <button class="ql-italic" [title]="'Italic'"></button>
+                <button class="ql-code-block" [title]="'Code Block'"></button>
+              </span>
+            </div>
+          </quill-editor>
+        </div>
+        <div *ngIf="answerFormErrors.ContentField" class="reg__form--error">
+          {{ answerFormErrors.ContentField }}
+        </div>
+        <div class="u-spacer"></div>
+        <button class="bug-create__btn">Add Answer</button>
+      </form>
+    </div>
+    <div class="bug-create__info col-2-of-4">
+      <h4 class="bug-create__info--header">Things to Consider</h4>
+      <div class="bug-create__info--list">
+        <div class="bug-create__info--row">
+          <img src="assets/img/target_50px.png" alt="target" class="bug-create__bullseye">
+          <p class="bug-create__info--bullet-title">Look for Typos</p> 
+        </div>
+        <div class="bug-create__info--row">
+          <p class="bug-create__info--text">
+            The majority of bugs are usually a typo of some sort, so be 
+            on the prowl for them, especially if your first reaction is 
+            'hmm, the code looks good'.
+          </p>
+        </div> 
+        <div class="bug-create__info--row">
+          <img src="assets/img/target_50px.png" alt="target" class="bug-create__bullseye">
+          <p class="bug-create__info--bullet-title">Need More Info?</p> 
+        </div>
+        <div class="bug-create__info--row">
+          <p class="bug-create__info--text">
+            It is normal to sometimes need more information when you 
+            are trying to help solve a bug. Feel free to ask if you 
+            think it will help!
+          </p>
+        </div> 
+        <div class="bug-create__info--row">
+          <img src="assets/img/target_50px.png" alt="target" class="bug-create__bullseye">
+          <p class="bug-create__info--bullet-title">Brevity is the Soul of Wit</p> 
+        </div>
+        <div class="bug-create__info--row">
+          <p class="bug-create__info--text">
+            Don't write a book; ain't nobody's got times for that.
+          </p>
+        </div> 
+      </div>
+    </div>
+  </div>
+  <div *ngIf="showAnswerForm && !editAnswer" class="row bug-create__form--block">
     <div class="bug-create col-2-of-4">
       <form 
         (submit)="onSubmitAnswer()" 
@@ -222,7 +298,7 @@
             </div>
           </quill-editor>
         </div>
-        <div *ngIf="formErrors.ContentField" class="reg__form--error">
+        <div *ngIf="answerFormErrors.ContentField" class="reg__form--error">
           {{ answerFormErrors.ContentField }}
         </div>
         <div class="u-spacer"></div>
@@ -269,13 +345,21 @@
 </div>
   <div *ngIf="answers[0] && answers[0].answer_content !== null" class="answers">
     <div *ngFor="let answer of answers" class="answers__row">
-      <div 
-        [innerHtml]="answer['answer_content']"
-        class="answers__content">
+      <div class="answers__group">
+        <svg 
+          *ngIf="answer.answered_by == user.user_id" 
+          (click)="onEditAnswer(answer.answer_id)" 
+          class="answers__icon--edit">
+          <use xlink:href="assets/img/icons/sprite.svg#icon-pencil"></use>
+        </svg>
+        <div 
+          [innerHtml]="answer['answer_content']"
+          class="answers__content">
+        </div>
       </div>
       <div class="answers__info">
         <p> <span class="u-color-grey">posted</span> {{ answer.answer_created | timeAgo }} </p>
-        <div class="answered_by"> {{ answer.answered_by }} </div>
+        <div class="answers__answered_by"> {{ answer.answered_name }} </div>
       </div>
     </div>
   </div>
