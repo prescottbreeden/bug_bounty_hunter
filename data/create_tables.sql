@@ -9,6 +9,8 @@ CREATE TABLE users (
   email         VARCHAR(255)  NOT NULL,
   password      VARCHAR(255)  NOT NULL,
   admin         TINYINT(1)    NOT NULL  DEFAULT 0,
+  profile_img   VARCHAR(255)  NOT NULL  DEFAULT 'assets/img/ninja2.png',
+  konami_unlock TINYINT(1)    NOT NULL  DEFAULT 0,
   user_created  TIMESTAMP     NOT NULL  DEFAULT NOW(),
   user_updated  TIMESTAMP     NOT NULL  DEFAULT NOW()   ON UPDATE NOW()
 );

@@ -1,48 +1,47 @@
 <h2 class="u-header--primary">{{ user.first_name }} {{ user.last_name }}'s Profile</h2>
 <div class="profile">
-  <div class="row">
-    <div class="col-2-of-4">
-      <div class="profile__image">
-        <img src="assets/img/ninja2.png" alt="avatar">
+
+  <div class="profile__image">
+    <img src={{user.profile_img}} alt="avatar">
+  </div>
+
+  <div class="col-2-of-4">
+    <div class="profile__info">
+      <div class="profile__row">
+        <div class="profile__item">Name: </div>
+        <div class="profile__item">
+          {{ user.first_name}} {{ user.last_name }} 
+        </div>
+      </div>
+      <div class="profile__row">
+        <div class="profile__item">Email:</div>
+        <div class="profile__item">{{ user.email }} </div>
+      </div>
+      <div class="profile__row">
+        <div class="profile__item">Created:</div>
+        <div class="profile__item">{{ user.created_at | timeAgo }} </div>
+      </div>
+      <div class="profile__row">
+        <div class="profile__item">Updated:</div>
+        <div class="profile__item">{{ user.updated_at | timeAgo }} </div>
       </div>
     </div>
-    <div class="col-2-of-4">
-      <div class="profile__info">
-        <div class="profile__row">
-          <div class="profile__item">Name: </div>
-          <div class="profile__item">
-            {{ user.first_name}} {{ user.last_name }} 
-          </div>
-        </div>
-        <div class="profile__row">
-          <div class="profile__item">Email:</div>
-          <div class="profile__item">{{ user.email }} </div>
-        </div>
-        <div class="profile__row">
-          <div class="profile__item">Created:</div>
-          <div class="profile__item">{{ user.created_at | timeAgo }} </div>
-        </div>
-        <div class="profile__row">
-          <div class="profile__item">Updated:</div>
-          <div class="profile__item">{{ user.updated_at | timeAgo }} </div>
-        </div>
+    <div class="profile__info">
+      <div class="profile__row">
+        <div class="profile__item">Bugs posted:</div>
+        <div class="profile__item">{{ stats.bugs_posted }}</div>
       </div>
-      <div class="profile__info">
-        <div class="profile__row">
-          <div class="profile__item">Bugs posted:</div>
-          <div class="profile__item">{{ stats.bugs_posted }}</div>
-        </div>
-        <div class="profile__row">
-          <div class="profile__item">Bugs answered:</div>
-          <div class="profile__item">{{ stats.answers_posted }}</div>
-        </div>
-        <div class="profile__row">
-          <div class="profile__item">Bugs favorited:</div>
-          <div class="profile__item">{{ stats.favorites }}</div>
-        </div>
+      <div class="profile__row">
+        <div class="profile__item">Bugs answered:</div>
+        <div class="profile__item">{{ stats.answers_posted }}</div>
+      </div>
+      <div class="profile__row">
+        <div class="profile__item">Bugs favorited:</div>
+        <div class="profile__item">{{ stats.favorites }}</div>
       </div>
     </div>
   </div>
+
   <button [disabled]="true" class="profile__btn">
     <svg class="profile__btn--icon">
       <use xlink:href="assets/img/icons/sprite.svg#icon-pencil"></use>

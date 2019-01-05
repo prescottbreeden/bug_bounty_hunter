@@ -11,6 +11,8 @@ function User(user) {
     last_name: user['last_name'],
     email: user['email'],
     admin: user['admin'],
+    profile_img: user['profile_img'],
+    konami_unlock: user['konami_unlock'],
     user_created: user['user_created'],
     user_updated: user['user_updated']
   }

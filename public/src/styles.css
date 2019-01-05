@@ -538,8 +538,10 @@ body {
   font-size: 3.5rem;
   margin-bottom: 3rem; }
 
-.profile__image img {
-  width: 100%; }
+.profile__image {
+  text-align: center; }
+  .profile__image img {
+    width: 25%; }
 
 .profile__row {
   display: flex;

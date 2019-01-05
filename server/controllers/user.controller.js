@@ -78,7 +78,8 @@ module.exports = {
 
        SELECT COUNT(DISTINCT b.bug_id) AS bugs,
               COUNT(DISTINCT answer_id) AS answers,
-              COUNT(DISTINCT favorite_id) AS favorites
+              COUNT(DISTINCT favorite_id) AS favorites,
+              konami_unlock
          FROM users AS u
     LEFT JOIN bugs AS b
            ON b.posted_by = user_id

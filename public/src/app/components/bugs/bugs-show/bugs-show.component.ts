@@ -1,4 +1,4 @@
-import { Component, OnInit, } from '@angular/core';
+import { Component, OnInit, HostListener, } from '@angular/core';
 import { AuthService } from 'src/app/common/services/auth.service';
 import { Router } from '@angular/router';
 import { BugService } from 'src/app/common/services/bug.service';
@@ -16,6 +16,21 @@ export class BugsShowComponent implements OnInit {
   fBugs: BugModel[] = [];
   searchText: string = '';
   showFavorites: boolean = false;
+  index: number = 0;
+
+  troll: string[] = [
+    "Me not that kind of Orc.",
+    "Poke, poke, poke, is that all you do?",
+    "Ooo, that was kinda nice.",
+    "You're the king? Well I didn't vote for you",
+    "Help, help! I'm being repressed!",
+    "Moose bites can be pretti nasti.",
+    "I never say 'Ni'.",
+    "It's only a flesh wound.",
+    "Norwegian Blue, lovely plumage.",
+    "Spam, spam, spam, spam, spam, spam, spam, spam..."
+  ];
+
 
   constructor(
     private authService: AuthService,
@@ -49,5 +64,14 @@ export class BugsShowComponent implements OnInit {
   toggleFavorites() {
     this.showFavorites = !this.showFavorites;
   }
+  
+  triggerAlert() {
+    alert(this.troll[this.index]);
+    this.index++;
+    this.index = this.index % 10;
+  }
+
+
+
 
 }

@@ -12,7 +12,9 @@
 
 </section>
 <div class="search">
-  <button class="search__btn">Live Search</button>
+  <button 
+    (click)="triggerAlert()"
+    class="search__btn">Live Search</button>
   <input 
     [(ngModel)]="searchText"
     type="text" 
