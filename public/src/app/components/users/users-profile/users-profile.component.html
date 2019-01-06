@@ -2,63 +2,70 @@
   <div class="profile__container">
 
     <div class="profile__avatar">
-      <div class="profile__image">
+      <div (click)="editProfilePic()" class="profile__image">
         <img src={{user.profile_img}} alt="avatar">
-      </div>
-      <h3 *ngIf="stats.konami_unlock" class="u-header--secondary">Grand Master</h3>
-      <h3 *ngIf="!stats.konami_unlock" class="u-header--secondary">{{ user.faction_name }}</h3>
-
-      <button [disabled]="true" class="profile__btn">
-        <svg class="profile__btn--icon">
+        <svg class="profile__image--icon">
           <use xlink:href="assets/img/icons/sprite.svg#icon-pencil"></use>
         </svg>
-        <span class="profile__btn--text">Edit Profile</span>
-      </button>
+      </div>
+      <h3 *ngIf="stats.konami_unlock" class="profile__avatar--title">Grand Master</h3>
+      <h3 *ngIf="!stats.konami_unlock" class="profile__avatar--title">{{ user.faction_name }}</h3>
+
     </div>
 
-  <div class="profile__group">
 
     <div class="profile__info">
+
       <div class="profile__row">
-        <div class="profile__item">Name: </div>
-        <div class="profile__item">
-          {{ user.first_name}} {{ user.last_name }} 
-        </div>
+        <div class="profile__item">Highest Achievement:</div>
+        <div class="profile__item">{{ bestTitle }}</div>
       </div>
+
+      <div class="u-divider u-color-white">
+
+        <div class="profile__row">
+          <div class="profile__item">Name: </div>
+          <div class="profile__row--cluster">
+            <div class="profile__item">
+              {{ user.first_name}} {{ user.last_name }} 
+            </div>
+            <svg 
+              (click)="editName()" 
+              class="profile__icon--edit">
+              <use xlink:href="assets/img/icons/sprite.svg#icon-pencil"></use>
+            </svg>
+          </div>            
+        </div>
+
+        <div class="profile__row">
+          <div class="profile__item">Email:</div>
+          <div class="profile__row--cluster">
+            <div class="profile__item">{{ user.email }} </div>
+            <svg 
+              (click)="editEmail()" 
+              class="profile__icon--edit">
+              <use xlink:href="assets/img/icons/sprite.svg#icon-pencil"></use>
+            </svg>
+          </div>
+        </div>
+
+        <div class="profile__row">
+          <div class="profile__item">Created:</div>
+          <div class="profile__item">{{ user.created_at | timeAgo }} </div>
+        </div>
+      
+      </div>
+
       <div class="profile__row">
-        <div class="profile__item">Email:</div>
-        <div class="profile__item">{{ user.email }} </div>
+        <div class="profile__item">Bugs Posted:</div>
+        <div class="profile__item">{{ stats.bugs_posted }}</div>
       </div>
+
       <div class="profile__row">
-        <div class="profile__item">Created:</div>
-        <div class="profile__item">{{ user.created_at | timeAgo }} </div>
+        <div class="profile__item">Bugs Answered:</div>
+        <div class="profile__item">{{ stats.answers_posted }}</div>
       </div>
-      <div class="profile__row">
-        <div class="profile__item">Updated:</div>
-        <div class="profile__item">{{ user.updated_at | timeAgo }} </div>
-      </div>
-    </div>
-    <div class="u-divider u-color-white">
-      <div class="profile__info">
-        <div class="profile__row">
-          <div class="profile__item">Title:</div>
-          <div class="profile__item">{{ bestTitle }}</div>
-        </div>
-        <div class="profile__row">
-          <div class="profile__item">Bugs posted:</div>
-          <div class="profile__item">{{ stats.bugs_posted }}</div>
-        </div>
-        <div class="profile__row">
-          <div class="profile__item">Bugs answered:</div>
-          <div class="profile__item">{{ stats.answers_posted }}</div>
-        </div>
-        <div class="profile__row">
-          <div class="profile__item">Bugs favorited:</div>
-          <div class="profile__item">{{ stats.favorites }}</div>
-        </div>
-      </div>
-    </div>
-  </div>
+
 
   </div>
 

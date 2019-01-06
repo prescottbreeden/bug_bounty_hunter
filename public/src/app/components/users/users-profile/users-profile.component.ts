@@ -72,6 +72,18 @@ titles: any = {
       });
   }
 
+  editName() {
+    console.log('clicked edit name');
+  }
+
+  editEmail() {
+    console.log('clicked edit email');
+  }
+
+  editProfilePic() {
+    console.log('clicked change profile image');
+  }
+
   setTitle() {
   //  Youngling -- faction : new register
   //  Padawan -- faction : first bug posted
@@ -85,29 +97,31 @@ titles: any = {
     
   // this should be done in reverse if it's done at all this way...
   if(this.stats.bugs_posted + this.stats.answers_posted === 0) {
-    this.bestTitle = 'Youngling'
+    this.bestTitle = 'Service Droid'
   } else if(this.stats.bugs_posted + this.stats.answers_posted < 6) {
-    this.bestTitle = 'Padawan'
+    this.bestTitle = 'TK-421'
   } else {
-      if(this.stats.bugs_posted + this.stats.answers_posted >= 6) {
-        this.bestTitle = 'Knight';
-      }
-      if(this.stats.bugs_posted + this.stats.answers_posted >= 15) {
-        this.bestTitle = 'Master';
-      }
-      if(this.stats.answers_posted >= 18) {
-        this.bestTitle = 'Bug Vadar';
-      }
-      if(this.stats.bugs_posted >= 15) {
-        this.bestTitle = 'The Bug Star';
-      }
-      if(this.stats.konami_unlock) {
-        this.bestTitle = 'Grand Master';
-      }
-      if(this.stats.bugs_posted + this.stats.answers_posted >= 30) {
-        this.bestTitle = 'Hacker';
-      }
+    if(this.stats.bugs_posted + this.stats.answers_posted >= 6) {
+      this.bestTitle = 'Bug Hunter';
+    }
+    if(this.stats.bugs_posted + this.stats.answers_posted >= 15) {
+      this.bestTitle = 'Master Bug Hunter';
+    }
+    if(this.stats.answers_posted >= 18) {
+      this.bestTitle = 'Bug Vadar';
+    }
+    if(this.stats.bugs_posted >= 15) {
+      this.bestTitle = 'The Bug Star';
+    }
+    if(this.stats.konami_unlock) {
+      this.bestTitle = 'Grand Master';
+    }
+    if(this.stats.bugs_posted + this.stats.answers_posted >= 30) {
+      this.bestTitle = 'Hacker';
+    }
+    if(!this.user.admin) {
       this.user.profile_img = this.titles[this.bestTitle];
+    }
   }
 }
 

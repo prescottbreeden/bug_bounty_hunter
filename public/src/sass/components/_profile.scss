@@ -28,9 +28,70 @@
     letter-spacing: 2px;
     font-size: 8rem;
     font-family: Jedi;
+
+    &--title {
+      text-align: center;
+      font-size: 3rem;
+    }
   }
 
-  &__group {
+  &__image {
+    position: relative;
+    text-align: center;
+    cursor: not-allowed;
+    width: 20rem;
+    height: 20rem;
+    margin: 0 auto;
+
+    img {
+      width: 100%;
+    }
+
+    &:hover > * {
+      display: initial;
+    }
+
+    &--icon {
+      @include absoluteCenter;
+      background-color: transparent;
+      border: none;
+      display: none;
+      height: 4rem;
+      width: 4rem;
+      fill: $color-white;
+    }
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 1rem;
+
+    &--cluster {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  &__icon {
+
+    &--edit {
+      margin-left: 1rem;
+      height: 1.6rem;
+      width: 1.6rem;
+      fill: $color-white;
+
+      &:hover {
+        fill: $color-red;
+        cursor: pointer;
+      }
+    }
+  }
+
+  &__info {
+    font-size: 2rem;
     border: 1px solid $color-dark-grey;
     border-radius: $default-border-radius;
     background-image: linear-gradient(
@@ -42,28 +103,6 @@
     color: $color-white;
     padding: 2rem;
     width: 60%;
-  }
-
-  &__image {
-    text-align: center;
-    img {
-      width: 20rem;
-    }
-  }
-  &__row {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-  }
-
-  &__info {
-    width: 100%;
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-  }
-
-  &__item {
-    margin-bottom: 1rem;
   }
 
   &__btn {

@@ -45,6 +45,7 @@ module.exports = {
        SELECT b.bug_id, 
               posted_by,
               CONCAT(u.first_name, ' ', u.last_name) AS posted_name, 
+              u.profile_img AS posted_profile,
               error, 
               traceback, 
               message, 

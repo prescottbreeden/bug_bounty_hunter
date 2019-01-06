@@ -2,6 +2,7 @@ export interface BugModel {
   bug_id: string | number;
   posted_by: string | number;
   posted_name: string;
+  posted_profile: string;
   error: string;
   traceback: string;
   message: string;
@@ -50,6 +51,7 @@ export function MapBugDatum(data): BugModel {
     bug_id: data['bug_id'],
     posted_by: data['posted_by'],
     posted_name: data['posted_name'],
+    posted_profile: data['posted_profile'],
     error: data['error'],
     traceback: data['traceback'],
     message: data['message'],
@@ -67,6 +69,7 @@ export function MapBugData(data): BugModel[] {
       bug_id: datum['bug_id'],
       posted_by: datum['posted_by'],
       posted_name: datum['posted_name'],
+      posted_profile: datum['posted_profile'],
       error: datum['error'],
       traceback: datum['traceback'],
       message: datum['message'],

@@ -24,6 +24,7 @@ export class BugsViewComponent implements OnInit {
     bug_id: '',
     posted_by: '',
     posted_name: '',
+    posted_profile: '',
     error: '',
     traceback: '',
     message: '',
@@ -194,6 +195,7 @@ export class BugsViewComponent implements OnInit {
           let addedAnswer = MapAnswerDatum(res[0]);
           addedAnswer.answer_content = JSON.parse(addedAnswer.answer_content);
           addedAnswer.answered_by = this.user.first_name + ' ' + this.user.last_name;
+          addedAnswer.answer_profile = this.user.profile_img;
           this.answers = [ ...this.answers, addedAnswer];
         })
     });
