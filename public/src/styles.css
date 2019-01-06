@@ -554,19 +554,20 @@ body {
   .profile__container {
     display: flex;
     justify-content: space-around;
-    align-items: flex-start; }
-  .profile__avatar {
+    align-items: flex-start;
     padding: 2rem;
-    padding-bottom: 1rem;
     border: 1px solid #393e46;
     border-radius: 5px;
     background-image: linear-gradient(to bottom, #60646b, #393e46);
     box-shadow: 0 1rem 3rem rgba(34, 34, 34, 0.4);
     color: #eee;
-    letter-spacing: 2px;
+    letter-spacing: 2px; }
+  .profile__avatar {
+    align-self: center;
     font-size: 8rem;
     font-family: Jedi; }
     .profile__avatar--title {
+      margin-top: 1rem;
       text-align: center;
       font-size: 3rem; }
   .profile__image {
@@ -608,13 +609,9 @@ body {
     fill: #eee; }
     .profile__icon--edit:hover {
       fill: #FC3C3C;
-      cursor: pointer; }
+      cursor: not-allowed; }
   .profile__info {
     font-size: 2rem;
-    border: 1px solid #393e46;
-    border-radius: 5px;
-    background-image: linear-gradient(to bottom, #60646b, #393e46);
-    box-shadow: 0 1rem 3rem rgba(34, 34, 34, 0.4);
     color: #eee;
     padding: 2rem;
     width: 60%; }

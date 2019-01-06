@@ -11,11 +11,7 @@
     display: flex;
     justify-content: space-around;
     align-items: flex-start;
-  }
-
-  &__avatar {
     padding: 2rem;
-    padding-bottom: 1rem;
     border: 1px solid $color-dark-grey;
     border-radius: $default-border-radius;
     background-image: linear-gradient(
@@ -26,10 +22,15 @@
     box-shadow: 0 1rem 3rem rgba($color-black, .4);
     color: $color-white;
     letter-spacing: 2px;
+  }
+
+  &__avatar {
+    align-self: center;
     font-size: 8rem;
     font-family: Jedi;
 
     &--title {
+      margin-top: 1rem;
       text-align: center;
       font-size: 3rem;
     }
@@ -85,21 +86,13 @@
 
       &:hover {
         fill: $color-red;
-        cursor: pointer;
+        cursor: not-allowed;
       }
     }
   }
 
   &__info {
     font-size: 2rem;
-    border: 1px solid $color-dark-grey;
-    border-radius: $default-border-radius;
-    background-image: linear-gradient(
-      to bottom, 
-      $color-light-grey,
-      $color-dark-grey
-    );
-    box-shadow: 0 1rem 3rem rgba($color-black, .4);
     color: $color-white;
     padding: 2rem;
     width: 60%;
