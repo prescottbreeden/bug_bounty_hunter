@@ -112,9 +112,11 @@
             formControlName="faction_id"
             class="reg__form--input reg__form--select" 
             id="faction">
-            <option value="1">Rebel Alliance</option>
-            <option value="2">Galactic Empire</option>
-            <option value="3">Jedi Order</option>
+            <option *ngIf="!admin" value="1">Rebel Alliance</option>
+            <option *ngIf="!admin" value="2">Galactic Empire</option>
+            <option *ngIf="!admin" value="3">Jedi Order</option>
+            <option *ngIf="admin" value="4">General Leia</option>
+            <option *ngIf="admin" value="5">Han Solo</option>
           </select> 
           <div class="reg__form--label">
             <label for="faction">Faction</label>

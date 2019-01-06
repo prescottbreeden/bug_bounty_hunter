@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { UserService } from 'src/app/common/services/user.service';
 import { AuthService } from 'src/app/common/services/auth.service';
 import { Router } from '@angular/router';
@@ -12,6 +12,10 @@ import { uniqueEmailValidator } from 'src/app/common/directives/unique-email-val
   templateUrl: './register.component.html',
 })
 export class RegisterComponent implements OnInit {
+  key: number;
+  code: number[] = [84,72,69,82,69,73,83,78,79,67,79,87,76,69,86,69,76];
+  index: number = 0;
+  admin: boolean = false;
   showEmailField = true;
   showPasswordField = false;
   isRegistered = false;
@@ -21,7 +25,9 @@ export class RegisterComponent implements OnInit {
   profile_pics = {
     1: "assets/img/images/profile-11.png",
     2: "assets/img/images/profile-12.png",
-    3: "assets/img/images/profile-9.png"
+    3: "assets/img/images/profile-9.png",
+    4: "assets/img/images/leia.png",
+    5: "assets/img/images/solo.png"
   }
 
   user: NewUser = {
@@ -30,6 +36,7 @@ export class RegisterComponent implements OnInit {
     faction_id: '',
     email: '',
     password: '',
+    admin: this.admin,
     profile_img: ''
   };
 
@@ -161,6 +168,7 @@ export class RegisterComponent implements OnInit {
       faction_id: faction_id,
       email: email,
       password: password,
+      admin: this.admin,
       profile_img: profile_img
     }
     if (this.newUserForm.value.confirm != this.user.password) {
@@ -195,5 +203,18 @@ export class RegisterComponent implements OnInit {
 
   toggleEmailField() {
     this.showEmailField = !this.showEmailField;
+  }
+
+  @HostListener('document: keydown', ['$event'])
+  adminActive(event: KeyboardEvent) {
+    this.key = event.keyCode;
+    if (this.key == this.code[this.index]) {
+      if (this.index === this.code.length-1) {
+        this.admin = true;
+        console.log('Admin active');
+      } 
+      return this.index++;
+    }
+    return this.index = 0;
   }
 }

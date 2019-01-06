@@ -23,6 +23,7 @@ export interface NewUser {
   faction_id: string;
   email: string;
   password: string;
+  admin: boolean;
   profile_img: string;
 }
 
