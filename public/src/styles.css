@@ -466,6 +466,10 @@ body {
     min-width: 10%;
     margin-left: 2rem;
     font-size: 1.2rem; }
+    .bug-view__created--img {
+      margin-left: 1rem; }
+      .bug-view__created--img img {
+        height: 4rem; }
   .bug-view__traceback {
     font-size: 2rem;
     background-color: #FFF4E0;
