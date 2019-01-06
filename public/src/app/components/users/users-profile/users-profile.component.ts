@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class UsersProfileComponent implements OnInit {
   user: UserModel = {
     user_id: '',
+    faction_name: '',
     first_name: '',
     last_name: '',
     email: '',
@@ -42,6 +43,7 @@ export class UsersProfileComponent implements OnInit {
       return this.router.navigate(['/']);
     }
     this.user = MapUserData(token.currentUser);
+    console.log(this.user);
     this.userService.getUserStatsById(this.user.user_id)
       .subscribe(result => {
         this.stats = MapUserStatsData(result[0]);

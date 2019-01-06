@@ -22,7 +22,26 @@ module.exports = {
   },
 
   login: (req, res) => {
-    db_connection.query('SELECT * FROM users WHERE email = ?', req.body.email, function(error, results, fields) {
+    const EMAIL = req.body.email;
+    db_connection.query(`
+
+       SELECT user_id,
+              faction_name,
+              first_name,
+              last_name,
+              email,
+              password, 
+              admin,
+              profile_img,
+              konami_unlock,
+              user_created,
+              user_updated
+         FROM users AS u
+         JOIN factions AS f
+           ON f.faction_id = u.faction_id
+        WHERE email = ?`, [EMAIL], 
+        
+      function(error, results, fields) {
       if(error) {
         logger.log('warn', `users.login(): ${error}`);
         res.json(error);

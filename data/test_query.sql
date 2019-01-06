@@ -99,21 +99,37 @@ USE bug_hunter;
 --            ON b.bug_id = f.bug_id
 --         WHERE f.user_id = 2
 -- ;
-       SELECT b.bug_id,
-              CONCAT(u.first_name, ' ', u.last_name) AS posted_by, 
-              error, 
-              traceback, 
-              message, 
-              view_count,
-              bug_created, 
-              COUNT(a.bug_id) AS num_answers
-         FROM bugs AS b 
-    LEFT JOIN answers AS a 
-           ON b.bug_id = a.bug_id 
-    LEFT JOIN users AS u
-           ON b.posted_by = u.user_id
-         JOIN favorites AS f
-           ON b.bug_id = f.bug_id
-        WHERE f.user_id = 2
-     GROUP BY b.bug_id
-     ORDER BY b.bug_created DESC;
+--        SELECT b.bug_id,
+--               CONCAT(u.first_name, ' ', u.last_name) AS posted_by, 
+--               error, 
+--               traceback, 
+--               message, 
+--               view_count,
+--               bug_created, 
+--               COUNT(a.bug_id) AS num_answers
+--          FROM bugs AS b 
+--     LEFT JOIN answers AS a 
+--            ON b.bug_id = a.bug_id 
+--     LEFT JOIN users AS u
+--            ON b.posted_by = u.user_id
+--          JOIN favorites AS f
+--            ON b.bug_id = f.bug_id
+--         WHERE f.user_id = 2
+--      GROUP BY b.bug_id
+--      ORDER BY b.bug_created DESC;
+
+       SELECT user_id,
+              faction_name,
+              first_name,
+              last_name,
+              email,
+              admin,
+              profile_img,
+              konami_unlock,
+              user_created,
+              user_updated
+         FROM users AS u
+         JOIN factions AS f
+           ON f.faction_id = u.faction_id
+        WHERE email = 'bugs@gmail.com';
+        

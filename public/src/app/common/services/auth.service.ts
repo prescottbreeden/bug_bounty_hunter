@@ -32,6 +32,7 @@ export class AuthService {
       .pipe(map(token => {
         if (token) {
           localStorage.setItem('token', token.toString());
+          this.emitTokenChanged.next(token);
           return true;
         }
         return false;

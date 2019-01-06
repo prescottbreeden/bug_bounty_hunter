@@ -1,5 +1,6 @@
 export interface UserModel {
   user_id: string;
+  faction_name: string;
   first_name: string;
   last_name: string;
   email: string;
@@ -30,6 +31,7 @@ export interface UserToken {
 export function MapUserData(data): UserModel {
   return {
     user_id: data['user_id'],
+    faction_name: data['faction_name'],
     first_name: data['first_name'],
     last_name: data['last_name'],
     email: data['email'],

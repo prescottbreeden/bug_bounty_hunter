@@ -2,8 +2,14 @@ DROP SCHEMA IF EXISTS bug_hunter;
 CREATE SCHEMA bug_hunter;
 USE bug_hunter;
 
+CREATE TABLE factions (
+  faction_id    INTEGER       NOT NULL  AUTO_INCREMENT  PRIMARY KEY,
+  faction_name  VARCHAR(255)  NOT NULL
+);
+
 CREATE TABLE users (
   user_id       INTEGER       NOT NULL  AUTO_INCREMENT  PRIMARY KEY,
+  faction_id    INTEGER       NOT NULL  DEFAULT 1,
   first_name    VARCHAR(255)  NOT NULL,
   last_name     VARCHAR(255)  NOT NULL,
   email         VARCHAR(255)  NOT NULL,
@@ -12,7 +18,10 @@ CREATE TABLE users (
   profile_img   VARCHAR(255)  NOT NULL  DEFAULT 'assets/img/ninja2.png',
   konami_unlock TINYINT(1)    NOT NULL  DEFAULT 0,
   user_created  TIMESTAMP     NOT NULL  DEFAULT NOW(),
-  user_updated  TIMESTAMP     NOT NULL  DEFAULT NOW()   ON UPDATE NOW()
+  user_updated  TIMESTAMP     NOT NULL  DEFAULT NOW()   ON UPDATE NOW(),
+
+  FOREIGN KEY (faction_id)
+    REFERENCES factions (faction_id)
 );
 
 CREATE TABLE tags (
