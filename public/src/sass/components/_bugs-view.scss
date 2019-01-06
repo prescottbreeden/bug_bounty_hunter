@@ -115,7 +115,7 @@
 
   &__group {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
   }
 
   &__row {
@@ -170,7 +170,7 @@
   }
 
   &__content {
-    margin-left: 2rem;
+    margin: 1rem;
     font-size: 2rem;
   }
 

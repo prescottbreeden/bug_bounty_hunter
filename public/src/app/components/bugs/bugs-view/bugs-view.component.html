@@ -361,9 +361,14 @@
           class="answers__content">
         </div>
       </div>
-      <div class="answers__info">
-        <p> <span class="u-color-grey">posted</span> {{ answer.answer_created | timeAgo }} </p>
-        <div class="answers__answered_by"> {{ answer.answered_name }} </div>
+      <div class="answers__group">
+        <div class="answers__info">
+          <p> <span class="u-color-grey">posted</span> {{ answer.answer_created | timeAgo }} </p>
+          <div class="answers__answered_by"> {{ answer.answered_name }} </div>
+        </div>
+        <div class="bug-view__created--img">
+          <img src={{answer.answer_profile}} alt="profile-img">
+        </div>
       </div>
     </div>
   </div>

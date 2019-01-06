@@ -41,6 +41,7 @@ export class BugsViewComponent implements OnInit {
       bug_id: '',
       answered_by: '',
       answered_name: '',
+      answer_profile: '',
       answer_content: '',
       answer_created: '',
       answer_updated: '',

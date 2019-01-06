@@ -501,7 +501,7 @@ body {
   margin: 2rem; }
   .answers__group {
     display: flex;
-    align-items: flex-start; }
+    align-items: center; }
   .answers__row {
     margin-top: 1rem;
     padding: 2rem;
@@ -534,7 +534,7 @@ body {
     .answers__icon--liked:hover {
       cursor: pointer; }
   .answers__content {
-    margin-left: 2rem;
+    margin: 1rem;
     font-size: 2rem; }
   .answers__info {
     text-align: right;

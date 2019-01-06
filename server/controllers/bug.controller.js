@@ -54,6 +54,7 @@ module.exports = {
               answer_id,
               CONCAT(u2.first_name, ' ', u2.last_name) AS answered_name,
               answered_by,
+              u2.profile_img AS answer_profile,
               answer_content,
               answer_created,
               answer_updated
