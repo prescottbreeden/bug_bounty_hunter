@@ -140,6 +140,9 @@ body {
 .u-color-grey {
   color: #60646b !important; }
 
+.u-color-white {
+  border-color: rgba(238, 238, 238, 0.3) !important; }
+
 .u-red-bg {
   background-color: #FC3C3C !important; }
 

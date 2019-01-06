@@ -11,9 +11,9 @@ export interface UserModel {
 }
 
 export interface UserStats {
-  bugs_posted: string | number;
-  answers_posted: string | number;
-  favorites: string | number;
+  bugs_posted: number;
+  answers_posted: number;
+  favorites: number;
   konami_unlock: boolean;
 }
 
@@ -47,9 +47,9 @@ export function MapUserData(data): UserModel {
 
 export function MapUserStatsData(data): UserStats {
   return {
-    bugs_posted: data['bugs'],
-    answers_posted: data['answers'],
-    favorites: data['favorites'],
+    bugs_posted: parseInt(data['bugs']),
+    answers_posted: parseInt(data['answers']),
+    favorites: parseInt(data['favorites']),
     konami_unlock: data['konami_unlock']
   }
 }

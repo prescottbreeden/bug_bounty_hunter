@@ -5,7 +5,7 @@
       <div class="profile__image">
         <img src={{user.profile_img}} alt="avatar">
       </div>
-      <h3 *ngIf="stats.konami_unlock" class="u-header--secondary">Jedi Master</h3>
+      <h3 *ngIf="stats.konami_unlock" class="u-header--secondary">Grand Master</h3>
       <h3 *ngIf="!stats.konami_unlock" class="u-header--secondary">{{ user.faction_name }}</h3>
 
       <button [disabled]="true" class="profile__btn">
@@ -38,22 +38,24 @@
         <div class="profile__item">{{ user.updated_at | timeAgo }} </div>
       </div>
     </div>
-    <div class="profile__info">
-      <div *ngIf="stats.konami_unlock" class="profile__row">
-        <div class="profile__item">Title:</div>
-        <div class="profile__item">Jedi Master</div>
-      </div>
-      <div class="profile__row">
-        <div class="profile__item">Bugs posted:</div>
-        <div class="profile__item">{{ stats.bugs_posted }}</div>
-      </div>
-      <div class="profile__row">
-        <div class="profile__item">Bugs answered:</div>
-        <div class="profile__item">{{ stats.answers_posted }}</div>
-      </div>
-      <div class="profile__row">
-        <div class="profile__item">Bugs favorited:</div>
-        <div class="profile__item">{{ stats.favorites }}</div>
+    <div class="u-divider u-color-white">
+      <div class="profile__info">
+        <div class="profile__row">
+          <div class="profile__item">Title:</div>
+          <div class="profile__item">{{ bestTitle }}</div>
+        </div>
+        <div class="profile__row">
+          <div class="profile__item">Bugs posted:</div>
+          <div class="profile__item">{{ stats.bugs_posted }}</div>
+        </div>
+        <div class="profile__row">
+          <div class="profile__item">Bugs answered:</div>
+          <div class="profile__item">{{ stats.answers_posted }}</div>
+        </div>
+        <div class="profile__row">
+          <div class="profile__item">Bugs favorited:</div>
+          <div class="profile__item">{{ stats.favorites }}</div>
+        </div>
       </div>
     </div>
   </div>
