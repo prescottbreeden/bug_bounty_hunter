@@ -16,5 +16,5 @@ USE bug_hunter;
 
  INSERT INTO factions (faction_name)
  VALUES ('Rebel Alliance'),
-        ('Gallactic Empire'),
+        ('Galactic Empire'),
         ('Jedi Order');

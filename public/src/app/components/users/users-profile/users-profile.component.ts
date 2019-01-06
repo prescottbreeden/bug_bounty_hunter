@@ -57,7 +57,7 @@ export class UsersProfileComponent implements OnInit {
     if (this.key == this.code[this.index]) {
       if (this.index === this.code.length-1) {
         this.stats.konami_unlock = true;
-        this.user.profile_img = "assets/img/images/profile-1.png";
+        this.user.profile_img = "assets/img/images/yoda.png";
       } 
       return this.index++;
     }

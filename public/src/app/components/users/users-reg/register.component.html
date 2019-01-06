@@ -108,6 +108,20 @@
           </div>
         </div>
         <div class="reg__form--row">
+          <select 
+            formControlName="faction_id"
+            class="reg__form--input reg__form--select" 
+            id="faction">
+            <option value="1">Rebel Alliance</option>
+            <option value="2">Galactic Empire</option>
+            <option value="3">Jedi Order</option>
+          </select> 
+          <div class="reg__form--label">
+            <label for="faction">Faction</label>
+          </div>
+        </div>
+
+        <div class="reg__form--row">
           <input 
             formControlName="email"
             type="email" 

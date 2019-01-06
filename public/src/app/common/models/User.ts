@@ -20,8 +20,10 @@ export interface UserStats {
 export interface NewUser {
   first_name: string;
   last_name: string;
+  faction_id: string;
   email: string;
   password: string;
+  profile_img: string;
 }
 
 export interface UserToken {

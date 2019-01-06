@@ -18,12 +18,19 @@ export class RegisterComponent implements OnInit {
   emailForm: FormGroup;
   passwordForm: FormGroup;
   newUserForm: FormGroup;
+  profile_pics = {
+    1: "assets/img/images/profile-11.png",
+    2: "assets/img/images/profile-12.png",
+    3: "assets/img/images/profile-9.png"
+  }
 
   user: NewUser = {
     first_name: '',
     last_name: '',
+    faction_id: '',
     email: '',
     password: '',
+    profile_img: ''
   };
 
   constructor(
@@ -62,6 +69,9 @@ export class RegisterComponent implements OnInit {
         Validators.minLength(2),
         UserValidators.cannotContainSpace]
       ],
+      faction_id: ['',
+        [Validators.required]
+      ],
       email: ['',
         [Validators.required, Validators.email],
         [uniqueEmailValidator(this.userService)]
@@ -83,6 +93,9 @@ export class RegisterComponent implements OnInit {
   }
   get LastName() {
     return this.newUserForm.get('last_name');
+  }
+  get Faction() {
+    return this.newUserForm.get('faction_id');
   }
   get RegEmail() {
     return this.newUserForm.get('email');
@@ -140,12 +153,15 @@ export class RegisterComponent implements OnInit {
   }
 
   onRegister() {
-    const {first_name, last_name, email, password} = this.newUserForm.value;
+    const {first_name, last_name, faction_id, email, password} = this.newUserForm.value;
+    const profile_img = this.profile_pics[faction_id];
     this.user = {
       first_name: first_name,
       last_name: last_name,
+      faction_id: faction_id,
       email: email,
-      password: password
+      password: password,
+      profile_img: profile_img
     }
     if (this.newUserForm.value.confirm != this.user.password) {
       this.Confirm.setErrors({

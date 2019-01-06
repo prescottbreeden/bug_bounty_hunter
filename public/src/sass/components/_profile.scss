@@ -1,4 +1,5 @@
 .profile {
+  padding: 3rem;
 
   &__title {
     text-align: center;
@@ -6,10 +7,47 @@
     margin-bottom: $margin-bottom;
   }
 
+  &__container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+  }
+
+  &__avatar {
+    padding: 2rem;
+    padding-bottom: 1rem;
+    border: 1px solid $color-dark-grey;
+    border-radius: $default-border-radius;
+    background-image: linear-gradient(
+      to bottom, 
+      $color-light-grey,
+      $color-dark-grey
+    );
+    box-shadow: 0 1rem 3rem rgba($color-black, .4);
+    color: $color-white;
+    letter-spacing: 2px;
+    font-size: 8rem;
+    font-family: Jedi;
+  }
+
+  &__group {
+    border: 1px solid $color-dark-grey;
+    border-radius: $default-border-radius;
+    background-image: linear-gradient(
+      to bottom, 
+      $color-light-grey,
+      $color-dark-grey
+    );
+    box-shadow: 0 1rem 3rem rgba($color-black, .4);
+    color: $color-white;
+    padding: 2rem;
+    width: 60%;
+  }
+
   &__image {
     text-align: center;
     img {
-      width: 25%;
+      width: 20rem;
     }
   }
   &__row {
@@ -19,6 +57,7 @@
   }
 
   &__info {
+    width: 100%;
     font-size: 2.5rem;
     margin-bottom: 1rem;
   }
@@ -40,6 +79,7 @@
     margin-bottom: $margin-bottom;
     border-radius: $default-border-radius;
     border: none;
+    box-shadow: 0 1rem 3rem rgba($color-black, .4);
 
     &:hover {
       cursor: pointer;
