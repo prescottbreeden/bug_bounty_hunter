@@ -134,10 +134,12 @@
   &__icon {
 
     &--edit {
-      margin-top: .3rem;
+      margin-top: 1.5rem;
       height: 2rem;
       width: 2rem;
+      min-width: 2rem;
       fill: $color-light-grey;
+      align-self: flex-start;
 
       &:hover {
         cursor: pointer;
@@ -172,12 +174,13 @@
   &__content {
     margin: 1rem;
     font-size: 2rem;
+    max-width: 90%;
   }
 
   &__info {
+    display: inline-block;
     text-align: right;
-    min-width: 10%;
-    margin-left: 2rem;
+    width: 15rem;
     font-size: 1.2rem;
   }
 }

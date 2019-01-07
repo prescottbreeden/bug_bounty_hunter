@@ -148,9 +148,7 @@ body {
 
 .footer {
   padding: 3rem;
-  height: 18rem;
-  background-image: linear-gradient(to bottom, #393e46, #60646b);
-  color: #eee; }
+  height: 10rem; }
   .footer__title {
     text-align: center;
     font-size: 2.5rem; }
@@ -515,10 +513,12 @@ body {
     .answers__row--cluster {
       display: flex; }
   .answers__icon--edit {
-    margin-top: .3rem;
+    margin-top: 1.5rem;
     height: 2rem;
     width: 2rem;
-    fill: #60646b; }
+    min-width: 2rem;
+    fill: #60646b;
+    align-self: flex-start; }
     .answers__icon--edit:hover {
       cursor: pointer;
       fill: #FC3C3C; }
@@ -538,17 +538,18 @@ body {
       cursor: pointer; }
   .answers__content {
     margin: 1rem;
-    font-size: 2rem; }
+    font-size: 2rem;
+    max-width: 90%; }
   .answers__info {
+    display: inline-block;
     text-align: right;
-    min-width: 10%;
-    margin-left: 2rem;
+    width: 15rem;
     font-size: 1.2rem; }
 
 .story {
   transform: skewX(-12deg);
   display: inline-block;
-  margin-left: 5.3rem; }
+  margin-left: 4.8rem; }
   .story__score {
     margin-left: -2rem; }
   .story__shape {
