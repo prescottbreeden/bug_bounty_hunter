@@ -26,8 +26,8 @@ export class RegisterComponent implements OnInit {
     1: "assets/img/images/profile-11.png",
     2: "assets/img/images/profile-12.png",
     3: "assets/img/images/profile-9.png",
-    4: "assets/img/images/leia.png",
-    5: "assets/img/images/solo.png"
+    4: "assets/img/images/solo.png",
+    5: "assets/img/images/leia.png"
   }
 
   user: NewUser = {
