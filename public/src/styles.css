@@ -545,6 +545,44 @@ body {
     margin-left: 2rem;
     font-size: 1.2rem; }
 
+.story {
+  transform: skewX(-12deg);
+  display: inline-block; }
+  .story__shape {
+    width: 15rem;
+    height: 15rem;
+    -webkit-shape-outside: circle(50% at 50% 50%);
+    shape-outside: circle(50% at 50% 50%);
+    -webkit-clip-path: circle(50% at 50% 50%);
+    clip-path: circle(50% at 50% 50%);
+    transform: translateX(-3rem) skewX(12deg);
+    position: relative; }
+  .story__img {
+    height: 100%;
+    transform: translateX(0rem) scale(1.1);
+    backface-visibility: hidden;
+    transition: transform .5s; }
+  .story__caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 20%);
+    color: #eee;
+    text-transform: uppercase;
+    font-size: 1.7rem;
+    text-align: center;
+    opacity: 0;
+    transition: all .5s;
+    backface-visibility: hidden; }
+  .story:hover .story__caption {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+    cursor: default; }
+  .story:hover .story__img {
+    transform: translateX(0rem) scale(1);
+    filter: blur(3px) brightness(80%);
+    cursor: default; }
+
 .profile {
   padding: 3rem; }
   .profile__title {
@@ -561,7 +599,8 @@ body {
     background-image: linear-gradient(to bottom, #60646b, #393e46);
     box-shadow: 0 1rem 3rem rgba(34, 34, 34, 0.4);
     color: #eee;
-    letter-spacing: 2px; }
+    letter-spacing: 2px;
+    margin-bottom: 3rem; }
   .profile__avatar {
     align-self: center;
     font-size: 8rem;
@@ -641,6 +680,26 @@ body {
     .profile__btn--text {
       margin-left: 1rem;
       line-height: 100%; }
+  .profile__avatar-list {
+    text-align: center;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    margin-bottom: 3rem; }
+    .profile__avatar-list--container {
+      padding: 2rem;
+      border: 1px solid #393e46;
+      border-radius: 5px;
+      background-image: linear-gradient(to bottom, #60646b, #393e46);
+      box-shadow: 0 1rem 3rem rgba(34, 34, 34, 0.4);
+      color: #eee;
+      letter-spacing: 2px;
+      width: 100%; }
+    .profile__avatar-list--title {
+      font-family: Lato;
+      margin-bottom: 2rem;
+      text-align: center; }
 
 .reg {
   margin-top: 3rem;

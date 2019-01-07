@@ -10,11 +10,18 @@ import { Router } from '@angular/router';
   templateUrl: './users-profile.component.html',
 })
 export class UsersProfileComponent implements OnInit {
+  bestTitle: string;
+  key: number;
+  code: number[] = [38,38,40,40,37,39,37,39,66,65,13];
+  index: number = 0;
+  editNameStatus: boolean = false;
+  editEmailStatus: boolean = false;
+  editProfilePicStatus: boolean = true;
 
-//  Youngling -- faction : new register
-//  Padawan -- faction : first bug posted
-//  Knight -- boba fett : 6 interactions (post/answer)
-//  Master -- windu : 20 interactions
+//  Service Droid -- faction : new register
+//  TK-421 -- faction : first bug posted
+//  Bug Hunter -- boba fett : 6 interactions (post/answer)
+//  Master Bug Hunter -- windu : 20 interactions
 //  Grand Master -- yoda : secret
 //  Kessel Commander -- m.falcon : answer bug within 10 minutes
 //  Bug Vader -- vadar : 15 answers
@@ -22,8 +29,8 @@ export class UsersProfileComponent implements OnInit {
 //  The Bug Star -- death star : 15 bugs
 
 titles: any = {
-  'Knight': 'assets/img/images/bobafett.png',
-  'Master': 'assets/img/images/windu.png',
+  'Bug Hunter': 'assets/img/images/bobafett.png',
+  'Master Bug Hunter': 'assets/img/images/windu.png',
   'Kessel Commander': 'assets/img/images/falcon.png',
   'Bug Vadar': 'assets/img/images/vader.png',
   'The Bug Star': 'assets/img/images/deathstar.png',
@@ -31,7 +38,6 @@ titles: any = {
   'Hacker': 'assets/img/images/r2d2.png'
 };
 
-  bestTitle: string;
   user: UserModel = {
     user_id: '',
     faction_name: '',
@@ -43,15 +49,14 @@ titles: any = {
     updated_at: '',
     admin: false
   };
+
   stats: UserStats = {
     bugs_posted: 0,
     answers_posted: 0,
     favorites: 0,
     konami_unlock: false
   };
-  key: number;
-  code: number[] = [38,38,40,40,37,39,37,39,66,65,13];
-  index: number = 0;
+
 
   constructor(
     private authService: AuthService,
@@ -70,6 +75,16 @@ titles: any = {
         this.stats = MapUserStatsData(result[0]);
         this.setTitle(); 
       });
+  }
+
+  toggleEditName() {
+    this.editNameStatus = !this.editNameStatus;
+  }
+  toggleEditEmail() {
+    this.editEmailStatus = !this.editEmailStatus;
+  }
+  toggleEditProfilePic() {
+    this.editProfilePicStatus = !this.editProfilePicStatus;
   }
 
   editName() {

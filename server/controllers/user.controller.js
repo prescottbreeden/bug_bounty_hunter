@@ -38,12 +38,13 @@ module.exports = {
   },
 
   getById: (req, res) => {
+    const ID = req.params.user_id;
     db_connection.query(`
 
        SELECT * 
          FROM users AS u
          JOIN factions AS f
-        WHERE user_id = ?`, 
+        WHERE user_id = ?`, [ID],
 
       function(error, results, fields) {
       if(error) {
@@ -86,6 +87,7 @@ module.exports = {
   },
 
   getUserStatsById: (req, res) => {
+    const ID = req.params.user_id;
     db_connection.query(`
 
        SELECT COUNT(DISTINCT b.bug_id) AS bugs,
@@ -100,7 +102,7 @@ module.exports = {
     LEFT JOIN favorites AS f
            ON f.user_id = u.user_id
         WHERE u.user_id = ?
-     GROUP BY u.user_id`, [req.params.id], 
+     GROUP BY u.user_id`, [ID], 
 
       function(error, results, fields) {
       if(error) {
@@ -134,11 +136,28 @@ module.exports = {
   },
 
   update: (req, res) => {
-    const data = req.body;
-    res.json('route not finished');
+    const ID = req.params.bug_id;
+    const DATA = req.body;
+    db_connection.query(`
+    
+       UPDATE users,
+          SET ?
+        WHERE user_id = ?`, [DATA, ID], 
+
+      function(error, results, fields) {
+      if (error) {
+        logger.log('warn', `user.update(): ${error}`);
+        res.json(error);
+      }
+      else {
+        res.json(results);
+      }
+    });
   },
 
   delete: (req, res) => {
+    const ID = req.params.user_id;
+
     res.json('route not finished');
   },
 

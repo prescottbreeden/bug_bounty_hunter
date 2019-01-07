@@ -13,8 +13,8 @@ export class BugService {
   getBugs() { 
     return this.http.get('/api/bugs'); 
   }
-  getBugById(id: string | number) {
-    return this.http.get('/api/bugs/' + id); 
+  getBugById(bug_id: string | number) {
+    return this.http.get('/api/bugs/' + bug_id); 
   }
   createBug(newBug: NewBug) {
     return this.http.post('/api/bugs', newBug); 

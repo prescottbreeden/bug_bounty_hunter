@@ -6,13 +6,13 @@ module.exports = function(app) {
 
   app
     .get('/api/users', user.getAll)
-    .get('/api/users/:id', user.getById)
+    .get('/api/users/:user_id', user.getById)
     .post('/api/users', user.create)
-    .put('/api/users/:id', user.update)
-    .delete('/api/users/:id', user.delete)
+    .put('/api/users/:user_id', user.update)
+    .delete('/api/users/:user_id', user.delete)
 
     .get('/api/users/stats', user.getAllUserData)
-    .get('/api/users/stats/:id', user.getUserStatsById)
+    .get('/api/users/stats/:user_id', user.getUserStatsById)
 
     .post('/authservice/validate/email/', auth.validateEmail)
     .post('/authservice/authenticate', auth.login)

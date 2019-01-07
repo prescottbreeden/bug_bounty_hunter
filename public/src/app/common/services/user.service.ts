@@ -12,8 +12,8 @@ export class UserService {
   getUsers() { 
     return this.http.get('/api/users'); 
   }
-  getById(id: number) { 
-    return this.http.get('/api/users/' + id); 
+  getById(user_id: number) { 
+    return this.http.get('/api/users/' + user_id); 
   }
   getUserByEmail(email: string) {
     return this.http.post('/authservice/validate/email/', {email: email});
@@ -24,11 +24,11 @@ export class UserService {
   updateUser(user: UserModel) {
     return this.http.post('/api/users/' + user.user_id, user);
   }
-  deleteUser(id: number) {
-    return this.http.delete('/api/users/' + id);
+  deleteUser(user_id: number) {
+    return this.http.delete('/api/users/' + user_id);
   }
-  getUserStatsById(id: string | number) {
-    return this.http.get('/api/users/stats/' + id);
+  getUserStatsById(user_id: string | number) {
+    return this.http.get('/api/users/stats/' + user_id);
   }
   getAllUserStats() {
     return this.http.get('/api/users/stats/');
