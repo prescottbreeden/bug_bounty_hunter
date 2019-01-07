@@ -33,4 +33,7 @@ export class UserService {
   getAllUserStats() {
     return this.http.get('/api/users/stats/');
   }
+  getFactionStats(faction_id: number) {
+    return this.http.get('/api/factions/' + faction_id);
+  }
 }

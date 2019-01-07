@@ -549,6 +549,8 @@ body {
   transform: skewX(-12deg);
   display: inline-block;
   margin-left: 5.3rem; }
+  .story__score {
+    margin-left: -2rem; }
   .story__shape {
     width: 15rem;
     height: 15rem;

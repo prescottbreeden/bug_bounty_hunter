@@ -115,6 +115,32 @@ module.exports = {
     });
   },
 
+  getFactionStats: (req, res) => {
+    const ID = req.params.faction_id;
+    db_connection.query(`
+
+       SELECT COUNT(DISTINCT b.bug_id) AS bugs,
+              COUNT(DISTINCT answer_id) AS answers
+         FROM users AS u
+    LEFT JOIN bugs AS b
+           ON b.posted_by = user_id
+    LEFT JOIN answers AS a
+           ON a.answered_by = user_id
+    LEFT JOIN factions AS f
+           ON f.faction_id = u.faction_id
+        WHERE f.faction_id = ?`, [ID], 
+
+      function(error, results, fields) {
+      if(error) {
+        logger.log('warn', `users.getFactionStats(): ${error}`);
+        res.json(error);
+      }
+      else {
+        res.json(results);
+      }
+    });
+  },
+
   create: (req, res) => {
     const DATA = req.body;
     DATA.password = bcrypt.hashSync(req.body.password, 10);

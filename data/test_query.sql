@@ -118,18 +118,32 @@ USE bug_hunter;
 --      GROUP BY b.bug_id
 --      ORDER BY b.bug_created DESC;
 
-       SELECT user_id,
-              faction_name,
-              first_name,
-              last_name,
-              email,
-              admin,
-              profile_img,
-              konami_unlock,
-              user_created,
-              user_updated
+      --  SELECT user_id,
+      --         faction_name,
+      --         first_name,
+      --         last_name,
+      --         email,
+      --         admin,
+      --         profile_img,
+      --         konami_unlock,
+      --         user_created,
+      --         user_updated
+      --    FROM users AS u
+      --    JOIN factions AS f
+      --      ON f.faction_id = u.faction_id
+      --   WHERE email = 'bugs@gmail.com';
+
+
+       SELECT 
+              f.faction_name,
+              f.faction_id,
+              COUNT(DISTINCT b.bug_id) AS bugs,
+              COUNT(DISTINCT answer_id) AS answers
          FROM users AS u
-         JOIN factions AS f
+    LEFT JOIN bugs AS b
+           ON b.posted_by = u.user_id
+    LEFT JOIN answers AS a
+           ON a.answered_by = u.user_id
+    LEFT JOIN factions AS f
            ON f.faction_id = u.faction_id
-        WHERE email = 'bugs@gmail.com';
-        
+        GROUP BY u.faction_id;

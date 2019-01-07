@@ -17,6 +17,8 @@ module.exports = function(app) {
     .post('/authservice/validate/email/', auth.validateEmail)
     .post('/authservice/authenticate', auth.login)
 
+    .get('/api/factions/:faction_id', user.getFactionStats)
+
     .get('/api/bugs', bug.getAll)
     .get('/api/bugs/:bug_id', bug.getById)
     .post('/api/bugs', bug.create)
