@@ -17,6 +17,7 @@ export class BugsShowComponent implements OnInit {
   searchText: string = '';
   showFavorites: boolean = false;
   index: number = 0;
+  editMode: boolean = false;
 
   troll: string[] = [
     "Me not that kind of Orc.",
@@ -54,6 +55,12 @@ export class BugsShowComponent implements OnInit {
     });
   }
 
+  deleteBug(bug_id: number) {
+    this.bugService.deleteBug(bug_id).subscribe(results => {
+      console.log(results);  
+    })
+  }
+
   getFavorites() {
     this.bugService.getFavorites(this.user.user_id)
       .subscribe(results => {
@@ -63,6 +70,10 @@ export class BugsShowComponent implements OnInit {
 
   toggleFavorites() {
     this.showFavorites = !this.showFavorites;
+  }
+
+  toggleEditMode() {
+    this.editMode = !this.editMode;
   }
   
   triggerAlert() {

@@ -16,6 +16,7 @@
 
     &--text {
       margin-right: 1rem;
+      margin-left: 1rem;
       text-transform: uppercase;
       font-size: 1.2rem;
     }
@@ -35,11 +36,29 @@
     }
   }
 
+  &__group {
+    position: relative;
+  }
+
   &__item {
     margin: 1rem;
     border: 1px solid $color-blue;
     transition: all .1s;
     font-size: 2rem;
+
+    &--delete {
+      position: absolute;
+      top: 50%;
+      left: -1rem;
+      transform: translateY(-50%);
+      height: 2rem;
+      width: 2rem;
+
+      &:hover {
+        fill: $color-red;
+        cursor: pointer;
+      }
+    }
   }
 
   &__info {

@@ -13,7 +13,7 @@ export class BugService {
   getBugs() { 
     return this.http.get('/api/bugs'); 
   }
-  getBugById(bug_id: string | number) {
+  getBugById(bug_id: number) {
     return this.http.get('/api/bugs/' + bug_id); 
   }
   createBug(newBug: NewBug) {
@@ -22,12 +22,12 @@ export class BugService {
   updateBug(bug: BugModel) {
     return this.http.put('/api/bugs/' + bug.bug_id, bug);
   }
-  deleteBug(bug_id: string | number) {
+  deleteBug(bug_id: number) {
     return this.http.delete('/api/bugs/' + bug_id);
   }
 
 
-  getAnswer(answer_id: string | number) {
+  getAnswer(answer_id: number) {
     return this.http.get('/api/answers/' + answer_id);
   }
   addAnswer(newAnswer: NewAnswer) {
@@ -41,7 +41,7 @@ export class BugService {
   isFavorite(data) {
     return this.http.get(`/api/bugs/favorites/${data.bug_id}/${data.user_id}`);
   }
-  getFavorites(id: string | number) {
+  getFavorites(id: number) {
     return this.http.get('/api/bugs/favorites/' + id);
   }
   addFavorite(data: any) {

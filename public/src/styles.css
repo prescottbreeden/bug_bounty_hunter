@@ -393,6 +393,7 @@ body {
       color: #60646b; }
     .bugs__header--text {
       margin-right: 1rem;
+      margin-left: 1rem;
       text-transform: uppercase;
       font-size: 1.2rem; }
   .bugs__link {
@@ -405,11 +406,23 @@ body {
     .bugs__link:hover {
       background-color: #00ADB5;
       color: #eee; }
+  .bugs__group {
+    position: relative; }
   .bugs__item {
     margin: 1rem;
     border: 1px solid #00ADB5;
     transition: all .1s;
     font-size: 2rem; }
+    .bugs__item--delete {
+      position: absolute;
+      top: 50%;
+      left: -1rem;
+      transform: translateY(-50%);
+      height: 2rem;
+      width: 2rem; }
+      .bugs__item--delete:hover {
+        fill: #FC3C3C;
+        cursor: pointer; }
   .bugs__info {
     min-width: 10%;
     font-size: 2rem;

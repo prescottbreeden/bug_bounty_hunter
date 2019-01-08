@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit {
   user: NewUser = {
     first_name: '',
     last_name: '',
-    faction_id: '',
+    faction_id: 0,
     email: '',
     password: '',
     admin: this.admin,

@@ -1,5 +1,5 @@
 export interface UserModel {
-  user_id: string;
+  user_id: number;
   faction_name: string;
   first_name: string;
   last_name: string;
@@ -20,7 +20,7 @@ export interface UserStats {
 export interface NewUser {
   first_name: string;
   last_name: string;
-  faction_id: string;
+  faction_id: number;
   email: string;
   password: string;
   admin: boolean;
@@ -33,7 +33,7 @@ export interface UserToken {
 
 export function MapUserData(data): UserModel {
   return {
-    user_id: data['user_id'],
+    user_id: parseInt(data['user_id']),
     faction_name: data['faction_name'],
     first_name: data['first_name'],
     last_name: data['last_name'],

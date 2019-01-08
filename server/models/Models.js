@@ -6,7 +6,7 @@ module.exports = {
 
 function User(user) {
   return {
-    user_id: user['user_id'],
+    user_id: parseInt(user['user_id']),
     faction_name: user['faction_name'],
     first_name: user['first_name'],
     last_name: user['last_name'],
@@ -21,8 +21,8 @@ function User(user) {
 
 function Bug(bug) {
   return {
-    bug_id: bug['bug_id'],
-    user_id: bug['user_id'],
+    bug_id: parseInt(bug['bug_id']),
+    user_id: parseInt(bug['user_id']),
     error: bug['error'],
     traceback: bug['traceback'],
     bug_created: bug['bug_created'],
@@ -32,9 +32,9 @@ function Bug(bug) {
 
 function Answer (answer) {
   return {
-    answer_id: answer['answer_id'],
-    bug_id: answer['bug_id'],
-    answered_by: answer['answered_by'],
+    answer_id: parseInt(answer['answer_id']),
+    bug_id: parseInt(answer['bug_id']),
+    answered_by: parseInt(answer['answered_by']),
     answer_content: answer['answer_content'],
     answer_created: answer['answer_created'],
     ansert_updated: answer['answer_updated']

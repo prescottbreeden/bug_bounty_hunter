@@ -1,19 +1,19 @@
 export interface BugModel {
-  bug_id: string | number;
-  posted_by: string | number;
+  bug_id: number;
+  posted_by: number;
   posted_name: string;
   posted_profile: string;
   error: string;
   traceback: string;
   message: string;
-  view_count: string | number;
+  view_count: number;
   bug_created: string;
   bug_updated: string;
-  num_answers: string | number;
+  num_answers: number;
 }
 
 export interface NewBug {
-  posted_by: string | number;
+  posted_by: number;
   error: string;
   traceback: string;
   message: string;
@@ -48,17 +48,17 @@ export function ValidateNewBug(data: NewBug): NewBugErrors {
 
 export function MapBugDatum(data): BugModel {
   return {
-    bug_id: data['bug_id'],
-    posted_by: data['posted_by'],
+    bug_id: parseInt(data['bug_id']),
+    posted_by: parseInt(data['posted_by']),
     posted_name: data['posted_name'],
     posted_profile: data['posted_profile'],
     error: data['error'],
     traceback: data['traceback'],
     message: data['message'],
-    view_count: data['view_count'],
+    view_count: parseInt(data['view_count']),
     bug_created: data['bug_created'],
     bug_updated: data['bug_updated'],
-    num_answers: data['num_answers']
+    num_answers: parseInt(data['num_answers'])
   }
 }
 
@@ -66,17 +66,17 @@ export function MapBugData(data): BugModel[] {
   let bugs = [];
   data.forEach(datum => {
     const bug = {
-      bug_id: datum['bug_id'],
-      posted_by: datum['posted_by'],
+      bug_id: parseInt(datum['bug_id']),
+      posted_by: parseInt(datum['posted_by']),
       posted_name: datum['posted_name'],
       posted_profile: datum['posted_profile'],
       error: datum['error'],
       traceback: datum['traceback'],
       message: datum['message'],
-      view_count: datum['view_count'],
+      view_count: parseInt(datum['view_count']),
       bug_created: datum['bug_created'],
       bug_updated: datum['bug_updated'],
-      num_answers: datum['num_answers']
+      num_answers: parseInt(datum['num_answers'])
     }
     bugs.push(bug);
   });

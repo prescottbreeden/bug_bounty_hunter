@@ -47,6 +47,7 @@ CREATE TABLE answers (
   answer_id       INTEGER     NOT NULL AUTO_INCREMENT   PRIMARY KEY,
   bug_id          INTEGER     NOT NULL,
   answered_by     INTEGER     NOT NULL,
+  accepted        BOOLEAN     NOT NULL  DEFAULT 0,
   answer_content  LONGTEXT    NOT NULL,
   answer_created  TIMESTAMP   NOT NULL  DEFAULT NOW(),
   answer_updated  TIMESTAMP   NOT NULL  DEFAULT NOW()   ON UPDATE NOW(),
@@ -56,6 +57,7 @@ CREATE TABLE answers (
   
   FOREIGN KEY (bug_id)
     REFERENCES bugs (bug_id)
+    ON DELETE CASCADE
 );
 
 CREATE TABLE favorites (

@@ -14,7 +14,7 @@ export class BugsCreateComponent implements OnInit {
   user: UserModel;
 
   newBug: NewBug = {
-    posted_by: '',
+    posted_by: 0,
     error: '',
     traceback: '',
     message: ''

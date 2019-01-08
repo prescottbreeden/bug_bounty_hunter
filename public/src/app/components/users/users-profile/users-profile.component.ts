@@ -39,7 +39,7 @@ titles: any = {
 };
 
   user: UserModel = {
-    user_id: '',
+    user_id: 0,
     faction_name: '',
     first_name: '',
     last_name: '',

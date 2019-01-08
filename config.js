@@ -7,6 +7,7 @@ var config = {
         url: 'http://my.site.com',
         // mysql connection settings
         database: {
+            multipleStatements: true,
             host: 'localhost',
             user: 'trashpanda',
             password: 'rubberbabybuggybumpers',

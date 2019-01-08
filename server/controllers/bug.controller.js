@@ -6,7 +6,7 @@ const db_connection = mysql.createConnection(config.database);
 
 module.exports = {
   
-  getAll: (req, res) => {
+  getAllBugs: (req, res) => {
     db_connection.query(`
 
        SELECT b.bug_id, 
@@ -37,7 +37,7 @@ module.exports = {
     });
   },
 
-  getById: (req, res) => {
+  getBugById: (req, res) => {
     const ID = req.params.bug_id;
     incrementCounter(ID);
     db_connection.query(`
@@ -80,7 +80,7 @@ module.exports = {
     });
   },
 
-  create: (req, res) => {
+  createBug: (req, res) => {
     const DATA = req.body;
     db_connection.query(`
     
@@ -99,7 +99,7 @@ module.exports = {
     });
   },
 
-  update: (req, res) => {
+  updateBug: (req, res) => {
     const ID = req.params.bug_id;
     const { error, traceback, message } = req.body;
     db_connection.query(`
@@ -121,8 +121,33 @@ module.exports = {
     });
   },
 
-  delete: (req, res) => {
-    res.json('route not finished');
+  deleteBug: (req, res) => {
+    const bug_id = req.params.bug_id;
+
+    db_connection.query(`
+    
+       DELETE
+         FROM answers
+        WHERE bug_id = ?;
+
+       DELETE
+         FROM favorites
+        WHERE bug_id = ?;
+        
+       DELETE
+         FROM bugs
+        WHERE bug_id = ?`, [bug_id, bug_id, bug_id], 
+   
+      function(error, results, fields) {
+      if(error) {
+        logger.log('warn', `bug.deleteBug(): ${error}`);
+        res.json(error);
+      }
+      else {
+        deleteBugData(bug_id);
+        res.json(results);
+      }
+    });
   },
 
   isFavorite: (req, res) => {
@@ -287,16 +312,29 @@ module.exports = {
 };
 
 function incrementCounter(bugId) {
-
     db_connection.query(`
 
        UPDATE bugs 
           SET view_count = view_count + 1 
         WHERE bug_id = ?`, bugId, 
 
-      function(error, results, fields) {
+      function(error) {
       if (error) {
         logger.log('warn', `bugs.addAnswer(): ${error}`);
       }
     });
+}
+
+function deleteBugData(bugId) {
+  db_connection.query(`
+  
+      DELETE
+        FROM bugs
+      WHERE bug_id = ?`, bugId, 
+  
+    function(error) {
+    if(error) {
+      logger.log('warn', `bug.deleteBug(): ${error}`);
+    }
+  });
 }

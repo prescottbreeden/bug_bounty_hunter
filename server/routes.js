@@ -19,11 +19,11 @@ module.exports = function(app) {
 
     .get('/api/factions/:faction_id', user.getFactionStats)
 
-    .get('/api/bugs', bug.getAll)
-    .get('/api/bugs/:bug_id', bug.getById)
-    .post('/api/bugs', bug.create)
-    .put('/api/bugs/:bug_id', bug.update)
-    .delete('/api/bugs/:bug_id', bug.delete)
+    .get('/api/bugs', bug.getAllBugs)
+    .get('/api/bugs/:bug_id', bug.getBugById)
+    .post('/api/bugs', bug.createBug)
+    .put('/api/bugs/:bug_id', bug.updateBug)
+    .delete('/api/bugs/:bug_id', bug.deleteBug)
 
     .get('/api/answers/:id', bug.getAnswer)
     .post('/api/answers', bug.addAnswer)

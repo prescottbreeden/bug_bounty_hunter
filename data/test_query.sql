@@ -134,16 +134,31 @@ USE bug_hunter;
       --   WHERE email = 'bugs@gmail.com';
 
 
-       SELECT 
-              f.faction_name,
-              f.faction_id,
-              COUNT(DISTINCT b.bug_id) AS bugs,
-              COUNT(DISTINCT answer_id) AS answers
-         FROM users AS u
-    LEFT JOIN bugs AS b
-           ON b.posted_by = u.user_id
-    LEFT JOIN answers AS a
-           ON a.answered_by = u.user_id
-    LEFT JOIN factions AS f
-           ON f.faction_id = u.faction_id
-        GROUP BY u.faction_id;
+--        SELECT 
+--               f.faction_name,
+--               f.faction_id,
+--               COUNT(DISTINCT b.bug_id) AS bugs,
+--               COUNT(DISTINCT answer_id) AS answers
+--          FROM users AS u
+--     LEFT JOIN bugs AS b
+--            ON b.posted_by = u.user_id
+--     LEFT JOIN answers AS a
+--            ON a.answered_by = u.user_id
+--     LEFT JOIN factions AS f
+--            ON f.faction_id = u.faction_id
+--         GROUP BY u.faction_id;
+
+-- ALTER TABLE answers ADD COLUMN accepted  BOOLEAN  DEFAULT 0;
+
+-- begin;
+
+-- alter table answers
+-- drop constraint orders_customer_id_fkey;
+
+-- alter table orders
+-- add constraint orders_customer_id_fkey
+-- foreign key (customer_id)
+-- references customers (id)
+-- on delete cascade;
+
+-- commit;

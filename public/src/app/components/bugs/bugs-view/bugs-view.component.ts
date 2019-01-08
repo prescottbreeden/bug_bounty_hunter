@@ -21,26 +21,26 @@ export class BugsViewComponent implements OnInit {
   user: UserModel;
 
   bug: BugModel = {
-    bug_id: '',
-    posted_by: '',
+    bug_id: 0,
+    posted_by: 0,
     posted_name: '',
     posted_profile: '',
     error: '',
     traceback: '',
     message: '',
-    view_count: '',
+    view_count: 0,
     bug_created: '',
     bug_updated: '',
-    num_answers: '',
+    num_answers: 0,
   };
 
   editBug: BugModel;
 
   answers: AnswerModel[] = [
     { 
-      answer_id: '',
-      bug_id: '',
-      answered_by: '',
+      answer_id: 0,
+      bug_id: 0,
+      answered_by: 0,
       answered_name: '',
       answer_profile: '',
       answer_content: '',
@@ -50,8 +50,8 @@ export class BugsViewComponent implements OnInit {
   ];
 
   newAnswer: NewAnswer = {
-    bug_id: '',
-    answered_by: '',
+    bug_id: 0,
+    answered_by: 0,
     answer_content: ''
   };
 
@@ -81,7 +81,7 @@ export class BugsViewComponent implements OnInit {
     }
     this.user = MapUserData(token.currentUser);
     this.route.params.subscribe((params: Params) => {
-      this.bug.bug_id = params['id'];
+      this.bug.bug_id = parseInt(params['id']);
       this.getLikedStatus();
       this.getBugData();
     });
@@ -194,7 +194,7 @@ export class BugsViewComponent implements OnInit {
         .subscribe(res => {
           let addedAnswer = MapAnswerDatum(res[0]);
           addedAnswer.answer_content = JSON.parse(addedAnswer.answer_content);
-          addedAnswer.answered_by = this.user.first_name + ' ' + this.user.last_name;
+          addedAnswer.answered_name = this.user.first_name + ' ' + this.user.last_name;
           addedAnswer.answer_profile = this.user.profile_img;
           this.answers = [ ...this.answers, addedAnswer];
         })

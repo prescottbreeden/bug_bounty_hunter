@@ -1,7 +1,7 @@
 export interface AnswerModel {
-  answer_id: string;
-  bug_id: string;
-  answered_by: string;
+  answer_id: number;
+  bug_id: number;
+  answered_by: number;
   answered_name: string;
   answer_profile: string;
   answer_content: string;
@@ -10,8 +10,8 @@ export interface AnswerModel {
 }
 
 export interface NewAnswer {
-  bug_id: string | number;
-  answered_by: string;
+  bug_id: number;
+  answered_by: number;
   answer_content: string;
 }
 
@@ -34,9 +34,9 @@ export function ValidateNewAnswer(data: NewAnswer): NewAnswerErrors {
 
 export function MapAnswerDatum(data): AnswerModel {
   return {
-    answer_id: data['answer_id'],
-    bug_id: data['bug_id'],
-    answered_by: data['answered_by'],
+    answer_id: parseInt(data['answer_id']),
+    bug_id: parseInt(data['bug_id']),
+    answered_by: parseInt(data['answered_by']),
     answered_name: data['answered_name'],
     answer_profile: data['answer_profile'],
     answer_content: data['answer_content'],
@@ -49,9 +49,9 @@ export function MapAnswerData(data): AnswerModel[] {
   let answers = [];
   data.forEach(datum => {
     const answer = {
-      answer_id: datum['answer_id'],
-      bug_id: datum['bug_id'],
-      answered_by: datum['answered_by'],
+      answer_id: parseInt(datum['answer_id']),
+      bug_id: parseInt(datum['bug_id']),
+      answered_by: parseInt(datum['answered_by']),
       answered_name: datum['answered_name'],
       answer_profile: datum['answer_profile'],
       answer_content: datum['answer_content'],
