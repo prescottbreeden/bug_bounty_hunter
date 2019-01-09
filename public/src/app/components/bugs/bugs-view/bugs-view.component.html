@@ -101,11 +101,6 @@
             type="text" 
             [style]="{ 'border-radius': '5px', 'height': '20rem' }"
             id="traceback">
-            <div quill-editor-toolbar>
-              <span class="ql-formats">
-                <button class="ql-code-block" [title]="'Code Block'"></button>
-              </span>
-            </div>
           </quill-editor>
       </div>
       <div *ngIf="editFormErrors.TracebackField" class="reg__form--error">
@@ -123,11 +118,6 @@
             type="text" 
             [style]="{ 'border-radius': '5px', 'height': '20rem' }"
             id="traceback">
-            <div quill-editor-toolbar>
-              <span class="ql-formats">
-                <button class="ql-code-block" [title]="'Code Block'"></button>
-              </span>
-            </div>
           </quill-editor>
       </div>
       <div *ngIf="editFormErrors.MessageField" class="reg__form--error">
@@ -217,13 +207,6 @@
             name="updatedAnswer.answer_content"
             [style]="{height: '250px'}"
             id="content">
-            <div quill-editor-toolbar>
-              <span class="ql-formats">
-                <button class="ql-bold" [title]="'Bold'"></button>
-                <button class="ql-italic" [title]="'Italic'"></button>
-                <button class="ql-code-block" [title]="'Code Block'"></button>
-              </span>
-            </div>
           </quill-editor>
         </div>
         <div *ngIf="answerFormErrors.ContentField" class="reg__form--error">
@@ -293,13 +276,6 @@
             name="newAnswer.answer_content"
             [style]="{height: '250px'}"
             id="content">
-            <div quill-editor-toolbar>
-              <span class="ql-formats">
-                <button class="ql-bold" [title]="'Bold'"></button>
-                <button class="ql-italic" [title]="'Italic'"></button>
-                <button class="ql-code-block" [title]="'Code Block'"></button>
-              </span>
-            </div>
           </quill-editor>
         </div>
         <div *ngIf="answerFormErrors.ContentField" class="reg__form--error">
