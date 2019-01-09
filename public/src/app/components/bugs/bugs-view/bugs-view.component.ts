@@ -131,7 +131,9 @@ export class BugsViewComponent implements OnInit {
       return ele.answer_id === answer_id;
     })[0];
     if (this.bug.posted_by != this.user.user_id) {
-      return alert('Me not that kind of orc.');
+      if (!this.user.admin) {
+        return alert('Me not that kind of orc.');
+      }
     }
     answer.accepted = !answer.accepted;
     this.bugService.acceptAnswer(answer_id, answer)

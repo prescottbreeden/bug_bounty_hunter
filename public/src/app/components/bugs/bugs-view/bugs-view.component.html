@@ -363,9 +363,10 @@
           <use xlink:href="assets/img/icons/sprite.svg#icon-check-circle"></use>
         </svg>
         <svg 
-          *ngIf="bug.posted_by == user.user_id && 
-                answer.answered_by !== user.user_id &&
-                !answer.accepted" 
+          *ngIf="((bug.posted_by == user.user_id && 
+                answer.answered_by !== user.user_id) &&
+                !answer.accepted) || (!answer.accepted &&
+                user.admin)" 
           (click)="onAcceptAnswer(answer.answer_id)" 
           class="answers__icon--edit">
           <use xlink:href="assets/img/icons/sprite.svg#icon-check-circle"></use>
