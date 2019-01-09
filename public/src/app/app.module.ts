@@ -47,7 +47,18 @@ import { TimeAgoPipe } from 'time-ago-pipe';
     ReactiveFormsModule,
     BrowserModule,
     HttpClientModule,
-    QuillModule
+    QuillModule.forRoot({
+      modules: {
+        toolbar: [
+          [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+          ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+          ['code-block'],
+          [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+          [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+          ['link']                         // link and image, video
+        ],
+      }
+    })
   ],
   providers: [UserService, AuthService, BugService],
   bootstrap: [AppComponent],

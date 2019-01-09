@@ -49,7 +49,7 @@
     </svg>
   </div>
   <div 
-    *ngIf="user.user_id == bug.posted_by"
+    *ngIf="user.user_id == bug.posted_by || user.admin"
     class="bug-create__btn--toggle" 
     [class.u-red-bg]="showEditBugForm"
     (click)="toggleEdit()">
@@ -351,7 +351,7 @@
     <div *ngFor="let answer of answers" class="answers__row">
       <div class="answers__group--data">
         <svg 
-          *ngIf="answer.answered_by == user.user_id && !answer.accepted" 
+          *ngIf="(answer.answered_by == user.user_id && !answer.accepted) || user.admin" 
           (click)="onEditAnswer(answer.answer_id)" 
           class="answers__icon--accept">
           <use xlink:href="assets/img/icons/sprite.svg#icon-pencil"></use>
