@@ -5,6 +5,7 @@ export interface AnswerModel {
   answered_name: string;
   answer_profile: string;
   answer_content: string;
+  accepted: boolean;
   answer_created: string;
   answer_updated: string;
 }
@@ -40,6 +41,7 @@ export function MapAnswerDatum(data): AnswerModel {
     answered_name: data['answered_name'],
     answer_profile: data['answer_profile'],
     answer_content: data['answer_content'],
+    accepted: data['accepted'],
     answer_created: data['answer_created'],
     answer_updated: data['answer_updated']
   }
@@ -55,6 +57,7 @@ export function MapAnswerData(data): AnswerModel[] {
       answered_name: datum['answered_name'],
       answer_profile: datum['answer_profile'],
       answer_content: datum['answer_content'],
+      accepted: datum['accepted'],
       answer_created: datum['answer_created'],
       answer_updated: datum['answer_updated']
     }

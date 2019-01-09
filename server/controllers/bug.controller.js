@@ -57,6 +57,7 @@ module.exports = {
               answered_by,
               u2.profile_img AS answer_profile,
               answer_content,
+              accepted,
               answer_created,
               answer_updated
          FROM bugs AS b 
@@ -67,7 +68,7 @@ module.exports = {
     LEFT JOIN users AS u2
            ON a.answered_by = u2.user_id
         WHERE b.bug_id = ?
-     ORDER BY a.answer_created`, [ID], 
+     ORDER BY a.accepted DESC, a.answer_created`, [ID], 
    
       function(error, results, fields) {
       if(error) {
@@ -303,6 +304,27 @@ module.exports = {
         res.json(results);
       }
     });
+  },
+
+  acceptAnswer: (req, res) => {
+    const answer_id = req.params.answer_id;
+    const accepted = req.body.accepted;
+    db_connection.query(`
+    
+       UPDATE answers
+          SET accepted = ?
+        WHERE answer_id = ?`, [accepted, answer_id], 
+
+      function(error, results, fields) {
+      if (error) {
+        logger.log('warn', `bug.update(): ${error}`);
+        res.json(error);
+      }
+      else {
+        res.json(results);
+      }
+    });
+
   },
 
   deleteAnswer: (req, res) => {

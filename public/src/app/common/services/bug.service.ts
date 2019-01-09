@@ -36,6 +36,9 @@ export class BugService {
   updateAnswer(answer: AnswerModel) {
     return this.http.put('/api/answers/' + answer.answer_id, answer);
   }
+  acceptAnswer(answer_id: number, accepted: AnswerModel) {
+    return this.http.put('/api/answers/accepted/' + answer_id, accepted);
+  }
 
 
   isFavorite(data) {

@@ -44,6 +44,7 @@ export class BugsViewComponent implements OnInit {
       answered_name: '',
       answer_profile: '',
       answer_content: '',
+      accepted: false,
       answer_created: '',
       answer_updated: '',
     }
@@ -124,6 +125,19 @@ export class BugsViewComponent implements OnInit {
     })[0];
     this.toggleForm();
     this.editAnswer = true;
+  }
+  onAcceptAnswer(answer_id) {
+    const answer = this.answers.filter(ele => {
+      return ele.answer_id === answer_id;
+    })[0];
+    if (this.bug.posted_by != this.user.user_id) {
+      return alert('Me not that kind of orc.');
+    }
+    answer.accepted = !answer.accepted;
+    this.bugService.acceptAnswer(answer_id, answer)
+      .subscribe(result => {
+        console.log(result);
+      });
   }
 
 

@@ -349,19 +349,33 @@
 </div>
   <div *ngIf="answers[0] && answers[0].answer_content !== null" class="answers">
     <div *ngFor="let answer of answers" class="answers__row">
-      <div class="answers__group">
+      <div class="answers__group--data">
         <svg 
-          *ngIf="answer.answered_by == user.user_id" 
+          *ngIf="answer.answered_by == user.user_id && !answer.accepted" 
           (click)="onEditAnswer(answer.answer_id)" 
-          class="answers__icon--edit">
+          class="answers__icon--accept">
           <use xlink:href="assets/img/icons/sprite.svg#icon-pencil"></use>
+        </svg>
+        <svg 
+          *ngIf="answer.accepted" 
+          (click)="onAcceptAnswer(answer.answer_id)"
+          class="answers__icon--accepted">
+          <use xlink:href="assets/img/icons/sprite.svg#icon-check-circle"></use>
+        </svg>
+        <svg 
+          *ngIf="bug.posted_by == user.user_id && 
+                answer.answered_by !== user.user_id &&
+                !answer.accepted" 
+          (click)="onAcceptAnswer(answer.answer_id)" 
+          class="answers__icon--edit">
+          <use xlink:href="assets/img/icons/sprite.svg#icon-check-circle"></use>
         </svg>
         <div 
           [innerHtml]="answer['answer_content']"
           class="answers__content">
         </div>
       </div>
-      <div class="answers__group">
+      <div class="answers__group--info">
         <div class="answers__info">
           <p> <span class="u-color-grey">posted</span> {{ answer.answer_created | timeAgo }} </p>
           <div class="answers__answered_by"> {{ answer.answered_name }} </div>

@@ -114,8 +114,18 @@
   margin: 2rem;
 
   &__group {
-    display: flex;
-    align-items: center;
+
+    &--data {
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
+
+    &--info {
+      width: 28%;
+      display: flex;
+      align-items: center;
+    }
   }
 
   &__row {
@@ -147,6 +157,29 @@
       }
     }
 
+    &--accepted {
+      margin-top: 1.5rem;
+      height: 2rem;
+      width: 2rem;
+      min-width: 2rem;
+      fill: green;
+      align-self: flex-start;
+    }
+
+    &--accept {
+      margin-top: 1.5rem;
+      height: 2rem;
+      width: 2rem;
+      min-width: 2rem;
+      fill: $color-dark-grey;
+      align-self: flex-start;
+
+      &:hover {
+        cursor: pointer;
+        fill: green;
+      }
+    }
+
     &--unliked {
       display: inline-block;
       height: 3rem;
@@ -174,13 +207,13 @@
   &__content {
     margin: 1rem;
     font-size: 2rem;
-    max-width: 90%;
+    width: 100%;
   }
 
   &__info {
     display: inline-block;
     text-align: right;
-    width: 15rem;
+    width: 100%;
     font-size: 1.2rem;
   }
 }
