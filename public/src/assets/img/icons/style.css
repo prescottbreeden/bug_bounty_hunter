@@ -19,6 +19,10 @@ Single-colored icons can be modified like so:
   width: 0.9285714285714285em;
 }
 
+.icon-lock {
+  width: 0.6428571428571428em;
+}
+
 .icon-info-circle {
   width: 0.8571428571428571em;
 }

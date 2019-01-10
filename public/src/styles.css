@@ -146,6 +146,28 @@ body {
 .u-red-bg {
   background-color: #FC3C3C !important; }
 
+.u-close-icon {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  height: 4rem;
+  width: 4rem;
+  fill: #eee; }
+  .u-close-icon:hover {
+    fill: #FC3C3C;
+    cursor: pointer; }
+
+.u-splash {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(34, 34, 34, 0.9);
+  z-index: 200; }
+
 .footer {
   padding: 3rem;
   height: 10rem; }
@@ -209,9 +231,14 @@ body {
   left: 0;
   width: 100%;
   display: flex;
+  justify-content: space-between;
   align-items: center;
   background-image: linear-gradient(to bottom, #60646b, #393e46);
   height: 8rem; }
+  .header__title-box {
+    display: flex;
+    align-items: center;
+    width: 100%; }
   .header__title {
     font-family: Jedi;
     margin-left: 6rem;
@@ -222,7 +249,26 @@ body {
     .header__title:hover {
       cursor: default; }
   .header__img {
-    margin-left: 1rem; }
+    margin-left: 1rem;
+    height: 6rem;
+    width: 6rem; }
+  .header__menu {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: #eee;
+    text-transform: uppercase; }
+    .header__menu:hover {
+      cursor: pointer; }
+      .header__menu:hover > * {
+        color: #00ADB5;
+        fill: #00ADB5; }
+    .header__menu--icon {
+      height: 2rem;
+      width: 2rem;
+      fill: #eee;
+      margin-right: 2rem;
+      margin-left: 1rem; }
 
 .nav {
   z-index: 1000;
@@ -652,7 +698,9 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 70%; }
+    width: 70%;
+    z-index: 500;
+    font-size: 2.5rem; }
     .profile__yoda--img {
       width: 20rem;
       height: 20rem;
@@ -664,10 +712,11 @@ body {
     .profile__yoda--quotes {
       display: flex;
       flex-direction: column;
-      justify-content: space-around; }
+      justify-content: space-around;
+      padding-bottom: 2rem; }
     .profile__yoda--item {
       font-family: Jedi;
-      font-size: 2.5rem;
+      font-size: 2rem;
       font-weight: 200;
       text-align: center; }
   .profile__avatar {
@@ -773,6 +822,7 @@ body {
       margin-bottom: 4rem; }
     .profile__avatar-list--container {
       padding: 3rem;
+      margin-bottom: 3rem;
       border: 1px solid #393e46;
       border-radius: 5px;
       background-image: linear-gradient(to bottom, #60646b, #393e46);
@@ -780,13 +830,25 @@ body {
       color: #eee;
       letter-spacing: 2px;
       width: 100%; }
+    .profile__avatar-list--title-box {
+      margin-bottom: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center; }
     .profile__avatar-list--title {
       font-family: Jedi;
-      margin-bottom: 2rem;
       text-align: center;
       color: transparent;
       -webkit-text-stroke-width: 1px;
       -webkit-text-stroke-color: #F8B500; }
+    .profile__avatar-list--help-icon {
+      fill: #F8B500;
+      height: 2rem;
+      width: 2rem;
+      margin-left: 1rem; }
+      .profile__avatar-list--help-icon:hover {
+        cursor: pointer;
+        fill: #00ADB5; }
 
 .reg {
   margin-top: 3rem;

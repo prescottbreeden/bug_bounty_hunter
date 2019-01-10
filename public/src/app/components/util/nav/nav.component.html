@@ -1,9 +1,22 @@
 
-<header 
-  class="header">
-  <h1 class="header__title">Bug Bounty Hunter</h1>
-  <img src="assets/img/target_50px.png" alt="target" class="header__img">
+<header class="header">
+  <div class="header__title-box">
+    <h1 class="header__title">Bug Bounty Hunter</h1>
+    <img src="assets/img/target_50px.png" alt="target" class="header__img">
+  </div>
+  <div 
+    *ngIf="loggedIn"
+    (click)="toggleFactions()"
+    class="header__menu">
+    <span class="header__menu--text">
+      Standings
+    </span>
+    <svg class="header__menu--icon">
+      <use xlink:href="assets/img/icons/sprite.svg#icon-info1"></use>
+    </svg>
+  </div>  
 </header>
+
 <nav 
   class="nav">
 
@@ -58,3 +71,46 @@
     <span class="nav__text">Login</span>
   </div>
 </nav>
+
+<div *ngIf="showFactions" class="u-splash">
+  <div class="profile__avatar--factions">
+    <div class="profile__avatar-list--container">
+      <h2 class="profile__avatar-list--title">Faction Standings</h2>
+      <div class="profile__avatar-list">
+        <div class="story">
+          <figure class="story__shape">
+            <img 
+              src="assets/img/images/profile-11.png" 
+              alt="person loving life" 
+              class="story__img" />
+            <figcaption class="story__caption">Rebel Alliance</figcaption>
+          </figure>
+          <p class="story__score">Bugs Posted: {{ rebels.bugs_posted }}</p>
+          <p class="story__score">Bugs Answered: {{ rebels.bugs_answered }}</p>
+        </div>
+        <div class="story">
+          <figure class="story__shape">
+            <img 
+              src="assets/img/images/profile-12.png" 
+              alt="person loving life" 
+              class="story__img" />
+            <figcaption class="story__caption">Galactic Empire</figcaption>
+          </figure>
+          <p class="story__score">Bugs Posted: {{ empire.bugs_posted }}</p>
+          <p class="story__score">Bugs Answered: {{ empire.bugs_answered }}</p>
+        </div>
+        <div class="story">
+          <figure class="story__shape">
+            <img 
+              src="assets/img/images/profile-9.png" 
+              alt="person loving life" 
+              class="story__img" />
+            <figcaption class="story__caption">Jedi Order</figcaption>
+          </figure>
+          <p class="story__score">Bugs Posted: {{ jedis.bugs_posted }}</p>
+          <p class="story__score">Bugs Answered: {{ jedis.bugs_answered }}</p>
+        </div>
+      </div>
+    </div>
+</div>
+</div>

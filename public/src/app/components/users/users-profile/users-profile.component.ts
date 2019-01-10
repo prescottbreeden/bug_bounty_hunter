@@ -21,7 +21,6 @@ export class UsersProfileComponent implements OnInit {
   editEmailStatus: boolean = false;
   editProfilePicStatus: boolean = true;
   showYoda: boolean = false;
-  showFactions: boolean = false;
 
 //  Service Droid -- faction : new register
 //  TK-421 -- faction : first bug posted
@@ -62,18 +61,6 @@ titles: any = {
     konami_unlock: false
   };
 
-  rebels = {
-    bugs_posted: '',
-    bugs_answered: '',
-  }
-  empire = {
-    bugs_posted: '',
-    bugs_answered: '',
-  }
-  jedis = {
-    bugs_posted: '',
-    bugs_answered: '',
-  }
 
 
   constructor(
@@ -93,21 +80,6 @@ titles: any = {
         this.stats = MapUserStatsData(result[0]);
         this.setTitle(); 
       });
-    this.userService.getFactionStats(1).subscribe(result => {
-      this.rebels.bugs_posted = result[0]['bugs'];
-      this.rebels.bugs_answered = result[0]['answers'];
-      console.log(this.rebels);
-    })
-    this.userService.getFactionStats(2).subscribe(result => {
-      this.empire.bugs_posted = result[0]['bugs'];
-      this.empire.bugs_answered = result[0]['answers'];
-      console.log(this.empire);
-    })
-    this.userService.getFactionStats(3).subscribe(result => {
-      this.jedis.bugs_posted = result[0]['bugs'];
-      this.jedis.bugs_answered = result[0]['answers'];
-      console.log(this.jedis);
-    })
   }
 
   toggleEditName() {
@@ -118,6 +90,9 @@ titles: any = {
   }
   toggleEditProfilePic() {
     this.editProfilePicStatus = !this.editProfilePicStatus;
+  }
+  toggleYoda() {
+    this.showYoda = !this.showYoda;
   }
 
   editName() {
@@ -153,37 +128,37 @@ titles: any = {
     this.bestTitle = 'TK-421';
     this.achievement = 'Created First Post';
     this.hint = 'At 6 posts, your next achievement is. Yrrrrs.';
-    this.wisdom = 'You must unlearn what you have unlearned.';
+    this.wisdom = 'Clear your mind must be.';
   } else {
     if(this.stats.bugs_posted + this.stats.answers_posted >= 6) {
       this.bestTitle = 'Bug Hunter';
       this.achievement = 'Posted 6+ Times';
-      this.hint = 'At 15 posts, your next achievement is. Hmmmph.';
       this.wisdom = 'Patience you must have.';
+      this.hint = 'At 15 posts, your next achievement is. Hmmmph.';
     }
     if(this.stats.bugs_posted + this.stats.answers_posted >= 15) {
       this.bestTitle = 'Master Bug Hunter';
       this.achievement = 'Posted 15+ Times';
-      this.hint = 'Difficult to see. Always in motion is the future.';
-      this.wisdom = 'You must confront Bug Vader. Then, only then, a Jedi will you be.';;
+      this.wisdom = 'Difficult to see. Always in motion is the future.';
+      this.hint = 'You must confront Bug Vader. Then, only then, a Jedi will you be.';;
     }
     if(this.stats.answers_posted >= 18) {
       this.bestTitle = 'Bug Vadar';
       this.achievement = 'Posted 18+ Answers';
-      this.hint = 'Try not. Post or do not. Ther is no try.';
       this.wisdom = 'Mind what you have learned. Save you it can.';
+      this.hint = 'Try not. Post or do not. There is no try.';
     }
     if(this.stats.bugs_posted >= 15) {
       this.bestTitle = 'The Bug Star';
       this.achievement = 'Posted 15+ Bugs';
-      this.hint = '';
-      this.wisdom = '';
+      this.wisdom = 'Master of Vim, not Emacs, a true Hacker is.';
+      this.hint = 'Always pass on what you have learned.';
     }
     if(this.stats.bugs_posted + this.stats.answers_posted >= 30) {
       this.bestTitle = 'Hacker';
       this.achievement = 'Posted 30+ Times';
+      this.wisdom = 'Through the Force, things you will see. Other places. The future, the past. Old friends long gone.';
       this.hint = 'Posted 30 times have you, yet 30 lives must have you.';
-      this.wisdom = 'Doot-bleep-bleep-doot-doot-bleep!';
     }
     if(this.stats.konami_unlock) {
       this.bestTitle = 'Grand Master';

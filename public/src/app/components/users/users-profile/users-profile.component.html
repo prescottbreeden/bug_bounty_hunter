@@ -73,7 +73,14 @@
 
 </div>
 <div class="profile__avatar-list--container">
-  <h2 class="profile__avatar-list--title">Ranks and Achievements</h2>
+  <div class="profile__avatar-list--title-box">
+    <h2 class="profile__avatar-list--title">Ranks and Achievements</h2>
+    <svg 
+      (click)="toggleYoda()"
+      class="profile__avatar-list--help-icon">
+      <use xlink:href="assets/img/icons/sprite.svg#icon-help_outline"></use>
+    </svg>
+  </div>
   <div class="profile__avatar-list">
     <div class="story">
       <figure class="story__shape">
@@ -143,6 +150,9 @@
       </figure>
     </div>
   </div>
+</div>
+
+<div class="profile__avatar-list--container">
   <h2 class="profile__avatar-list--title">Admins</h2>
   <div class="profile__avatar-list">
     <div class="story">
@@ -166,56 +176,23 @@
   </div>
 </div>
 
-<div *ngIf="showYoda" class="profile__yoda">
-  <div class="profile__avatar-list--container">
-    <h2 class="profile__avatar-list--title">Master Yoda</h2>
-    <img 
-      class="profile__yoda--img"
-      src="assets/img/yoda_portrait.jpg" alt="yoda">
-    <div class="profile__yoda--quotes">
-      <h4 class="profile__yoda--item">{{ wisdom }}</h4>
-      <h4 class="profile__yoda--item">{{ hint }}</h4>
+<div *ngIf="showYoda" class="u-splash">
+  <div class="profile__yoda">
+    <svg 
+      (click)="toggleYoda()"
+      class="u-close-icon">
+      <use xlink:href="assets/img/icons/sprite.svg#icon-x"></use>
+    </svg>
+    <div class="profile__avatar-list--container">
+      <h2 class="profile__avatar-list--title">Master Yoda</h2>
+      <img 
+        class="profile__yoda--img"
+        src="assets/img/yoda_portrait.jpg" alt="yoda">
+      <div class="profile__yoda--quotes">
+        <h4 class="profile__yoda--item">{{ wisdom }}</h4>
+        <h4 class="profile__yoda--item">{{ hint }}</h4>
+      </div>
     </div>
   </div>
 </div>
 
-<div *ngIf="showFactions" class="profile__avatar--factions">
-  <div class="profile__avatar-list--container">
-    <h2 class="profile__avatar-list--title">Factions</h2>
-    <div class="profile__avatar-list">
-      <div class="story">
-        <figure class="story__shape">
-          <img 
-            src="assets/img/images/profile-11.png" 
-            alt="person loving life" 
-            class="story__img" />
-          <figcaption class="story__caption">Rebel Alliance</figcaption>
-        </figure>
-        <p class="story__score">Bugs Posted: {{ rebels.bugs_posted }}</p>
-        <p class="story__score">Bugs Answered: {{ rebels.bugs_answered }}</p>
-      </div>
-      <div class="story">
-        <figure class="story__shape">
-          <img 
-            src="assets/img/images/profile-12.png" 
-            alt="person loving life" 
-            class="story__img" />
-          <figcaption class="story__caption">Galactic Empire</figcaption>
-        </figure>
-        <p class="story__score">Bugs Posted: {{ empire.bugs_posted }}</p>
-        <p class="story__score">Bugs Answered: {{ empire.bugs_answered }}</p>
-      </div>
-      <div class="story">
-        <figure class="story__shape">
-          <img 
-            src="assets/img/images/profile-9.png" 
-            alt="person loving life" 
-            class="story__img" />
-          <figcaption class="story__caption">Jedi Order</figcaption>
-        </figure>
-        <p class="story__score">Bugs Posted: {{ jedis.bugs_posted }}</p>
-        <p class="story__score">Bugs Answered: {{ jedis.bugs_answered }}</p>
-      </div>
-    </div>
-  </div>
-</div>

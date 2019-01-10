@@ -28,6 +28,8 @@
   &__yoda {
     @include absoluteCenter;
     width: 70%;
+    z-index: 500;
+    font-size: 2.5rem;
 
     &--img {
       width: 20rem;
@@ -44,11 +46,12 @@
       display: flex;
       flex-direction: column;
       justify-content: space-around;
+      padding-bottom: 2rem;
     }
 
     &--item {
       font-family: Jedi;
-      font-size: 2.5rem;
+      font-size: 2rem;
       font-weight: 200;
       text-align: center;
     }
@@ -188,6 +191,7 @@
 
     &--container {
       padding: 3rem;
+      margin-bottom: $margin-bottom;
       border: 1px solid $color-dark-grey;
       border-radius: $default-border-radius;
       background-image: linear-gradient(
@@ -201,13 +205,31 @@
       width: 100%;
     }
 
+    &--title-box {
+      margin-bottom: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
     &--title {
       font-family: Jedi;
-      margin-bottom: 2rem;
       text-align: center;
       color: transparent;
       -webkit-text-stroke-width: 1px;  
       -webkit-text-stroke-color: $color-yellow;  
+    }
+
+    &--help-icon {
+      fill: $color-yellow;
+      height: 2rem;
+      width: 2rem;
+      margin-left: 1rem;
+
+      &:hover {
+        cursor: pointer;
+        fill: $color-blue;
+      }
     }
   }
 }
