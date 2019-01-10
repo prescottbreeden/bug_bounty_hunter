@@ -11,12 +11,17 @@ import { Router } from '@angular/router';
 })
 export class UsersProfileComponent implements OnInit {
   bestTitle: string;
+  achievement: string;
+  hint: string;
+  wisdom: string;
   key: number;
   code: number[] = [38,38,40,40,37,39,37,39,66,65,13];
   index: number = 0;
   editNameStatus: boolean = false;
   editEmailStatus: boolean = false;
   editProfilePicStatus: boolean = true;
+  showYoda: boolean = false;
+  showFactions: boolean = false;
 
 //  Service Droid -- faction : new register
 //  TK-421 -- faction : first bug posted
@@ -140,27 +145,50 @@ titles: any = {
     
   // this should be done in reverse if it's done at all this way...
   if(this.stats.bugs_posted + this.stats.answers_posted === 0) {
-    this.bestTitle = 'Service Droid'
+    this.bestTitle = 'Service Droid';
+    this.achievement = 'New Member';
+    this.hint = 'Fear of writing your first is the path to the dark side.'
+    this.wisdom = 'Post bug or message, you will. Hrrrrrrm?'
   } else if(this.stats.bugs_posted + this.stats.answers_posted < 6) {
-    this.bestTitle = 'TK-421'
+    this.bestTitle = 'TK-421';
+    this.achievement = 'Created First Post';
+    this.hint = 'At 6 posts, your next achievement is. Yrrrrs.';
+    this.wisdom = 'You must unlearn what you have unlearned.';
   } else {
     if(this.stats.bugs_posted + this.stats.answers_posted >= 6) {
       this.bestTitle = 'Bug Hunter';
+      this.achievement = 'Posted 6+ Times';
+      this.hint = 'At 15 posts, your next achievement is. Hmmmph.';
+      this.wisdom = 'Patience you must have.';
     }
     if(this.stats.bugs_posted + this.stats.answers_posted >= 15) {
       this.bestTitle = 'Master Bug Hunter';
+      this.achievement = 'Posted 15+ Times';
+      this.hint = 'Difficult to see. Always in motion is the future.';
+      this.wisdom = 'You must confront Bug Vader. Then, only then, a Jedi will you be.';;
     }
     if(this.stats.answers_posted >= 18) {
       this.bestTitle = 'Bug Vadar';
+      this.achievement = 'Posted 18+ Answers';
+      this.hint = 'Try not. Post or do not. Ther is no try.';
+      this.wisdom = 'Mind what you have learned. Save you it can.';
     }
     if(this.stats.bugs_posted >= 15) {
       this.bestTitle = 'The Bug Star';
-    }
-    if(this.stats.konami_unlock) {
-      this.bestTitle = 'Grand Master';
+      this.achievement = 'Posted 15+ Bugs';
+      this.hint = '';
+      this.wisdom = '';
     }
     if(this.stats.bugs_posted + this.stats.answers_posted >= 30) {
       this.bestTitle = 'Hacker';
+      this.achievement = 'Posted 30+ Times';
+      this.hint = 'Posted 30 times have you, yet 30 lives must have you.';
+      this.wisdom = 'Doot-bleep-bleep-doot-doot-bleep!';
+    }
+    if(this.stats.konami_unlock) {
+      this.bestTitle = 'Grand Master';
+      this.achievement = 'A True Jedi Knight';
+      this.hint = 'May the Force be with you.'
     }
     if(!this.user.admin) {
       this.user.profile_img = this.titles[this.bestTitle];

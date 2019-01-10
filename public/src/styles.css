@@ -51,7 +51,7 @@
 
 body {
   box-sizing: border-box;
-  margin-top: 18rem; }
+  margin-top: 12rem; }
 
 button::-moz-focus-inner {
   border: 0; }
@@ -211,7 +211,7 @@ body {
   display: flex;
   align-items: center;
   background-image: linear-gradient(to bottom, #60646b, #393e46);
-  height: 12rem; }
+  height: 8rem; }
   .header__title {
     font-family: Jedi;
     margin-left: 6rem;
@@ -227,17 +227,17 @@ body {
 .nav {
   z-index: 1000;
   position: fixed;
-  top: 12rem;
+  top: 8rem;
   left: 0;
   width: 100%;
-  height: 6rem;
   display: flex;
   justify-content: space-around;
   background-color: #393e46; }
   .nav__icon {
-    height: 100%;
-    width: 10%;
-    fill: #eee; }
+    height: 2rem;
+    width: 2rem;
+    fill: #eee;
+    margin-right: 1rem; }
   .nav__link {
     display: flex;
     align-items: center;
@@ -248,7 +248,7 @@ body {
     font-size: 1.75rem;
     color: #eee;
     width: 100%;
-    padding: 2rem 0rem; }
+    padding: 1rem 0rem; }
     .nav__link:active {
       outline: none;
       border: none; }
@@ -585,6 +585,12 @@ body {
   transform: skewX(-12deg);
   display: inline-block;
   margin-left: 4.8rem; }
+  .story--single {
+    margin-left: 2.4rem;
+    width: 100% !important;
+    margin-bottom: 3rem; }
+    .story--single > * {
+      margin: 0 auto; }
   .story__score {
     margin-left: -2rem; }
   .story__shape {
@@ -640,6 +646,30 @@ body {
     color: #eee;
     letter-spacing: 2px;
     margin-bottom: 3rem; }
+  .profile__yoda {
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%; }
+    .profile__yoda--img {
+      width: 20rem;
+      height: 20rem;
+      border-radius: 5px;
+      display: block;
+      margin: 0 auto;
+      margin-top: 1rem;
+      margin-bottom: 2rem; }
+    .profile__yoda--quotes {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around; }
+    .profile__yoda--item {
+      font-family: Jedi;
+      font-size: 2.5rem;
+      font-weight: 200;
+      text-align: center; }
   .profile__avatar {
     align-self: center;
     font-size: 8rem;
@@ -654,6 +684,13 @@ body {
       color: transparent;
       -webkit-text-stroke-width: 1px;
       -webkit-text-stroke-color: #F8B500; }
+    .profile__avatar--factions {
+      display: inline-block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 70%; }
   .profile__image {
     position: relative;
     text-align: center;

@@ -3,6 +3,16 @@
   display: inline-block;
   margin-left: 4.8rem;
 
+  &--single {
+    margin-left: 2.4rem;
+    width: 100% !important;
+    margin-bottom: $margin-bottom;
+
+    & > * {
+      margin: 0 auto;
+    }
+  }
+
   &__score {
     margin-left: -2rem;
   }

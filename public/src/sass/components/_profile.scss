@@ -25,6 +25,35 @@
     margin-bottom: $margin-bottom;
   }
 
+  &__yoda {
+    @include absoluteCenter;
+    width: 70%;
+
+    &--img {
+      width: 20rem;
+      height: 20rem;
+      border-radius: $default-border-radius;
+      display: block;
+      margin: 0 auto;
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+      // border: 2px dashed orangered;
+    }
+
+    &--quotes {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+    }
+
+    &--item {
+      font-family: Jedi;
+      font-size: 2.5rem;
+      font-weight: 200;
+      text-align: center;
+    }
+  }
+
   &__avatar {
     align-self: center;
     font-size: 8rem;
@@ -40,6 +69,11 @@
       color: transparent;
       -webkit-text-stroke-width: 1px;  
       -webkit-text-stroke-color: $color-yellow;  
+    }
+
+    &--factions {
+      @include absoluteCenter;
+      width: 70%;
     }
   }
 
