@@ -11,18 +11,8 @@
     display: flex;
     justify-content: space-around;
     align-items: flex-start;
-    padding: 2rem;
-    border: 1px solid $color-dark-grey;
-    border-radius: $default-border-radius;
-    background-image: linear-gradient(
-      to bottom, 
-      $color-light-grey,
-      $color-dark-grey
-    );
-    box-shadow: 0 1rem 3rem rgba($color-black, .4);
-    color: $color-white;
-    letter-spacing: 2px;
-    margin-bottom: $margin-bottom;
+    @include backgroundColor;
+
   }
 
   &__yoda {
@@ -190,18 +180,7 @@
     }
 
     &--container {
-      padding: 3rem;
-      margin-bottom: $margin-bottom;
-      border: 1px solid $color-dark-grey;
-      border-radius: $default-border-radius;
-      background-image: linear-gradient(
-        to bottom, 
-        $color-light-grey,
-        $color-dark-grey
-      );
-      box-shadow: 0 1rem 3rem rgba($color-black, .4);
-      color: $color-white;
-      letter-spacing: 2px;
+      @include backgroundColor;
       width: 100%;
     }
 
@@ -213,11 +192,7 @@
     }
 
     &--title {
-      font-family: Jedi;
-      text-align: center;
-      color: transparent;
-      -webkit-text-stroke-width: 1px;  
-      -webkit-text-stroke-color: $color-yellow;  
+      @include jediTitle;
     }
 
     &--help-icon {

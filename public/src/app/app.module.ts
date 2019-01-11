@@ -55,7 +55,7 @@ import { TimeAgoPipe } from 'time-ago-pipe';
           ['code-block'],
           [{ 'list': 'ordered'}, { 'list': 'bullet' }],
           [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
-          ['link']                         // link and image, video
+          ['link'],                         // link and image, video
         ],
       }
     })

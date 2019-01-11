@@ -1,69 +1,105 @@
-<div class="row">
-  <div class="bug-create col-2-of-4">
-    <form 
-      (submit)="onSubmitBug()" 
-      class="bug-create__form">
+<div class="bug-create">
+  <h2 class="bug-create__title">Create New Bug</h2>
+
+  <form 
+    (submit)="onSubmitBug()" 
+    class="bug-create__form">
+    <input 
+      type="hidden" 
+      [(ngModel)]="newBug.posted_by" 
+      name="newBug.posted_by">
+    <div class="bug-create__form--row">
+      <label for="title" class="bug-create__form--label">Title / Error</label>
+    </div>
+    <div class="bug-create__form--row">
       <input 
-        type="hidden" 
-        [(ngModel)]="newBug.posted_by" 
-        name="newBug.posted_by">
-      <div class="bug-create__form--row">
-        <label for="title" class="bug-create__form--label">Error</label>
-      </div>
-      <div class="bug-create__form--row">
-        <input 
-          [(ngModel)]="newBug.error"
-          #title="ngModel"
-          name="newBug.error"
-          placeholder="Define error here ..."
+        [(ngModel)]="newBug.error"
+        #title="ngModel"
+        name="newBug.error"
+        placeholder="e.g. 'TypeError: Cannot set property 'undefined' of undefined'"
+        type="text" 
+        class="bug-create__form--input" 
+        id="title">
+    </div>
+    <div 
+      *ngIf="formErrors.ErrorField" 
+      class="reg__form--error">
+      {{ formErrors.ErrorField }}
+    </div>
+    <div class="u-spacer"></div>
+    <div class="bug-create__form--row">
+      <label for="traceback" class="bug-create__form--label">Stack Trace</label>
+    </div>
+    <div class="bug-create__form--row">
+        <quill-editor 
+          [(ngModel)]="newBug.traceback"
+          #traceback="ngModel"
+          name="newBug.traceback"
           type="text" 
-          class="bug-create__form--input" 
-          id="title">
+          [style]="quillSettings"
+          id="traceback">
+        </quill-editor>
+    </div>
+    <div *ngIf="formErrors.TracebackField" class="reg__form--error">
+      {{ formErrors.TracebackField }}
+    </div>
+    <div class="u-spacer"></div>
+    <div class="bug-create__form--row">
+      <label for="message" class="bug-create__form--label">Comments</label>
+    </div>
+    <div class="bug-create__form--row">
+        <quill-editor 
+          [(ngModel)]="newBug.message"
+          #message="ngModel"
+          name="newBug.message"
+          type="text" 
+          [style]="quillSettings"
+          id="traceback">
+        </quill-editor>
+    </div>
+    <div *ngIf="formErrors.MessageField" class="reg__form--error">
+      {{ formErrors.MessageField }}
+    </div>
+    <div class="u-spacer"></div>
+    <button class="bug-create__btn">Submit New Bug</button>
+  </form>
+  <div *ngIf="showPreview" class="bug-create__preview">
+    <section class="bug-view">
+      <div class="bug-view__row">
+        <div class="bug-view__row--cluster">
+          <svg *ngIf="userLikes" class="bug-view__icon--liked">
+            <use xlink:href="assets/img/icons/sprite.svg#icon-heart"></use>
+          </svg>
+          <svg *ngIf="!userLikes" (click)="likeBug()" class="bug-view__icon--unliked">
+            <use xlink:href="assets/img/icons/sprite.svg#icon-heart-o"></use>
+          </svg>
+          <h2 class="bug-view__error">{{ newBug.error }}</h2>
+        </div>
+        <div class="bug-view__row--col">
+          <h5 class="bug-view__created"> 
+            <span class="u-color-grey">posted</span>
+            a moment ago
+          </h5>
+          
+          <h5 class="bug-view__created"> 
+            <span class="u-color-grey">by</span>
+            {{ user.first_name }} {{ user.last_name }}
+          </h5>
+        </div>
       </div>
       <div 
-        *ngIf="formErrors.ErrorField" 
-        class="reg__form--error">
-        {{ formErrors.ErrorField }}
+        [innerHtml]="newBug.traceback"
+        class="bug-view__traceback">
       </div>
-      <div class="u-spacer"></div>
-      <div class="bug-create__form--row">
-        <label for="traceback" class="bug-create__form--label">Stack Trace</label>
+      <div 
+        [innerHtml]="newBug.message"
+        class="bug-view__message">
       </div>
-      <div class="bug-create__form--row">
-          <quill-editor 
-            [(ngModel)]="newBug.traceback"
-            #traceback="ngModel"
-            name="newBug.traceback"
-            type="text" 
-            [style]="{ 'border-radius': '5px', 'height': '20rem' }"
-            id="traceback">
-          </quill-editor>
-      </div>
-      <div *ngIf="formErrors.TracebackField" class="reg__form--error">
-        {{ formErrors.TracebackField }}
-      </div>
-      <div class="u-spacer"></div>
-      <div class="bug-create__form--row">
-        <label for="message" class="bug-create__form--label">Comments</label>
-      </div>
-      <div class="bug-create__form--row">
-          <quill-editor 
-            [(ngModel)]="newBug.message"
-            #message="ngModel"
-            name="newBug.message"
-            type="text" 
-            [style]="{ 'border-radius': '5px', 'height': '20rem' }"
-            id="traceback">
-          </quill-editor>
-      </div>
-      <div *ngIf="formErrors.MessageField" class="reg__form--error">
-        {{ formErrors.MessageField }}
-      </div>
-      <div class="u-spacer"></div>
-      <button class="bug-create__btn">Submit New Bug</button>
-    </form>
+    </section>
   </div>
-  <div class="bug-create__info col-2-of-4">
+</div>
+
+<div *ngIf="showHelp" class="bug-create__help">
     <h4 class="bug-create__info--header">Guidelines</h4>
     <div class="bug-create__info--list">
       <div class="bug-create__info--row">
@@ -116,40 +152,4 @@
         </p>
       </div> 
     </div>
-  </div>
-</div>
-<div *ngIf="newBug.error.length" class="bug-create__preview">
-  <h2 class="bug-create__preview--title">Bug Prieview</h2>
-  <section class="bug-view">
-    <div class="bug-view__row">
-      <div class="bug-view__row--cluster">
-        <svg *ngIf="userLikes" class="bug-view__icon--liked">
-          <use xlink:href="assets/img/icons/sprite.svg#icon-heart"></use>
-        </svg>
-        <svg *ngIf="!userLikes" (click)="likeBug()" class="bug-view__icon--unliked">
-          <use xlink:href="assets/img/icons/sprite.svg#icon-heart-o"></use>
-        </svg>
-        <h2 class="bug-view__error">{{ newBug.error }}</h2>
-      </div>
-      <div class="bug-view__row--col">
-        <h5 class="bug-view__created"> 
-          <span class="u-color-grey">posted</span>
-          a moment ago
-        </h5>
-        
-        <h5 class="bug-view__created"> 
-          <span class="u-color-grey">by</span>
-          {{ user.first_name }} {{ user.last_name }}
-        </h5>
-      </div>
-    </div>
-    <div 
-      [innerHtml]="newBug.traceback"
-      class="bug-view__traceback">
-    </div>
-    <div 
-      [innerHtml]="newBug.message"
-      class="bug-view__message">
-    </div>
-  </section>
 </div>

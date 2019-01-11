@@ -36,4 +36,7 @@ export class UserService {
   getFactionStats(faction_id: number) {
     return this.http.get('/api/factions/' + faction_id);
   }
+  setProfilePic(data) {
+    return this.http.put('/api/users/profile/' + data.user_id, data);
+  }
 }

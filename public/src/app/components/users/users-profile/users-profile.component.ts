@@ -4,6 +4,7 @@ import { UserService } from 'src/app/common/services/user.service';
 import { UserModel, MapUserData, UserStats, MapUserStatsData } from 'src/app/common/models/User';
 import { isNull } from 'util';
 import { Router } from '@angular/router';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-users-profile',
@@ -42,6 +43,16 @@ titles: any = {
   'Hacker': 'assets/img/images/r2d2.png'
 };
 
+avatars: string[] = [ 
+  'assets/img/images/bobafett.png',
+  'assets/img/images/windu.png',
+  'assets/img/images/r2d2.png',
+  'assets/img/images/vader.png',
+  'assets/img/images/falcon.png',
+  'assets/img/images/deathstar.png',
+  'assets/img/images/yoda.png'
+ ]
+
   user: UserModel = {
     user_id: 0,
     faction_name: '',
@@ -75,6 +86,10 @@ titles: any = {
       return this.router.navigate(['/']);
     }
     this.user = MapUserData(token.currentUser);
+    this.userService.getById(this.user.user_id)
+      .subscribe(result => {
+        this.user = MapUserData(result[0]);
+      })
     this.userService.getUserStatsById(this.user.user_id)
       .subscribe(result => {
         this.stats = MapUserStatsData(result[0]);
@@ -103,8 +118,22 @@ titles: any = {
     console.log('clicked edit email');
   }
 
-  editProfilePic() {
-    console.log('clicked change profile image');
+  updateUser() {
+    console.log(this.user.profile_img)
+    return {
+      user_id: this.user.user_id,
+      email: this.user.email,
+      profile_img: this.user.profile_img
+    }
+  }
+
+  editProfilePic(avatar) {
+    this.user.profile_img = this.avatars[avatar];
+    const data = this.updateUser(); 
+
+    this.userService.setProfilePic(data).subscribe(result => {
+      console.log(result);
+    });
   }
 
   setTitle() {
@@ -165,9 +194,9 @@ titles: any = {
       this.achievement = 'A True Jedi Knight';
       this.hint = 'May the Force be with you.'
     }
-    if(!this.user.admin) {
-      this.user.profile_img = this.titles[this.bestTitle];
-    }
+    // if(!this.user.admin) {
+    //   this.user.profile_img = this.titles[this.bestTitle];
+    // }
   }
 }
 

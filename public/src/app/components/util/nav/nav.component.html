@@ -75,6 +75,11 @@
 <div *ngIf="showFactions" class="u-splash">
   <div class="profile__avatar--factions">
     <div class="profile__avatar-list--container">
+      <svg 
+        (click)="toggleFactions()"
+        class="u-close-icon">
+        <use xlink:href="assets/img/icons/sprite.svg#icon-x"></use>
+      </svg>
       <h2 class="profile__avatar-list--title">Faction Standings</h2>
       <div class="profile__avatar-list">
         <div class="story">

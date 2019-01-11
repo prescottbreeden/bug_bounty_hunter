@@ -1,14 +1,23 @@
 .bug-create {
-  display: inline-block;
+  width: 100%;
+  @include backgroundColor;
 
   &__form--block {
     margin-top: 2rem;
+    display: flex;
+    justify-content: space-around;
+    // width: 100%;
+  }
+
+  &__title {
+    @include jediTitle;
   }
 
   &__form {
-    display: inline-block;
+    // display: inline-block;
     font-size: 2rem;
-    width: 100%;
+    min-width: 45%;
+    margin-right: 3rem;
 
     &--input {
       border-style: ridge;
@@ -103,6 +112,8 @@
   }
 
   &__preview {
+    // display: inline-block;
+    width: 100%;
     padding: 2rem;
     border: 1px dashed $color-light-grey;
 

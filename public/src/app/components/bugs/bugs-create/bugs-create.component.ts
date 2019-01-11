@@ -25,6 +25,12 @@ export class BugsCreateComponent implements OnInit {
     MessageField: null
   }
 
+  quillSettings = {
+    'border-radius': '5px', 
+    'height': '20rem',
+    'background-color': 'white'
+  }
+
   constructor(
     private authService: AuthService,
     private bugService: BugService,

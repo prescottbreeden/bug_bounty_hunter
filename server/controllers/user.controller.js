@@ -225,6 +225,27 @@ module.exports = {
         return res.json(results);
       }
     });
+  },
+
+  setProfilePic: (req, res) => {
+    const user_id = req.params.user_id;
+    console.log(req.body);
+    // const { profile_img } = req.body;
+    db_connection.query(`
+
+       UPDATE users
+          SET profile_img = ?
+        WHERE user_id = ?`, [req.body.profile_img, user_id], 
+
+    function(error, results, fields) {
+      if (error) {
+        logger.log('warn', `users.setProfilePic(): ${error}`);
+        res.json(error);
+      }
+      else {
+        return res.json(results);
+      }
+    })
   }
 
 };

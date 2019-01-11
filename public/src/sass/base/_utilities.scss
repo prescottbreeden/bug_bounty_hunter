@@ -64,17 +64,31 @@
 .u-red-bg {
   background-color: $color-red !important;
 }
-
 .u-close-icon {
   position: absolute;
   top: 1rem;
   right: 1rem;
-  height: 4rem;
-  width: 4rem;
+  height: 2rem;
+  width: 2rem;
   fill: $color-white;
 
   &:hover {
     fill: $color-red;
+    cursor: pointer;
+  }
+}
+
+.u-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  color: $color-white;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 0px;
+
+  &:hover {
+    color: $color-red;
     cursor: pointer;
   }
 }
