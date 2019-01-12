@@ -1,5 +1,12 @@
 <div class="bug-create">
-  <h2 class="bug-create__title">Create New Bug</h2>
+  <div class="bug-create__title-box">
+    <h2 class="bug-create__title">Create New Bug</h2>
+    <svg 
+      (click)="toggleHelp()"
+      class="profile__avatar-list--help-icon">
+      <use xlink:href="assets/img/icons/sprite.svg#icon-help_outline"></use>
+    </svg>
+  </div>
 
   <form 
     (submit)="onSubmitBug()" 
@@ -150,4 +157,24 @@
         </p>
       </div> 
     </div>
+</div>
+
+<div *ngIf="showHelp" class="u-splash">
+  <div class="profile__yoda">
+    <svg 
+      (click)="toggleHelp()"
+      class="u-close-icon">
+      <use xlink:href="assets/img/icons/sprite.svg#icon-x"></use>
+    </svg>
+    <div class="profile__avatar-list--container">
+      <h2 class="profile__avatar-list--title">Master Yoda</h2>
+      <img 
+        class="profile__yoda--img"
+        src="assets/img/yoda_portrait.jpg" alt="yoda">
+      <div class="profile__yoda--quotes">
+        <h4 class="profile__yoda--item">{{ wisdom }}</h4>
+        <h4 class="profile__yoda--item">{{ hint }}</h4>
+      </div>
+    </div>
+  </div>
 </div>

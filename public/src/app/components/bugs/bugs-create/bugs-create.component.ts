@@ -10,6 +10,7 @@ import { isNull } from 'util';
   templateUrl: './bugs-create.component.html',
 })
 export class BugsCreateComponent implements OnInit {
+  showHelp: boolean = false;
   user: UserModel;
 
   newBug: NewBug = {
@@ -23,12 +24,6 @@ export class BugsCreateComponent implements OnInit {
     ErrorField: null,
     TracebackField: null,
     MessageField: null
-  }
-
-  quillSettings = {
-    'border-radius': '5px', 
-    'height': '20rem',
-    'background-color': 'white'
   }
 
   constructor(
@@ -59,6 +54,10 @@ export class BugsCreateComponent implements OnInit {
         });
       this.router.navigate(['/bugs']);
     }
+  }
+
+  toggleHelp() {
+    this.showHelp = !this.showHelp;
   }
 
 }

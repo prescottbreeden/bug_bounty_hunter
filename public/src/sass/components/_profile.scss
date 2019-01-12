@@ -1,5 +1,4 @@
 .profile {
-  padding: 3rem;
 
   &__title {
     text-align: center;
@@ -73,7 +72,7 @@
   &__image {
     position: relative;
     text-align: center;
-    cursor: not-allowed;
+    cursor: default;
     width: 20rem;
     height: 20rem;
     margin: 0 auto;

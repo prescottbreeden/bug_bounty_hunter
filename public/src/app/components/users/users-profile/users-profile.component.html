@@ -5,9 +5,6 @@
     <div class="profile__avatar">
       <div (click)="editProfilePic()" class="profile__image">
         <img src={{user.profile_img}} alt="avatar">
-        <svg class="profile__image--icon">
-          <use xlink:href="assets/img/icons/sprite.svg#icon-pencil"></use>
-        </svg>
       </div>
       <h3 *ngIf="stats.konami_unlock" class="profile__avatar--title">Grand Master</h3>
       <h3 *ngIf="!stats.konami_unlock" class="profile__avatar--title">{{ user.faction_name }}</h3>
@@ -97,11 +94,11 @@
       (click)="editProfilePic(1)" 
       class="story">
       <figure class="story__shape">
-        <img 
+        <!-- <img 
           src="assets/img/images/windu.png" 
           alt="person loving life" 
           class="story__img" />
-        <figcaption class="story__caption">Master Bug Hunter</figcaption>
+        <figcaption class="story__caption">Master Bug Hunter</figcaption> -->
       </figure>
     </div>
     <div 
