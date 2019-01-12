@@ -68,6 +68,19 @@ pre {
   word-wrap: break-word;
   /* Internet Explorer 5.5+ */ }
 
+.ql-toolbar {
+  background-color: #eee;
+  border-radius: 5px 5px 0 0;
+  border-style: hidden; }
+
+.ql-editor {
+  height: 20rem;
+  background-color: #eee; }
+
+.ql-container {
+  border-radius: 0 0 5px 5px;
+  border-style: hidden; }
+
 @font-face {
   font-family: Jedi;
   src: url("assets/font/STJEDISE.TTF"); }
@@ -343,11 +356,8 @@ body {
   box-shadow: 0 1rem 3rem rgba(34, 34, 34, 0.4);
   color: #eee;
   letter-spacing: 2px;
-  margin-bottom: 3rem; }
-  .bug-create__form--block {
-    margin-top: 2rem;
-    display: flex;
-    justify-content: space-around; }
+  margin-bottom: 3rem;
+  padding: 2rem 5rem 5rem 5rem; }
   .bug-create__title {
     font-family: Jedi;
     text-align: center;
@@ -355,12 +365,12 @@ body {
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: #F8B500; }
   .bug-create__form {
-    font-size: 2rem;
-    min-width: 45%;
-    margin-right: 3rem; }
+    font-size: 2rem; }
     .bug-create__form--input {
-      border-style: ridge;
+      background-color: #eee;
+      border-style: hidden;
       border-radius: 5px;
+      border: 1px solid #ccc;
       padding: 1rem;
       margin: 1rem 0;
       width: 100%; }
@@ -376,13 +386,6 @@ body {
       .bug-create__form--input:-moz-placeholder {
         /* Firefox 18- */
         font-style: italic; }
-    .bug-create__form--textbox {
-      padding: 1rem;
-      margin: 1rem 0;
-      border-radius: 5px;
-      border-style: groove;
-      resize: none;
-      height: 20rem; }
   .bug-create__icon {
     height: 4rem;
     width: 4rem;
@@ -395,12 +398,19 @@ body {
     border: 1px solid #60646b;
     background-color: #00ADB5;
     color: #eee;
-    width: 100%; }
+    width: 50%;
+    display: block;
+    margin: 0 auto;
+    margin-top: 3.5rem;
+    box-shadow: 0 1rem 3rem rgba(34, 34, 34, 0.9); }
     .bug-create__btn:hover {
       cursor: pointer;
       background-color: #FC3C3C; }
     .bug-create__btn:disabled {
       cursor: not-allowed; }
+    .bug-create__btn:hover {
+      box-shadow: none;
+      transform: translateY(5px); }
     .bug-create__btn--toggle {
       padding: 2rem;
       font-size: 2rem;
@@ -487,7 +497,10 @@ body {
     margin: 1rem;
     border: 1px solid #00ADB5;
     transition: all .1s;
-    font-size: 2rem; }
+    font-size: 2rem;
+    border-radius: 5px; }
+    .bugs__item:hover {
+      box-shadow: 0 1rem 3rem rgba(34, 34, 34, 0.2); }
     .bugs__item--delete {
       position: absolute;
       top: 50%;
@@ -560,14 +573,14 @@ body {
       .bug-view__created--img img {
         height: 4rem; }
   .bug-view__traceback {
-    font-size: 2rem;
+    font-size: 1.6rem;
     background-color: #FFF4E0;
     padding: 2rem;
     border-radius: 5px;
     color: #FC3C3C; }
   .bug-view__message {
-    font-size: 2rem;
-    padding: 2rem;
+    font-size: 1.6rem;
+    padding: 1rem;
     border: 1px solid #60646b;
     margin-top: 2rem; }
   .bug-view__controls {
@@ -648,7 +661,7 @@ body {
       cursor: pointer; }
   .answers__content {
     margin: 1rem;
-    font-size: 2rem;
+    font-size: 1.6rem;
     width: 100%; }
   .answers__info {
     display: inline-block;

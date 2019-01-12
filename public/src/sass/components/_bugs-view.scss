@@ -74,7 +74,7 @@
   }
 
   &__traceback {
-    font-size: 2rem;
+    font-size: 1.6rem;
     background-color: $color-off-white;
     padding: 2rem;
     border-radius: $default-border-radius;
@@ -83,8 +83,8 @@
   }
 
   &__message {
-    font-size: 2rem;
-    padding: 2rem;
+    font-size: 1.6rem;
+    padding: 1rem;
     border: 1px solid $color-light-grey;
     margin-top: 2rem;
   }
@@ -206,7 +206,7 @@
 
   &__content {
     margin: 1rem;
-    font-size: 2rem;
+    font-size: 1.6rem;
     width: 100%;
   }
 

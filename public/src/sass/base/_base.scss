@@ -23,3 +23,20 @@ pre {
     white-space: -o-pre-wrap;    /* Opera 7 */
     word-wrap: break-word;       /* Internet Explorer 5.5+ */
 }
+
+.ql-toolbar {
+  background-color: $color-white;
+  border-radius: 5px 5px 0 0;
+  border-style: hidden;
+}
+
+.ql-editor {
+  height: 20rem;
+  background-color: $color-white;
+
+}
+
+.ql-container {
+  border-radius: 0 0 5px 5px;
+  border-style: hidden;
+}

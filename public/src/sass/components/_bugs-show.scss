@@ -29,6 +29,7 @@
     align-items: center;
     padding: 1rem;
     color: $color-black;
+    // transition: box-shadow .2s;
 
     &:hover {
       background-color: $color-blue;
@@ -45,6 +46,11 @@
     border: 1px solid $color-blue;
     transition: all .1s;
     font-size: 2rem;
+    border-radius: 5px;
+
+    &:hover {
+      box-shadow: 0 1rem 3rem rgba($color-black, .2);
+    }
 
     &--delete {
       position: absolute;
