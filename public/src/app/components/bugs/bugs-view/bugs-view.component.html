@@ -62,8 +62,16 @@
 </div>
 
 <div class="u-spacer"></div>
-<div *ngIf="showEditBugForm" class="row">
-  <div class="bug-create col-2-of-4">
+<div *ngIf="showEditBugForm">
+  <div class="bug-create">
+    <div class="bug-create__title-box">
+      <h2 class="bug-create__title">Edit Bug</h2>
+      <svg 
+        (click)="toggleBugHelp()"
+        class="profile__avatar-list--help-icon">
+        <use xlink:href="assets/img/icons/sprite.svg#icon-help_outline"></use>
+      </svg>
+    </div>
     <form 
       (submit)="onSubmitBugEdit()" 
       class="bug-create__form">
@@ -99,7 +107,6 @@
             #traceback="ngModel"
             name="editBug.traceback"
             type="text" 
-            [style]="{ 'border-radius': '5px', 'height': '20rem' }"
             id="traceback">
           </quill-editor>
       </div>
@@ -116,7 +123,6 @@
             #message="ngModel"
             name="editBug.message"
             type="text" 
-            [style]="{ 'border-radius': '5px', 'height': '20rem' }"
             id="traceback">
           </quill-editor>
       </div>
@@ -127,7 +133,133 @@
       <button class="bug-create__btn">Save Bug Data</button>
     </form>
   </div>
-  <div class="bug-create__info col-2-of-4">
+</div>
+
+<div *ngIf="showAnswerForm && editAnswer" class="bug-create__form--block">
+  <div class="bug-create">
+    <form 
+      (submit)="onSubmitAnswerEdit()" 
+      class="bug-create__form">
+      <input 
+        type="hidden" 
+        [(ngModel)]="updatedAnswer.posted_by" 
+        name="updatedAnswer.posted_by">
+      <input 
+        type="hidden" 
+        [(ngModel)]="updatedAnswer.bug_id" 
+        name="updatedAnswer.bug_id">
+      <div class="bug-create__title-box">
+        <h2 class="bug-create__title">Edit Answer</h2>
+        <svg 
+          (click)="toggleAnswerHelp()"
+          class="profile__avatar-list--help-icon">
+          <use xlink:href="assets/img/icons/sprite.svg#icon-help_outline"></use>
+        </svg>
+      </div>
+      <div class="form__row">
+        <quill-editor 
+          [(ngModel)]="updatedAnswer.answer_content"
+          #content="ngModel"
+          name="updatedAnswer.answer_content"
+          id="content">
+        </quill-editor>
+      </div>
+      <div *ngIf="answerFormErrors.ContentField" class="reg__form--error">
+        {{ answerFormErrors.ContentField }}
+      </div>
+      <div class="u-spacer"></div>
+      <button class="bug-create__btn">Add Answer</button>
+    </form>
+  </div>
+</div>
+
+  <div *ngIf="showAnswerForm && !editAnswer" class="bug-create__form--block">
+    <div class="bug-create">
+      <form 
+        (submit)="onSubmitAnswer()" 
+        class="bug-create__form">
+        <input 
+          type="hidden" 
+          [(ngModel)]="newAnswer.posted_by" 
+          name="newAnswer.posted_by">
+        <input 
+          type="hidden" 
+          [(ngModel)]="newAnswer.bug_id" 
+          name="newAnswer.bug_id">
+        <div class="bug-create__title-box">
+          <h2 class="bug-create__title">Add Answer</h2>
+          <svg 
+            (click)="toggleAnswerHelp()"
+            class="profile__avatar-list--help-icon">
+            <use xlink:href="assets/img/icons/sprite.svg#icon-help_outline"></use>
+          </svg>
+        </div>
+        <div class="form__row">
+          <quill-editor 
+            [(ngModel)]="newAnswer.answer_content"
+            #content="ngModel"
+            name="newAnswer.answer_content"
+            id="content">
+          </quill-editor>
+        </div>
+        <div *ngIf="answerFormErrors.ContentField" class="reg__form--error">
+          {{ answerFormErrors.ContentField }}
+        </div>
+        <div class="u-spacer"></div>
+        <button class="bug-create__btn">Add Answer</button>
+      </form>
+    </div>
+  </div>
+
+  <div *ngIf="answers[0] && answers[0].answer_content !== null" class="answers">
+    <div *ngFor="let answer of answers" class="answers__row">
+      <div class="answers__group--data">
+        <svg 
+          *ngIf="(answer.answered_by == user.user_id && !answer.accepted) || user.admin" 
+          (click)="onEditAnswer(answer.answer_id)" 
+          class="answers__icon--accept">
+          <use xlink:href="assets/img/icons/sprite.svg#icon-pencil"></use>
+        </svg>
+        <svg 
+          *ngIf="answer.accepted" 
+          (click)="onAcceptAnswer(answer.answer_id)"
+          class="answers__icon--accepted">
+          <use xlink:href="assets/img/icons/sprite.svg#icon-check-circle"></use>
+        </svg>
+        <svg 
+          *ngIf="((bug.posted_by == user.user_id && 
+                answer.answered_by !== user.user_id) &&
+                !answer.accepted) || (!answer.accepted &&
+                user.admin)" 
+          (click)="onAcceptAnswer(answer.answer_id)" 
+          class="answers__icon--edit">
+          <use xlink:href="assets/img/icons/sprite.svg#icon-check-circle"></use>
+        </svg>
+        <div 
+          [innerHtml]="answer['answer_content']"
+          class="answers__content">
+        </div>
+      </div>
+      <div class="answers__group--info">
+        <div class="answers__info">
+          <p> <span class="u-color-grey">posted</span> {{ answer.answer_created | timeAgo }} </p>
+          <div class="answers__answered_by"> {{ answer.answered_name }} </div>
+        </div>
+        <div class="bug-view__created--img">
+          <img src={{answer.answer_profile}} alt="profile-img">
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div *ngIf="answers[0] && answers[0].answer_content === null" class="answers">
+  There are currently no suggested solutions for this bug. You should be the first!
+</div>
+
+<div 
+  *ngIf="showEditBugHelp"
+  class="u-splash">
+  <div class="bug-create__info">
     <h4 class="bug-create__info--header">Guidelines</h4>
     <div class="bug-create__info--list">
       <div class="bug-create__info--row">
@@ -183,186 +315,43 @@
   </div>
 </div>
 
-
-  <div *ngIf="showAnswerForm && editAnswer" class="row bug-create__form--block">
-    <div class="bug-create col-2-of-4">
-      <form 
-        (submit)="onSubmitAnswerEdit()" 
-        class="bug-create__form">
-        <input 
-          type="hidden" 
-          [(ngModel)]="updatedAnswer.posted_by" 
-          name="updatedAnswer.posted_by">
-        <input 
-          type="hidden" 
-          [(ngModel)]="updatedAnswer.bug_id" 
-          name="updatedAnswer.bug_id">
-        <div class="bug-create__form--row">
-          <h4 class="bug-create__info--header">Edit Answer</h4>
-        </div>
-        <div class="form__row">
-          <quill-editor 
-            [(ngModel)]="updatedAnswer.answer_content"
-            #content="ngModel"
-            name="updatedAnswer.answer_content"
-            [style]="{height: '250px'}"
-            id="content">
-          </quill-editor>
-        </div>
-        <div *ngIf="answerFormErrors.ContentField" class="reg__form--error">
-          {{ answerFormErrors.ContentField }}
-        </div>
-        <div class="u-spacer"></div>
-        <button class="bug-create__btn">Add Answer</button>
-      </form>
-    </div>
-    <div class="bug-create__info col-2-of-4">
-      <h4 class="bug-create__info--header">Things to Consider</h4>
-      <div class="bug-create__info--list">
-        <div class="bug-create__info--row">
-          <img src="assets/img/target_50px.png" alt="target" class="bug-create__bullseye">
-          <p class="bug-create__info--bullet-title">Look for Typos</p> 
-        </div>
-        <div class="bug-create__info--row">
-          <p class="bug-create__info--text">
-            The majority of bugs are usually a typo of some sort, so be 
-            on the prowl for them, especially if your first reaction is 
-            'hmm, the code looks good'.
-          </p>
-        </div> 
-        <div class="bug-create__info--row">
-          <img src="assets/img/target_50px.png" alt="target" class="bug-create__bullseye">
-          <p class="bug-create__info--bullet-title">Need More Info?</p> 
-        </div>
-        <div class="bug-create__info--row">
-          <p class="bug-create__info--text">
-            It is normal to sometimes need more information when you 
-            are trying to help solve a bug. Feel free to ask if you 
-            think it will help!
-          </p>
-        </div> 
-        <div class="bug-create__info--row">
-          <img src="assets/img/target_50px.png" alt="target" class="bug-create__bullseye">
-          <p class="bug-create__info--bullet-title">Brevity is the Soul of Wit</p> 
-        </div>
-        <div class="bug-create__info--row">
-          <p class="bug-create__info--text">
-            Don't write a book; ain't nobody's got times for that.
-          </p>
-        </div> 
+<div 
+  *ngIf="showAnswerHelp"
+  class="u-splash">
+  <div class="bug-create__info">
+    <h2 class="bug-create__title">Things to Consider</h2>
+    <div class="bug-create__info--list">
+      <div class="bug-create__info--row">
+        <img src="assets/img/target_50px.png" alt="target" class="bug-create__bullseye">
+        <p class="bug-create__info--bullet-title">Look for Typos</p> 
       </div>
+      <div class="bug-create__info--row">
+        <p class="bug-create__info--text">
+          The majority of bugs are usually a typo of some sort, so be 
+          on the prowl for them, especially if your first reaction is 
+          'hmm, the code looks good'.
+        </p>
+      </div> 
+      <div class="bug-create__info--row">
+        <img src="assets/img/target_50px.png" alt="target" class="bug-create__bullseye">
+        <p class="bug-create__info--bullet-title">Need More Info?</p> 
+      </div>
+      <div class="bug-create__info--row">
+        <p class="bug-create__info--text">
+          It is normal to sometimes need more information when you 
+          are trying to help solve a bug. Feel free to ask if you 
+          think it will help!
+        </p>
+      </div> 
+      <div class="bug-create__info--row">
+        <img src="assets/img/target_50px.png" alt="target" class="bug-create__bullseye">
+        <p class="bug-create__info--bullet-title">Brevity is the Soul of Wit</p> 
+      </div>
+      <div class="bug-create__info--row">
+        <p class="bug-create__info--text">
+          Don't write a book; ain't nobody's got times for that.
+        </p>
+      </div> 
     </div>
   </div>
-  <div *ngIf="showAnswerForm && !editAnswer" class="row bug-create__form--block">
-    <div class="bug-create col-2-of-4">
-      <form 
-        (submit)="onSubmitAnswer()" 
-        class="bug-create__form">
-        <input 
-          type="hidden" 
-          [(ngModel)]="newAnswer.posted_by" 
-          name="newAnswer.posted_by">
-        <input 
-          type="hidden" 
-          [(ngModel)]="newAnswer.bug_id" 
-          name="newAnswer.bug_id">
-        <div class="bug-create__form--row">
-          <h4 class="bug-create__info--header">Add Answer</h4>
-        </div>
-        <div class="form__row">
-          <quill-editor 
-            [(ngModel)]="newAnswer.answer_content"
-            #content="ngModel"
-            name="newAnswer.answer_content"
-            [style]="{height: '250px'}"
-            id="content">
-          </quill-editor>
-        </div>
-        <div *ngIf="answerFormErrors.ContentField" class="reg__form--error">
-          {{ answerFormErrors.ContentField }}
-        </div>
-        <div class="u-spacer"></div>
-        <button class="bug-create__btn">Add Answer</button>
-      </form>
-    </div>
-    <div class="bug-create__info col-2-of-4">
-      <h4 class="bug-create__info--header">Things to Consider</h4>
-      <div class="bug-create__info--list">
-        <div class="bug-create__info--row">
-          <img src="assets/img/target_50px.png" alt="target" class="bug-create__bullseye">
-          <p class="bug-create__info--bullet-title">Look for Typos</p> 
-        </div>
-        <div class="bug-create__info--row">
-          <p class="bug-create__info--text">
-            The majority of bugs are usually a typo of some sort, so be 
-            on the prowl for them, especially if your first reaction is 
-            'hmm, the code looks good'.
-          </p>
-        </div> 
-        <div class="bug-create__info--row">
-          <img src="assets/img/target_50px.png" alt="target" class="bug-create__bullseye">
-          <p class="bug-create__info--bullet-title">Need More Info?</p> 
-        </div>
-        <div class="bug-create__info--row">
-          <p class="bug-create__info--text">
-            It is normal to sometimes need more information when you 
-            are trying to help solve a bug. Feel free to ask if you 
-            think it will help!
-          </p>
-        </div> 
-        <div class="bug-create__info--row">
-          <img src="assets/img/target_50px.png" alt="target" class="bug-create__bullseye">
-          <p class="bug-create__info--bullet-title">Brevity is the Soul of Wit</p> 
-        </div>
-        <div class="bug-create__info--row">
-          <p class="bug-create__info--text">
-            Don't write a book; ain't nobody's got times for that.
-          </p>
-        </div> 
-      </div>
-    </div>
-  </div>
-</div>
-  <div *ngIf="answers[0] && answers[0].answer_content !== null" class="answers">
-    <div *ngFor="let answer of answers" class="answers__row">
-      <div class="answers__group--data">
-        <svg 
-          *ngIf="(answer.answered_by == user.user_id && !answer.accepted) || user.admin" 
-          (click)="onEditAnswer(answer.answer_id)" 
-          class="answers__icon--accept">
-          <use xlink:href="assets/img/icons/sprite.svg#icon-pencil"></use>
-        </svg>
-        <svg 
-          *ngIf="answer.accepted" 
-          (click)="onAcceptAnswer(answer.answer_id)"
-          class="answers__icon--accepted">
-          <use xlink:href="assets/img/icons/sprite.svg#icon-check-circle"></use>
-        </svg>
-        <svg 
-          *ngIf="((bug.posted_by == user.user_id && 
-                answer.answered_by !== user.user_id) &&
-                !answer.accepted) || (!answer.accepted &&
-                user.admin)" 
-          (click)="onAcceptAnswer(answer.answer_id)" 
-          class="answers__icon--edit">
-          <use xlink:href="assets/img/icons/sprite.svg#icon-check-circle"></use>
-        </svg>
-        <div 
-          [innerHtml]="answer['answer_content']"
-          class="answers__content">
-        </div>
-      </div>
-      <div class="answers__group--info">
-        <div class="answers__info">
-          <p> <span class="u-color-grey">posted</span> {{ answer.answer_created | timeAgo }} </p>
-          <div class="answers__answered_by"> {{ answer.answered_name }} </div>
-        </div>
-        <div class="bug-view__created--img">
-          <img src={{answer.answer_profile}} alt="profile-img">
-        </div>
-      </div>
-    </div>
-  </div>
-<div *ngIf="answers[0] && answers[0].answer_content === null" class="answers">
-  There are currently no suggested solutions for this bug. You should be the first!
 </div>

@@ -3,13 +3,6 @@
   @include backgroundColor;
   padding: 2rem 5rem 5rem 5rem;
 
-  &__form--block {
-    // display: flex;
-    // justify-content: space-around;
-    // width: 100%;
-    // border: 1px dashed yellow;
-  }
-
   &__title-box {
     display: flex;
     justify-content: center;
@@ -18,10 +11,10 @@
 
   &__title {
     @include jediTitle;
+    font-size: 3rem;
   }
 
   &__form {
-    // display: inline-block;
     font-size: 2rem;
 
     &--input {
@@ -45,15 +38,6 @@
       &:-moz-placeholder { /* Firefox 18- */
         font-style: italic;
       }
-    }
-
-    &--textbox {
-      // padding: 1rem;
-      // margin: 1rem 0;
-      // border-radius: 0 0 5px 5px;
-      // border-style: groove;
-      // resize: none;
-      // height: 20rem;
     }
   }
 
