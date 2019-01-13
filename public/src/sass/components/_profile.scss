@@ -122,6 +122,13 @@
         cursor: not-allowed;
       }
     }
+
+    &--lock {
+      @include absoluteCenter;
+      height: 4rem;
+      width: 4rem;
+      fill: rgba($color-white, .5);
+    }
   }
 
   &__info {
