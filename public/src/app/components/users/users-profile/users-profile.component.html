@@ -80,7 +80,6 @@
   </div>
   <div class="profile__avatar-list">
     <div 
-      (click)="editProfilePic(0)" 
       class="story">
       <figure class="story__shape">
         <svg 
@@ -90,6 +89,7 @@
         </svg>
         <img 
           *ngIf="rank >= 3"
+          (click)="editProfilePic(0)" 
           src="assets/img/images/bobafett.png" 
           alt="person loving life" 
           class="story__img" />
