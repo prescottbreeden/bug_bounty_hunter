@@ -206,18 +206,18 @@
       class="story story--single">
       <figure class="story__shape">
         <svg 
-          *ngIf="!konami_unlock"
+          *ngIf="!konamiMaster"
           class="profile__icon--lock">
           <use xlink:href="assets/img/icons/sprite.svg#icon-lock"></use>
         </svg>
         <img 
-          *ngIf="konami_unlock"
+          *ngIf="konamiMaster"
           (click)="editProfilePic(6)" 
           src="assets/img/images/yoda.png" 
           alt="person loving life" 
           class="story__img" />
         <figcaption 
-          *ngIf="konami_unlock"
+          *ngIf="konamiMaster"
           (click)="editProfilePic(6)" 
           class="story__caption">Grand Master</figcaption>
       </figure>

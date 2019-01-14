@@ -196,6 +196,12 @@ body {
   background-color: rgba(34, 34, 34, 0.9);
   z-index: 200; }
 
+.u-italic {
+  font-style: italic; }
+
+.u-small {
+  font-size: 1.5rem; }
+
 .footer {
   padding: 3rem;
   height: 10rem; }
@@ -440,8 +446,10 @@ body {
       .bug-create__btn--toggle:disabled {
         cursor: not-allowed; }
   .bug-create__bullseye {
-    min-height: 50px;
-    min-width: 50px; }
+    height: 5rem;
+    width: 5rem;
+    max-height: 5rem;
+    max-width: 5rem; }
   .bug-create__info {
     display: inline-block;
     width: 100%;
@@ -466,6 +474,9 @@ body {
     .bug-create__info--text {
       font-size: 2rem;
       margin-bottom: 1rem; }
+    .bug-create__info--help-img {
+      min-width: 40%;
+      margin-right: 2rem; }
   .bug-create__preview {
     width: 100%;
     padding: 2rem;
