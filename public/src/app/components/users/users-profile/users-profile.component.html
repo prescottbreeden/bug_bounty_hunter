@@ -3,7 +3,7 @@
   <div class="profile__container">
 
     <div class="profile__avatar">
-      <div (click)="editProfilePic()" class="profile__image">
+      <div class="profile__image">
         <img src={{user.profile_img}} alt="avatar">
       </div>
       <h3 *ngIf="stats.konami_unlock" class="profile__avatar--title">Grand Master</h3>
