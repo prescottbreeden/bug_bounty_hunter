@@ -28,8 +28,12 @@
     color: $color-white;
     width: 20%;
     font-size: 2rem;
+    font-family: Lato;
     border: none;
     border-radius: 5px 0 0 5px;
+    @include respond(phone) {
+      font-size: 1.6rem;
+    }
 
     &:hover {
       cursor: pointer;

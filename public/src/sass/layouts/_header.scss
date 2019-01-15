@@ -1,5 +1,5 @@
 .header {
-  z-index: 1000;
+  z-index: 500;
   position: fixed;
   top: 0;
   left: 0;
@@ -13,12 +13,20 @@
     $color-dark-grey
   );
   height: 8rem;
-  // padding: 2rem 3rem;
+  @include respond(phone) {
+    // flex-direction: column;
+    // justify-content: flex-start;
+  }
 
   &__title-box {
     display: flex;
     align-items: center;
     width: 100%;
+    @include respond(phone) {
+      justify-content: center;
+      
+    }
+
   }
 
   &__title {
@@ -28,6 +36,11 @@
     color: transparent;
     -webkit-text-stroke-width: 1px;  
     -webkit-text-stroke-color: $color-yellow;  
+    @include respond(phone) {
+      margin-left: 0;
+      font-size: 2rem;
+      text-align: center;
+    }
 
     &:hover {
       cursor: default;
@@ -38,6 +51,10 @@
     margin-left: 1rem;
     height: 6rem;
     width: 6rem;
+    @include respond(phone) {
+      height: 3rem;
+      width: 3rem;
+    }
   }
 
   &__menu {
@@ -46,6 +63,9 @@
     align-items: center;
     color: $color-white;
     text-transform: uppercase;
+    @include respond(phone) {
+      display: none;
+    }
 
     &:hover {
       cursor: pointer;

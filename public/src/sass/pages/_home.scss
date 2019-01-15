@@ -1,3 +1,6 @@
 .app-container {
   padding: 3rem;
+  @include respond(phone) {
+    padding: 1.5rem;
+  }
 }

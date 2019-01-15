@@ -1,5 +1,6 @@
 .bugs {
   margin-bottom: $margin-bottom;
+  @include respond(phone) { }
 
   &__header {
     display: flex;
@@ -29,7 +30,9 @@
     align-items: center;
     padding: 1rem;
     color: $color-black;
-    // transition: box-shadow .2s;
+    @include respond(phone) { 
+      flex-direction: column;
+    }
 
     &:hover {
       background-color: $color-blue;
@@ -71,6 +74,13 @@
     min-width: 10%;
     font-size: 2rem;
     color: inherit;
+    @include respond(phone) { 
+      margin-top: .5rem;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      flex-direction: row-reverse;
+    }
 
     &--row {
       display: flex;
@@ -95,5 +105,13 @@
 
   &__answers {
     // color: var(--color-yellow);
+  }
+
+  &__error {
+    @include respond(phone) {
+      font-size: 1.6rem;
+      display: block;
+      width: 100%;
+    }
   }
 }

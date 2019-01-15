@@ -44,6 +44,10 @@
     color: $color-white;
     letter-spacing: 2px;
     margin-bottom: $margin-bottom;
+    @include respond(phone) {
+        padding: 0rem;
+        padding-top: 1rem;
+    }
 }
 
 @mixin jediTitle {
