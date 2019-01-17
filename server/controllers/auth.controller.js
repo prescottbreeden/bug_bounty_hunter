@@ -10,7 +10,11 @@ const db_connection = mysql.createConnection(config.database);
 module.exports = {
 
   validateEmail: (req, res) => {
-    db_connection.query('SELECT * FROM users WHERE email = ?', req.body.email, function(error, results, fields) {
+    db_connection.query(`
+
+      SELECT * FROM users WHERE email = ?`, req.body.email, 
+      
+      function(error, results, fields) {
       if(error) {
         logger.log('warn', `users.validateEmail(): ${error}`);
         res.json(error);

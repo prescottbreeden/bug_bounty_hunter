@@ -75,7 +75,10 @@
           <svg *ngIf="userLikes" class="bug-view__icon--liked">
             <use xlink:href="assets/img/icons/sprite.svg#icon-heart"></use>
           </svg>
-          <svg *ngIf="!userLikes" (click)="likeBug()" class="bug-view__icon--unliked">
+          <svg 
+            *ngIf="!userLikes" 
+            (click)="likeBug()" 
+            class="bug-view__icon--unliked">
             <use xlink:href="assets/img/icons/sprite.svg#icon-heart-o"></use>
           </svg>
           <h2 class="bug-view__error">{{ newBug.error }}</h2>
