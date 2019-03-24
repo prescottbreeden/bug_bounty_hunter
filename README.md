@@ -1,8 +1,19 @@
 # bug_bounty_hunter
 Stack Overflow clone for my students at coding dojo to rehearse reading and analyzing error messages
 
-Edit config.js in node server to appropriate database info  
-Navigate to data folder and execute from mysql shell> 'source create_tables.sql'  
-server is run from app.js  
-  
-gg have fun
+## feature list
+  - gamified faction competition
+  - create favorites
+  - profile statistics
+  - unlock profile images
+  - hidden easter eggs
+  - help menus
+  - searchable results
+  - login/registration
+  - authentication via json webtoken
+  - node mysql with relational mapping
+  - get/add/edit/delete bugs
+  - get/add/edit/delete answers
+  - get/add/delete favorites
+  - admin access to edit/delete content
+  - responsive design

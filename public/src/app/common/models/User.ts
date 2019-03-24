@@ -42,14 +42,14 @@ export function MapUserData(data): UserModel {
     profile_img: data['profile_img'],
     created_at: data['user_created'],
     updated_at: data['user_updated']
-  }
+  };
 }
 
 export function MapUserStatsData(data): UserStats {
   return {
-    bugs_posted: parseInt(data['bugs']),
-    answers_posted: parseInt(data['answers']),
-    favorites: parseInt(data['favorites']),
-    konami_unlock: data['konami_unlock']
-  }
+    bugs_posted: parseInt(data[0]['bugs']),
+    answers_posted: parseInt(data[0]['answers']),
+    favorites: parseInt(data[0]['favorites']),
+    konami_unlock: data[0]['konami_unlock']
+  };
 }

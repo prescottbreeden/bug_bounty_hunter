@@ -60,13 +60,13 @@ export class BugsViewComponent implements OnInit {
 
   answerFormErrors: NewAnswerErrors = {
     ContentField: null
-  }
+  };
 
   editFormErrors: NewBugErrors = {
     ErrorField: null,
     TracebackField: null,
     MessageField: null
-  }
+  };
 
   constructor(
     private route: ActivatedRoute,
@@ -97,12 +97,14 @@ export class BugsViewComponent implements OnInit {
       return this.createAnswer();
     }
   }
+
   onSubmitAnswerEdit() {
     this.answerFormErrors = ValidateNewAnswer(this.updatedAnswer);
     if (this.answerFormErrors.ContentField === null) {
       return this.updateAnswer();
     }
   }
+  
   onSubmitBugEdit() {
     this.editFormErrors = ValidateNewBug(this.editBug);
     if (this.editFormErrors.ErrorField === null 
@@ -111,14 +113,13 @@ export class BugsViewComponent implements OnInit {
       this.editBug.traceback = JSON.stringify(this.editBug.traceback);
       this.editBug.message = JSON.stringify(this.editBug.message);
       this.bugService.updateBug(this.editBug)
-        .subscribe(res => {
-          console.log('bug updated: ', res);
-        });
+        .subscribe(res => console.log('bug updated: ', res));
       this.toggleEdit();
       this.router.navigate(['/bugs/' + this.bug.bug_id]);
       this.getBugData();
     }
   }
+  
   onEditAnswer(answer_id) {
     this.updatedAnswer = this.answers.filter(ele => {
       return ele.answer_id === answer_id;
@@ -126,6 +127,7 @@ export class BugsViewComponent implements OnInit {
     this.toggleForm();
     this.editAnswer = true;
   }
+  
   onAcceptAnswer(answer_id) {
     const answer = this.answers.filter(ele => {
       return ele.answer_id === answer_id;
@@ -155,6 +157,7 @@ export class BugsViewComponent implements OnInit {
     }
     this.showAnswerForm = !this.showAnswerForm;
   }
+
   toggleEdit() {
     if (this.showAnswerForm) {
       this.toggleForm();
@@ -176,6 +179,7 @@ export class BugsViewComponent implements OnInit {
         }
       });
   }
+
   getBugData() {
     this.bugService.getBugById(this.bug.bug_id)
       .subscribe(res => {
@@ -187,6 +191,7 @@ export class BugsViewComponent implements OnInit {
         this.newAnswer.bug_id = this.bug.bug_id;
       });
   }
+  
   likeBug() {
     this.bugService.addFavorite({
       bug_id: this.bug.bug_id,
@@ -195,6 +200,7 @@ export class BugsViewComponent implements OnInit {
       this.isFavorite = true;
     })
   }
+  
   dislikeBug() {
     this.bugService.removeFavorite({
       bug_id: this.bug.bug_id,
@@ -203,14 +209,17 @@ export class BugsViewComponent implements OnInit {
       this.isFavorite = false;
     })
   }
+  
   createAnswer() {
-    this.newAnswer.answer_content = JSON.stringify(this.newAnswer.answer_content);
-    this.bugService.addAnswer(this.newAnswer).subscribe(res => {
-      this.bugService.getAnswer(res['insertId'])
+    this.newAnswer.answer_content = JSON
+      .stringify(this.newAnswer.answer_content);
+    this.bugService.addAnswer(this.newAnswer).subscribe((res: any) => {
+      this.bugService.getAnswer(res.insertId)
         .subscribe(res => {
           let addedAnswer = MapAnswerDatum(res[0]);
           addedAnswer.answer_content = JSON.parse(addedAnswer.answer_content);
-          addedAnswer.answered_name = this.user.first_name + ' ' + this.user.last_name;
+          addedAnswer.answered_name = 
+            `${this.user.first_name} ${this.user.last_name}`;
           addedAnswer.answer_profile = this.user.profile_img;
           this.answers = [ ...this.answers, addedAnswer];
         })
@@ -218,15 +227,16 @@ export class BugsViewComponent implements OnInit {
     this.newAnswer.answer_content = '';
     this.toggleForm();
   }
+  
   updateAnswer() {
-    this.updatedAnswer.answer_content = JSON.stringify(this.updatedAnswer.answer_content);
+    this.updatedAnswer.answer_content = JSON
+      .stringify(this.updatedAnswer.answer_content);
     this.bugService.updateAnswer(this.updatedAnswer)
-      .subscribe(res => {
-        console.log(res);
-      });
+      .subscribe(res => console.log(res));
     this.toggleForm();
     this.editAnswer = false;
-    this.updatedAnswer.answer_content = JSON.parse(this.updatedAnswer.answer_content);
+    this.updatedAnswer.answer_content = JSON
+      .parse(this.updatedAnswer.answer_content);
   }
 }
 

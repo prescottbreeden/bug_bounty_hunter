@@ -79,13 +79,9 @@ avatars: string[] = [
       return this.router.navigate(['/']);
     }
     this.user = MapUserData(token.currentUser);
-    this.userService.getById(this.user.user_id)
-      .subscribe(result => {
-        this.user = MapUserData(result[0]);
-      })
     this.userService.getUserStatsById(this.user.user_id)
-      .subscribe(result => {
-        this.stats = MapUserStatsData(result[0]);
+      .subscribe(data => {
+        this.stats = MapUserStatsData(data);
         this.setRank();
         this.setTitle(); 
       });
@@ -113,7 +109,6 @@ avatars: string[] = [
   }
 
   updateUser() {
-    console.log(this.user.profile_img)
     return {
       user_id: this.user.user_id,
       email: this.user.email,

@@ -37,7 +37,7 @@ export class BugService {
     return this.http.put('/api/answers/' + answer.answer_id, answer);
   }
   acceptAnswer(answer_id: number, accepted: AnswerModel) {
-    return this.http.put('/api/answers/accepted/' + answer_id, accepted);
+    return this.http.patch('/api/answers/' + answer_id, accepted);
   }
 
 

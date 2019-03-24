@@ -6,7 +6,6 @@ import { NewUser } from 'src/app/common/models/User';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { UserValidators } from 'src/app/common/models/Validations';
 import { uniqueEmailValidator } from 'src/app/common/directives/unique-email-validator.directive';
-import { routerNgProbeToken } from '@angular/router/src/router_module';
 
 @Component({
   selector: 'app-register',
@@ -194,7 +193,6 @@ export class RegisterComponent implements OnInit {
               if (result) {
                 this.router.navigate(['/bugs']);
               } else {
-                console.log('ALL IS LOST!!!')
                 this.router.navigate(['/404']);
               }
             });

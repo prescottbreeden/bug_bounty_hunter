@@ -187,55 +187,14 @@ module.exports = {
     res.json('route not finished');
   },
 
-  getTitlesById: (req, res) => {
-    const ID = req.params.user_id; 
-    db_connection.query(`
-
-       SELECT title_name
-         FROM users_titles AS ut
-         JOIN users AS u
-           ON u.user_id = ut.user_id
-        WHERE u.user_id = ?`, [ID], 
-
-      function(error, results, fields) {
-      if (error) {
-        logger.log('warn', `users.create(): ${error}`);
-        res.json(error);
-      }
-      else {
-        return res.json(results);
-      }
-    });
-  },
-
-  createTitle: (req, res) => {
-    const DATA = req.body;
-    db_connection.query(`
-
-       INSERT 
-         INTO users_titles 
-          SET ?`, [DATA], 
-
-      function(error, results, fields) {
-      if (error) {
-        logger.log('warn', `users.create(): ${error}`);
-        res.json(error);
-      }
-      else {
-        return res.json(results);
-      }
-    });
-  },
-
   setProfilePic: (req, res) => {
-    const user_id = req.params.user_id;
-    console.log(req.body);
-    // const { profile_img } = req.body;
+    const { user_id } = req.params;
+    const { profile_img } = req.body;
     db_connection.query(`
 
        UPDATE users
           SET profile_img = ?
-        WHERE user_id = ?`, [req.body.profile_img, user_id], 
+        WHERE user_id = ?`, [profile_img, user_id], 
 
     function(error, results, fields) {
       if (error) {
@@ -246,6 +205,7 @@ module.exports = {
         return res.json(results);
       }
     })
+
   }
 
 };

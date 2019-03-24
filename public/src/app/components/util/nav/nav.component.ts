@@ -46,17 +46,14 @@ export class NavComponent implements OnInit {
     this.userService.getFactionStats(1).subscribe(result => {
       this.rebels.bugs_posted = result[0]['bugs'];
       this.rebels.bugs_answered = result[0]['answers'];
-      console.log(this.rebels);
     })
     this.userService.getFactionStats(2).subscribe(result => {
       this.empire.bugs_posted = result[0]['bugs'];
       this.empire.bugs_answered = result[0]['answers'];
-      console.log(this.empire);
     })
     this.userService.getFactionStats(3).subscribe(result => {
       this.jedis.bugs_posted = result[0]['bugs'];
       this.jedis.bugs_answered = result[0]['answers'];
-      console.log(this.jedis);
     })
   }
 
