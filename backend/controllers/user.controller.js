@@ -1,19 +1,23 @@
-const env = process.env.NODE_ENV || 'development';
-const config = require('../../config')[env];
-const logger = require('../_helpers/logger');
-const Models = require('../models/Models');
-const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const mysql = require('mysql');
-const db_connection = mysql.createConnection(config.database);
+const logger = require('../_helpers/logger');
+const {database:connect} = require('../../config')['development'];
+const db = mysql.createConnection(connect);
 const {
-  queryAllUsers
+  queryAllUsers,
+  queryUserById,
+  queryUserData,
+  queryUserStatsById,
+  queryFactionStats,
+  queryNewUser,
+  queryUpdateUser,
+  queryUpdateProfilePic
 } = require('../dbQueries/user.queries');
 
 module.exports = {
   
   getAll: (req, res) => {
-    db_connection.query(queryAllUsers, (error, results) => {
+    db.query(queryAllUsers, (error, results) => {
       if(error) {
         logger.log('warn', `users.getAll(): ${error}`);
         res.json(error);
@@ -25,15 +29,8 @@ module.exports = {
   },
 
   getById: (req, res) => {
-    const ID = req.params.user_id;
-    db_connection.query(`
-
-       SELECT * 
-         FROM users AS u
-         JOIN factions AS f
-        WHERE user_id = ?`, [ID],
-
-      function(error, results, fields) {
+    const {user_id:ID} = req.params;
+    db.query(queryUserById, [ID], (error, results) => {
       if(error) {
         logger.log('warn', `users.getById(): ${error}`);
         res.json(error);
@@ -45,23 +42,8 @@ module.exports = {
   },
 
   getAllUserData: (req, res) => {
-    db_connection.query(`
-
-       SELECT CONCAT(u.first_name, ' ', u.last_name) AS name,
-              COUNT(DISTINCT b.bug_id) AS bugs,
-              COUNT(DISTINCT answer_id) AS answers,
-              COUNT(DISTINCT favorite_id) AS favorites
-         FROM users AS u
-    LEFT JOIN bugs AS b
-           ON b.posted_by = user_id
-    LEFT JOIN answers AS a
-           ON a.answered_by = user_id
-    LEFT JOIN favorites AS f
-           ON f.user_id = u.user_id
-     GROUP BY u.user_id
-     ORDER BY bugs DESC`, [req.params.id], 
-
-      function(error, results, fields) {
+    const {user_id:ID} = req.params;
+    db.query(queryUserData, [ID], (error, results) => {
       if(error) {
         logger.log('warn', `users.getAllUserData(): ${error}`);
         res.json(error);
@@ -70,28 +52,11 @@ module.exports = {
         res.json(results);
       }
     });
-
   },
 
   getUserStatsById: (req, res) => {
-    const ID = req.params.user_id;
-    db_connection.query(`
-
-       SELECT COUNT(DISTINCT b.bug_id) AS bugs,
-              COUNT(DISTINCT answer_id) AS answers,
-              COUNT(DISTINCT favorite_id) AS favorites,
-              konami_unlock
-         FROM users AS u
-    LEFT JOIN bugs AS b
-           ON b.posted_by = user_id
-    LEFT JOIN answers AS a
-           ON a.answered_by = user_id
-    LEFT JOIN favorites AS f
-           ON f.user_id = u.user_id
-        WHERE u.user_id = ?
-     GROUP BY u.user_id`, [ID], 
-
-      function(error, results, fields) {
+    const {user_id:ID} = req.params;
+    db.query(queryUserStatsById, [ID], (error, results) => {
       if(error) {
         logger.log('warn', `users.getUserStatsById(): ${error}`);
         res.json(error);
@@ -103,21 +68,8 @@ module.exports = {
   },
 
   getFactionStats: (req, res) => {
-    const ID = req.params.faction_id;
-    db_connection.query(`
-
-       SELECT COUNT(DISTINCT b.bug_id) AS bugs,
-              COUNT(DISTINCT answer_id) AS answers
-         FROM users AS u
-    LEFT JOIN bugs AS b
-           ON b.posted_by = user_id
-    LEFT JOIN answers AS a
-           ON a.answered_by = user_id
-    LEFT JOIN factions AS f
-           ON f.faction_id = u.faction_id
-        WHERE f.faction_id = ?`, [ID], 
-
-      function(error, results, fields) {
+    const {faction_id:ID} = req.params;
+    db.query(queryFactionStats, [ID], (error, results) => {
       if(error) {
         logger.log('warn', `users.getFactionStats(): ${error}`);
         res.json(error);
@@ -131,13 +83,7 @@ module.exports = {
   create: (req, res) => {
     const DATA = req.body;
     DATA.password = bcrypt.hashSync(req.body.password, 10);
-    db_connection.query(`
-
-       INSERT 
-         INTO users 
-          SET ?`, [DATA], 
-
-      function(error, results, fields) {
+    db.query(queryNewUser, [DATA], (error, results) => {
       if (error) {
         logger.log('warn', `users.create(): ${error}`);
         res.json(error);
@@ -149,15 +95,9 @@ module.exports = {
   },
 
   update: (req, res) => {
-    const ID = req.params.bug_id;
+    const {bug_id:ID} = req.params;
     const DATA = req.body;
-    db_connection.query(`
-    
-       UPDATE users,
-          SET ?
-        WHERE user_id = ?`, [DATA, ID], 
-
-      function(error, results, fields) {
+    db.query(queryUpdateUser, [DATA, ID], (error, results) => {
       if (error) {
         logger.log('warn', `user.update(): ${error}`);
         res.json(error);
@@ -169,21 +109,14 @@ module.exports = {
   },
 
   delete: (req, res) => {
-    const ID = req.params.user_id;
-
+    const {user_id:ID} = req.params;
     res.json('route not finished');
   },
 
   setProfilePic: (req, res) => {
-    const { user_id } = req.params;
-    const { profile_img } = req.body;
-    db_connection.query(`
-
-       UPDATE users
-          SET profile_img = ?
-        WHERE user_id = ?`, [profile_img, user_id], 
-
-    function(error, results, fields) {
+    const {user_id:ID} = req.params;
+    const {profile_img:IMG} = req.body;
+    db.query(queryUpdateProfilePic, [IMG, ID], (error, results) => {
       if (error) {
         logger.log('warn', `users.setProfilePic(): ${error}`);
         res.json(error);
