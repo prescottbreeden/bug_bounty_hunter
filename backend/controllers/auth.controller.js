@@ -14,10 +14,8 @@ const {
 module.exports = {
 
   getEmail: (req, res) => {
-    const { email } = req.body;
-    db_connection.query(validateEmailString, email,
-
-      function (error, results) {
+    const { EMAIL } = req.body;
+    db_connection.query(validateEmailString, EMAIL, (error, results) => {
         if (error) {
           logger.log('warn', `users.validateEmail(): ${error}`);
           res.json(error);
@@ -29,17 +27,15 @@ module.exports = {
   },
 
   login: (req, res) => {
-    const EMAIL = req.body.email;
-    db_connection.query(login, [EMAIL],
-
-      function (error, results) {
+    const { EMAIL } = req.body;
+    db_connection.query(login, [EMAIL], (error, results) => {
         if (error) {
           logger.log('warn', `users.login(): ${error}`);
           res.json(error);
         }
         else {
           const user = new User(results[0]);
-          var status = bcrypt.compareSync(req.body.password, results[0]['password']);
+          const status = bcrypt.compareSync(req.body.password, results[0]['password']);
           if (status) {
             let token = jwt.sign({ currentUser: user }, 'shhhhhhh');
             console.log('returning user: \n\n', user, '\n\n', token);
@@ -50,5 +46,9 @@ module.exports = {
           }
         }
       });
+  },
+
+  updateToken: (req, res) => {
+    const { user_id } = req.body;
   }
 };

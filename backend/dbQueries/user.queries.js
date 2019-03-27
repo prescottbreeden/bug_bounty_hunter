@@ -1,7 +1,18 @@
-const env = process.env.NODE_ENV || 'development';
-const logger = require('../_helpers/logger');
-const { User } = require('../models/Models');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
-const mysql = require('mysql');
-const db_connection = mysql.createConnection(config.database);
+module.exports = {
+
+  queryAllUsers: 
+      `SELECT user_id,
+              faction_name,
+              first_name,
+              last_name,
+              email,
+              admin,
+              profile_img,
+              konami_unlock,
+              user_created,
+              user_updated,
+         FROM users AS u
+         JOIN factions AS f
+           ON f.faction_id = u.faction_id`, 
+  queryOneUser: ''
+}

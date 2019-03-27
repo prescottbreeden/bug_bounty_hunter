@@ -6,27 +6,14 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const mysql = require('mysql');
 const db_connection = mysql.createConnection(config.database);
+const {
+  queryAllUsers
+} = require('../dbQueries/user.queries');
 
 module.exports = {
   
   getAll: (req, res) => {
-    db_connection.query(`
-    
-       SELECT user_id,
-              faction_name,
-              first_name,
-              last_name,
-              email,
-              admin,
-              profile_img,
-              konami_unlock,
-              user_created,
-              user_updated,
-         FROM users AS u
-         JOIN factions AS f
-           ON f.faction_id = u.faction_id`, 
-
-      function(error, results, fields) {
+    db_connection.query(queryAllUsers, (error, results) => {
       if(error) {
         logger.log('warn', `users.getAll(): ${error}`);
         res.json(error);
