@@ -10,7 +10,7 @@ import { isNull } from 'util';
   templateUrl: './bugs-create.component.html',
 })
 export class BugsCreateComponent implements OnInit {
-  showHelp: boolean = false;
+  showHelp = false;
   user: UserModel;
 
   newBug: NewBug = {
@@ -48,10 +48,7 @@ export class BugsCreateComponent implements OnInit {
       && this.formErrors.TracebackField === null) {
       this.newBug.traceback = JSON.stringify(this.newBug.traceback);
       this.newBug.message = JSON.stringify(this.newBug.message);
-      this.bugService.createBug(this.newBug)
-        .subscribe(res => {
-          console.log('new bug created: ', res);
-        });
+      this.bugService.createBug(this.newBug).subscribe();
       this.router.navigate(['/bugs']);
     }
   }

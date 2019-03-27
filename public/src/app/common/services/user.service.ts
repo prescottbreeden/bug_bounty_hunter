@@ -16,7 +16,7 @@ export class UserService {
     return this.http.get('/api/users/' + user_id); 
   }
   getUserByEmail(email: string) {
-    return this.http.post('/authservice/validate/email/', {email: email});
+    return this.http.post('/api/auth/email', {email: email});
   }
   createNewUser(newUser: NewUser) { 
     return this.http.post('/api/users', newUser); 

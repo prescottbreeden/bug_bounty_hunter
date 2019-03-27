@@ -125,6 +125,7 @@ export class RegisterComponent implements OnInit {
       this.user.email = this.emailForm.value.email;
       this.authService.emailExists(this.emailForm.value)
         .subscribe(result => {
+          console.log(result);
           if (result) {
             this.user.first_name = result.first_name;
             this.user.last_name = result.last_name;

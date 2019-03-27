@@ -12,12 +12,12 @@ import { isNull } from 'util';
 })
 export class BugsShowComponent implements OnInit {
   user: UserModel;
-  bugs: BugModel[] = [];
-  fBugs: BugModel[] = [];
-  searchText: string = '';
-  showFavorites: boolean = false;
+  bugs: BugModel[];
+  fBugs: BugModel[];
+  searchText = '';
+  showFavorites = false;
   index: number = 0;
-  editMode: boolean = false;
+  editMode = false;
 
   troll: string[] = [
     "Me not that kind of Orc.",
@@ -57,6 +57,7 @@ export class BugsShowComponent implements OnInit {
 
   deleteBug(bug_id: number) {
     this.bugService.deleteBug(bug_id).subscribe(results => {
+      // offer undo button
       console.log(results);  
     })
   }

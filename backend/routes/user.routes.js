@@ -14,7 +14,5 @@ module.exports = function(app) {
     .get('/api/users/stats', user.getAllUserData)
     .get('/api/users/stats/:user_id', user.getUserStatsById)
     .put('/api/users/profile/:user_id', user.setProfilePic)
-    .post('/authservice/validate/email/', auth.validateEmail)
-    .post('/authservice/authenticate', auth.login)
     .get('/api/factions/:faction_id', user.getFactionStats)
 }

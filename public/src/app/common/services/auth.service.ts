@@ -15,7 +15,7 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   emailExists(credentials) {
-    return this.http.post('/authservice/validate/email/', credentials)
+    return this.http.post('/api/auth/email/', credentials)
       .pipe(map(result => {
         if (result instanceof Array) {
           if (result.length > 0) {
@@ -28,7 +28,7 @@ export class AuthService {
   }
 
   login(credentials) {
-    return this.http.post('/authservice/authenticate', credentials)
+    return this.http.post('/api/auth/login', credentials)
       .pipe(map(token => {
         if (token) {
           localStorage.setItem('token', token.toString());
