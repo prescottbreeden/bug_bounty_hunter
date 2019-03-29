@@ -10,12 +10,12 @@ import { Router } from '@angular/router';
   templateUrl: './users-profile.component.html',
 })
 export class UsersProfileComponent implements OnInit {
-  editNameStatus: boolean = false;
-  editEmailStatus: boolean = false;
-  editProfilePicStatus: boolean = true;
-  showYoda: boolean = false;
-  kesselCommander: boolean = false;
-  konamiMaster: boolean = false;
+  editProfilePicStatus = true;
+  editNameStatus = false;
+  editEmailStatus = false;
+  showYoda = false;
+  kesselCommander = false;
+  konamiMaster = false;
   rank: number;
   key: number;
   code: number[] = [38,38,40,40,37,39,37,39,66,65,13];
@@ -55,6 +55,7 @@ avatars: string[] = [
     last_name: '',
     email: '',
     profile_img: '',
+    konami_unlock: false,
     created_at: '',
     updated_at: '',
     admin: false
@@ -112,7 +113,8 @@ avatars: string[] = [
     return {
       user_id: this.user.user_id,
       email: this.user.email,
-      profile_img: this.user.profile_img
+      profile_img: this.user.profile_img,
+      konami_unlock: this.konamiMaster
     }
   }
 
@@ -121,7 +123,7 @@ avatars: string[] = [
     const data = this.updateUser(); 
 
     this.userService.setProfilePic(data).subscribe(result => {
-      console.log(result);
+      this.authService.newToken(this.user).subscribe();
     });
   }
 

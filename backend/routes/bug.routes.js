@@ -1,6 +1,6 @@
 const bug = require('./../controllers/bug.controller');
 
-module.exports = function(app) {
+module.exports = app => {
 
   app
     .get('/api/bugs', bug.getAllBugs)

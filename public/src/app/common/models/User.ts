@@ -6,6 +6,7 @@ export interface UserModel {
   email: string;
   admin: boolean;
   profile_img: string;
+  konami_unlock: boolean;
   created_at: string | Date;
   updated_at: string | Date;
 }
@@ -40,6 +41,7 @@ export function MapUserData(data): UserModel {
     email: data['email'],
     admin: data['admin'],
     profile_img: data['profile_img'],
+    konami_unlock: data['konami_unlock'],
     created_at: data['user_created'],
     updated_at: data['user_updated']
   };

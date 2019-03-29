@@ -1,8 +1,7 @@
-const bcrypt = require('bcryptjs');
-const mysql = require('mysql');
 const logger = require('../_helpers/logger');
+const bcrypt = require('bcryptjs');
 const {database:connect} = require('../../config')['development'];
-const db = mysql.createConnection(connect);
+const db = require('mysql').createConnection(connect);
 const {
   queryAllUsers,
   queryUserById,
@@ -21,8 +20,7 @@ module.exports = {
       if(error) {
         logger.log('warn', `users.getAll(): ${error}`);
         res.json(error);
-      }
-      else {
+      } else {
         res.json(results);
       }
     });
@@ -34,8 +32,7 @@ module.exports = {
       if(error) {
         logger.log('warn', `users.getById(): ${error}`);
         res.json(error);
-      }
-      else {
+      } else {
         res.json(results);
       }
     });
@@ -47,8 +44,7 @@ module.exports = {
       if(error) {
         logger.log('warn', `users.getAllUserData(): ${error}`);
         res.json(error);
-      }
-      else {
+      } else {
         res.json(results);
       }
     });
@@ -60,8 +56,7 @@ module.exports = {
       if(error) {
         logger.log('warn', `users.getUserStatsById(): ${error}`);
         res.json(error);
-      }
-      else {
+      } else {
         res.json(results);
       }
     });
@@ -73,8 +68,7 @@ module.exports = {
       if(error) {
         logger.log('warn', `users.getFactionStats(): ${error}`);
         res.json(error);
-      }
-      else {
+      } else {
         res.json(results);
       }
     });
@@ -87,8 +81,7 @@ module.exports = {
       if (error) {
         logger.log('warn', `users.create(): ${error}`);
         res.json(error);
-      }
-      else {
+      } else {
         return res.json(results);
       }
     });
@@ -101,8 +94,7 @@ module.exports = {
       if (error) {
         logger.log('warn', `user.update(): ${error}`);
         res.json(error);
-      }
-      else {
+      } else {
         res.json(results);
       }
     });
@@ -120,12 +112,25 @@ module.exports = {
       if (error) {
         logger.log('warn', `users.setProfilePic(): ${error}`);
         res.json(error);
-      }
-      else {
+      } else {
         return res.json(results);
       }
     })
+  },
 
+  setKonamiUnlock: (req, res) => {
+    const {user_id:ID} = req.body;
+    db.query(
+      `UPDATE users SET konami_unlock = 1 WHERE user_id = ?`
+      , [ID], (error, results) => {
+        if (error) {
+          logger.log('warn', `users.setKonamiUnlock(): ${error}`);
+        } else {
+          return res.json(results);
+        }
+      }
+    )
   }
+
 
 };

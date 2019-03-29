@@ -12,8 +12,8 @@ import { isNull } from 'util';
 })
 export class BugsShowComponent implements OnInit {
   user: UserModel;
-  bugs: BugModel[];
-  fBugs: BugModel[];
+  bugs: BugModel[] = [];
+  fBugs: BugModel[] = [];
   searchText = '';
   showFavorites = false;
   index: number = 0;
@@ -82,8 +82,5 @@ export class BugsShowComponent implements OnInit {
     this.index++;
     this.index = this.index % 10;
   }
-
-
-
 
 }

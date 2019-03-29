@@ -13,10 +13,10 @@ import { isNull } from 'util';
   templateUrl: './bugs-view.component.html',
 })
 export class BugsViewComponent implements OnInit {
-  isFavorite: Boolean = false;
-  showEditBugForm: boolean = false;
-  showAnswerForm: boolean = false;
-  editAnswer: boolean = false;
+  isFavorite = false;
+  showEditBugForm = false;
+  showAnswerForm = false;
+  editAnswer = false;
 
   user: UserModel;
 
@@ -211,8 +211,7 @@ export class BugsViewComponent implements OnInit {
   }
   
   createAnswer() {
-    this.newAnswer.answer_content = JSON
-      .stringify(this.newAnswer.answer_content);
+    this.newAnswer.answer_content = JSON.stringify(this.newAnswer.answer_content);
     this.bugService.addAnswer(this.newAnswer).subscribe((res: any) => {
       this.bugService.getAnswer(res.insertId)
         .subscribe(res => {

@@ -3,7 +3,7 @@ const user = require('../controllers/user.controller');
 const auth = require('../controllers/auth.controller');
 const bug = require('../controllers/bug.controller');
 
-module.exports = function(app) {
+module.exports = app => {
 
   app
     .get('/api/users', user.getAll)
@@ -15,4 +15,5 @@ module.exports = function(app) {
     .get('/api/users/stats/:user_id', user.getUserStatsById)
     .put('/api/users/profile/:user_id', user.setProfilePic)
     .get('/api/factions/:faction_id', user.getFactionStats)
+    .get('/api/users/konami-unlock', user.setKonamiUnlock);
 }

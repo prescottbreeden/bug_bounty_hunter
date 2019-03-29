@@ -1,9 +1,11 @@
 
 module.exports = {
 
-  validateEmailString: `SELECT * FROM users WHERE email = ?`,
-  login: `
-       SELECT user_id,
+  queryValidateEmail: 
+      `SELECT * FROM users WHERE email = ?`,
+
+  queryLogin: 
+      `SELECT user_id,
               faction_name,
               first_name,
               last_name,
@@ -18,12 +20,7 @@ module.exports = {
          JOIN factions AS f
            ON f.faction_id = u.faction_id
         WHERE email = ?`,
-}
 
-function validateEmail(res, data) {
-
-}
-
-function login(res, data) {
-
+  queryGetUserById:
+      `SELECT * FROM users WHERE user_id = ?`
 }
