@@ -1,10 +1,10 @@
 module.exports = {
-  User,
+  MapUserData,
   Bug,
   Answer
 }
 
-function User(user) {
+function MapUserData(user) {
   return {
     user_id: parseInt(user['user_id']),
     faction_name: user['faction_name'],
