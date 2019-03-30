@@ -1,11 +1,10 @@
-const { MapUserData } = require('../models/mapper');
-const User = require('../models/user.models');
+const User = require('../models/auth.models');
 
 module.exports = {
 
-  getEmail: (req, res) => {
+  getByEmail: (req, res) => {
     const { email } = req.body;
-    User.findEmail(email)
+    User.findByEmail(email)
       .then(data => res.json(data))
       .catch(error => res.json(error));
   },
@@ -18,8 +17,8 @@ module.exports = {
   },
 
   updateToken: (req, res) => {
-    const { user_id: ID } = req.body;
-    User.updateToken(ID)
+    const { id: ID } = req.params;
+    User.updateTokenById(ID)
       .then(data => res.json(data))
       .catch(err => res.json(err));
   }

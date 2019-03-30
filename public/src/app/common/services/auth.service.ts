@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Subject, Observable } from 'rxjs';
-import { MapUserData, UserModel } from '../models/User';
+import { MapUserData, IUser, INewUser } from '../models/User';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  emailExists(credentials): Observable<UserModel|null> {
+  emailExists(credentials): Observable<IUser|null> {
     return this.http.post('/api/auth/email/', credentials)
       .pipe(map(result => {
         if (result instanceof Array) {
@@ -27,8 +27,8 @@ export class AuthService {
       }));
   }
 
-  login(credentials): Observable<boolean> {
-    return this.http.post('/api/auth/login', credentials)
+  login(user: INewUser): Observable<boolean> {
+    return this.http.post('/api/auth/login', user)
       .pipe(map(token => {
         if (token) {
           localStorage.setItem('token', token.toString());
@@ -53,8 +53,8 @@ export class AuthService {
     return helper.decodeToken(token);
   }
 
-  newToken(user: UserModel) {
-    return this.http.post('/api/auth/id', user.user_id)
+  newToken(user: IUser): Observable<boolean> {
+    return this.http.get(`/api/auth/${user.user_id}`)
       .pipe(map(token => {
         if (token) {
           localStorage.setItem('token', token.toString());

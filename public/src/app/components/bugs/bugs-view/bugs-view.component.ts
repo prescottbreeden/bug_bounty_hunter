@@ -5,7 +5,7 @@ import { BugService } from 'src/app/common/services/bug.service';
 import { BugModel, NewBugErrors, ValidateNewBug, MapBugData } from 'src/app/common/models/Bug';
 import { NewAnswer, AnswerModel, MapAnswerDatum, NewAnswerErrors, ValidateNewAnswer } from 'src/app/common/models/Answer';
 import { buildBugObject } from 'src/app/common/models/Helpers';
-import { UserModel, MapUserData } from 'src/app/common/models/User';
+import { User, MapUserData } from 'src/app/common/models/User';
 import { isNull } from 'util';
 
 @Component({
@@ -18,7 +18,7 @@ export class BugsViewComponent implements OnInit {
   showAnswerForm = false;
   editAnswer = false;
 
-  user: UserModel;
+  user: User;
 
   bug: BugModel = {
     bug_id: 0,

@@ -19,6 +19,7 @@ module.exports = {
       `SELECT * 
          FROM users AS u
          JOIN factions AS f
+           ON f.faction_id = u.faction_id
         WHERE user_id = ?`,
 
   queryUserData: 
@@ -70,6 +71,9 @@ module.exports = {
       `UPDATE users, SET ? WHERE user_id = ?`,
 
   queryUpdateProfilePic:
-      `UPDATE users SET profile_img = ? WHERE user_id = ?`
+      `UPDATE users SET profile_img = ? WHERE user_id = ?`,
+
+  queryKonami:
+      `UPDATE users SET konami_unlock = true WHERE user_id = ?`
 
 }

@@ -1,9 +1,13 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { AuthService } from 'src/app/common/services/auth.service';
 import { UserService } from 'src/app/common/services/user.service';
-import { UserModel, MapUserData, UserStats, MapUserStatsData } from 'src/app/common/models/User';
 import { isNull } from 'util';
 import { Router } from '@angular/router';
+import { 
+  User,
+  MapUserData, 
+  IUserStats, 
+  MapUserStatsData } from 'src/app/common/models/User';
 
 @Component({
   selector: 'app-users-profile',
@@ -48,24 +52,12 @@ avatars: string[] = [
   'assets/img/images/yoda.png'
  ]
 
-  user: UserModel = {
-    user_id: 0,
-    faction_name: '',
-    first_name: '',
-    last_name: '',
-    email: '',
-    profile_img: '',
-    konami_unlock: false,
-    created_at: '',
-    updated_at: '',
-    admin: false
-  };
+  user = new User;
 
-  stats: UserStats = {
+  stats: IUserStats = {
     bugs_posted: 0,
     answers_posted: 0,
-    favorites: 0,
-    konami_unlock: false
+    favorites: 0
   };
 
   constructor(
@@ -121,14 +113,14 @@ avatars: string[] = [
   editProfilePic(avatar) {
     this.user.profile_img = this.avatars[avatar];
     const data = this.updateUser(); 
-
     this.userService.setProfilePic(data).subscribe(result => {
       this.authService.newToken(this.user).subscribe();
     });
   }
 
   setRank() {
-    if(this.stats.konami_unlock) {
+    console.log(this.user.konami_unlock);
+    if(this.user.konami_unlock) {
       this.konamiMaster = true;
     }
     // if(this.stats.falcon_unlock) {
@@ -158,6 +150,13 @@ avatars: string[] = [
   }
 
   setTitle() {
+    if (this.konamiMaster) {
+      return this.rankData = {
+          bestTitle: 'Grand Master',
+          achievement: 'A True Jedi Knight',
+          hint: 'May the Force be with you.',
+      }
+    }
     switch (this.rank) {
       case 1:
         return this.rankData = {
@@ -216,9 +215,10 @@ avatars: string[] = [
     this.key = event.keyCode;
     if (this.key == this.code[this.index]) {
       if (this.index === this.code.length-1) {
-        this.stats.konami_unlock = true;
+        this.user.konami_unlock = true;
         this.konamiMaster = true;
         this.user.profile_img = "assets/img/images/yoda.png";
+        this.userService.setKonami(this.user).subscribe();
         return this.rankData = {
           bestTitle: 'Grand Master',
           achievement: 'A True Jedi Knight',

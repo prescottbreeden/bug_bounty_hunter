@@ -1,4 +1,4 @@
-export interface UserModel {
+export interface IUser{
   user_id: number;
   faction_name: string;
   first_name: string;
@@ -11,14 +11,26 @@ export interface UserModel {
   updated_at: string | Date;
 }
 
-export interface UserStats {
+export class User implements IUser {
+  user_id = 0;
+  faction_name = '';
+  first_name = '';
+  last_name = '';
+  email = '';
+  admin = false;
+  profile_img = '';
+  konami_unlock = false;
+  created_at = '';
+  updated_at = '';
+}
+
+export interface IUserStats {
   bugs_posted: number;
   answers_posted: number;
   favorites: number;
-  konami_unlock: boolean;
 }
 
-export interface NewUser {
+export interface INewUser {
   first_name: string;
   last_name: string;
   faction_id: number;
@@ -28,30 +40,28 @@ export interface NewUser {
   profile_img: string;
 }
 
-export interface UserToken {
-  currentUser: UserModel;
+export class NewUser implements INewUser {
+  first_name = '';
+  last_name = '';
+  faction_id = 0;
+  email = '';
+  password = '';
+  admin = false;
+  profile_img: '';
 }
 
-export function MapUserData(data): UserModel {
-  return {
-    user_id: parseInt(data['user_id']),
-    faction_name: data['faction_name'],
-    first_name: data['first_name'],
-    last_name: data['last_name'],
-    email: data['email'],
-    admin: data['admin'],
-    profile_img: data['profile_img'],
-    konami_unlock: data['konami_unlock'],
-    created_at: data['user_created'],
-    updated_at: data['user_updated']
-  };
+export interface IUserToken {
+  currentUser: IUser;
 }
 
-export function MapUserStatsData(data): UserStats {
+export function MapUserData(data: User): User {
+  return data;
+}
+
+export function MapUserStatsData(data): IUserStats {
   return {
     bugs_posted: parseInt(data[0]['bugs']),
     answers_posted: parseInt(data[0]['answers']),
-    favorites: parseInt(data[0]['favorites']),
-    konami_unlock: data[0]['konami_unlock']
+    favorites: parseInt(data[0]['favorites'])
   };
 }

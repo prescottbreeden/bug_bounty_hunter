@@ -3,7 +3,7 @@ const auth = require('../controllers/auth.controller');
 module.exports = app => {
 
   app
-    .post('/api/auth/id', auth.updateToken)
-    .post('/api/auth/email', auth.getEmail)
+    .get('/api/auth/:id', auth.updateToken)
+    .post('/api/auth/email', auth.getByEmail)
     .post('/api/auth/login', auth.login);
 }

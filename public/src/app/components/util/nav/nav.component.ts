@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from 'src/app/common/services/auth.service';
 import { Router } from '@angular/router';
-import { UserToken } from 'src/app/common/models/User';
+import { IUserToken } from 'src/app/common/models/User';
 import { UserService } from 'src/app/common/services/user.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { UserService } from 'src/app/common/services/user.service';
 export class NavComponent implements OnInit {
   loggedIn = false;
   showFactions = false;
-  token: UserToken;
+  token: IUserToken;
   
   rebels = {
     bugs_posted: '',

@@ -15,5 +15,5 @@ module.exports = app => {
     .get('/api/users/stats/:user_id', user.getUserStatsById)
     .put('/api/users/profile/:user_id', user.setProfilePic)
     .get('/api/factions/:faction_id', user.getFactionStats)
-    .get('/api/users/konami-unlock', user.setKonamiUnlock);
+    .post('/api/users/konami-unlock', user.setKonamiUnlock);
 }

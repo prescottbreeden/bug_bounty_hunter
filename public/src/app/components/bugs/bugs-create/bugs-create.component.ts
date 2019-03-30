@@ -3,7 +3,7 @@ import { NewBug, NewBugErrors, ValidateNewBug } from 'src/app/common/models/Bug'
 import { AuthService } from 'src/app/common/services/auth.service';
 import { BugService } from 'src/app/common/services/bug.service';
 import { Router } from '@angular/router';
-import { UserModel, MapUserData } from 'src/app/common/models/User';
+import { User, MapUserData } from 'src/app/common/models/User';
 import { isNull } from 'util';
 @Component({
   selector: 'app-bugs-create',
@@ -11,7 +11,7 @@ import { isNull } from 'util';
 })
 export class BugsCreateComponent implements OnInit {
   showHelp = false;
-  user: UserModel;
+  user: User;
 
   newBug: NewBug = {
     posted_by: 0,

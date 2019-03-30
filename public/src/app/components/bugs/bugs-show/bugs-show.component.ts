@@ -3,7 +3,7 @@ import { AuthService } from 'src/app/common/services/auth.service';
 import { Router } from '@angular/router';
 import { BugService } from 'src/app/common/services/bug.service';
 import { BugModel, MapBugData } from 'src/app/common/models/Bug';
-import { UserModel, MapUserData } from 'src/app/common/models/User';
+import { User, MapUserData } from 'src/app/common/models/User';
 import { isNull } from 'util';
 
 @Component({
@@ -11,7 +11,7 @@ import { isNull } from 'util';
   templateUrl: './bugs-show.component.html',
 })
 export class BugsShowComponent implements OnInit {
-  user: UserModel;
+  user: User;
   bugs: BugModel[] = [];
   fBugs: BugModel[] = [];
   searchText = '';
