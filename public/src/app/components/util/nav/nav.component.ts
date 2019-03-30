@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from 'src/app/common/services/auth.service';
 import { Router } from '@angular/router';
-import { UserToken } from 'src/app/common/models/User';
+import { IUserToken } from 'src/app/common/models/User';
 import { UserService } from 'src/app/common/services/user.service';
 
 @Component({
@@ -9,9 +9,9 @@ import { UserService } from 'src/app/common/services/user.service';
   templateUrl: './nav.component.html',
 })
 export class NavComponent implements OnInit {
-  loggedIn: boolean;
-  token: UserToken;
-  showFactions: boolean = false;
+  loggedIn = false;
+  showFactions = false;
+  token: IUserToken;
   
   rebels = {
     bugs_posted: '',
@@ -43,6 +43,10 @@ export class NavComponent implements OnInit {
   ngOnInit() { 
     this.token = this.authService.getToken();
     if (this.token) { this.loggedIn = true; }
+    this.generateStats();
+  }
+
+  generateStats() {
     this.userService.getFactionStats(1).subscribe(result => {
       this.rebels.bugs_posted = result[0]['bugs'];
       this.rebels.bugs_answered = result[0]['answers'];

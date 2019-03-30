@@ -1,8 +1,9 @@
 const auth = require('../controllers/auth.controller');
 
-module.exports = function(app) {
+module.exports = app => {
 
   app
-    .post('/authservice/validate/email/', auth.validateEmail)
-    .post('/authservice/authenticate', auth.login);
+    .get('/api/auth/:id', auth.updateToken)
+    .post('/api/auth/email', auth.getByEmail)
+    .post('/api/auth/login', auth.login);
 }

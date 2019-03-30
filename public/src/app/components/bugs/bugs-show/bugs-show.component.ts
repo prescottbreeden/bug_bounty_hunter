@@ -3,7 +3,7 @@ import { AuthService } from 'src/app/common/services/auth.service';
 import { Router } from '@angular/router';
 import { BugService } from 'src/app/common/services/bug.service';
 import { BugModel, MapBugData } from 'src/app/common/models/Bug';
-import { UserModel, MapUserData } from 'src/app/common/models/User';
+import { User, MapUserData } from 'src/app/common/models/User';
 import { isNull } from 'util';
 
 @Component({
@@ -11,13 +11,13 @@ import { isNull } from 'util';
   templateUrl: './bugs-show.component.html',
 })
 export class BugsShowComponent implements OnInit {
-  user: UserModel;
+  user: User;
   bugs: BugModel[] = [];
   fBugs: BugModel[] = [];
-  searchText: string = '';
-  showFavorites: boolean = false;
+  searchText = '';
+  showFavorites = false;
   index: number = 0;
-  editMode: boolean = false;
+  editMode = false;
 
   troll: string[] = [
     "Me not that kind of Orc.",
@@ -57,6 +57,7 @@ export class BugsShowComponent implements OnInit {
 
   deleteBug(bug_id: number) {
     this.bugService.deleteBug(bug_id).subscribe(results => {
+      // offer undo button
       console.log(results);  
     })
   }
@@ -81,8 +82,5 @@ export class BugsShowComponent implements OnInit {
     this.index++;
     this.index = this.index % 10;
   }
-
-
-
 
 }

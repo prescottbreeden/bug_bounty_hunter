@@ -18,5 +18,5 @@ USE bug_hunter;
  VALUES ('Rebel Alliance'),
         ('Galactic Empire'),
         ('Jedi order'),
-        ('teaching assistant'),
+        ('instructor'),
         ('instructor');

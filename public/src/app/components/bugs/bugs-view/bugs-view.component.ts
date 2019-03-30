@@ -5,7 +5,7 @@ import { BugService } from 'src/app/common/services/bug.service';
 import { BugModel, NewBugErrors, ValidateNewBug, MapBugData } from 'src/app/common/models/Bug';
 import { NewAnswer, AnswerModel, MapAnswerDatum, NewAnswerErrors, ValidateNewAnswer } from 'src/app/common/models/Answer';
 import { buildBugObject } from 'src/app/common/models/Helpers';
-import { UserModel, MapUserData } from 'src/app/common/models/User';
+import { User, MapUserData } from 'src/app/common/models/User';
 import { isNull } from 'util';
 
 @Component({
@@ -13,12 +13,12 @@ import { isNull } from 'util';
   templateUrl: './bugs-view.component.html',
 })
 export class BugsViewComponent implements OnInit {
-  isFavorite: Boolean = false;
-  showEditBugForm: boolean = false;
-  showAnswerForm: boolean = false;
-  editAnswer: boolean = false;
+  isFavorite = false;
+  showEditBugForm = false;
+  showAnswerForm = false;
+  editAnswer = false;
 
-  user: UserModel;
+  user: User;
 
   bug: BugModel = {
     bug_id: 0,
@@ -211,8 +211,7 @@ export class BugsViewComponent implements OnInit {
   }
   
   createAnswer() {
-    this.newAnswer.answer_content = JSON
-      .stringify(this.newAnswer.answer_content);
+    this.newAnswer.answer_content = JSON.stringify(this.newAnswer.answer_content);
     this.bugService.addAnswer(this.newAnswer).subscribe((res: any) => {
       this.bugService.getAnswer(res.insertId)
         .subscribe(res => {

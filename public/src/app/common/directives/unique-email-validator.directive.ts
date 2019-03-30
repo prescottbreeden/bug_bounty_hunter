@@ -6,10 +6,8 @@ import { map } from 'rxjs/operators';
 
 export function uniqueEmailValidator(userService: UserService): AsyncValidatorFn {
   return (c: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> => {
-    console.log('fack you async validator: ', c, c.value);
     return userService.getUserByEmail(c.value).pipe(
       map(users => {
-        console.log(users);
         if (users instanceof Array)
           return users && users.length > 0 ? { alreadyExists: true } : null;
         return null;

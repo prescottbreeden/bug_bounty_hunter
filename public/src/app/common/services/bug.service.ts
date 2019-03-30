@@ -14,30 +14,30 @@ export class BugService {
     return this.http.get('/api/bugs'); 
   }
   getBugById(bug_id: number) {
-    return this.http.get('/api/bugs/' + bug_id); 
+    return this.http.get(`/api/bugs/${bug_id}`); 
   }
   createBug(newBug: NewBug) {
     return this.http.post('/api/bugs', newBug); 
   }
   updateBug(bug: BugModel) {
-    return this.http.put('/api/bugs/' + bug.bug_id, bug);
+    return this.http.put(`/api/bugs/${bug.bug_id}`, bug);
   }
   deleteBug(bug_id: number) {
-    return this.http.delete('/api/bugs/' + bug_id);
+    return this.http.delete(`/api/bugs/${bug_id}`);
   }
 
 
   getAnswer(answer_id: number) {
-    return this.http.get('/api/answers/' + answer_id);
+    return this.http.get(`/api/answers/${answer_id}`);
   }
   addAnswer(newAnswer: NewAnswer) {
     return this.http.post('/api/answers', newAnswer);
   }
   updateAnswer(answer: AnswerModel) {
-    return this.http.put('/api/answers/' + answer.answer_id, answer);
+    return this.http.put(`/api/answers/${answer.answer_id}`, answer);
   }
   acceptAnswer(answer_id: number, accepted: AnswerModel) {
-    return this.http.patch('/api/answers/' + answer_id, accepted);
+    return this.http.patch(`/api/answers/${answer_id}`, accepted);
   }
 
 
@@ -45,7 +45,7 @@ export class BugService {
     return this.http.get(`/api/bugs/favorites/${data.bug_id}/${data.user_id}`);
   }
   getFavorites(id: number) {
-    return this.http.get('/api/bugs/favorites/' + id);
+    return this.http.get(`/api/bugs/favorites/${id}`);
   }
   addFavorite(data: any) {
     return this.http.post('/api/bugs/favorites', data);

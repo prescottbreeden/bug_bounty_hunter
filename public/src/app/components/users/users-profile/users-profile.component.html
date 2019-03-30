@@ -60,7 +60,7 @@
         <div class="profile__item">Bugs Posted:</div>
         <div class="profile__item">{{ stats.bugs_posted }}</div>
       </div>
-
+      stats
       <div class="profile__row">
         <div class="profile__item">Bugs Answered:</div>
         <div class="profile__item">{{ stats.answers_posted }}</div>
@@ -94,6 +94,7 @@
           alt="person loving life" 
           class="story__img" />
         <figcaption 
+          (click)="editProfilePic(0)"
           *ngIf="rank >= 3"
           class="story__caption">Bug Hunter</figcaption>
       </figure>
@@ -234,7 +235,7 @@
           src="assets/img/images/solo.png" 
           alt="person loving life" 
           class="story__img" />
-        <figcaption class="story__caption">Teaching Assistant</figcaption>
+        <figcaption class="story__caption">Instructor</figcaption>
       </figure>
     </div>
     <div class="story">

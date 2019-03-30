@@ -12,6 +12,7 @@ import { uniqueEmailValidator } from 'src/app/common/directives/unique-email-val
   templateUrl: './register.component.html',
 })
 export class RegisterComponent implements OnInit {
+  user = new NewUser;
   key: number;
   code: number[] = [84,72,69,82,69,73,83,78,79,67,79,87,76,69,86,69,76];
   index: number = 0;
@@ -29,16 +30,6 @@ export class RegisterComponent implements OnInit {
     4: "assets/img/images/solo.png",
     5: "assets/img/images/leia.png"
   }
-
-  user: NewUser = {
-    first_name: '',
-    last_name: '',
-    faction_id: 0,
-    email: '',
-    password: '',
-    admin: this.admin,
-    profile_img: ''
-  };
 
   constructor(
     private authService: AuthService,

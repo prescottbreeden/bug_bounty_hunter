@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { Subject } from 'rxjs';
-import { MapUserData } from '../models/User';
+import { Subject, Observable } from 'rxjs';
+import { MapUserData, IUser, INewUser } from '../models/User';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +14,8 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  emailExists(credentials) {
-    return this.http.post('/authservice/validate/email/', credentials)
+  emailExists(credentials): Observable<IUser|null> {
+    return this.http.post('/api/auth/email/', credentials)
       .pipe(map(result => {
         if (result instanceof Array) {
           if (result.length > 0) {
@@ -27,8 +27,8 @@ export class AuthService {
       }));
   }
 
-  login(credentials) {
-    return this.http.post('/authservice/authenticate', credentials)
+  login(user: INewUser): Observable<boolean> {
+    return this.http.post('/api/auth/login', user)
       .pipe(map(token => {
         if (token) {
           localStorage.setItem('token', token.toString());
@@ -39,11 +39,11 @@ export class AuthService {
       }));
   }
 
-  logout() {
+  logout(): void {
     localStorage.removeItem('token');
   }
 
-  isLoggedIn() {
+  isLoggedIn(): boolean {
     return false;
   }
 
@@ -51,6 +51,18 @@ export class AuthService {
     const helper = new JwtHelperService();
     let token = localStorage.getItem('token');
     return helper.decodeToken(token);
+  }
+
+  newToken(user: IUser): Observable<boolean> {
+    return this.http.get(`/api/auth/${user.user_id}`)
+      .pipe(map(token => {
+        if (token) {
+          localStorage.setItem('token', token.toString());
+          this.emitTokenChanged.next(token);
+          return true;
+        }
+        return false;
+      }));
   }
 
 }
