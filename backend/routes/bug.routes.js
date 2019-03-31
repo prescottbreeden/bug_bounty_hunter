@@ -7,6 +7,6 @@ module.exports = app => {
     .get('/api/bugs/:bug_id', bug.getBugById)
     .post('/api/bugs', bug.createBug)
     .put('/api/bugs/:bug_id', bug.updateBug)
-    .delete('/api/bugs/:bug_id', bug.deleteBug)
+    .delete('/api/bugs/:bug_id', bug.deleteBug);
 
-}
+};

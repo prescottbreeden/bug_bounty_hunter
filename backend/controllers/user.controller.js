@@ -1,7 +1,7 @@
 const User = require('../models/user.models');
 
 module.exports = {
-  
+
   getAll: (req, res) => {
     User.findAll()
       .then(data => res.json(data))
@@ -53,7 +53,7 @@ module.exports = {
 
   delete: (req, res) => {
     const {user_id:ID} = req.params;
-    res.json('route not finished');
+    throw 'Route not implemented';
   },
 
   setProfilePic: (req, res) => {

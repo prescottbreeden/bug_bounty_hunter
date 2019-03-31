@@ -8,4 +8,4 @@ module.exports = app => {
     .put('/api/answers/:answer_id', answer.updateAnswer)
     .patch('/api/answers/:answer_id', answer.acceptAnswer);
 
-}
+};

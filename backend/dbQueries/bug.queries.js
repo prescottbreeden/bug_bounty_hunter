@@ -70,5 +70,4 @@ module.exports = {
   queryIncrementCounter:
       `UPDATE bugs SET view_count = view_count + 1 WHERE bug_id = ?`,
 
-
-}
+};

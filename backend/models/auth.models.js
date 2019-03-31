@@ -1,11 +1,9 @@
-const config = require('../../config')['development'];
+const {database:connect} = require('../../config')['development'];
 const logger = require('../_helpers/logger');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const mysql = require('mysql');
-const util = require('util');
-const db = mysql.createConnection(config.database);
-const query = util.promisify(db.query).bind(db);
+const db = require('mysql').createConnection(connect);
+const query = require('util').promisify(db.query).bind(db);
 const {
   queryValidateEmail,
   queryLogin,

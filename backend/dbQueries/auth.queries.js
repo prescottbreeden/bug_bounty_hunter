@@ -57,4 +57,5 @@ module.exports = {
            ON fav.user_id = u.user_id
         WHERE u.user_id = ?
      GROUP BY u.user_id`,
-}
+
+};

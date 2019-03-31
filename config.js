@@ -1,11 +1,7 @@
 // normally .gitignore this file
-
-
-var config = {
+const config = {
     development: {
-        //url to be used in link generation
-        url: 'http://my.site.com',
-        // mysql connection settings
+        url: 'http://bughunter.xyz',
         database: {
             multipleStatements: true,
             host: 'localhost',
@@ -13,12 +9,10 @@ var config = {
             password: 'rubberbabybuggybumpers',
             database: 'bug_hunter'
         },
-        // server details
         server: {
             host: '10.0.0.170',
             port: '1337'
         },
-        // session settings
         // session: {
         //     secret: "rubberbabybuggybumpers",
         //     name: 'cookie_monster',
@@ -28,21 +22,17 @@ var config = {
         // }
     },
     production: {
-        //url to be used in link generation
-        url: 'http://my.site.com',
-        // mysql connection settings
+        url: 'http://bughunter.xyz',
         database: {
             host: 'localhost',
             user: 'root',
             password: 'root',
             database: 'bug_hunter'
         },
-        // server details
         server: {
             host: '10.0.0.170',
             port: '4200'
         },
-        // session settings
         // session: {
         //     secret: "rubberbabybuggybumpers",
         //     name: 'cookie_monster',

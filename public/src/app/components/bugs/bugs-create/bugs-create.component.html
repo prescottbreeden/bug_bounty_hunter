@@ -1,35 +1,35 @@
 <div class="bug-create">
   <div class="bug-create__title-box">
     <h2 class="bug-create__title">Create New Bug</h2>
-    <svg 
+    <svg
       (click)="toggleHelp()"
       class="profile__avatar-list--help-icon">
       <use xlink:href="assets/img/icons/sprite.svg#icon-help_outline"></use>
     </svg>
   </div>
 
-  <form 
-    (submit)="onSubmitBug()" 
+  <form
+    (submit)="onSubmitBug()"
     class="bug-create__form">
-    <input 
-      type="hidden" 
-      [(ngModel)]="newBug.posted_by" 
+    <input
+      type="hidden"
+      [(ngModel)]="newBug.posted_by"
       name="newBug.posted_by">
     <div class="bug-create__form--row">
       <label for="title" class="bug-create__form--label">Title / Error</label>
     </div>
     <div class="bug-create__form--row">
-      <input 
+      <input
         [(ngModel)]="newBug.error"
         #title="ngModel"
         name="newBug.error"
         placeholder="e.g. 'TypeError: Cannot set property 'undefined' of undefined'"
-        type="text" 
-        class="bug-create__form--input" 
+        type="text"
+        class="bug-create__form--input"
         id="title">
     </div>
-    <div 
-      *ngIf="formErrors.ErrorField" 
+    <div
+      *ngIf="formErrors.ErrorField"
       class="reg__form--error">
       {{ formErrors.ErrorField }}
     </div>
@@ -38,11 +38,11 @@
       <label for="traceback" class="bug-create__form--label">Stack Trace</label>
     </div>
     <div class="bug-create__form--row">
-        <quill-editor 
+        <quill-editor
           [(ngModel)]="newBug.traceback"
           #traceback="ngModel"
           name="newBug.traceback"
-          type="text" 
+          type="text"
           id="traceback">
         </quill-editor>
     </div>
@@ -54,11 +54,11 @@
       <label for="message" class="bug-create__form--label">Comments</label>
     </div>
     <div class="bug-create__form--row">
-        <quill-editor 
+        <quill-editor
           [(ngModel)]="newBug.message"
           #message="ngModel"
           name="newBug.message"
-          type="text" 
+          type="text"
           id="traceback">
         </quill-editor>
     </div>
@@ -75,31 +75,31 @@
           <svg *ngIf="userLikes" class="bug-view__icon--liked">
             <use xlink:href="assets/img/icons/sprite.svg#icon-heart"></use>
           </svg>
-          <svg 
-            *ngIf="!userLikes" 
-            (click)="likeBug()" 
+          <svg
+            *ngIf="!userLikes"
+            (click)="likeBug()"
             class="bug-view__icon--unliked">
             <use xlink:href="assets/img/icons/sprite.svg#icon-heart-o"></use>
           </svg>
           <h2 class="bug-view__error">{{ newBug.error }}</h2>
         </div>
         <div class="bug-view__row--col">
-          <h5 class="bug-view__created"> 
+          <h5 class="bug-view__created">
             <span class="u-color-grey">posted</span>
             a moment ago
           </h5>
-          
-          <h5 class="bug-view__created"> 
+
+          <h5 class="bug-view__created">
             <span class="u-color-grey">by</span>
             {{ user.first_name }} {{ user.last_name }}
           </h5>
         </div>
       </div>
-      <div 
+      <div
         [innerHtml]="newBug.traceback"
         class="bug-view__traceback">
       </div>
-      <div 
+      <div
         [innerHtml]="newBug.message"
         class="bug-view__message">
       </div>
@@ -112,7 +112,7 @@
 
 <div *ngIf="showHelp" class="u-splash">
   <div class="profile__yoda">
-    <svg 
+    <svg
       (click)="toggleHelp()"
       class="u-close-icon">
       <use xlink:href="assets/img/icons/sprite.svg#icon-x"></use>
@@ -121,63 +121,63 @@
       <h2 class="profile__avatar-list--title">New Bug Tips</h2>
       <div class="bug-create__info--list">
         <div class="bug-create__info--row">
-          <img src="assets/img/target_50px.png" alt="target" class="bug-create__bullseye">
-          <p class="bug-create__info--bullet-title">Use the 'Code-Block' Option to Preserve Indentation</p> 
+          <img src="assets/img/images/target.png" alt="target" class="bug-create__bullseye">
+          <p class="bug-create__info--bullet-title">Use the 'Code-Block' Option to Preserve Indentation</p>
         </div>
         <div class="bug-create__info--row">
-          <img 
+          <img
             class="bug-create__info--help-img"
-            src="assets/img/images/help_format.png" 
+            src="assets/img/images/help_format.png"
             alt="code-block">
           <p class="bug-create__info--text">
-            Using this option will allow the form to preserve the indentation in 
-            your code.  Without this, all code will be left justified when it is 
-            displayed for others to read, which can make reading code fairly 
+            Using this option will allow the form to preserve the indentation in
+            your code.  Without this, all code will be left justified when it is
+            displayed for others to read, which can make reading code fairly
             difficult.
           </p>
-        </div> 
+        </div>
         <div class="bug-create__info--row">
-          <img src="assets/img/target_50px.png" alt="target" class="bug-create__bullseye">
-          <p class="bug-create__info--bullet-title">Defining Your Error</p> 
+          <img src="assets/img/images/target.png" alt="target" class="bug-create__bullseye">
+          <p class="bug-create__info--bullet-title">Defining Your Error</p>
         </div>
         <div class="bug-create__info--row">
           <p class="bug-create__info--text">
-              Ascertain which part of your error message is the most important 
-              and descriptive. If you are posting a bug that does not contain an 
+              Ascertain which part of your error message is the most important
+              and descriptive. If you are posting a bug that does not contain an
               error message, try to describe the issue as plainly as possible.
           </p>
-        </div> 
+        </div>
         <div class="bug-create__info--row">
-          <img src="assets/img/target_50px.png" alt="target" class="bug-create__bullseye">
-          <p class="bug-create__info--bullet-title">Adding your Stack Trace</p> 
+          <img src="assets/img/images/target.png" alt="target" class="bug-create__bullseye">
+          <p class="bug-create__info--bullet-title">Adding your Stack Trace</p>
         </div>
         <div class="bug-create__info--row">
           <p class="bug-create__info--text">
             Your stack trace contains all the stack frames until its own contructor
             function (i.e. everything that is still on the stack up until the error
-            exception is thrown).  This output can be extremely helpful when 
-            debugging to get additional info. For our purposes, it is best if you 
-            just copy the entire error message and if it is too long an admin will 
+            exception is thrown).  This output can be extremely helpful when
+            debugging to get additional info. For our purposes, it is best if you
+            just copy the entire error message and if it is too long an admin will
             edit it for you.
             <br>
             <br>
             <span class="u-italic u-small">If you have an error-less bug, write "none" for your stack trace.</span>
           </p>
-        </div> 
+        </div>
         <div class="bug-create__info--row">
-          <img src="assets/img/target_50px.png" alt="target" class="bug-create__bullseye">
-          <p class="bug-create__info--bullet-title">Adding a Comment</p> 
+          <img src="assets/img/images/target.png" alt="target" class="bug-create__bullseye">
+          <p class="bug-create__info--bullet-title">Adding a Comment</p>
         </div>
         <div class="bug-create__info--row">
           <p class="bug-create__info--text">
-            This is a really good place to mention the ways you have already tried 
-            to solve your bug.  Not only will this reduce thread redundancy but will 
-            also offer an opportunity for you to rubber-duck-debug in case you forgot 
-            to try something. If there is any additional info that you think might 
-            be helpful you can add it here (e.g. code snippets you think might be 
+            This is a really good place to mention the ways you have already tried
+            to solve your bug.  Not only will this reduce thread redundancy but will
+            also offer an opportunity for you to rubber-duck-debug in case you forgot
+            to try something. If there is any additional info that you think might
+            be helpful you can add it here (e.g. code snippets you think might be
             the cause, questions about the error message itself, etc.).
           </p>
-        </div> 
+        </div>
       </div>
     </div>
   </div>

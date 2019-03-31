@@ -33,4 +33,5 @@ module.exports = {
 
   queryDeleteFavorite:
       `DELETE FROM favorites WHERE bug_id = ? AND user_id = ?`,
-}
+
+};

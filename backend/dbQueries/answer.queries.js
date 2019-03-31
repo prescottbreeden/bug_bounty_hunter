@@ -4,8 +4,8 @@ module.exports = {
       `INSERT INTO answers SET ?`,
 
   queryGetAnswer:
-      `SELECT * 
-         FROM answers 
+      `SELECT *
+         FROM answers
         WHERE answer_id = ?`,
 
   queryUpdateAnswer:
@@ -18,7 +18,8 @@ module.exports = {
           SET accepted = ?
         WHERE answer_id = ?`,
 
-  queryDeleteAnswer: 
+  queryDeleteAnswer:
       // implement me
       'route not created'
-}
+
+};

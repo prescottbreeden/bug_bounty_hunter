@@ -89,4 +89,4 @@ module.exports = {
   queryKonami:
       `UPDATE users SET konami_unlock = true WHERE user_id = ?`
 
-}
+};
