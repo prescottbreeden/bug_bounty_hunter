@@ -1,7 +1,6 @@
 const express = require('express');
 const bp = require('body-parser');
-const config = require('./config')['development'];
-const {port} = config.server;
+const {server:{port}} = require('./config')['development'];
 const app = express();
 
 app.use(bp.json());
