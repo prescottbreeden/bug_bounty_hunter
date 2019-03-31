@@ -10,5 +10,6 @@ app.listen(port, () => console.log(`Listening on port: ${port}`));
 require('./backend/routes/auth.routes')(app);
 require('./backend/routes/user.routes')(app);
 require('./backend/routes/bug.routes')(app);
+require('./backend/routes/favorite.routes')(app);
 require('./backend/routes/answer.routes')(app);
 require('./backend/routes/angular.routes')(app);

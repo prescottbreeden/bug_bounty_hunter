@@ -2,18 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/common/services/auth.service';
 import { Router } from '@angular/router';
 import { BugService } from 'src/app/common/services/bug.service';
-import { BugModel, MapBugData } from 'src/app/common/models/bug/Bug';
 import { User } from 'src/app/common/models/user/User';
 import { isNull } from 'util';
+import { Bug } from 'src/app/common/models/bug/Bug';
 
 @Component({
   selector: 'app-bugs-show',
   templateUrl: './bugs-show.component.html',
 })
 export class BugsShowComponent implements OnInit {
-  user: User;
-  bugs: BugModel[] = [];
-  fBugs: BugModel[] = [];
+  user = new User;
+  bugs: Bug[] = [];
+  fBugs: Bug[] = [];
   searchText = '';
   showFavorites = false;
   index: number = 0;
@@ -32,7 +32,6 @@ export class BugsShowComponent implements OnInit {
     "Spam, spam, spam, spam, spam, spam, spam, spam..."
   ];
 
-
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -50,9 +49,8 @@ export class BugsShowComponent implements OnInit {
   }
 
   getAllBugs() {
-    this.bugService.getBugs().subscribe(results => {
-      this.bugs = MapBugData(results);
-    });
+    this.bugService.getBugs()
+      .subscribe((results: Bug[]) => this.bugs = results);
   }
 
   deleteBug(bug_id: number) {
@@ -64,9 +62,9 @@ export class BugsShowComponent implements OnInit {
 
   getFavorites() {
     this.bugService.getFavorites(this.user.user_id)
-      .subscribe(results => {
-        this.fBugs = MapBugData(results);
-      })
+      .subscribe((results: Bug[]) => {
+        this.fBugs = results;
+      });
   }
 
   toggleFavorites() {

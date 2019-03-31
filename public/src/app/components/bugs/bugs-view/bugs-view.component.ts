@@ -2,11 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { AuthService } from 'src/app/common/services/auth.service';
 import { BugService } from 'src/app/common/services/bug.service';
-import { BugModel, NewBugErrors, ValidateNewBug, MapBugData } from 'src/app/common/models/bug/Bug';
-import { NewAnswer, AnswerModel, MapAnswerDatum, NewAnswerErrors, ValidateNewAnswer } from 'src/app/common/models/answer/Answer';
+import { ValidateNewBug } from 'src/app/common/models/bug/Helpers';
+import { NewBugErrors } from "src/app/common/models/bug/NewBugErrors";
 import { buildBugObject } from 'src/app/common/models/bug/Helpers';
 import { User } from 'src/app/common/models/user/User';
+import { Bug } from 'src/app/common/models/bug/Bug';
 import { isNull } from 'util';
+import {
+  NewAnswer,
+  AnswerModel,
+  MapAnswerDatum,
+  NewAnswerErrors,
+  ValidateNewAnswer } from 'src/app/common/models/answer/Answer';
 
 @Component({
   selector: 'app-bugs-view',
@@ -18,23 +25,9 @@ export class BugsViewComponent implements OnInit {
   showAnswerForm = false;
   editAnswer = false;
 
-  user: User;
-
-  bug: BugModel = {
-    bug_id: 0,
-    posted_by: 0,
-    posted_name: '',
-    posted_profile: '',
-    error: '',
-    traceback: '',
-    message: '',
-    view_count: 0,
-    bug_created: '',
-    bug_updated: '',
-    num_answers: 0,
-  };
-
-  editBug: BugModel;
+  user = new User;
+  bug = new Bug;
+  editBug = new Bug;
 
   answers: AnswerModel[] = [
     {

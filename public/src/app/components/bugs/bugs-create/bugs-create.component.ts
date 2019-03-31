@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { NewBug, NewBugErrors, ValidateNewBug } from 'src/app/common/models/bug/Bug';
+import { ValidateNewBug } from 'src/app/common/models/bug/Helpers';
+import { NewBugErrors } from "src/app/common/models/bug/NewBugErrors";
+import { NewBug } from "src/app/common/models/bug/NewBug";
 import { AuthService } from 'src/app/common/services/auth.service';
 import { BugService } from 'src/app/common/services/bug.service';
 import { Router } from '@angular/router';
@@ -11,14 +13,8 @@ import { isNull } from 'util';
 })
 export class BugsCreateComponent implements OnInit {
   showHelp = false;
-  user: User;
-
-  newBug: NewBug = {
-    posted_by: 0,
-    error: '',
-    traceback: '',
-    message: ''
-  };
+  user = new User;
+  newBug = new NewBug;
 
   formErrors: NewBugErrors = {
     ErrorField: null,
