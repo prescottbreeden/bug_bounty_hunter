@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from 'src/app/common/services/auth.service';
 import { Router } from '@angular/router';
-import { IUserToken } from 'src/app/common/models/User';
 import { UserService } from 'src/app/common/services/user.service';
 
 @Component({
@@ -11,8 +10,8 @@ import { UserService } from 'src/app/common/services/user.service';
 export class NavComponent implements OnInit {
   loggedIn = false;
   showFactions = false;
-  token: IUserToken;
-  
+  token: any;
+
   rebels = {
     bugs_posted: '',
     bugs_answered: '',
@@ -30,9 +29,8 @@ export class NavComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private userService: UserService
-  ) { 
+  ) {
     authService.tokenEmitted$.subscribe(token => {
-      console.log(token);
       if (token) {
         this.loggedIn = true;
         this.token = authService.getToken();
@@ -40,7 +38,7 @@ export class NavComponent implements OnInit {
     })
   }
 
-  ngOnInit() { 
+  ngOnInit() {
     this.token = this.authService.getToken();
     if (this.token) { this.loggedIn = true; }
     this.generateStats();

@@ -3,21 +3,21 @@ import { AuthService } from 'src/app/common/services/auth.service';
 import { UserService } from 'src/app/common/services/user.service';
 import { isNull } from 'util';
 import { Router } from '@angular/router';
-import { 
-  User,
-  MapUserData, 
-  IUserStats, 
-  MapUserStatsData } from 'src/app/common/models/User';
+import { User } from 'src/app/common/models/user/User';
+import { Rank } from 'src/app/common/models/user/Rank';
+import { setTitle, setRank } from './setTitle';
 
 @Component({
   selector: 'app-users-profile',
   templateUrl: './users-profile.component.html',
 })
 export class UsersProfileComponent implements OnInit {
+  user = new User;
+  rankData = new Rank;
   editProfilePicStatus = true;
   editNameStatus = false;
   editEmailStatus = false;
-  showYoda = false;
+  askYoda = false;
   kesselCommander = false;
   konamiMaster = false;
   rank: number;
@@ -35,14 +35,8 @@ titles: any = {
   'Hacker': 'assets/img/images/r2d2.png'
 };
 
-rankData: any = {
-  bestTitle: '',
-  achievement: '',
-  wisdom: '',
-  hint: ''
-}
 
-avatars: string[] = [ 
+avatars: string[] = [
   'assets/img/images/bobafett.png',
   'assets/img/images/windu.png',
   'assets/img/images/vader.png',
@@ -51,14 +45,6 @@ avatars: string[] = [
   'assets/img/images/r2d2.png',
   'assets/img/images/yoda.png'
  ]
-
-  user = new User;
-
-  stats: IUserStats = {
-    bugs_posted: 0,
-    answers_posted: 0,
-    favorites: 0
-  };
 
   constructor(
     private authService: AuthService,
@@ -71,13 +57,10 @@ avatars: string[] = [
     if (isNull(token)) {
       return this.router.navigate(['/']);
     }
-    this.user = MapUserData(token.currentUser);
-    this.userService.getUserStatsById(this.user.user_id)
-      .subscribe(data => {
-        this.stats = MapUserStatsData(data);
-        this.setRank();
-        this.setTitle(); 
-      });
+    this.user = token.currentUser;
+    this.user.rank = setRank(this.user);
+    this.rankData = setTitle(this.user);
+    this.konamiMaster = this.user.konami_unlock;
   }
 
   toggleEditName() {
@@ -90,7 +73,7 @@ avatars: string[] = [
     this.editProfilePicStatus = !this.editProfilePicStatus;
   }
   toggleYoda() {
-    this.showYoda = !this.showYoda;
+    this.askYoda = !this.askYoda;
   }
 
   editName() {
@@ -112,102 +95,10 @@ avatars: string[] = [
 
   editProfilePic(avatar) {
     this.user.profile_img = this.avatars[avatar];
-    const data = this.updateUser(); 
+    const data = this.updateUser();
     this.userService.setProfilePic(data).subscribe(result => {
       this.authService.newToken(this.user).subscribe();
     });
-  }
-
-  setRank() {
-    console.log(this.user.konami_unlock);
-    if(this.user.konami_unlock) {
-      this.konamiMaster = true;
-    }
-    // if(this.stats.falcon_unlock) {
-    //   this.kesselCommander = true;
-    // }
-    if(this.stats.bugs_posted + this.stats.answers_posted >= 30) {
-      return this.rank = 7;
-    }
-    if(this.stats.bugs_posted >= 12) {
-      return this.rank = 6;
-    }
-    if(this.stats.answers_posted >= 12) {
-      return this.rank = 5;
-    }
-    if(this.stats.bugs_posted + this.stats.answers_posted >= 15) {
-      return this.rank = 4;
-    }
-    if(this.stats.bugs_posted + this.stats.answers_posted >= 6) {
-      return this.rank = 3;
-    }
-    if(this.stats.bugs_posted + this.stats.answers_posted < 6) {
-      return this.rank = 2
-    } 
-    if(this.stats.bugs_posted + this.stats.answers_posted === 0) {
-      return this.rank = 1
-    } 
-  }
-
-  setTitle() {
-    if (this.konamiMaster) {
-      return this.rankData = {
-          bestTitle: 'Grand Master',
-          achievement: 'A True Jedi Knight',
-          hint: 'May the Force be with you.',
-      }
-    }
-    switch (this.rank) {
-      case 1:
-        return this.rankData = {
-          bestTitle: 'Service Droid',
-          achievement: 'New Member',
-          hint: 'Fear of writing your first is the path to the dark side.',
-          wisdom: 'Post bug or message, you will. Hrrrrrrm?',
-        }
-      case 2:
-        return this.rankData = {
-          bestTitle: 'TK-421',
-          achievement: 'Created First Post',
-          hint: 'At 6 posts, your next achievement is. Yrrrrs.',
-          wisdom: 'Clear your mind must be.',
-        }
-      case 3:
-        return this.rankData = {
-          bestTitle: 'Bug Hunter',
-          achievement: 'Posted 6+ Times',
-          wisdom: 'Patience you must have.',
-          hint: 'At 15 posts, your next achievement is. Hmmmph.',
-        }
-      case 4:
-        return this.rankData = {
-          bestTitle: 'Master Bug Hunter',
-          achievement: 'Posted 15+ Times',
-          wisdom: 'Difficult to see. Always in motion the future is.',
-          hint: 'You must confront bug vader. Then, only then, a Jedi will you be.',
-        }
-      case 5:
-        return this.rankData = {
-        bestTitle: 'Bug Vadar',
-        achievement: 'Posted 12+ Answers',
-        wisdom: 'Mind what you have learned. Save you it can.',
-        hint: 'Try not. Post or do not. There is no try.',
-        }
-      case 6:
-        return this.rankData = {
-          bestTitle: 'The Bug Star',
-          achievement: 'Posted 12+ Bugs',
-          wisdom: 'Master of vim, not emacs, a true hacker is.',
-          hint: 'Always pass on what you have learned.',
-        }
-      case 7:
-        return this.rankData = {
-          bestTitle: 'Hacker',
-          achievement: 'Posted 30+ Times',
-          wisdom: 'Through the Force, things you will see. other places. the future, the past. old friends long gone.',
-          hint: 'Posted 30 times have you, yet 30 lives you require.',
-        }
-    }
   }
 
   @HostListener('document: keydown', ['$event'])
@@ -222,9 +113,10 @@ avatars: string[] = [
         return this.rankData = {
           bestTitle: 'Grand Master',
           achievement: 'A True Jedi Knight',
+          wisdom: 'The student becomes the Master',
           hint: 'May the Force be with you.',
         }
-      } 
+      }
       return this.index++;
     }
     return this.index = 0;

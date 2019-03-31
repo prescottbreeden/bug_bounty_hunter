@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { NewBug, BugModel } from '../../common/models/Bug';
-import { NewAnswer, AnswerModel } from '../../common/models/Answer';
+import { NewBug, BugModel } from '../models/bug/Bug';
+import { NewAnswer, AnswerModel } from '../models/answer/Answer';
 
 @Injectable({
   providedIn: 'root'
@@ -10,14 +10,14 @@ export class BugService {
 
   constructor(private http: HttpClient) { }
 
-  getBugs() { 
-    return this.http.get('/api/bugs'); 
+  getBugs() {
+    return this.http.get('/api/bugs');
   }
   getBugById(bug_id: number) {
-    return this.http.get(`/api/bugs/${bug_id}`); 
+    return this.http.get(`/api/bugs/${bug_id}`);
   }
   createBug(newBug: NewBug) {
-    return this.http.post('/api/bugs', newBug); 
+    return this.http.post('/api/bugs', newBug);
   }
   updateBug(bug: BugModel) {
     return this.http.put(`/api/bugs/${bug.bug_id}`, bug);

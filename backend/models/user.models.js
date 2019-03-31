@@ -9,7 +9,6 @@ const {
   queryAllUsers,
   queryUserById,
   queryUserData,
-  queryUserStatsById,
   queryFactionStats,
   queryNewUser,
   queryUpdateUser,
@@ -21,7 +20,6 @@ module.exports = {
   findAll,
   findById,
   getData,
-  getStats,
   getFactionStats,
   create,
   updateById,
@@ -52,15 +50,6 @@ async function getData(id) {
     return await query(queryUserData, id);
   } catch (error) {
     logger.log('warn', `users.getAllUserData(): ${error}`);
-    return error;
-  }
-}
-
-async function getStats(id) {
-  try {
-    return await query(queryUserStatsById, id);
-  } catch (error) {
-    logger.log('warn', `users.getUserStatsById(): ${error}`);
     return error;
   }
 }

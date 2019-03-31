@@ -1,9 +1,9 @@
-import { Component, OnInit, HostListener, } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/common/services/auth.service';
 import { Router } from '@angular/router';
 import { BugService } from 'src/app/common/services/bug.service';
-import { BugModel, MapBugData } from 'src/app/common/models/Bug';
-import { User, MapUserData } from 'src/app/common/models/User';
+import { BugModel, MapBugData } from 'src/app/common/models/bug/Bug';
+import { User } from 'src/app/common/models/user/User';
 import { isNull } from 'util';
 
 @Component({
@@ -44,7 +44,7 @@ export class BugsShowComponent implements OnInit {
     if (isNull(token)) {
       return this.router.navigate(['/']);
     }
-    this.user = MapUserData(token.currentUser);
+    this.user = token.currentUser;
     this.getAllBugs();
     this.getFavorites();
   }
@@ -58,7 +58,7 @@ export class BugsShowComponent implements OnInit {
   deleteBug(bug_id: number) {
     this.bugService.deleteBug(bug_id).subscribe(results => {
       // offer undo button
-      console.log(results);  
+      console.log(results);
     })
   }
 
@@ -76,7 +76,7 @@ export class BugsShowComponent implements OnInit {
   toggleEditMode() {
     this.editMode = !this.editMode;
   }
-  
+
   triggerAlert() {
     alert(this.troll[this.index]);
     this.index++;

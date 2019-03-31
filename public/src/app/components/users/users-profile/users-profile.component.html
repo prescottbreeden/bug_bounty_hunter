@@ -6,8 +6,8 @@
       <div class="profile__image">
         <img src={{user.profile_img}} alt="avatar">
       </div>
-      <h3 *ngIf="stats.konami_unlock" class="profile__avatar--title">Grand Master</h3>
-      <h3 *ngIf="!stats.konami_unlock" class="profile__avatar--title">{{ user.faction_name }}</h3>
+      <h3 *ngIf="user.konami_unlock" class="profile__avatar--title">Grand Master</h3>
+      <h3 *ngIf="!user.konami_unlock" class="profile__avatar--title">{{ user.faction_name }}</h3>
     </div>
 
 
@@ -27,22 +27,22 @@
           <div class="profile__item">Name: </div>
           <div class="profile__row--cluster">
             <div class="profile__item">
-              {{ user.first_name}} {{ user.last_name }} 
+              {{ user.first_name}} {{ user.last_name }}
             </div>
-            <svg 
-              (click)="editName()" 
+            <svg
+              (click)="editName()"
               class="profile__icon--edit">
               <use xlink:href="assets/img/icons/sprite.svg#icon-pencil"></use>
             </svg>
-          </div>            
+          </div>
         </div>
 
         <div class="profile__row">
           <div class="profile__item">Email:</div>
           <div class="profile__row--cluster">
             <div class="profile__item">{{ user.email }} </div>
-            <svg 
-              (click)="editEmail()" 
+            <svg
+              (click)="editEmail()"
               class="profile__icon--edit">
               <use xlink:href="assets/img/icons/sprite.svg#icon-pencil"></use>
             </svg>
@@ -51,19 +51,18 @@
 
         <div class="profile__row">
           <div class="profile__item">Created:</div>
-          <div class="profile__item">{{ user.created_at | timeAgo }} </div>
+          <div class="profile__item">{{ user.user_created | timeAgo }} </div>
         </div>
-      
+
       </div>
 
       <div class="profile__row">
         <div class="profile__item">Bugs Posted:</div>
-        <div class="profile__item">{{ stats.bugs_posted }}</div>
+        <div class="profile__item">{{ user.bugs }}</div>
       </div>
-      stats
       <div class="profile__row">
-        <div class="profile__item">Bugs Answered:</div>
-        <div class="profile__item">{{ stats.answers_posted }}</div>
+        <div class="profile__item">Answers Posted:</div>
+        <div class="profile__item">{{ user.answers }}</div>
       </div>
 
   </div>
@@ -72,154 +71,154 @@
 <div class="profile__avatar-list--container">
   <div class="profile__avatar-list--title-box">
     <h2 class="profile__avatar-list--title">Achievements</h2>
-    <svg 
+    <svg
       (click)="toggleYoda()"
       class="profile__avatar-list--help-icon">
       <use xlink:href="assets/img/icons/sprite.svg#icon-help_outline"></use>
     </svg>
   </div>
   <div class="profile__avatar-list">
-    <div 
+    <div
       class="story">
       <figure class="story__shape">
-        <svg 
-          *ngIf="rank < 3"
+        <svg
+          *ngIf="user.rank < 3"
           class="profile__icon--lock">
           <use xlink:href="assets/img/icons/sprite.svg#icon-lock"></use>
         </svg>
-        <img 
-          *ngIf="rank >= 3"
-          (click)="editProfilePic(0)" 
-          src="assets/img/images/bobafett.png" 
-          alt="person loving life" 
-          class="story__img" />
-        <figcaption 
+        <img
+          *ngIf="user.rank >= 3"
           (click)="editProfilePic(0)"
-          *ngIf="rank >= 3"
+          src="assets/img/images/bobafett.png"
+          alt="person loving life"
+          class="story__img" />
+        <figcaption
+          (click)="editProfilePic(0)"
+          *ngIf="user.rank >= 3"
           class="story__caption">Bug Hunter</figcaption>
       </figure>
     </div>
-    <div 
+    <div
       class="story">
       <figure class="story__shape">
-        <svg 
-          *ngIf="rank < 4"
+        <svg
+          *ngIf="user.rank < 4"
           class="profile__icon--lock">
           <use xlink:href="assets/img/icons/sprite.svg#icon-lock"></use>
         </svg>
-        <img 
-          *ngIf="rank >= 4"
-          (click)="editProfilePic(1)" 
-          src="assets/img/images/windu.png" 
-          alt="person loving life" 
+        <img
+          *ngIf="user.rank >= 4"
+          (click)="editProfilePic(1)"
+          src="assets/img/images/windu.png"
+          alt="person loving life"
           class="story__img" />
-        <figcaption 
-          (click)="editProfilePic(1)" 
-          *ngIf="rank >= 4"
+        <figcaption
+          (click)="editProfilePic(1)"
+          *ngIf="user.rank >= 4"
           class="story__caption">Master Bug Hunter</figcaption>
       </figure>
     </div>
-    <div 
+    <div
       class="story">
       <figure class="story__shape">
-        <svg 
-          *ngIf="rank < 5"
+        <svg
+          *ngIf="user.rank < 5"
           class="profile__icon--lock">
           <use xlink:href="assets/img/icons/sprite.svg#icon-lock"></use>
         </svg>
-        <img 
-          *ngIf="rank >= 5"
-          (click)="editProfilePic(2)" 
-          src="assets/img/images/vader.png" 
-          alt="person loving life" 
+        <img
+          *ngIf="user.rank >= 5"
+          (click)="editProfilePic(2)"
+          src="assets/img/images/vader.png"
+          alt="person loving life"
           class="story__img" />
-        <figcaption 
-          (click)="editProfilePic(2)" 
-          *ngIf="rank >= 5"
+        <figcaption
+          (click)="editProfilePic(2)"
+          *ngIf="user.rank >= 5"
           class="story__caption">Bug Vader</figcaption>
       </figure>
     </div>
   </div>
   <div class="profile__avatar-list">
-    <div 
+    <div
       class="story">
       <figure class="story__shape">
-        <svg 
-          *ngIf="rank < 6"
+        <svg
+          *ngIf="user.rank < 6"
           class="profile__icon--lock">
           <use xlink:href="assets/img/icons/sprite.svg#icon-lock"></use>
         </svg>
-        <img 
-          *ngIf="rank >= 6"
-          (click)="editProfilePic(3)" 
-          src="assets/img/images/deathstar.png" 
-          alt="person loving life" 
+        <img
+          *ngIf="user.rank >= 6"
+          (click)="editProfilePic(3)"
+          src="assets/img/images/deathstar.png"
+          alt="person loving life"
           class="story__img" />
-        <figcaption 
-          *ngIf="rank >= 6"
-          (click)="editProfilePic(3)" 
+        <figcaption
+          *ngIf="user.rank >= 6"
+          (click)="editProfilePic(3)"
           class="story__caption">The Bug Star</figcaption>
       </figure>
     </div>
-    <div 
+    <div
       class="story">
       <figure class="story__shape">
-        <svg 
+        <svg
           *ngIf="!falcon_unlock"
           class="profile__icon--lock">
           <use xlink:href="assets/img/icons/sprite.svg#icon-lock"></use>
         </svg>
-        <img 
+        <img
           *ngIf="falcon_unlock"
-          (click)="editProfilePic(4)" 
-          src="assets/img/images/falcon.png" 
-          alt="person loving life" 
+          (click)="editProfilePic(4)"
+          src="assets/img/images/falcon.png"
+          alt="person loving life"
           class="story__img" />
-        <figcaption 
+        <figcaption
           *ngIf="falcon_unlock"
-          (click)="editProfilePic(4)" 
+          (click)="editProfilePic(4)"
           class="story__caption">Kessel Commander</figcaption>
       </figure>
     </div>
-    <div 
+    <div
       class="story">
       <figure class="story__shape">
-        <svg 
-          *ngIf="rank < 7"
+        <svg
+          *ngIf="user.rank < 7"
           class="profile__icon--lock">
           <use xlink:href="assets/img/icons/sprite.svg#icon-lock"></use>
         </svg>
-        <img 
-          *ngIf="rank >= 7"
-          (click)="editProfilePic(5)" 
-          src="assets/img/images/r2d2.png" 
-          alt="person loving life" 
+        <img
+          *ngIf="user.rank >= 7"
+          (click)="editProfilePic(5)"
+          src="assets/img/images/r2d2.png"
+          alt="person loving life"
           class="story__img" />
-        <figcaption 
-          *ngIf="rank >= 7"
-          (click)="editProfilePic(5)" 
+        <figcaption
+          *ngIf="user.rank >= 7"
+          (click)="editProfilePic(5)"
           class="story__caption">Hacker</figcaption>
       </figure>
     </div>
   </div>
   <div class="profile__avatar--list">
-    <div 
+    <div
       class="story story--single">
       <figure class="story__shape">
-        <svg 
+        <svg
           *ngIf="!konamiMaster"
           class="profile__icon--lock">
           <use xlink:href="assets/img/icons/sprite.svg#icon-lock"></use>
         </svg>
-        <img 
+        <img
           *ngIf="konamiMaster"
-          (click)="editProfilePic(6)" 
-          src="assets/img/images/yoda.png" 
-          alt="person loving life" 
+          (click)="editProfilePic(6)"
+          src="assets/img/images/yoda.png"
+          alt="person loving life"
           class="story__img" />
-        <figcaption 
+        <figcaption
           *ngIf="konamiMaster"
-          (click)="editProfilePic(6)" 
+          (click)="editProfilePic(6)"
           class="story__caption">Grand Master</figcaption>
       </figure>
     </div>
@@ -231,18 +230,18 @@
   <div class="profile__avatar-list">
     <div class="story">
       <figure class="story__shape">
-        <img 
-          src="assets/img/images/solo.png" 
-          alt="person loving life" 
+        <img
+          src="assets/img/images/solo.png"
+          alt="person loving life"
           class="story__img" />
         <figcaption class="story__caption">Instructor</figcaption>
       </figure>
     </div>
     <div class="story">
       <figure class="story__shape">
-        <img 
-          src="assets/img/images/leia.png" 
-          alt="person loving life" 
+        <img
+          src="assets/img/images/leia.png"
+          alt="person loving life"
           class="story__img" />
         <figcaption class="story__caption">Instructor</figcaption>
       </figure>
@@ -250,16 +249,16 @@
   </div>
 </div>
 
-<div *ngIf="showYoda" class="u-splash">
+<div *ngIf="askYoda" class="u-splash">
   <div class="profile__yoda">
-    <svg 
+    <svg
       (click)="toggleYoda()"
       class="u-close-icon">
       <use xlink:href="assets/img/icons/sprite.svg#icon-x"></use>
     </svg>
     <div class="profile__avatar-list--container">
       <h2 class="profile__avatar-list--title">Master Yoda</h2>
-      <img 
+      <img
         class="profile__yoda--img"
         src="assets/img/yoda_portrait.jpg" alt="yoda">
       <div class="profile__yoda--quotes">

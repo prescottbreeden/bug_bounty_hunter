@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { BugModel } from 'src/app/common/models/Bug';
+import { BugModel } from 'src/app/common/models/bug/Bug';
 
 @Pipe({
   name: 'filter'

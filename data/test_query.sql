@@ -38,46 +38,46 @@ USE bug_hunter;
 -- ;
 
 -- get answers on bug view
---    SELECT b.bug_id, 
---           posted_by, 
---           error, 
---           traceback, 
---           message, 
---           bug_created, 
---           bug_updated, 
+--    SELECT b.bug_id,
+--           posted_by,
+--           error,
+--           traceback,
+--           message,
+--           bug_created,
+--           bug_updated,
 --           answer_id,
 --           answered_by,
 --           answer_content,
 --           answer_created,
 --           answer_updated
---      FROM bugs AS b 
--- LEFT JOIN answers AS a 
---        ON b.bug_id = a.bug_id 
+--      FROM bugs AS b
+-- LEFT JOIN answers AS a
+--        ON b.bug_id = a.bug_id
 --     WHERE b.bug_id = 2
 -- ;
 
---    SELECT b.bug_id, 
---           posted_by, 
---           error, 
---           traceback, 
---           message, 
---           bug_created, 
+--    SELECT b.bug_id,
+--           posted_by,
+--           error,
+--           traceback,
+--           message,
+--           bug_created,
 --           COUNT(a.bug_id) AS num_answers,
 --           COUNT(bl.bug_like_id) AS num_likes
---      FROM bugs AS b 
--- LEFT JOIN answers AS a 
---        ON b.bug_id = a.bug_id 
+--      FROM bugs AS b
+-- LEFT JOIN answers AS a
+--        ON b.bug_id = a.bug_id
 -- LEFT JOIN bugs_likes AS bl
 --        ON b.bug_id = bl.bug_id
 --  GROUP BY bug_id
--- ; 
+-- ;
 
 -- is liked by user
 --    SELECT b.bug_id,
 --           bl.bug_like_id
---      FROM bugs AS b 
---      JOIN bugs_likes AS bl 
---        ON b.bug_id = bl.bug_id 
+--      FROM bugs AS b
+--      JOIN bugs_likes AS bl
+--        ON b.bug_id = bl.bug_id
 --     WHERE b.bug_id = 1
 --       AND bl.user_id = 1
 -- ;
@@ -88,8 +88,8 @@ USE bug_hunter;
 --       AND user_id = 2
 -- ;
 
---    UPDATE bugs 
---       SET view_count = view_count + 1 
+--    UPDATE bugs
+--       SET view_count = view_count + 1
 --     WHERE bug_id = ?
 -- ;
 
@@ -100,16 +100,16 @@ USE bug_hunter;
 --         WHERE f.user_id = 2
 -- ;
 --        SELECT b.bug_id,
---               CONCAT(u.first_name, ' ', u.last_name) AS posted_by, 
---               error, 
---               traceback, 
---               message, 
+--               CONCAT(u.first_name, ' ', u.last_name) AS posted_by,
+--               error,
+--               traceback,
+--               message,
 --               view_count,
---               bug_created, 
+--               bug_created,
 --               COUNT(a.bug_id) AS num_answers
---          FROM bugs AS b 
---     LEFT JOIN answers AS a 
---            ON b.bug_id = a.bug_id 
+--          FROM bugs AS b
+--     LEFT JOIN answers AS a
+--            ON b.bug_id = a.bug_id
 --     LEFT JOIN users AS u
 --            ON b.posted_by = u.user_id
 --          JOIN favorites AS f
@@ -134,7 +134,7 @@ USE bug_hunter;
       --   WHERE email = 'pbreeden@codingdojo.com';
 
 
---        SELECT 
+--        SELECT
 --               f.faction_name,
 --               f.faction_id,
 --               COUNT(DISTINCT b.bug_id) AS bugs,
@@ -162,3 +162,29 @@ USE bug_hunter;
 -- on delete cascade;
 
 -- commit;
+
+       SELECT u.user_id,
+              f.faction_name,
+              u.first_name,
+              u.last_name,
+              u.email,
+              u.password,
+              u.admin,
+              u.profile_img,
+              u.konami_unlock,
+              u.user_created,
+              u.user_updated,
+              COUNT(DISTINCT b.bug_id) AS bugs,
+              COUNT(DISTINCT a.answer_id) AS answers,
+              COUNT(DISTINCT fav.favorite_id) AS favorites
+         FROM users AS u
+         JOIN factions AS f
+           ON f.faction_id = u.faction_id
+    LEFT JOIN bugs AS b
+           ON b.posted_by = user_id
+    LEFT JOIN answers AS a
+           ON a.answered_by = user_id
+    LEFT JOIN favorites AS fav
+           ON fav.user_id = u.user_id
+        WHERE u.email = 'wabbittwacks@gmail.com'
+     GROUP BY u.user_id;

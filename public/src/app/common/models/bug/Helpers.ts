@@ -1,5 +1,5 @@
 import { MapBugDatum } from './Bug';
-import { MapAnswerData } from './Answer';
+import { MapAnswerData } from '../answer/Answer';
 
 export function buildBugObject(data): any {
   let allData: any = {
@@ -7,7 +7,7 @@ export function buildBugObject(data): any {
     answers: []
   };
   allData.bug = MapBugDatum(data[0]);
-  allData.bug.traceback = JSON.parse(allData.bug.traceback); 
+  allData.bug.traceback = JSON.parse(allData.bug.traceback);
   allData.bug.message = JSON.parse(allData.bug.message);
   allData.answers = MapAnswerData(data);
   return allData;

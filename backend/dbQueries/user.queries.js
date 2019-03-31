@@ -1,6 +1,6 @@
 module.exports = {
 
-  queryAllUsers: 
+  queryAllUsers:
       `SELECT user_id,
               faction_name,
               first_name,
@@ -13,36 +13,48 @@ module.exports = {
               user_updated,
          FROM users AS u
          JOIN factions AS f
-           ON f.faction_id = u.faction_id`, 
+           ON f.faction_id = u.faction_id`,
 
-  queryUserById:
-      `SELECT * 
-         FROM users AS u
-         JOIN factions AS f
-           ON f.faction_id = u.faction_id
-        WHERE user_id = ?`,
-
-  queryUserData: 
-      `SELECT CONCAT(u.first_name, ' ', u.last_name) AS name,
+  queryUserByEmail:
+      `SELECT first_name,
+              last_name,
+              email,
+              admin,
+              profile_img,
+              konami_unlock,
+              user_created,
+              user_updated,
               COUNT(DISTINCT b.bug_id) AS bugs,
               COUNT(DISTINCT answer_id) AS answers,
-              COUNT(DISTINCT favorite_id) AS favorites
+              COUNT(DISTINCT favorite_id) AS favorites,
          FROM users AS u
+         JOIN factions as f
+           ON f.faction_id = u.faction_id
     LEFT JOIN bugs AS b
            ON b.posted_by = user_id
     LEFT JOIN answers AS a
            ON a.answered_by = user_id
     LEFT JOIN favorites AS f
            ON f.user_id = u.user_id
-     GROUP BY u.user_id
-     ORDER BY bugs DESC`,
+        WHERE u.email = ?
+        GROUP BY u.user_id
+        ORDER BY bugs DESC`,
 
-  queryUserStatsById:
-      `SELECT COUNT(DISTINCT b.bug_id) AS bugs,
+  queryUserById:
+      `SELECT first_name,
+              last_name,
+              email,
+              admin,
+              profile_img,
+              konami_unlock,
+              user_created,
+              user_updated,
+              COUNT(DISTINCT b.bug_id) AS bugs,
               COUNT(DISTINCT answer_id) AS answers,
               COUNT(DISTINCT favorite_id) AS favorites,
-              konami_unlock
          FROM users AS u
+         JOIN factions as f
+           ON f.faction_id = u.faction_id
     LEFT JOIN bugs AS b
            ON b.posted_by = user_id
     LEFT JOIN answers AS a
@@ -50,7 +62,8 @@ module.exports = {
     LEFT JOIN favorites AS f
            ON f.user_id = u.user_id
         WHERE u.user_id = ?
-     GROUP BY u.user_id`, 
+        GROUP BY u.user_id
+        ORDER BY bugs DESC`,
 
   queryFactionStats:
       `SELECT COUNT(DISTINCT b.bug_id) AS bugs,

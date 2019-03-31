@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { AuthService } from 'src/app/common/services/auth.service';
 import { BugService } from 'src/app/common/services/bug.service';
-import { BugModel, NewBugErrors, ValidateNewBug, MapBugData } from 'src/app/common/models/Bug';
-import { NewAnswer, AnswerModel, MapAnswerDatum, NewAnswerErrors, ValidateNewAnswer } from 'src/app/common/models/Answer';
-import { buildBugObject } from 'src/app/common/models/Helpers';
-import { User, MapUserData } from 'src/app/common/models/User';
+import { BugModel, NewBugErrors, ValidateNewBug, MapBugData } from 'src/app/common/models/bug/Bug';
+import { NewAnswer, AnswerModel, MapAnswerDatum, NewAnswerErrors, ValidateNewAnswer } from 'src/app/common/models/answer/Answer';
+import { buildBugObject } from 'src/app/common/models/bug/Helpers';
+import { User } from 'src/app/common/models/user/User';
 import { isNull } from 'util';
 
 @Component({
@@ -37,7 +37,7 @@ export class BugsViewComponent implements OnInit {
   editBug: BugModel;
 
   answers: AnswerModel[] = [
-    { 
+    {
       answer_id: 0,
       bug_id: 0,
       answered_by: 0,
@@ -80,14 +80,14 @@ export class BugsViewComponent implements OnInit {
     if (isNull(token)) {
       return this.router.navigate(['/']);
     }
-    this.user = MapUserData(token.currentUser);
+    this.user = token.currentUser;
     this.route.params.subscribe((params: Params) => {
       this.bug.bug_id = parseInt(params['id']);
       this.getLikedStatus();
       this.getBugData();
     });
   }
-  
+
   // -------------------------------------------- //
   //              HTML EVENT LISTENERS            //
   // -------------------------------------------- //
@@ -104,11 +104,11 @@ export class BugsViewComponent implements OnInit {
       return this.updateAnswer();
     }
   }
-  
+
   onSubmitBugEdit() {
     this.editFormErrors = ValidateNewBug(this.editBug);
-    if (this.editFormErrors.ErrorField === null 
-      && this.editFormErrors.MessageField === null 
+    if (this.editFormErrors.ErrorField === null
+      && this.editFormErrors.MessageField === null
       && this.editFormErrors.TracebackField === null) {
       this.editBug.traceback = JSON.stringify(this.editBug.traceback);
       this.editBug.message = JSON.stringify(this.editBug.message);
@@ -119,7 +119,7 @@ export class BugsViewComponent implements OnInit {
       this.getBugData();
     }
   }
-  
+
   onEditAnswer(answer_id) {
     this.updatedAnswer = this.answers.filter(ele => {
       return ele.answer_id === answer_id;
@@ -127,7 +127,7 @@ export class BugsViewComponent implements OnInit {
     this.toggleForm();
     this.editAnswer = true;
   }
-  
+
   onAcceptAnswer(answer_id) {
     const answer = this.answers.filter(ele => {
       return ele.answer_id === answer_id;
@@ -171,7 +171,7 @@ export class BugsViewComponent implements OnInit {
   // -------------------------------------------- //
   getLikedStatus() {
     this.bugService.isFavorite({
-      bug_id: this.bug.bug_id, 
+      bug_id: this.bug.bug_id,
       user_id: this.user.user_id
     }).subscribe(res => {
         if(res[0] && res[0].hasOwnProperty('user_id')) {
@@ -191,7 +191,7 @@ export class BugsViewComponent implements OnInit {
         this.newAnswer.bug_id = this.bug.bug_id;
       });
   }
-  
+
   likeBug() {
     this.bugService.addFavorite({
       bug_id: this.bug.bug_id,
@@ -200,7 +200,7 @@ export class BugsViewComponent implements OnInit {
       this.isFavorite = true;
     })
   }
-  
+
   dislikeBug() {
     this.bugService.removeFavorite({
       bug_id: this.bug.bug_id,
@@ -209,7 +209,7 @@ export class BugsViewComponent implements OnInit {
       this.isFavorite = false;
     })
   }
-  
+
   createAnswer() {
     this.newAnswer.answer_content = JSON.stringify(this.newAnswer.answer_content);
     this.bugService.addAnswer(this.newAnswer).subscribe((res: any) => {
@@ -217,7 +217,7 @@ export class BugsViewComponent implements OnInit {
         .subscribe(res => {
           let addedAnswer = MapAnswerDatum(res[0]);
           addedAnswer.answer_content = JSON.parse(addedAnswer.answer_content);
-          addedAnswer.answered_name = 
+          addedAnswer.answered_name =
             `${this.user.first_name} ${this.user.last_name}`;
           addedAnswer.answer_profile = this.user.profile_img;
           this.answers = [ ...this.answers, addedAnswer];
@@ -226,7 +226,7 @@ export class BugsViewComponent implements OnInit {
     this.newAnswer.answer_content = '';
     this.toggleForm();
   }
-  
+
   updateAnswer() {
     this.updatedAnswer.answer_content = JSON
       .stringify(this.updatedAnswer.answer_content);

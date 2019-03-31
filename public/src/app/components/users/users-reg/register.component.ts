@@ -2,7 +2,7 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { UserService } from 'src/app/common/services/user.service';
 import { AuthService } from 'src/app/common/services/auth.service';
 import { Router } from '@angular/router';
-import { NewUser } from 'src/app/common/models/User';
+import { NewUser } from "src/app/common/models/user/NewUser";
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { UserValidators } from 'src/app/common/models/Validations';
 import { uniqueEmailValidator } from 'src/app/common/directives/unique-email-validator.directive';
@@ -208,7 +208,7 @@ export class RegisterComponent implements OnInit {
       if (this.index === this.code.length-1) {
         this.admin = true;
         console.log('Admin active');
-      } 
+      }
       return this.index++;
     }
     return this.index = 0;
