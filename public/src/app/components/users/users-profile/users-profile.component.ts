@@ -24,6 +24,8 @@ export class UsersProfileComponent implements OnInit {
   key: number;
   code: number[] = [38,38,40,40,37,39,37,39,66,65,13];
   index: number = 0;
+  bugs = 0;
+  answers = 0;
 
 titles: any = {
   'Bug Hunter': 'assets/img/images/bobafett.png',
@@ -58,9 +60,14 @@ avatars: string[] = [
       return this.router.navigate(['/']);
     }
     this.user = token.currentUser;
-    this.user.rank = setRank(this.user);
-    this.rankData = setTitle(this.user);
-    this.konamiMaster = this.user.konami_unlock;
+    this.userService.getUserStatsById(this.user.user_id)
+      .subscribe((data: any) => {
+        this.user.bugs = data[0].bugs;
+        this.user.answers = data[0].answers;
+        this.user.rank = setRank(this.user);
+        this.rankData = setTitle(this.user);
+      })
+      this.konamiMaster = this.user.konami_unlock;
   }
 
   toggleEditName() {

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { Subject, Observable } from 'rxjs';
+import { Subject, Observable, BehaviorSubject } from 'rxjs';
 import { NewUser } from "../models/user/NewUser";
 import { User } from "../models/user/User";
 
@@ -12,6 +12,14 @@ import { User } from "../models/user/User";
 export class AuthService {
   private emitTokenChanged = new Subject<any>();
   tokenEmitted$ = this.emitTokenChanged.asObservable();
+
+  private readonly userInfo = new BehaviorSubject<any>(null);
+  get UserInfo(): Observable<any> {
+    return this.userInfo.asObservable();
+  }
+  set UserInfo(user)  {
+    this.userInfo.next(user);
+  }
 
   constructor(private http: HttpClient) { }
 
@@ -32,6 +40,7 @@ export class AuthService {
     return this.http.post('/api/auth/login', user)
       .pipe(map(token => {
         if (token) {
+          this.userInfo.next(user);
           localStorage.setItem('token', token.toString());
           this.emitTokenChanged.next(token);
           return true;

@@ -89,6 +89,8 @@ export class BugsViewComponent implements OnInit {
     if (this.answerFormErrors.ContentField === null) {
       return this.createAnswer();
     }
+    const balls: any = { answers: this.user.answers++, ...this.user };
+    this.authService.UserInfo = balls;
   }
 
   onSubmitAnswerEdit() {

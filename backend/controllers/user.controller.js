@@ -15,13 +15,6 @@ module.exports = {
       .catch(err => res.json(err));
   },
 
-  getAllUserData: (req, res) => {
-    const {user_id:ID} = req.params;
-    User.getData(ID)
-      .then(data => res.json(data))
-      .catch(err => res.json(err));
-  },
-
   getUserStatsById: (req, res) => {
     const {user_id:ID} = req.params;
     User.getStats(ID)

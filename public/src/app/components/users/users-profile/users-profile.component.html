@@ -4,7 +4,7 @@
 
     <div class="profile__avatar">
       <div class="profile__image">
-        <img src={{user.profile_img}} alt="avatar">
+        <img src={{user.profile_img}}>
       </div>
       <h3 *ngIf="user.konami_unlock" class="profile__avatar--title">Grand Master</h3>
       <h3 *ngIf="!user.konami_unlock" class="profile__avatar--title">{{ user.faction_name }}</h3>

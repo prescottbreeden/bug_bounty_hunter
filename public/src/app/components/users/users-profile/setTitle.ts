@@ -10,6 +10,7 @@ export function setTitle(user: User): Rank {
           hint: 'May the Force be with you.',
       }
     }
+    console.log(user);
     switch (user.rank) {
       case 1:
         return {

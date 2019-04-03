@@ -65,6 +65,20 @@ module.exports = {
         GROUP BY u.user_id
         ORDER BY bugs DESC`,
 
+  queryUserStatsById:
+      `SELECT u.konami_unlock,
+              COUNT(DISTINCT b.bug_id) AS bugs,
+              COUNT(DISTINCT answer_id) AS answers
+         FROM users AS u
+         JOIN factions as f
+           ON f.faction_id = u.faction_id
+    LEFT JOIN bugs AS b
+           ON b.posted_by = u.user_id
+    LEFT JOIN answers AS a
+           ON a.answered_by = u.user_id
+        WHERE u.user_id = ?
+        GROUP BY u.user_id`,
+
   queryFactionStats:
       `SELECT COUNT(DISTINCT b.bug_id) AS bugs,
               COUNT(DISTINCT answer_id) AS answers

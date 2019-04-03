@@ -6,7 +6,7 @@ const query = require('util').promisify(db.query).bind(db);
 const {
   queryAllUsers,
   queryUserById,
-  queryUserData,
+  queryUserStatsById,
   queryFactionStats,
   queryNewUser,
   queryUpdateUser,
@@ -17,7 +17,7 @@ const {
 module.exports = {
   findAll,
   findById,
-  getData,
+  getStats,
   getFactionStats,
   create,
   updateById,
@@ -29,7 +29,7 @@ async function findAll() {
   try {
     return await query(queryAllUsers);
   } catch (error) {
-    logger.log('warn', `users.getAll(): ${error}`);
+    logger.log('warn', `users.findAll(): ${error}`);
     return error;
   }
 }
@@ -38,16 +38,16 @@ async function findById(id) {
   try {
     return await query(queryUserById, id);
   } catch (error) {
-    logger.log('warn', `users.getById(): ${error}`);
+    logger.log('warn', `users.findById(): ${error}`);
     return error;
   }
 }
 
-async function getData(id) {
+async function getStats(id) {
   try {
-    return await query(queryUserData, id);
+    return await query(queryUserStatsById, id);
   } catch (error) {
-    logger.log('warn', `users.getAllUserData(): ${error}`);
+    logger.log('warn', `users.getStats(): ${error}`);
     return error;
   }
 }

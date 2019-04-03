@@ -2,7 +2,9 @@
 module.exports = {
 
   queryValidateEmail:
-      `SELECT * FROM users WHERE email = ?`,
+      `SELECT *
+         FROM users as u
+        WHERE u.email = ?`,
 
   queryLogin:
       `SELECT u.user_id,

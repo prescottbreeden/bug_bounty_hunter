@@ -28,15 +28,16 @@ export class UserService {
   deleteUser(user_id: number) {
     return this.http.delete('/api/users/' + user_id);
   }
+
+
   getUserStatsById(user_id: string | number) {
     return this.http.get('/api/users/stats/' + user_id);
   }
-  getAllUserStats() {
-    return this.http.get('/api/users/stats/');
-  }
   getFactionStats(faction_id: number) {
-    return this.http.get('/api/factions/' + faction_id);
+    return this.http.get('/api/factions/stats/' + faction_id);
   }
+
+
   setProfilePic(data) {
     return this.http.put('/api/users/profile/' + data.user_id, data);
   }

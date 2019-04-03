@@ -7,10 +7,10 @@ export class User {
   admin = false;
   profile_img = '';
   konami_unlock = false;
-  bugs = 0;
-  answers = 0;
-  favorites = 0;
   created_at = '';
   updated_at = '';
+  bugs? = 0;
+  answers? = 0;
+  favorites? = 0;
   rank? = 0;
 }

@@ -45,6 +45,8 @@ export class BugsCreateComponent implements OnInit {
       this.newBug.traceback = JSON.stringify(this.newBug.traceback);
       this.newBug.message = JSON.stringify(this.newBug.message);
       this.bugService.createBug(this.newBug).subscribe();
+      const balls: any = { bugs: this.user.bugs++, ...this.user };
+      this.authService.UserInfo = balls;
       this.router.navigate(['/bugs']);
     }
   }
